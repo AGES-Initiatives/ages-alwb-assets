@@ -113,7 +113,9 @@ function showAll() {
 	displayingBilingual = true;
 }
 
-
+function noHymn() {
+	$("p.hymn:not(:contains('.'))").removeClass("hymn").addClass("rubric").text("(The text of this hymn is not available.)").css("background-color","yellow");
+}
 
 function setViewPort() {
 	 viewport.setAttribute('content', 'width = ' + screen.width + ', user-scalable=yes');
@@ -428,6 +430,8 @@ $(".nightMode").click(function(){
 	$("div.agesMenu, div.agesMenu *").css('background-color',dayMenuBarColor);
 	return false;
 });
+
+noHymn();
 
   
  });
