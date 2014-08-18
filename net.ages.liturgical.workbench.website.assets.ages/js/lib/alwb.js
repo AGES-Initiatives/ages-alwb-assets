@@ -119,7 +119,7 @@ function noHymn() {
 }
 */
 function notAvailable() {
-	$("p.hymn:contains(()").removeClass("hymn").addClass("rubric").css("background-color","white");
+	$("p.hymn:contains('English')").removeClass("hymn").addClass("rubric").css("background-color","white");
 }
 
 function setViewPort() {
