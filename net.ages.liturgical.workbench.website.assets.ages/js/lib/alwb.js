@@ -113,9 +113,11 @@ function showAll() {
 	displayingBilingual = true;
 }
 
+/*
 function noHymn() {
-	$("p.hymn:not(:contains('.'))").removeClass("hymn").addClass("rubric").text("(The text of this hymn is not available.)").css("background-color","yellow");
+	$("p.hymn:not(:contains(.))").removeClass("hymn").addClass("rubric").text("(The text of this hymn is not available.)").css("background-color","yellow");
 }
+*/
 function notAvailable() {
 	$("p.hymn:contains(()").removeClass("hymn").addClass("rubric").css("background-color","white");
 }
@@ -434,7 +436,6 @@ $(".nightMode").click(function(){
 	return false;
 });
 
-noHymn();
 notAvailable();
-  
+//noHymn();  
  });
