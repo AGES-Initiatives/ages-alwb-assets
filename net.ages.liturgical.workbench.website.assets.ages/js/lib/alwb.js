@@ -116,6 +116,9 @@ function showAll() {
 function noHymn() {
 	$("p.hymn:not(:contains('.'))").removeClass("hymn").addClass("rubric").text("(The text of this hymn is not available.)").css("background-color","yellow");
 }
+function notAvailable() {
+	$("p.hymn:contains(()").removeClass("hymn").addClass("rubric").css("background-color","white");
+}
 
 function setViewPort() {
 	 viewport.setAttribute('content', 'width = ' + screen.width + ', user-scalable=yes');
@@ -432,6 +435,6 @@ $(".nightMode").click(function(){
 });
 
 noHymn();
-
+notAvailable();
   
  });
