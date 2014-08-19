@@ -113,13 +113,10 @@ function showAll() {
 	displayingBilingual = true;
 }
 
-/*
-function noHymn() {
-	$("p.hymn:not(:contains(.))").removeClass("hymn").addClass("rubric").text("(The text of this hymn is not available.)").css("background-color","yellow");
-}
-*/
+$.expr[':'].notext = function detectNoText(x){ return x.innerHTML && x.innerHTML.replace(/(<!--.*(?!-->))|\s+/g, '').length === 0 }
+
 function notAvailable() {
-	$("p.hymn:contains('English')").removeClass("hymn").addClass("rubric").css("background-color","white");
+$("p.hymn:notext").removeClass("hymn").addClass("rubric").text("(The English text of this hymn is missing, because it was either inaccessible at the time of publication or unavailable due to copyright restrictions.)").css("background-color","white");
 }
 
 function setViewPort() {
@@ -437,5 +434,5 @@ $(".nightMode").click(function(){
 });
 
 notAvailable();
-//noHymn();  
+  
  });
