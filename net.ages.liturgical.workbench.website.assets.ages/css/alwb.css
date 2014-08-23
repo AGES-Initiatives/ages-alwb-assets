@@ -728,7 +728,7 @@ iframe {
     }
 table.books-index-table {
 	table-layout:fixed !important;
-	width: 60% !important;
+	width: 100% !important;
 }
 .index-books-language-td {
 	vertical-align: middle;
@@ -741,7 +741,7 @@ table.books-index-table {
 .index-books-file-link-td {
 	vertical-align: middle;
 	padding-right: 0px !important;
-	width: 25% !important;
+	width: 45% !important;
 }
 .index-books-file-link {
 	vertical-align: center;
@@ -754,7 +754,7 @@ table.books-index-table {
 .index-books-file-timestamp-td {
 	vertical-align: middle;
 	padding: 0px !important;
-	width: 25% !important;
+	width: 5% !important;
 }
 
 table.custom-index-table {
