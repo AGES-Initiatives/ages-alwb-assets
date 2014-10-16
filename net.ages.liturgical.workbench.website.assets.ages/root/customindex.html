@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Client Menu</title>
+		<!--[if IE]><script type="text/javascript">
+		    // Fix for IE ignoring relative base tags.
+		    (function() {
+		        var baseTag = document.getElementsByTagName('base')[0];
+		        baseTag.href = baseTag.href;
+		    })();
+		</script><![endif]-->
+		<meta charset="utf-8"> 
+   			<meta name="viewport">
+		<meta name="keywords" content="">
+		<!-- Meta Declarations -->
+		<meta charset="utf-8"> 
+		<meta name='viewport'>
+		
+		<!-- Stylesheets -->
+		        <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link rel='stylesheet' type='text/css' href='css/alwb.css'>
+		<link rel='stylesheet' type='text/css' href='css/dcs.css'>
+		<link rel='stylesheet' type='text/css' href='js/lib/bootstrap/css/bootstrap.css'>
+		<link type="text/css" rel="stylesheet" href="css/jquery.dropdown.css" />
+		
+		<!-- Scripts -->
+		<script data-main="js/app" src="js/lib/require.js"></script>
+		
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+			<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+			<!--[if lt IE 9]>
+				<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<![endif]-->
+    			<script type="text/javascript">
+    					var alwbTooltips = {
+    						l1: {
+    							Audio: "Click to hear an audio recording.", 
+    							Byzantine: "Click to view score in Byzantine notation.",
+    							Western: "Click to view score in Western notation."
+    							},
+    						l2: {
+    							Audio: "To hear an audio recording, click here.", 
+    							Byzantine: "To view a Byzantine score, click here.",
+    							Western: "To view a Western score, click here."
+    							}
+    					};
+    			</script>
+    	</head>
+	<body>
+		
+<div class='agesMenu'>
+	<!-- Menu Bar Icons-->
+	<a href="#" data-jqm-dropdown="#jqm-dropdown-pages" title="Go to..."><i class="fa fa-bars ages-menu-link"></i></a>
+<a href="#" class="increaseFont"><i class="fa fa-plus-square increaseFont ages-menu-link ages-font-resizer"></i></a>
+<a href="#" class="decreaseFont"><i class="fa fa-minus-square decreaseFont ages-menu-link ages-font-resizer"></i></a>
+	<a href="javascript:(hideAllRight());"><i class="fa fa-caret-square-o-left ages-menu-link ages-col-picker"></i></a>
+	<a href="javascript:(showAll());"><i class="fa fa-columns ages-menu-link ages-col-picker"></i></a>
+	<a href="javascript:(hideAllLeft());"><i class="fa fa-caret-square-o-right ages-menu-link ages-col-picker"></i></a>
+	<span id="clockbox" class="clockbox"></span>
+	
+	<!-- Dropdown Menu Contents -->
+	<div id="jqm-dropdown-pages" class="jqm-dropdown jqm-dropdown-tip">
+	    <ul class="jqm-dropdown-menu jqm-dropdown-relative">
+			<li><a href="servicesindex.html"><i class="fa fa-calendar">&nbsp;Daily Services by Date</i></a></li>
+		    <li><a href="booksindex.html"><i class="fa fa-arrows">&nbsp;Sacraments and Services</i></a></li>
+		    <li><a href="clientindex.html"><i class="fa fa-list-alt">&nbsp;Additional Texts and Music</i></a></li>
+			<li class="jqm-dropdown-divider"></li>
+		    <li><a href="about.html"><i class="fa fa-info-circle">&nbsp;About</i></a></li>
+		    <li><a href="contact.html"><i class="fa fa-envelope">&nbsp;Contact</i></a></li>
+		    <li><a href="donate.html"><i class="fa fa-money">&nbsp;Donate</i></a></li>
+			<li class="jqm-dropdown-divider"></li>
+		    <li><a href="javascript:(showInfo())"><i class="fa fa-laptop">&nbsp;Browser Information</i></a></li>
+			<li class="jqm-dropdown-divider"></li>
+		    <li><a href="help.html"><i class="fa fa-question-circle">&nbsp;Help</i></a></li>
+	 	</ul>
+	</div>
+</div>
+<br><br>
+<div data-role="main" style="margin-left: 1em;">
+<p class="IndexYear">Client Index</p>
+<br>
+<p style="font-weight: bold;" class="IndexItem">Matins Ordinary: [<a href="h/c/matinsordinary/gr-en/index.html">TEXT</a>]<br>
+</p>
+
+<p class="IndexLink">Doxologies:
+[<a href="../../m/en_dedes/ho/s03/ma/w/doxologymode1.pdf" target="FrameScore">Mode 1</a>]
+[<a href="../../m/en_dedes/ho/s03/ma/w/doxologymode2.pdf" target="FrameScore">Mode 2</a>]
+[<a href="../../m/en_dedes/ho/s03/ma/w/doxologymode6.pdf" target="FrameScore">Mode pl 2</a>]
+[<a href="../../m/en_dedes/ho/s03/ma/w/doxologymode8.pdf" target="FrameScore">Mode pl 4</a>]</p>
+<br>
+<p style="font-weight: bold; color: red;" class="IndexItem">Liturgy Hymns</p>
+<p class="IndexItem">Beatitudes pl. 4: [<a href="client/Beatitudes8.pdf" target="FrameScore">Score-W</a>]</p>
+
+<p class="IndexItem">Holy God Mode 1: [<a href="../../m/en_dedes/eu/lichrysbasil/w/holygodmode1.pdf" target="FrameScore">Score-W</a>]</p>
+
+<p class="IndexItem">Holy God Mode 2: [<a href="../../m/en_dedes/eu/lichrysbasil/w/holygodmode2.pdf" target="FrameScore">Score-W</a>]</p>
+
+<p class="IndexItem">Kalogirou Greek: [<a href="client/MB-HolyGodKalogerouG.pdf" target="FrameScore">Score-B</a>]</p>
+
+<p class="IndexItem">As Many of You: [<a href="../../m/en_dedes/eu/lichrysbasil/w/asmanyofyou.pdf" target="FrameScore">Score-W</a>]</p>
+
+<p class="IndexItem">Before Your Cross: [<a href="../../m/eu/lichrysbasil/w/beforeyourcross.pdf" target="FrameScore">Score-W</a>]</p>
+
+<p class="IndexItem">Liturgy: [<a href="../../m/en_dedes/eu/lichrysbasil/w/cherubicmode1.pdf" target="FrameScore">Mode 1</a>]
+[<a href="../../m/en_dedes/eu/lichrysbasil/w/cherubicmode6.pdf" target="FrameScore">Mode pl 2</a>] 
+[<a href="../../m/en_dedes/eu/lichrysbasil/w/cherubicmode8.pdf" target="FrameScore">Mode pl 4</a>]</p>
+
+<p class="IndexItem">I will love You: [<a href="../../m/en_dedes/eu/lichrysbasil/w/iwillloveyoumode1.pdf" target="FrameScore">Score-W</a>]</p>
+
+<p class="IndexItem">In You, O Lady: [<a href="../../m/en_dedes/eu/lichrysbasil/w/inyouolady8.pdf" target="FrameScore">Score-W</a>]</p>
+
+<br>
+
+<p style="font-weight: bold; color: red;" class="IndexItem">Wedding Hymns</p>
+
+<p class="IndexItem">Kratema Mode 3 [<a href="client/wedding/b/MB-Kratema3G.pdf" target="FrameScore">Score-B</a>]</p>
+<p class="IndexItem">Kratema Mode 7 [<a href="client/wedding/w/MW-Kratema7G.pdf" target="FrameScore">Score-B</a>]</p>
+<p class="IndexItem">Kratema Mode 8 [<a href="client/wedding/b/MB-Kratema8G.pdf" target="FrameScore">Score-B</a>]</p>
+<p class="IndexItem">Theotoke Parthene (complete) [<a href="client/wedding/b/MB-TheotokeParthComplete.pdf" target="FrameScore">Score-B</a>]</p>
+<p class="IndexItem">Dormition Vespers Glory [<a href="client/wedding/b/MB-08-15-VespersGlory.pdf" target="FrameScore">Score-B</a>] [<a href="client/wedding/w/MW-08-15-VespersGlory.pdf" target="FrameScore">Score-W</a>]
+</p>
+<p class="IndexItem">Axion Anthimou (Greek) [<a href="client/wedding/b/MB-AxionAnthimou.pdf" target="FrameScore">Score-B</a>]</p>
+<p class="IndexItem">O Protection [<a href="client/wedding/w/MW-OProtection.pdf" target="FrameScore">Score-W</a>]</p>
+<p class="IndexItem">In the Red Sea (Greek) [<a href="client/wedding/b/MB-InTheRedSeaG.pdf" target="FrameScore">Score-B]</a></p>
+<p class="IndexItem">In the Red Sea (English) [<a href="client/wedding/w/MW-InTheRedSea.pdf" target="FrameScore">Score-W]</a></p>
+
+<br>
+
+<p style="font-weight: bold; color: red;" class="IndexItem">Episcopal Hymns</p>
+
+<p class="IndexItem">Eis Polla Eti (long): [<a href="client/episcopal/w/eispollaetilonggreek.pdf" target="FrameScore">Score-W</a>]
+</p>
+
+<p class="IndexItem">Ton Despotin (short): [<a href="client/episcopal/w/tondespotinshortgreek.pdf" target="FrameScore">Score-W</a>]
+</p>
+
+<p class="IndexItem">Ton Despotin (long): [<a href="client/episcopal/b/tondespotinlonggreek.pdf" target="FrameScore">Score-B</a>]
+</p>
+
+<p class="IndexItem">Liturgy Hymns: [<a href="client/episcopal/w/liturgyresponsesgreek.pdf" target="FrameScore">Score-W</a>]
+</p>
+
+<p class="IndexItem">Fimi for Alexios EG: [<a href="client/episcopal/w/fimimetroalexiosatlanta.pdf" target="FrameScore">Score-W</a>]<br>
+</p>
+
+<p class="IndexItem">Fimi for Demetrios E: [<a href="client/episcopal/w/fimiarchbdemetriosamerica.pdf" target="FrameScore">Score-W</a>]</p>
+
+<br>
+<p style="font-weight: bold; color: red;" class="IndexItem">Artoclasia Hymns</p>
+
+<p class="IndexItem">Rich Men: [<a href="../../m/en_dedes/ho/s10/ve/w/lityartohymn.pdf" target="FrameScore">Score-W</a>]</p>
+
+<p class="IndexItem">Theotoke Parthene: [<a href="../../m/en_dedes/ho/s10/ve/w/litytheotokeparthene.pdf" target="FrameScore">Score-W</a>]</p>
+
+<br>
+<p style="font-weight: bold; color: red;" class="IndexItem">Other Services and Hymns</p>
+
+<p class="IndexItem">Small Paraclesis: [<a href="client/SmallParaklesisT.htm" target="_self">TEXT</a>] [<a href="client/MW-SmallParaklesis.pdf" target="FrameScore">MUSIC</a>]
+</p>
+
+<p class="IndexItem">Great Paraclesis: [<a href="client/GreatParaklesisT.htm" target="_self">TEXT</a>] [<a href="client/MW-GreatParaklesis.pdf" target="FrameScore">MUSIC</a>]
+</p>
+
+<p class="IndexItem">Encomia for the Dormition
+</p>
+
+<p class="IndexItem">Encomia - St. Nektarios: [<a href="client/EncomiaForStNektarios%28full%29.pdf" target="FrameScore">Full</a>]
+[<a href="client/EncomiaForStNektarios%28abridged%29.pdf" target="FrameScore">Abridged</a>]
+</p>
+
+<p class="IndexItem">Paraclesis to St. Nektarios: [<a href="client/StNektariosParaklesis.pdf" target="FrameScore">TEXT</a>]
+</p>
+
+<p class="IndexItem">St. Nektarios Hymn to the Theotokos: [<a href="client/St%20Nektarios%20hymn%20G.htm" target="_self">TEXT</a>]</p>
+
+<p class="IndexItem">Great Blessing of Water: [TEXT]
+</p>
+
+<p class="IndexItem">By the Waters of Babylon: [<a href="client/MB-ByTheWaters.pdf" target="FrameScore">Score-B</a>] </p>
+
+<p class="IndexItem">Lent Index</p>
+
+<p class="IndexItem">Holy Week Index </p>
+</div>
+<br><br>
+</html>
