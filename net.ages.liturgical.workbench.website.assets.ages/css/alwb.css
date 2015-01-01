@@ -248,19 +248,19 @@ p.designation {
     font-weight:bolder;
     color:red;
 }
-p.dialog {
-    text-align:left;
-    text-indent: 28px;
-    font-size:95%;
-    line-height:130%;
-    margin-bottom: 5px;
-}
 p.dialogzero {
     text-align:left;
     text-indent: 28px;
     font-size:95%;
     line-height:130%;
     margin-bottom: 0px;
+}
+p.dialog {
+    text-align:left;
+    text-indent: 28px;
+    font-size:95%;
+    line-height:130%;
+    margin-bottom: 5px;
 }
 p.heirmos {
     text-align:left;
@@ -343,13 +343,19 @@ p.name {
     font-style:italic;
     color:red;
 }
+p.prayerzero {
+    text-align:left;
+    text-indent: 28px;
+    line-height:150%;
+    margin-bottom: 0px;
+}
 p.prayer {
     text-align:left;
     text-indent: 28px;
     line-height:150%;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
-p.prayerzero {
+p.readingzero {
     text-align:left;
     text-indent: 28px;
     line-height:150%;
@@ -359,13 +365,17 @@ p.reading {
     text-align:left;
     text-indent: 28px;
     line-height:150%;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
-p.readingzero {
-    text-align:left;
-    text-indent: 28px;
+p.readingcenterzero {
+    text-align:center;
     line-height:150%;
-    margin-bottom: 0em;
+    margin-bottom: 0px;
+}
+p.readingcenter {
+    text-align:center;
+    line-height:150%;
+    margin-bottom: 6px;
 }
 p.rubric {
     color:red;
@@ -380,14 +390,14 @@ p.verse {
     font-style:italic;
     font-size:100%;
     line-height:150%;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 p.versecenter {
     text-align:center;
     font-style:italic;
     font-size:90%;
     line-height:100%;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 p.cover1 {
     font-family: sans-serif;
