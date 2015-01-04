@@ -338,6 +338,16 @@ p.melody {
     font-style:italic;
     color:red;
 }
+p.missaltitle {
+    text-align:left;
+    text-align-last:right;
+    font-size:80%;
+    color:red;
+    font-weight:bold;
+    text-indent: 0px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
 p.name {
     font-weight:normal;
     font-style:italic;
@@ -540,6 +550,11 @@ span.bolditalicsred {
 	font-weight:bold;
 	font-style:italic;
 	color:red;
+}
+
+span.numright{
+	float: right;
+	font-weight:bold;
 }
 
 table {
