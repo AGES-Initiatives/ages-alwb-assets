@@ -338,6 +338,15 @@ p.melody {
     font-style:italic;
     color:red;
 }
+p.missalreading {
+    text-align:left;
+    text-align-last:right;
+    font-size:80%;
+    font-weight:normal;
+    text-indent: 28px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
 p.missaltitle {
     text-align:left;
     text-align-last:right;
@@ -553,8 +562,9 @@ span.bolditalicsred {
 }
 
 span.numright{
+	font-style:inherit;
 	float: right;
-	font-weight:bold;
+	color:red;
 }
 
 table {
