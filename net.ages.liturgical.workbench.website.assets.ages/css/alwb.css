@@ -405,6 +405,15 @@ p.rubric {
     text-align:left;
     text-indent: 28px;
 }
+p.titlezero {
+	text-align:center;
+	font-style:normal;
+    font-weight:bolder;
+    color:red;
+    font-size:80%;
+  	margin-top: -7px;
+  	margin-bottom: 0px;
+}
 p.verse {
     text-align:left;
     text-indent: 28px;
