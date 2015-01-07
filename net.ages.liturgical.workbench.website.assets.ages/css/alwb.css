@@ -570,11 +570,20 @@ span.bolditalicsred {
 	color:red;
 }
 
-span.numright{
+span.numright {
 	font-style:inherit;
 	float: right;
 	color:red;
 }
+
+span.versiondesignation {
+	font-style:inherit;
+	font-weight:lighter;
+	font-size:50%;
+	vertical-align:middle;
+	color:#428bca;
+	float: right;
+	}
 
 table {
   margin: 0 3pt;
