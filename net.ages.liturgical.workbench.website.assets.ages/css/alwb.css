@@ -577,7 +577,7 @@ span.numright {
 }
 
 span.versiondesignation {
-	font-style:normal
+	font-style:normal;
 	font-weight:lighter;
 	font-size:50%;
 	vertical-align:middle;
