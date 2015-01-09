@@ -117,6 +117,10 @@ function toggleDisplayVersion() {
 	$(".versiondesignation").toggle();
 }
 
+$(document).ready(function(){
+	$("td.leftCell span.versiondesignation").css("display","none");
+	});
+
 
 $.expr[':'].notext = function detectNoText(x){ return x.innerHTML && x.innerHTML.replace(/(<!--.*(?!-->))|\s+/g, '').length === 0 }
 
@@ -430,11 +434,12 @@ $(".dayMode").click(function(){
 });
 
 $(".nightMode").click(function(){
-	$("html, body, body *").css('background-color','black');
-	$("p").css('color','#FBF0D9');
-	$(redElements).css('color','red');
-	$("i.ages-menu-link *").css('color',dayMenuIconColor);
-	$("div.agesMenu, div.agesMenu *").css('background-color',dayMenuBarColor);
+//	$("html, body, body *").css('background-color','black');
+//	$("p").css('color','#FBF0D9');
+//	$(redElements).css('color','red');
+//	$("i.ages-menu-link *").css('color',dayMenuIconColor);
+//	$("div.agesMenu, div.agesMenu *").css('background-color',dayMenuBarColor);
+	$("td.rightCell span.versiondesignation").toggle();
 	return false;
 });
 
