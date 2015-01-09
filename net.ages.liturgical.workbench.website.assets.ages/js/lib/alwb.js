@@ -113,6 +113,11 @@ function showAll() {
 	displayingBilingual = true;
 }
 
+function toggleDisplayVersion() {
+	$(".versiondesignation").toggle();
+}
+
+
 $.expr[':'].notext = function detectNoText(x){ return x.innerHTML && x.innerHTML.replace(/(<!--.*(?!-->))|\s+/g, '').length === 0 }
 
 function notAvailable() {
