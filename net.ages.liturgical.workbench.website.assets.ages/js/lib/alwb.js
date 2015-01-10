@@ -79,7 +79,7 @@ function hideAllLeft () {
 $("td").css("display","");
 $("div.media-group-empty").css("display","");
 $("div.media-group-empty").addClass("m-g-e");
-$("tr:has(p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.rubric,.media-group)").attr("onclick","swapLang(this)");
+$("tr:has(p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.readingcenter,p.readingcenterzero,p.rubric,.media-group)").attr("onclick","swapLang(this)");
 $(".media-icon,i,li").attr("onmousedown","stopSwap(this)");
 $(".media-icon,i,li").attr("onmouseout","resumeSwap(this)");
 $("td:even").css("background-color","#FFF7E6");
@@ -92,7 +92,7 @@ function hideAllRight() {
 $("td").css("display","");
 $("div.media-group-empty").css("display","");
 $("div.media-group-empty").addClass("m-g-e");
-$("tr:has(p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.rubric,.media-group)").attr("onclick","swapLang(this)");
+$("tr:has(p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.readingcenter,p.readingcenterzero,p.rubric,.media-group)").attr("onclick","swapLang(this)");
 $(".media-icon,i,li").attr("onmousedown","stopSwap(this)");
 $(".media-icon,i,li").attr("onmouseout","resumeSwap(this)");
 $("td:even").css("background-color","#FFF7E6");
@@ -111,10 +111,6 @@ function showAll() {
 	$("td").css("border","");
 	$("td:even").css("background-color","#FBF0D9");
 	displayingBilingual = true;
-}
-
-function toggleDisplayVersion() {
-	$(".versiondesignation").toggle();
 }
 
 $(document).ready(function(){
