@@ -440,6 +440,7 @@ $(".nightMode").click(function(){
 
 $(".versionMode").click(function(){
 	$("td.rightCell span.versiondesignation").toggle();
+	$("tr p.source").toggle();
 	return false;
 });
 
