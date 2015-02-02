@@ -455,6 +455,7 @@ $.fn.visibilityToggle = function() {
 $(".versionMode").click(function(){
 	$("span.versiondesignation").visibilityToggle();
 	$("p.source").visibilityToggle();
+	$("p.source0").visibilityToggle();
 	return false;
 });
 
