@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tree view</title>
+	<!-- Meta Declarations -->
+	<meta charset="utf-8"> 
+	<meta name='viewport'>
+
+		<!-- Stylesheets -->
+		<link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link rel='stylesheet' type='text/css' href='css/alwb.css'>
+		<link rel='stylesheet' type='text/css' href='css/dcs.css'>
+		<link rel='stylesheet' type='text/css' href='js/lib/bootstrap/css/bootstrap.css'>
+		<link type="text/css" rel="stylesheet" href="css/jquery.dropdown.css" />
+		<link rel="stylesheet" href="css/tree.css" />
+
+		<!-- Scripts -->
+		<script data-main="js/app" src="js/lib/require.js"></script>
+		
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+			<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+			<!--[if lt IE 9]>
+				<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<![endif]-->
+    			<script type="text/javascript">
+    					var alwbTooltips = {
+    						l1: {
+    							Audio: "Click to hear an audio recording.", 
+    							Byzantine: "Click to view score in Byzantine notation.",
+    							Western: "Click to view score in Western notation."
+    							},
+    						l2: {
+    							Audio: "To hear an audio recording, click here.", 
+    							Byzantine: "To view a Byzantine score, click here.",
+    							Western: "To view a Western score, click here."
+    							}
+    					};
+    			</script>
+</head>
+<body>
+	<div class='agesMenu'>
+		<!-- Menu Bar Icons-->
+		<a href="#" data-jqm-dropdown="#jqm-dropdown-pages" title="Go to..."><i class="fa fa-bars ages-menu-link"></i></a>
+		<span id="clockbox" class="clockbox"></span>
+		
+		<!-- Dropdown Menu Contents -->
+		<div id="jqm-dropdown-pages" class="jqm-dropdown jqm-dropdown-tip">
+		    <ul class="jqm-dropdown-menu jqm-dropdown-relative">
+				<li><a href="servicesindex.html"><i class="fa fa-calendar">&nbsp;Daily Services by Date</i></a></li>
+			    <li><a href="booksindex.html"><i class="fa fa-arrows">&nbsp;Sacraments and Services</i></a></li>
+			    <li><a href="customindex.html"><i class="fa fa-list-alt">&nbsp;Additional Texts and Music</i></a></li>
+				<li class="jqm-dropdown-divider"></li>
+			    <li><a href="about.html"><i class="fa fa-info-circle">&nbsp;About</i></a></li>
+			    <li><a href="contact.html"><i class="fa fa-envelope">&nbsp;Contact</i></a></li>
+			    <li><a href="donate.html"><i class="fa fa-money">&nbsp;Donate</i></a></li>
+				<li class="jqm-dropdown-divider"></li>
+			    <li><a href="javascript:(showInfo())"><i class="fa fa-laptop">&nbsp;Browser Information</i></a></li>
+				<li class="jqm-dropdown-divider"></li>
+			    <li><a href="help.html"><i class="fa fa-question-circle">&nbsp;Help</i></a></li>
+		 	</ul>
+		</div>
+	</div>
+<br><br>
+
+	<div id="dcs_tree_container">
+    <!-- in this example the tree is populated from inline HTML -->
+	    <ul id="dcs_tree">
+	    	<li class="book">Octoechos
+	    		<ul>
+	    			<li class="mode">Mode 1
+	    				<ul>
+	    					<li class="day">Day 1
+	    						<ul>
+	    							<li class="service">Vespers
+	    								<ul>
+	    									<li class="notation">Byzantine
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/b/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    									<li class="notation">Western
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/w/glorybothsticheraric.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/w/glorybothsticheraric.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/w/lihc.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/w/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/w/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ve/w/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    								</ul>
+	    							</li>
+	    							<li class="service">Matins
+	    								<ul>
+	    									<li class="notation">Byzantine
+	    										<ul>
+	    										</ul>
+	    									</li>
+	    									<li class="notation">Western
+	    										<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/godisthelord.pdf">OC:MA:God is the Lord</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/kathisma11.pdf">OC:MA:Kathisma 1.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/kathisma12.pdf">OC:MA:Kathisma 1.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/kathisma13.pdf">OC:MA:Kathisma 1.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/kathisma21.pdf">OC:MA:Kathisma 2.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/kathisma22.pdf">OC:MA:Kathisma 2.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/kathisma23.pdf">OC:MA:Kathisma 2.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/prokeimenon.pdf">OC:MA:Prokeimenon</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/magnificat.pdf">OC:MA:Magnificat</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/lauds01.pdf">OC:MA:Lauds</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m1/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 8</li>
+	    										</ul>
+	    									</li>
+    									</ul>
+									</li>
+	    						</ul>
+	    					</li>
+	    				</ul>
+	    			</li>
+	    			<li class="mode">Mode 2
+	    				<ul>
+	    					<li class="day">Day 1
+	    						<ul>
+	    							<li class="service">Vespers
+	    								<ul>
+	    									<li class="notation">Byzantine
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/glorybothsticheraric.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/glorybothsticheraric.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/lihc.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/lihc.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/b/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    									<li class="notation">Western
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/glorybothsticheraric.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/glorybothsticheraric.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/lihc.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/lihc.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ve/w/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    								</ul>
+	    							</li>
+	    							<li class="service">Matins
+	    								<ul>
+	    									<li class="notation">Byzantine
+	    										<ul>
+	    										</ul>
+	    									</li>
+	    									<li class="notation">Western
+	    										<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/godisthelord.pdf">OC:MA:God is the Lord</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/kathisma11.pdf">OC:MA:Kathisma 1.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/kathisma12.pdf">OC:MA:Kathisma 1.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/kathisma13.pdf">OC:MA:Kathisma 1.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/kathisma21.pdf">OC:MA:Kathisma 2.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/kathisma22.pdf">OC:MA:Kathisma 2.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/kathisma23.pdf">OC:MA:Kathisma 2.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/antiphon21.pdf">OC:MA:Antiphon 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/antiphon31.pdf">OC:MA:Antiphon 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/prokeimenon.pdf">OC:MA:Prokeimenon</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/magnificat.pdf">OC:MA:Magnificat</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/lauds01.pdf">OC:MA:Lauds</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/lauds2.pdf">OC:MA:Lauds Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/lauds3.pdf">OC:MA:Lauds Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/lauds4.pdf">OC:MA:Lauds Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/lauds5.pdf">OC:MA:Lauds Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/lauds6.pdf">OC:MA:Lauds Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/lauds7.pdf">OC:MA:Lauds Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m2/d1/ma/w/lauds8.pdf">OC:MA:Lauds Sticheron 8</li>
+	    										</ul>
+	    									</li>
+    									</ul>
+									</li>
+	    						</ul>
+	    					</li>
+	    				</ul>
+	    			</li>
+	    			<li class="mode">Mode 3
+	    				<ul>
+	    					<li class="day">Day 1
+	    						<ul>
+	    							<li class="service">Vespers
+	    								<ul>
+	    									<li class="notation">Byzantine
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/b/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    									<li class="notation">Western
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/w/glorybothsticheraric.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/w/glorybothsticheraric.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/w/lihc.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/w/lihc.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/w/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/w/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ve/w/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    								</ul>
+	    							</li>
+	    							<li class="service">Matins
+	    								<ul>
+	    									<li class="notation">Byzantine
+	    										<ul>
+	    										</ul>
+	    									</li>
+	    									<li class="notation">Western
+	    										<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/godisthelord.pdf">OC:MA:God is the Lord</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/kathisma11.pdf">OC:MA:Kathisma 1.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/kathisma12.pdf">OC:MA:Kathisma 1.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/kathisma13.pdf">OC:MA:Kathisma 1.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/kathisma21.pdf">OC:MA:Kathisma 2.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/kathisma22.pdf">OC:MA:Kathisma 2.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/kathisma23.pdf">OC:MA:Kathisma 2.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/antiphon21.pdf">OC:MA:Antiphon 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/antiphon31.pdf">OC:MA:Antiphon 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/prokeimenon.pdf">OC:MA:Prokeimenon</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/magnificat.pdf">OC:MA:Magnificat</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/lauds01.pdf">OC:MA:Lauds</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/lauds2.pdf">OC:MA:Lauds Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/lauds3.pdf">OC:MA:Lauds Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/lauds4.pdf">OC:MA:Lauds Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/lauds5.pdf">OC:MA:Lauds Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/lauds6.pdf">OC:MA:Lauds Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/lauds7.pdf">OC:MA:Lauds Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m3/d1/ma/w/lauds8.pdf">OC:MA:Lauds Sticheron 8</li>
+	    										</ul>
+	    									</li>
+    									</ul>
+									</li>
+	    						</ul>
+	    					</li>
+	    				</ul>
+	    			</li>
+	    			<li class="mode">Mode 4
+	    				<ul>
+	    					<li class="day">Day 1
+	    						<ul>
+	    							<li class="service">Vespers
+	    								<ul>
+	    									<li class="notation">Byzantine
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/b/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    									<li class="notation">Western
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/glorybothsticheraric.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/glorybothsticheraric.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/stichera1234.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/stichera1234.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/stichera1234.pdf#page=2">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/stichera1234.pdf#page=3">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ve/w/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    								</ul>
+	    							</li>
+	    							<li class="service">Matins
+	    								<ul>
+	    									<li class="notation">Byzantine
+	    										<ul>
+	    										</ul>
+	    									</li>
+	    									<li class="notation">Western
+	    										<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/godisthelord.pdf">OC:MA:God is the Lord</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/kathisma11.pdf">OC:MA:Kathisma 1.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/kathisma12.pdf">OC:MA:Kathisma 1.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/kathisma13.pdf">OC:MA:Kathisma 1.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/kathisma21.pdf">OC:MA:Kathisma 2.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/kathisma22.pdf">OC:MA:Kathisma 2.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/kathisma23.pdf">OC:MA:Kathisma 2.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/antiphon21.pdf">OC:MA:Antiphon 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/antiphon31.pdf">OC:MA:Antiphon 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/prokeimenon.pdf">OC:MA:Prokeimenon</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/magnificat.pdf">OC:MA:Magnificat</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/lauds01.pdf">OC:MA:Lauds</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/lauds2.pdf">OC:MA:Lauds Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/lauds3.pdf">OC:MA:Lauds Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/lauds4.pdf">OC:MA:Lauds Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/lauds5.pdf">OC:MA:Lauds Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/lauds6.pdf">OC:MA:Lauds Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/lauds7.pdf">OC:MA:Lauds Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m4/d1/ma/w/lauds8.pdf">OC:MA:Lauds Sticheron 8</li>
+	    										</ul>
+	    									</li>
+    									</ul>
+									</li>
+	    						</ul>
+	    					</li>
+	    				</ul>
+	    			</li>
+	    			<li class="mode">Mode 5
+	    				<ul>
+	    					<li class="day">Day 1
+	    						<ul>
+	    							<li class="service">Vespers
+	    								<ul>
+	    									<li class="notation">Byzantine
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/b/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    									<li class="notation">Western
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/glorybothsticheraric.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/glorybothsticheraric.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/lihc.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/lihc.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ve/w/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    								</ul>
+	    							</li>
+	    							<li class="service">Matins
+	    								<ul>
+	    									<li class="notation">Byzantine
+	    										<ul>
+	    										</ul>
+	    									</li>
+	    									<li class="notation">Western
+	    										<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/godisthelord.pdf">OC:MA:God is the Lord</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/kathisma11.pdf">OC:MA:Kathisma 1.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/kathisma12.pdf">OC:MA:Kathisma 1.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/kathisma13.pdf">OC:MA:Kathisma 1.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/kathisma21.pdf">OC:MA:Kathisma 2.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/kathisma22.pdf">OC:MA:Kathisma 2.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/kathisma23.pdf">OC:MA:Kathisma 2.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/antiphon21.pdf">OC:MA:Antiphon 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/antiphon31.pdf">OC:MA:Antiphon 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/prokeimenon.pdf">OC:MA:Prokeimenon</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/magnificat.pdf">OC:MA:Magnificat</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/lauds01.pdf">OC:MA:Lauds</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/lauds2.pdf">OC:MA:Lauds Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/lauds3.pdf">OC:MA:Lauds Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/lauds4.pdf">OC:MA:Lauds Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/lauds5.pdf">OC:MA:Lauds Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/lauds6.pdf">OC:MA:Lauds Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/lauds7.pdf">OC:MA:Lauds Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m5/d1/ma/w/lauds8.pdf">OC:MA:Lauds Sticheron 8</li>
+	    										</ul>
+	    									</li>
+    									</ul>
+									</li>
+	    						</ul>
+	    					</li>
+	    				</ul>
+	    			</li>
+	    			<li class="mode">Mode 6
+	    				<ul>
+	    					<li class="day">Day 1
+	    						<ul>
+	    							<li class="service">Vespers
+	    								<ul>
+	    									<li class="notation">Byzantine
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/b/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    									<li class="notation">Western
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/w/glorybothsticheraric.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/w/glorybothsticheraric.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/w/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/w/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/w/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/w/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/w/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ve/w/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    								</ul>
+	    							</li>
+	    							<li class="service">Matins
+	    								<ul>
+	    									<li class="notation">Byzantine
+	    										<ul>
+	    										</ul>
+	    									</li>
+	    									<li class="notation">Western
+	    										<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/godisthelord.pdf">OC:MA:God is the Lord</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/kathisma11.pdf">OC:MA:Kathisma 1.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/kathisma12.pdf">OC:MA:Kathisma 1.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/kathisma13.pdf">OC:MA:Kathisma 1.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/kathisma21.pdf">OC:MA:Kathisma 2.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/kathisma22.pdf">OC:MA:Kathisma 2.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/kathisma23.pdf">OC:MA:Kathisma 2.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/antiphon21.pdf">OC:MA:Antiphon 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/antiphon31.pdf">OC:MA:Antiphon 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/prokeimenon.pdf">OC:MA:Prokeimenon</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/magnificat.pdf">OC:MA:Magnificat</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/lauds01.pdf">OC:MA:Lauds</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/lauds2.pdf">OC:MA:Lauds Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/lauds3.pdf">OC:MA:Lauds Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/lauds4.pdf">OC:MA:Lauds Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/lauds5.pdf">OC:MA:Lauds Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/lauds6.pdf">OC:MA:Lauds Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/lauds7.pdf">OC:MA:Lauds Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m6/d1/ma/w/lauds8.pdf">OC:MA:Lauds Sticheron 8</li>
+	    										</ul>
+	    									</li>
+    									</ul>
+									</li>
+	    						</ul>
+	    					</li>
+	    				</ul>
+	    			</li>
+	    			<li class="mode">Mode 7
+	    				<ul>
+	    					<li class="day">Day 1
+	    						<ul>
+	    							<li class="service">Vespers
+	    								<ul>
+	    									<li class="notation">Byzantine
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/b/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    									<li class="notation">Western
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/w/glorybothsticheraric.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/w/glorybothsticheraric.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/w/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/w/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/w/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/w/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ve/w/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    								</ul>
+	    							</li>
+	    							<li class="service">Matins
+	    								<ul>
+	    									<li class="notation">Byzantine
+	    										<ul>
+	    										</ul>
+	    									</li>
+	    									<li class="notation">Western
+	    										<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/godisthelord.pdf">OC:MA:God is the Lord</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/kathisma11.pdf">OC:MA:Kathisma 1.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/kathisma12.pdf">OC:MA:Kathisma 1.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/kathisma13.pdf">OC:MA:Kathisma 1.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/kathisma21.pdf">OC:MA:Kathisma 2.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/kathisma22.pdf">OC:MA:Kathisma 2.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/kathisma23.pdf">OC:MA:Kathisma 2.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/antiphon21.pdf">OC:MA:Antiphon 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/antiphon31.pdf">OC:MA:Antiphon 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/prokeimenon.pdf">OC:MA:Prokeimenon</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:MA:Magnificat</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/lauds01.pdf">OC:MA:Lauds</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/lauds2.pdf">OC:MA:Lauds Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/lauds3.pdf">OC:MA:Lauds Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/lauds4.pdf">OC:MA:Lauds Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/lauds5.pdf">OC:MA:Lauds Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/lauds6.pdf">OC:MA:Lauds Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/lauds7.pdf">OC:MA:Lauds Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m7/d1/ma/w/lauds8.pdf">OC:MA:Lauds Sticheron 8</li>
+	    										</ul>
+	    									</li>
+    									</ul>
+									</li>
+	    						</ul>
+	    					</li>
+	    				</ul>
+	    			</li>
+	    			<li class="mode">Mode 8
+	    				<ul>
+	    					<li class="day">Day 1
+	    						<ul>
+	    							<li class="service">Vespers
+	    								<ul>
+	    									<li class="notation">Byzantine
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/stichera5.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/stichera6.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/stichera7.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/b/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    									<li class="notation">Western
+			    								<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/glorybothsticheraric.pdf">Glory: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/glorybothsticheraric.pdf">Both: Sticheraric</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/lihc1.pdf">Lord I Have Cried</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/lihc2.pdf">Let My Prayer</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/stichera1.pdf">OC:VE:Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/stichera2.pdf">OC:VE:Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/stichera3.pdf">OC:VE:Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/stichera4.pdf">OC:VE:Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">OC:VE:Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/stictheotokion.pdf">OC:VE:Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/aposticha1.pdf">OC:VE:Aposticha 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/aposticha2.pdf">OC:VE:Aposticha 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/aposticha3.pdf">OC:VE:Aposticha 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/aposticha4.pdf">OC:VE:Aposticha 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/apostheotokion.pdf">OC:VE:Aposticha Theotokion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/apolytikion.pdf">OC:VE:Apolytikion</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ve/w/apoltheotokionvm.pdf">OC:VE:Apolytikion-Theotokikon</li>
+			    								</ul>
+	    									</li>
+	    								</ul>
+	    							</li>
+	    							<li class="service">Matins
+	    								<ul>
+	    									<li class="notation">Byzantine
+	    										<ul>
+	    										</ul>
+	    									</li>
+	    									<li class="notation">Western
+	    										<ul>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/godisthelord.pdf">OC:MA:God is the Lord</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/kathisma11.pdf">OC:MA:Kathisma 1.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/kathisma12.pdf">OC:MA:Kathisma 1.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/kathisma13.pdf">OC:MA:Kathisma 1.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/kathisma21.pdf">OC:MA:Kathisma 2.1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/kathisma22.pdf">OC:MA:Kathisma 2.2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/kathisma23.pdf">OC:MA:Kathisma 2.3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/antiphon11.pdf">OC:MA:Antiphon 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/antiphon21.pdf">OC:MA:Antiphon 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/antiphon31.pdf">OC:MA:Antiphon 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/antiphon41.pdf">OC:MA:Antiphon 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/prokeimenon.pdf">OC:MA:Prokeimenon</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/magnificat.pdf">OC:MA:Magnificat</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/lauds01.pdf">OC:MA:Lauds</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/lauds1.pdf">OC:MA:Lauds Sticheron 1</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/lauds2.pdf">OC:MA:Lauds Sticheron 2</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/lauds3.pdf">OC:MA:Lauds Sticheron 3</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/lauds4.pdf">OC:MA:Lauds Sticheron 4</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/lauds5.pdf">OC:MA:Lauds Sticheron 5</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/lauds6.pdf">OC:MA:Lauds Sticheron 6</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/lauds7.pdf">OC:MA:Lauds Sticheron 7</li>
+													<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/oc/m8/d1/ma/w/lauds8.pdf">OC:MA:Lauds Sticheron 8</li>
+	    										</ul>
+	    									</li>
+    									</ul>
+									</li>
+	    						</ul>
+	    					</li>
+	    				</ul>
+	    			</li>
+	    		</ul>
+	    	</li>
+
+	    </ul>
+	</div>
+<br>
+<br>
+	<script src="js/lib/jquery-2.0.3.min.js"></script>
+	<script>
+	$(function () {
+
+		$("#dcs_tree li").each(function() {
+			if ( $(this).children('ul').length > 0) {
+				$(this).addClass('treeparent');
+			} else {
+				$(this).addClass('treelink')
+				$(this).click(function(event) {
+					event.stopPropagation();
+					//window.location.href = ($(this).attr('dcslink')) ? $(this).attr('dcslink') : "#"; // Link to new page
+
+					top.frames['FrameScore'].location = ($(this).attr('dcslink')) ? $(this).attr('dcslink') : "#"; // Link in iFrame
+				});
+			}
+		});
+
+		$('#dcs_tree .treeparent').click(function(event) {
+			event.stopPropagation();
+			$(this).children('ul').toggle();
+		});
+
+		$("#dcs_tree .treeparent").children().toggle();
+
+	});
+	</script>
+
+</body>
