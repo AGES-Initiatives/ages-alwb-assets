@@ -66,6 +66,45 @@
 	<div id="dcs_tree_container">
     <!-- in this example the tree is populated from inline HTML -->
 	    <ul id="dcs_tree">
+	    	<li class="book">Katavasias
+	    		<ul>
+	    			<li class="day">Meeting
+	    				<ul>
+	    					<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/he/k/b/meeting.pdf">Byzantine</li>
+	    					<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/he/k/w/meeting.pdf">Western</li>
+	    					<li dcslink="http://www.agesinitiatives.com/dcs/a/en_dedes/he/k/meeting1.mp3">Audio</li>
+	    				</ul>
+	    			</li>
+	    			<li class="day">Triodion 1 and 4
+	    				<ul>
+	    					<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/he/k/b/triodion14.pdf">Byzantine</li>
+	    					<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/he/k/w/triodion14.pdf">Western</li>
+	    					<li dcslink="http://www.agesinitiatives.com/dcs/a/en_dedes/he/k/triodion141.mp3">Audio</li>
+	    				</ul>
+	    			</li>
+	    			<li class="day">Triodion 2
+	    				<ul>
+	    					<li dcslink="">Byzantine</li>
+	    					<li dcslink="">Western</li>
+	    					<li dcslink="">Audio</li>
+	    				</ul>
+	    			</li>
+	    			<li class="day">Triodion 3
+	    				<ul>
+	    					<li dcslink="">Byzantine</li>
+	    					<li dcslink="">Western</li>
+	    					<li dcslink="">Audio</li>
+	    				</ul>
+	    			</li>
+	    			<li class="day">Lent 1
+	    				<ul>
+	    					<li dcslink="">Byzantine</li>
+	    					<li dcslink="">Western</li>
+	    					<li dcslink="">Audio</li>
+	    				</ul>
+	    			</li>
+	    		</ul>
+	    	</li>
 	    	<li class="book">Octoechos
 	    		<ul>
 	    			<li class="mode">Mode 1
@@ -814,9 +853,20 @@
 				$(this).addClass('treelink')
 				$(this).click(function(event) {
 					event.stopPropagation();
-					//window.location.href = ($(this).attr('dcslink')) ? $(this).attr('dcslink') : "#"; // Link to new page
+					
 
-					top.frames['FrameScore'].location = ($(this).attr('dcslink')) ? $(this).attr('dcslink') : "#"; // Link in iFrame
+					var pdf_patt = /.pdf$/i;
+					var mp3_patt = /.mp3$/i;
+
+					if (pdf_patt.test($(this).attr('dcslink'))) {
+						top.frames['FrameScore'].location = $(this).attr('dcslink');
+					}
+					if (mp3_patt.test($(this).attr('dcslink'))) {
+						top.frames['FrameAudio'].location = $(this).attr('dcslink');
+					}
+					//top.frames[ f_target ].location = ($(this).attr('dcslink')) ? $(this).attr('dcslink') : $(this).attr('dcslink');
+
+					// top.frames['FrameAudio'].location
 				});
 			}
 		});
