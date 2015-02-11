@@ -202,7 +202,7 @@ p {
 	color: black;   /* night mode #FBF0D9 */
     text-align: left;
     font-family: "Arimo", sans-serif;
-    font-weight: normal;
+/*    font-weight: normal; */
     padding-left: -50px;
     margin-bottom: 0em; /* to control spacing after para */
 }
@@ -218,6 +218,11 @@ p.actor {
 p.actor:first-letter {
     text-align:left;
     font-size:125%;
+}
+p.alttext {
+	font-size:80%;
+	background-color:#CCCCCC;
+	margin-left:2em;
 }
 p.break {
     margin-bottom: 10px;
