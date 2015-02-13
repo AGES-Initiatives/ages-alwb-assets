@@ -91,6 +91,10 @@
 					border-top-width:1px; 
 				}
 	
+				a {
+					color:#000000;
+				}
+	
 				.treelink {
 					margin-left: -25px;
 					font-size: 12pt;
@@ -114,10 +118,10 @@
 					font-size: 8pt;
 					font-weight: thin;
 					font-style: italic;
-					color: red;
+					color: #000000;
 				}
 	
-				.notavailable {
+				.notavailable a {
 					color: #B3B3B3;
 					font-style: italic;
 				}		
@@ -178,7 +182,7 @@
 		    <ul id="dcs_tree">
 				<li class="level_1">Eothina
 					<ul>
-		    			<li class="treerubric">Audio is old and may differ from current scores.</li>
+		    			<div class="treerubric">Audio is old and may differ from current scores.</div>
 						<li class="level_2">Holy is the Lord our God
 							<ul>
 								<li dcslink="http://www.agesinitiatives.com/dcs/m/NA.pdf">Score: Byzantine</li>
@@ -472,7 +476,7 @@
 				</li>
 		    	<li class="level_1">Katavasias
 		    		<ul>
-		    			<li class="treerubric">Byzantine scores may be old and differ from the Western. Audio is old and may differ from current scores.</li>
+		    			<div class="treerubric">Byzantine scores may be old and differ from the Western. Audio is old and may differ from current scores.</div>
 		    			<li class="level_3">Theotokos
 		    				<ul>
 		    					<li dcslink="http://www.agesinitiatives.com/dcs/m/en_dedes/he/k/b/theotokos.pdf">Score: Byzantine</li>
@@ -805,7 +809,7 @@
 		    	</li>
 		    	<li class="level_1">Octoechos
 		    		<ul>
-		    			<li class="treerubric">Byzantine scores may be old and differ from the Western. Audio is old and may differ from current scores.</li>
+		    			<div class="treerubric">Byzantine scores may be old and differ from the Western. Audio is old and may differ from current scores.</div>
 		    			<li class="level_2">Mode 1
 		    				<ul>
 		    					<li class="level_3">Sunday
@@ -3403,7 +3407,7 @@
 		    	</li>
 				<li class="level_1">Sacraments and Services
 					<ul>
-		    			<li class="treerubric">Audio may be outdated and differ from current scores.</li>
+		    			<div class="treerubric">Audio may be outdated and differ from current scores.</div>
 						<li class="level_2">Baptism
 							<ul>
 								<li class="level_3">Glory to You
@@ -3863,30 +3867,32 @@
 				if ( $(this).children('ul').length > 0) {
 					$(this).addClass('treeparent');
 				} else {
-					$(this).addClass('treelink')
-	
+					
 					var na_patt = /NA.pdf$/i;
 					if (na_patt.test($(this).attr('dcslink'))) {
 						$(this).addClass('notavailable');
 					}
-	
-						$(this).click(function(event) {
+
+					dcs_link = ($(this).attr('dcslink')) ? $(this).attr('dcslink') : "#";
+					dcs_html = $(this).html(); 
+
+					var pdf_patt = /.pdf/i;
+					var mp3_patt = /.mp3/i;
+					
+					if (pdf_patt.test($(this).attr('dcslink'))) {
+						//dcs_target = $(this).attr('dcslink');
+						dcs_target = "FrameScore";
+					} else if (mp3_patt.test($(this).attr('dcslink'))) {
+						//dcs_target = $(this).attr('dcslink');
+						dcs_target = "FrameAudio";
+					} else {
+						dcs_target = "_blank";
+					}
+					$(this).html("<a href='"+dcs_link+"' target='"+dcs_target+"'>" + dcs_html + "</a>");
+					$(this).click(function(event) {
 						event.stopPropagation();
-						
-	
-						var pdf_patt = /.pdf/i;
-						var mp3_patt = /.mp3/i;
-	
-						if (pdf_patt.test($(this).attr('dcslink'))) {
-							top.frames['FrameScore'].location = $(this).attr('dcslink');
-						}
-						if (mp3_patt.test($(this).attr('dcslink'))) {
-							top.frames['FrameAudio'].location = $(this).attr('dcslink');
-						}
-						//top.frames[ f_target ].location = ($(this).attr('dcslink')) ? $(this).attr('dcslink') : $(this).attr('dcslink');
-	
-						// top.frames['FrameAudio'].location
 					});
+					
 				}
 			});
 	
