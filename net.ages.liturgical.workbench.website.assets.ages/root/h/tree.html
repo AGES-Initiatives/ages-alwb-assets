@@ -130,6 +130,8 @@
 	
 			<!-- Scripts -->
 			<script data-main="js/app" src="js/lib/require.js"></script>
+			<script src="js/lib/jquery-2.0.3.min.js"></script>
+			<script src="js/lib/dcs_tree.js"></script>
 			
 			<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 				<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -3872,54 +3874,6 @@
 				</li>
 			</ul>
 		</div>
-	
-	<br><br>
-		<script src="js/lib/jquery-2.0.3.min.js"></script>
-		<script>
-		$(function () {
-	
-			$("#dcs_tree li").each(function() {
-				if ( $(this).children('ul').length > 0) {
-					$(this).addClass('treeparent');
-				} else {
-					
-					var na_patt = /NA.pdf$/i;
-					if (na_patt.test($(this).attr('dcslink'))) {
-						$(this).addClass('notavailable');
-					}
-
-					dcs_link = ($(this).attr('dcslink')) ? $(this).attr('dcslink') : "#";
-					dcs_html = $(this).html(); 
-
-					var pdf_patt = /.pdf/i;
-					var mp3_patt = /.mp3/i;
-					
-					if (pdf_patt.test($(this).attr('dcslink'))) {
-						//dcs_target = $(this).attr('dcslink');
-						dcs_target = "FrameScore";
-					} else if (mp3_patt.test($(this).attr('dcslink'))) {
-						//dcs_target = $(this).attr('dcslink');
-						dcs_target = "FrameAudio";
-					} else {
-						dcs_target = "_blank";
-					}
-					$(this).html("<a href='"+dcs_link+"' target='"+dcs_target+"'>" + dcs_html + "</a>");
-					$(this).click(function(event) {
-						event.stopPropagation();
-					});
-					
-				}
-			});
-	
-			$('#dcs_tree .treeparent').click(function(event) {
-				event.stopPropagation();
-				$(this).children('ul').toggle();
-			});
-	
-			$("#dcs_tree .treeparent").children().toggle();
-	
-		});
-		</script>
 	
 	</body>
 </html>
