@@ -365,7 +365,11 @@ p.missaltitle {
 p.name {
     font-weight:normal;
     font-style:italic;
+    text-align:center;
     color:red;
+    font-size: 80%;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 p.prayerzero {
     text-align:left;
