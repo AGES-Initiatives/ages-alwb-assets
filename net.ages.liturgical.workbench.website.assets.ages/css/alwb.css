@@ -528,6 +528,10 @@ p.credits3 {
     font-size:9pt;
     margin-bottom: 1em;
 }
+span.anum {
+	color: red;
+    font-size:80%;
+}
 
 span.melody {
 	font-style:italic;
@@ -546,6 +550,13 @@ span.designation {
 	color:red;
 }
 
+span.reference{
+	font-variant:normal;
+	font-weight:normal;
+	font-style:italic;
+	font-size:70%;
+	color:red;	
+}
 span.rubric{
 	font-variant:normal;
 	font-weight:normal;
@@ -575,7 +586,6 @@ span.bolditalics {
 	font-weight:bold;
 	font-style:italic;
 }
-
 span.red {
 	font-style:inherit;
 	color:red;
