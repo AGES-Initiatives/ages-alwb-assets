@@ -397,13 +397,13 @@ p.reading {
 }
 p.readingcenterzero {
     text-align:center;
-	font-size:80%;
+	font-size:100%;
     line-height:150%;
     margin-bottom: 0px;
 }
 p.readingcenter {
     text-align:center;
-	font-size:80%;
+	font-size:100%;
     line-height:150%;
     margin-bottom: 6px;
 }
