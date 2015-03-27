@@ -536,18 +536,21 @@ span.anum {
 span.melody {
 	font-style:italic;
 	color:red;	
+	white-space: nowrap;
 }
 
 span.mode {
 	font-style:normal;
 	font-weight:bolder;
 	color:red;
+	white-space: nowrap;
 }
 
 span.designation {
 	font-style:normal;
 	font-weight:bolder;
 	color:red;
+	white-space: nowrap;
 }
 
 span.reference{
@@ -578,6 +581,11 @@ span.bigblack {
 	line-height:150%;
 	color:black;
 }
+span.black {
+	font-style:normal;
+	color:black;
+}
+
 span.bold {
 	font-weight:bold;
 	font-style:inherit;
@@ -597,6 +605,10 @@ span.boldred {
 	font-style:inherit;
 }
 
+span.italicsblack {
+	font-style:italic;
+	color:black;
+}
 span.italicsred {
 	font-style:italic;
 	color:red;
