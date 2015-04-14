@@ -16,8 +16,11 @@
 				var pdf_patt = /.pdf/i;
 				var mp3_patt = /.mp3/i;
 				var html_patt = /.html/i;
-				
-				if (pdf_patt.test($(this).attr('dcslink'))) {
+				var p_patt = /p\//i;
+
+				if (p_patt.test( $(this).attr('dcslink') )) {
+					  dcs_target = "FrameScore";
+				} else if (pdf_patt.test($(this).attr('dcslink'))) {
 					//dcs_target = $(this).attr('dcslink');
 					dcs_target = "FrameScore";
 				} else if (mp3_patt.test($(this).attr('dcslink'))) {
