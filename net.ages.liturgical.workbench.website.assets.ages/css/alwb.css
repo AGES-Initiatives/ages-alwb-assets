@@ -248,6 +248,29 @@ p.chapverse {
     margin-top: 0px;
     margin-bottom: 0px;
 }
+p.collapsebottom {
+    text-align:center;
+    font-style:normal;
+    font-size:90%;
+    color:blue;
+    line-height:100%;
+    margin-top: 12px;
+    margin-bottom: 3px;
+}
+.collapsebottom:hover {
+	cursor: pointer;
+}
+p.collapsetop {
+    text-align:center;
+    font-style:normal;
+    font-size:90%;
+    color:blue;
+    line-height:100%;
+    margin-bottom: 12px;
+}
+.collapsetop:hover {
+	cursor: pointer;
+}
 p.designation {
     font-style:normal;
     font-weight:bolder;
