@@ -459,6 +459,25 @@ $(".versionMode").click(function(){
 	return false;
 });
 
+$("tr:has(.collapsetop)").nextUntil("tr:has(.collapsebottom)").hide();
+$("tr:has(.collapsebottom)").hide();
+
+$("tr:has(.collapsetop)").click(function() {
+	$(this).nextUntil('tr:has(.collapsebottom)').show();
+	$(this).nextUntil('tr:has(.collapsebottom)').css("background-color", "#FDF6E7");
+	$(this).hide();
+	$(this).nextAll('tr:has(.collapsebottom):first').show();
+});
+$("tr:has(.collapsebottom)").click(function() {
+	$(this).prevUntil('tr:has(.collapsetop)').hide();
+	$(this).hide();
+	$(this).prevAll('tr:has(.collapsetop):first').show();
+
+	var show_pos = $(this).prevAll('tr:has(.collapsetop):first').position();
+	window.scrollTo(0,show_pos.top-50);
+});
+
+
 notAvailable();
   
  });
