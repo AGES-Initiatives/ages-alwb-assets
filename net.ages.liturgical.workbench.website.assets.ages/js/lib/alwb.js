@@ -1,4 +1,4 @@
-﻿var resized = false;
+var resized = false;
 var originalFontSize;
 var adjustedFontSize;
 var elements;
@@ -85,6 +85,12 @@ $(".media-icon,i,li").attr("onmouseout","resumeSwap(this)");
 $("td:even").css("background-color","#FFF7E6");
 $("td:even").css("display","none");
 $("td").css("border","0");
+
+// Added
+$('.fa-columns.ages-col-picker').show();
+$('.fa-caret-square-o-right.ages-col-picker').hide();
+$('.fa-caret-square-o-left.ages-col-picker').show();
+
 displayingBilingual = false;
 }
 
@@ -98,6 +104,12 @@ $(".media-icon,i,li").attr("onmouseout","resumeSwap(this)");
 $("td:even").css("background-color","#FFF7E6");
 $("td:odd").css("display","none");
 $("td").css("border","0");
+
+// Added
+$('.fa-columns.ages-col-picker').show();
+$('.fa-caret-square-o-left.ages-col-picker').hide();
+$('.fa-caret-square-o-right.ages-col-picker').show();
+
 displayingBilingual = false;
 }
 
@@ -110,6 +122,12 @@ function showAll() {
 	$("td").css("display","");
 	$("td").css("border","");
 	$("td:even").css("background-color","#FBF0D9");
+
+	// Added
+	$('.fa-columns.ages-col-picker').hide();
+	$('.fa-caret-square-o-left.ages-col-picker').show();
+	$('.fa-caret-square-o-right.ages-col-picker').show();
+
 	displayingBilingual = true;
 }
 
@@ -418,6 +436,8 @@ $(document).ready(function(){
 		resizeNume();
     return false;
   });
+
+$('.dayMode').toggle(); // Added
   
 $(".dayMode").click(function(){
 	$("html, body, body *").css('background-color',dayBackgroundColor);
@@ -425,6 +445,9 @@ $(".dayMode").click(function(){
 	$(redElements).css('color','red');
 	$("i.ages-menu-link *").css('color',dayMenuIconColor);
 	$("div.agesMenu, div.agesMenu *").css('background-color',dayMenuBarColor);
+
+	$('.dayMode').toggle(); // Added
+	$('.nightMode').toggle(); // Added
 
 	return false;
 });
@@ -435,8 +458,22 @@ $(".nightMode").click(function(){
 	$(redElements).css('color','red');
 	$("i.ages-menu-link *").css('color',dayMenuIconColor);
 	$("div.agesMenu, div.agesMenu *").css('background-color',dayMenuBarColor);
+
+	$('.dayMode').toggle(); // Added
+	$('.nightMode').toggle(); // Added
+
 	return false;
 });
+
+
+if ($('title').data('language')) {
+	var lang_array = $('title').data('language').split('-');
+	if (lang_array.length == 2) {
+		if (displayingBilingual) {
+			$('.fa-columns.ages-col-picker').hide();
+		}
+	}
+}
 
 $.fn.visible = function() {
 	return this.css('visibility', 'visible');
@@ -477,6 +514,52 @@ $("tr:has(.collapsebottom)").click(function() {
 	window.scrollTo(0,show_pos.top-50);
 });
 
+// Added - start
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+show_media = getCookie('showmedialinks');
+
+if (!isMobile.iPad()) {
+	$('a.versionMode').after('<a href="#" class="mediaMode"><i class="fa fa-music mediaMode ages-menu-link"></i></a>');
+	$('.mediaMode').click(function() {
+		$('.media-group').toggle();
+		var media_val = $('.media-group:first').css('display');
+		setCookie('showmedialinks',media_val,100);
+		return false;
+	});	
+	$('.media-group').toggle();
+	if (show_media == "none") {
+		$('.media-group').hide();
+	} else if(show_media == "block") {
+		$('.media-group').show();
+	}
+}
+
+$('a.mediaMode').attr('data-toggle','tooltip');
+$('a.mediaMode').attr('data-placement','bottom');
+$('a.mediaMode').attr('title','Show/Hide media links')
+$('[data-toggle="tooltip"]').tooltip({
+	delay : {
+		"hide" : 5000
+	}
+});
+$('a.mediaMode').tooltip('show');
+$('a.mediaMode').trigger('mouseout');
+// Added - stop
 
 notAvailable();
   
