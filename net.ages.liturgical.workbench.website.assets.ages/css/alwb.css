@@ -224,6 +224,14 @@ p.alttext {
 	background-color:#CCCCCC;
 	margin-left:2em;
 }
+.bmc {
+    font-size:0;
+    height:0;
+}
+.emc {
+    font-size:0;
+    height:0;
+}
 p.break {
     margin-bottom: 10px;
 }
