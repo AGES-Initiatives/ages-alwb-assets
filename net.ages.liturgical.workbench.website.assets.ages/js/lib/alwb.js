@@ -584,14 +584,14 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   //$(".pref-panel").append("<table id='pref-table'>");
   $(".pref-panel").append("<div class='pref-opts'></div>");
   $(".pref-opts").append("<div class='pref-instructions'><p>"+
-      "Use this panel to choose which parts of the canon to display, the position of the Eothinon Gospel,"+
-      " the Kontakia and the Katavasias, and the end of service options. Certain selections will make others inaccesible, to prevent mistakes. "+
+      "Use this panel to choose which parts of the canon to display, and also the position of the Eothinon Gospel,"+
+      " the Kontakia and the Katavasias. Certain selections will make others inaccesible, to prevent mistakes. "+
       " The default preferences will display the Matins service as it is in the regular Matins service. Once you have "+
       " selected your preferences, click Apply. You will then be taken to the text of the service. If you want to change "+
-      "your preferences, click on the Preferences Button on the blue toolbar or on the top right corner of the left frame.</p>" +
-      "<h3>Printing Instructions</h3><h5>(Mobile devices not supported.)</h5> If you want to print the customized service as it appears in " +
+      "your preferences, click on the Preferences Button on the blue toolbar.</p>" +
+      "<h3>Printing Instructions</h3> If you want to print the customized service as it appears in " +
       "your browser in the left frame, turn off the media icons using the music button on the blue toolbar. "+
-      "Choose your bilingual or English only preference and whether or not to display source and version information. Click on the printer button that will appear on the "+
+      "Choose your bilingual or English only preference. Click on the printer button that will appear on the "+
       "right hand corner of the left frame. Bilingual texts will print in two columns. English only text will print in a "+
       "single column, filling the page.</p></div>");
 
@@ -701,6 +701,16 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   $(".pref-opts").append( ode_to_html(canon_list,9) );
   $(".pref-opts").append(spacer_text);
 
+  var dismissal_label1 = $('.bmc_matins_end_no_dismissal:first').text();
+  var dismissal_label2 = $('.bmc_matins_end_before_dismissal:first').text();
+  var dismissal_label3 = $('.bmc_matins_close:first').text();
+  $(".pref-opts").append("<div class='pref-left'><label for='cb-dismissal1'>"+dismissal_label1+"</label></div>"
+      + "<div class='pref-right'><input type='checkbox' id='cb-dismissal1'></div>");
+  $(".pref-opts").append("<div class='pref-left'><label for='cb-dismissal2'>"+dismissal_label2+"</label></div>"
+      + "<div class='pref-right'><input type='checkbox' id='cb-dismissal2'></div>");
+  $(".pref-opts").append("<div class='pref-left'><label for='cb-dismissal3'>"+dismissal_label3+"</label></div>"
+      + "<div class='pref-right'><input type='checkbox' id='cb-dismissal3'></div>");
+
   $(".pref-opts").append("<div class='pref-closer'>Apply</div>");
 
   // Add print and services preference links
@@ -789,6 +799,37 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
     $(".pref-panel").hide();
   });
 
+  // Bind click functions for dismissal options
+  $('#cb-dismissal1').click(function() {
+    if (this.checked) {
+      $('tr:has(p.bmc_matins_end_no_dismissal)').nextUntil('tr:has(p.emc_matins_end_no_dismissal)').show();
+      $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').hide();
+      $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
+      $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').hide();
+    } else {
+      $('tr:has(p.bmc_matins_end_no_dismissal)').nextUntil('tr:has(p.emc_matins_end_no_dismissal)').hide();
+    }
+  });
+  $('#cb-dismissal2').click(function() {
+    if (this.checked) {
+      $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').show();
+      $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').show();
+      // Hide dismissal 1 if it's visible
+      if ($('#cb-dismissal1').prop('checked'))
+        $('#cb-dismissal1').click();
+    } else {
+      $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').hide();
+      $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
+    }
+  });
+  $('#cb-dismissal3').click(function() {
+    if (this.checked) {
+      $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').show();  
+    } else {
+      $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').hide();
+    }
+  });
+
   // Make it look like a default service
   hide_all_canons();
   show_kontakion(1,false);
@@ -799,6 +840,10 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   $("#radio-mag-katavasia").click();
   $("#cb-ode9_katavasia").click();
   $('#cb-ode9_katavasia').prop('disabled',true);
+  $('tr:has(p.bmc_matins_end_no_dismissal)').nextUntil('tr:has(p.emc_matins_end_no_dismissal)').hide();
+  $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').hide();
+  $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
+  $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').hide();
 
   $('.pref-panel').show();
 
