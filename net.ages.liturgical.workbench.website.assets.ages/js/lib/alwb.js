@@ -806,6 +806,10 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
       $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').hide();
       $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
       $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').hide();
+      if ($('#cb-dismissal2').prop('checked'))
+        $('#cb-dismissal2').click();
+      if ($('#cb-dismissal3').prop('checked'))
+        $('#cb-dismissal3').click();
     } else {
       $('tr:has(p.bmc_matins_end_no_dismissal)').nextUntil('tr:has(p.emc_matins_end_no_dismissal)').hide();
     }
@@ -815,8 +819,9 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
       $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').show();
       $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').show();
       // Hide dismissal 1 if it's visible
-      if ($('#cb-dismissal1').prop('checked'))
+      if ($('#cb-dismissal1').prop('checked')) {
         $('#cb-dismissal1').click();
+      }
     } else {
       $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').hide();
       $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
@@ -828,6 +833,8 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
     } else {
       $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').hide();
     }
+    if ($('#cb-dismissal1').prop('checked'))
+      $('#cb-dismissal1').click();
   });
 
   // Make it look like a default service
