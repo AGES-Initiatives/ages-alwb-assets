@@ -585,11 +585,11 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   $(".pref-panel").append("<div class='pref-opts'></div>");
   $(".pref-opts").append("<div class='pref-instructions'><p>"+
       "Use this panel to choose which parts of the canon to display, and also the position of the Eothinon Gospel,"+
-      " the Kontakia and the Katavasias. Certain selections will make others inaccesible, to prevent mistakes. "+
-      " The default preferences will display the Matins service as it is in the regular Matins service. Once you have "+
+      " the Kontakia and the Katavasias, and whether or not to display end litanies and dismissal. Certain selections will make others inaccesible, to prevent mistakes. "+
+      " The default preferences will display the Matins service as it is in the regular Matins file. Once you have "+
       " selected your preferences, click Apply. You will then be taken to the text of the service. If you want to change "+
-      "your preferences, click on the Preferences Button on the blue toolbar.</p>" +
-      "<h3>Printing Instructions</h3> If you want to print the customized service as it appears in " +
+      "your preferences, click on the Preferences Button on the right hand corner of the left frame.</p>" +
+      "<br><p>If you want to print the customized service as it appears in " +
       "your browser in the left frame, turn off the media icons using the music button on the blue toolbar. "+
       "Choose your bilingual or English only preference. Click on the printer button that will appear on the "+
       "right hand corner of the left frame. Bilingual texts will print in two columns. English only text will print in a "+
