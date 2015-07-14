@@ -585,11 +585,11 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   $(".pref-panel").append("<div class='pref-opts'></div>");
   $(".pref-opts").append("<div class='pref-instructions'><p>"+
       "Use this panel to choose which parts of the canon to display, and also the position of the Eothinon Gospel,"+
-      " the Kontakia and the Katavasias, and whether or not to display end litanies and dismissal. Certain selections will make others inaccesible, to prevent mistakes. "+
-      " The default preferences will display the Matins service as it is in the regular Matins file. Once you have "+
+      " the Kontakia and the Katavasias. Certain selections will make others inaccesible, to prevent mistakes. "+
+      " The default preferences will display the Matins service as it is in the regular Matins service. Once you have "+
       " selected your preferences, click Apply. You will then be taken to the text of the service. If you want to change "+
-      "your preferences, click on the Preferences Button on the right hand corner of the left frame.</p>" +
-      "<br><p>If you want to print the customized service as it appears in " +
+      "your preferences, click on the Preferences Button on the blue toolbar.</p>" +
+      "<h3>Printing Instructions</h3> If you want to print the customized service as it appears in " +
       "your browser in the left frame, turn off the media icons using the music button on the blue toolbar. "+
       "Choose your bilingual or English only preference. Click on the printer button that will appear on the "+
       "right hand corner of the left frame. Bilingual texts will print in two columns. English only text will print in a "+
@@ -627,9 +627,11 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
     + "<td><input id='cb-midode-kathisma' type='checkbox'></td></tr>");
   $(".pref-panel").append(pref-spacer_text);*/
 
-  $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-2'>"+kontak_label2+"</label></div>"
-        + "<div class='pref-right'><input id='cb-kontakion-2' type='checkbox'></div>"
-        + "<div class='pref-left'><label for='cb-midode-kathisma'>"+kathisma_label+"</label></div>"
+  if (kontak_label2 != '')
+    $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-2'>"+kontak_label2+"</label></div>"
+        + "<div class='pref-right'><input id='cb-kontakion-2' type='checkbox'></div>");
+  if (kathisma_label != '')
+    $(".pref-opts").append("<div class='pref-left'><label for='cb-midode-kathisma'>"+kathisma_label+"</label></div>"
         + "<div class='pref-right'><input id='cb-midode-kathisma' type='checkbox'></div>"
         + spacer_text);
 
@@ -654,8 +656,11 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   //$(".pref-panel").append("<tr><td><label for='cb-kontakion-1'>"+kontak_label1+"</label></td>"
   //  + "<td><input id='cb-kontakion-1' type='checkbox'></td></tr>");
   //$(".pref-panel").append(spacer_text);
-  $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-1'>"+kontak_label1+"</label></div>"
-        + "<div class='pref-right'><input id='cb-kontakion-1' type='checkbox'></div>" + spacer_text);
+  if (kontak_label1 != '') {
+    $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-1'>"+kontak_label1+"</label></div>"
+        + "<div class='pref-right'><input id='cb-kontakion-1' type='checkbox'></div>" + spacer_text);  
+  }
+  
 
   // Ode 7
   $(".pref-opts").append( ode_to_html(canon_list,7) + spacer_text);
@@ -666,8 +671,11 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   var kontak_label12 = $('.bmc_kontakion_position12:first').text();
   //$(".pref-panel").append("<tr><td><label for='cb-kontakion-12'>"+kontak_label12+"</label></td>"
   //  + "<td><input id='cb-kontakion-12' type='checkbox'></td></tr>");
-  $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-12'>"+kontak_label12+"</label></div>"
-      + "<div class='pref-right'><input id='cb-kontakion-12' type='checkbox'></div>");
+  if (kontak_label12 != '') {
+    $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-12'>"+kontak_label12+"</label></div>"
+      + "<div class='pref-right'><input id='cb-kontakion-12' type='checkbox'></div>");  
+  }
+  
 
   // Katavasias 1-8
   //$(".pref-panel").append("<tr><td><label for='cb-katavasias1345678'>Katavasias 1345678</label></td>"
@@ -692,11 +700,14 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   // Ode 9
   var mag_label1 = $('.bmc_magnificat_modeokatavasia:first').text();
   var mag_label2 = $('.bmc_magnificat_modeofcanon:first').text();
-  $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-katavasia'>" + mag_label1 + "</label></div>"
-    + "<div class='pref-right'><input type='radio' name='radio-magnificat' id='radio-mag-katavasia'></div>");
-  $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-modeofcanon'>" + mag_label2 + "</label></div>"
-    + "<div class='pref-right'><input type='radio' name='radio-magnificat' id='radio-mag-modeofcanon'></div>"
-    + spacer_text);
+  if (mag_label1 != '')
+    $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-katavasia'>" + mag_label1 + "</label></div>"
+        + "<div class='pref-right'><input type='radio' name='radio-magnificat' id='radio-mag-katavasia'></div>");
+  
+  if (mag_label2 != '')
+    $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-modeofcanon'>" + mag_label2 + "</label></div>"
+        + "<div class='pref-right'><input type='radio' name='radio-magnificat' id='radio-mag-modeofcanon'></div>"
+        + spacer_text);
 
   $(".pref-opts").append( ode_to_html(canon_list,9) );
   $(".pref-opts").append(spacer_text);
