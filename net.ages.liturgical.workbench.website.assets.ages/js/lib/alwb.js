@@ -608,24 +608,15 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
           + spacer_text);
   }
 
-  // Ode 1
-  //$(".pref-panel").append( ode_to_html(canon_list,1) );
-  //$(".pref-panel").append(spacer_text);
-  $(".pref-opts").append( ode_to_html(canon_list,1) + spacer_text );
-  // Ode 3
-  $(".pref-opts").append( ode_to_html(canon_list,3) + spacer_text );
+  $(".pref-opts").append( make_ode_html(1) );
+  $(".pref-opts").append( make_ode_html(2) );
+  $(".pref-opts").append( make_ode_html(3) );
 
-  // Short litany after Ode 3
   $(".pref-opts").append( short_litany_html(3) + spacer_text );
 
   // Kontakion and Mid-ode Kathisma
   var kathisma_label = $('.bmc_ode3_kathisma:first').text();
   var kontak_label2 = $('.bmc_kontakion_position2:first').text();
-  /*$(".pref-panel").append("<tr><td><label for='cb-kontakion-2'>"+kontak_label2+"</label></td>"
-    + "<td><input id='cb-kontakion-2' type='checkbox'></td></tr>");
-  $(".pref-panel").append("<tr><td><label for='cb-midode-kathisma'>"+kathisma_label+"</label></td>"
-    + "<td><input id='cb-midode-kathisma' type='checkbox'></td></tr>");
-  $(".pref-panel").append(pref-spacer_text);*/
 
   if (kontak_label2 != '')
     $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-2'>"+kontak_label2+"</label></div>"
@@ -635,27 +626,15 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
         + "<div class='pref-right'><input id='cb-midode-kathisma' type='checkbox'></div>"
         + spacer_text);
 
-  // Ode 4
-  $(".pref-opts").append( ode_to_html(canon_list,4) + spacer_text );
-  //$(".pref-opts").append(spacer_text);
-
-  // Ode 5
-  $(".pref-opts").append( ode_to_html(canon_list,5) + spacer_text );
-  //$(".pref-opts").append(spacer_text);
-
-  // Odd 6
-  $(".pref-opts").append( ode_to_html(canon_list,6) + spacer_text );
-  //$(".pref-opts").append(spacer_text);
+  $(".pref-opts").append( make_ode_html(4) );
+  $(".pref-opts").append( make_ode_html(5) );
+  $(".pref-opts").append( make_ode_html(6) );
 
   // Short litany after Ode 6
   $(".pref-opts").append( short_litany_html(6) + spacer_text );
-  //$(".pref-panel").append(spacer_text);
 
   // Kontakion and Synaxarion
   var kontak_label1 = $('.bmc_kontakion_position1:first').text();
-  //$(".pref-panel").append("<tr><td><label for='cb-kontakion-1'>"+kontak_label1+"</label></td>"
-  //  + "<td><input id='cb-kontakion-1' type='checkbox'></td></tr>");
-  //$(".pref-panel").append(spacer_text);
   if (kontak_label1 != '') {
     $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-1'>"+kontak_label1+"</label></div>"
         + "<div class='pref-right'><input id='cb-kontakion-1' type='checkbox'></div>" + spacer_text);  
@@ -666,16 +645,10 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
     $(".pref-opts").append("<div class='pref-left'><label for='cb-extended_synaxarion'>"+extended_synax_label+"</label></div>"
         + "<div class='pref-right'><input id='cb-extended_synaxarion' type='checkbox'></div>" + spacer_text );
   
-
-  // Ode 7
-  $(".pref-opts").append( ode_to_html(canon_list,7) + spacer_text);
-
-  // Ode 8
-  $(".pref-opts").append( ode_to_html(canon_list,8) + spacer_text);
+  $(".pref-opts").append( make_ode_html(7) );
+  $(".pref-opts").append( make_ode_html(8) );
 
   var kontak_label12 = $('.bmc_kontakion_position12:first').text();
-  //$(".pref-panel").append("<tr><td><label for='cb-kontakion-12'>"+kontak_label12+"</label></td>"
-  //  + "<td><input id='cb-kontakion-12' type='checkbox'></td></tr>");
   if (kontak_label12 != '') {
     $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-12'>"+kontak_label12+"</label></div>"
       + "<div class='pref-right'><input id='cb-kontakion-12' type='checkbox'></div>");  
@@ -708,8 +681,7 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
         + "<div class='pref-right'><input type='radio' name='radio-magnificat' id='radio-mag-modeofcanon'></div>"
         + spacer_text);
 
-  $(".pref-opts").append( ode_to_html(canon_list,9) );
-  $(".pref-opts").append(spacer_text);
+  $(".pref-opts").append( make_ode_html(9) );
 
   var dismissal_label1 = $('.bmc_matins_end_no_dismissal:first').text();
   var dismissal_label2 = $('.bmc_matins_end_before_dismissal:first').text();
@@ -754,7 +726,6 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
 
   // Bind click functions for canon odes
   $('[id^="cb-ode"]').click(function() {
-    //console.log("CB clicked: "+this.id + " - " + this.checked);
     if (this.checked) {
       $('tr:has(p.bmc_'+this.id.slice(3)+')').nextUntil('tr:has(p.emc_'+this.id.slice(3)+')').show();
     } else {
@@ -878,12 +849,11 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
 	
 
 function hide_all_canons() {
-	//console.log("Hiding all canons");
 	$('tr:has([class^="bmc_ode"])').each(function() {
 		$(this).nextUntil('tr:has([class^="emc_ode"])').hide();
 	});
 }
-
+/*
 function ode_to_html(canon_list, ode_num) {
 	var out_html = "";
 	for (var i=0;i<canon_list.length;i++) {
@@ -893,6 +863,27 @@ function ode_to_html(canon_list, ode_num) {
         + "<div class='pref-right'><input id='"+cb_id+"' type='checkbox'></div>";
 	}
 	return out_html;
+}*/
+
+function make_ode_html(ode_num) {
+  var ode_list = []; 
+  $('[class^="bmc_ode'+ode_num+'"]').each(function() {
+    var class_name = $(this).attr('class');
+    if (ode_list.indexOf(class_name) == -1)
+      if ((class_name.indexOf("litany") == -1) && (class_name.indexOf("kathisma") == -1))
+        ode_list.push(class_name);
+  });
+
+  var out_html = '';
+  ode_list.map(function(ode_name) {
+    var pref_label = $('.'+ode_name+':first').text();
+    var cb_id = "cb-ode"+ode_num+"_"+ode_name.slice(9);
+    out_html += "<div class='pref-left'><label for='"+cb_id+"'>"+pref_label+"</label></div>"
+             + "<div class='pref-right'><input id='"+cb_id+"' type='checkbox'></div>";
+  });
+  if (ode_list.length > 0)
+    out_html += spacer_text;
+  return out_html; 
 }
 
 function short_litany_html(ode_num) {
