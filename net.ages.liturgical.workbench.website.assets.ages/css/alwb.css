@@ -456,6 +456,17 @@ p.source0 {
     position:relative;
     top:-3em;
 }
+p.source1 {
+    margin-top: 0px;
+	font-weight:normal;
+    font-style:normal;
+    font-size:70%;
+    color:gray;
+    text-align:left;
+    height:0;
+    position:relative;
+    top:-6em;
+}
 p.titlezero {
 	text-align:center;
 	font-style:normal;
