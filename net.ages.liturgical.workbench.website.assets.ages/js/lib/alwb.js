@@ -612,26 +612,40 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   $(".pref-opts").append( make_ode_html(2) );
   $(".pref-opts").append( make_ode_html(3) );
 
-  $(".pref-opts").append( short_litany_html(3) + spacer_text );
+  if (short_litany_html(3))
+    $(".pref-opts").append( short_litany_html(3) + spacer_text );
 
   // Kontakion and Mid-ode Kathisma
   var kathisma_label = $('.bmc_ode3_kathisma:first').text();
   var kontak_label2 = $('.bmc_kontakion_position2:first').text();
 
-  if (kontak_label2 != '')
-    $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-2'>"+kontak_label2+"</label></div>"
-        + "<div class='pref-right'><input id='cb-kontakion-2' type='checkbox'></div>");
-  if (kathisma_label != '')
-    $(".pref-opts").append("<div class='pref-left'><label for='cb-midode-kathisma'>"+kathisma_label+"</label></div>"
-        + "<div class='pref-right'><input id='cb-midode-kathisma' type='checkbox'></div>"
-        + spacer_text);
+  if ($('.bmc_kontakion_position2').nextAll('.bmc_ode3_kathisma').length !== 0) {
+    console.log("position2");
+    if (kontak_label2 != '')
+      $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-2'>"+kontak_label2+"</label></div>"
+          + "<div class='pref-right'><input id='cb-kontakion-2' type='checkbox'></div>");
+    if (kathisma_label != '')
+      $(".pref-opts").append("<div class='pref-left'><label for='cb-midode-kathisma'>"+kathisma_label+"</label></div>"
+          + "<div class='pref-right'><input id='cb-midode-kathisma' type='checkbox'></div>"
+          + spacer_text);
+  } else {
+    if (kathisma_label != '')
+      $(".pref-opts").append("<div class='pref-left'><label for='cb-midode-kathisma'>"+kathisma_label+"</label></div>"
+          + "<div class='pref-right'><input id='cb-midode-kathisma' type='checkbox'></div>");
+    if (kontak_label2 != '')
+      $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-2'>"+kontak_label2+"</label></div>"
+          + "<div class='pref-right'><input id='cb-kontakion-2' type='checkbox'></div>"
+          + spacer_text);
+  }
+    
 
   $(".pref-opts").append( make_ode_html(4) );
   $(".pref-opts").append( make_ode_html(5) );
   $(".pref-opts").append( make_ode_html(6) );
 
   // Short litany after Ode 6
-  $(".pref-opts").append( short_litany_html(6) + spacer_text );
+  if (short_litany_html(6))
+    $(".pref-opts").append( short_litany_html(6) + spacer_text );
 
   // Kontakion and Synaxarion
   var kontak_label1 = $('.bmc_kontakion_position1:first').text();
@@ -887,10 +901,13 @@ function make_ode_html(ode_num) {
 }
 
 function short_litany_html(ode_num) {
-  var p_label = $('.bmc_ode'+ode_num+'_litany:first').text();
-  var out_html = "<div class='pref-left'><label for='cb-ode"+ode_num+"_litany'>" + p_label + "</label></div>"
+  if ($('.bmc_ode'+ode_num+'_litany').length > 0) {
+    var p_label = $('.bmc_ode'+ode_num+'_litany:first').text();
+    var out_html = "<div class='pref-left'><label for='cb-ode"+ode_num+"_litany'>" + p_label + "</label></div>"
         + "<div class='pref-right'><input id='cb-ode"+ode_num+"_litany' type='checkbox'></div>";
-	return out_html;
+    return out_html;
+  }
+  return "";
 }
 
 
