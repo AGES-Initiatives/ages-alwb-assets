@@ -18,16 +18,13 @@
 				var html_patt = /.html/i;
 				var p_patt = /p\//i;
 
-				if (p_patt.test( $(this).attr('dcslink') )) {
-					  dcs_target = "FrameScore";
-				} else if (pdf_patt.test($(this).attr('dcslink'))) {
-					//dcs_target = $(this).attr('dcslink');
-					dcs_target = "FrameScore";
-				} else if (mp3_patt.test($(this).attr('dcslink'))) {
-					//dcs_target = $(this).attr('dcslink');
+				if (mp3_patt.test($(this).attr('dcslink'))) {
 					dcs_target = "FrameAudio";
+				} else if (p_patt.test( $(this).attr('dcslink'))) {
+					dcs_target = "FrameScore";
+				} else if (pdf_patt.test($(this).attr('dcslink'))) {
+					dcs_target = "FrameScore";
 				} else if (html_patt.test($(this).attr('dcslink'))) {
-					//dcs_target = $(this).attr('dcslink');
 					dcs_target = "FrameText";
 				} else {
 					dcs_target = "_blank";
