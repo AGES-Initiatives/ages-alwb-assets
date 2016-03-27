@@ -496,21 +496,21 @@ $(".versionMode").click(function(){
 	return false;
 });
 
-$("tr:has(.collapsetop)").nextUntil("tr:has(.collapsebottom)").hide();
-$("tr:has(.collapsebottom)").hide();
+$("tr:has(.bmc_collapse)").nextUntil("tr:has(.emc_collapse)").hide();
+$("tr:has(.emc_collapse)").hide();
 
-$("tr:has(.collapsetop)").click(function() {
-	$(this).nextUntil('tr:has(.collapsebottom)').show();
-	$(this).nextUntil('tr:has(.collapsebottom)').css("background-color", "#FDF6E7");
+$("tr:has(.bmc_collapse)").click(function() {
+	$(this).nextUntil('tr:has(.emc_collapse)').show();
+	$(this).nextUntil('tr:has(.emc_collapse)').css("background-color", "#FDF6E7");
 	$(this).hide();
-	$(this).nextAll('tr:has(.collapsebottom):first').show();
+	$(this).nextAll('tr:has(.emc_collapse):first').show();
 });
-$("tr:has(.collapsebottom)").click(function() {
-	$(this).prevUntil('tr:has(.collapsetop)').hide();
+$("tr:has(.emc_collapse)").click(function() {
+	$(this).prevUntil('tr:has(.bmc_collapse)').hide();
 	$(this).hide();
-	$(this).prevAll('tr:has(.collapsetop):first').show();
+	$(this).prevAll('tr:has(.bmc_collapse):first').show();
 
-	var show_pos = $(this).prevAll('tr:has(.collapsetop):first').position();
+	var show_pos = $(this).prevAll('tr:has(.bmc_collapse):first').position();
 	window.scrollTo(0,show_pos.top-50);
 });
 
