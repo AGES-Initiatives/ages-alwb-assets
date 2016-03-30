@@ -248,7 +248,13 @@ p.chapverse {
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
+p[class^="bmc_"], p[class^="emc_"] {
+  display: none;
+}
+
 p.emc_collapse {
+    display:block;
     text-align:center;
     font-style:normal;
     font-size:90%;
@@ -261,7 +267,8 @@ p.emc_collapse {
 	cursor: pointer;
 }
 p.bmc_collapse {
-    text-align:center;
+    display:block;
+	text-align:center;
     font-style:normal;
     font-size:90%;
     color:blue;
@@ -986,11 +993,7 @@ table.custom-index-table {
   float: left;
 }
 
-/*
-p[class^="bmc_"], p[class^="emc_"] {
-  display: none;
-}
-*/
+
 
 @media print {
   @page {
