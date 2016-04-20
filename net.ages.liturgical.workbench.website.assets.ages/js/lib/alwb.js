@@ -563,10 +563,14 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
 
   // Determine which canons are present
   var opt_class_list = [];
+  var opt_list = [];
   $('[class^="bmc_"]').each(function() {
+    // console.log('BMC: ', $(this).attr('class'))
     var class_name = $(this).attr('class');
+    var class_text = $(this).text();
     if (opt_class_list.indexOf( class_name ) == -1) {
       opt_class_list.push(class_name);
+      opt_list.push({ class: class_name, text: class_text });
     }
   });
   //console.log(opt_class_list);
@@ -597,119 +601,57 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
 
   $(".pref-opts").append('<div class="pref-closer">Apply</div>');
 
-  // Eothinon Gospel
-  if (has_eothinon_gospel) {
-    var gospel_label1 = $('.bmc_eothinongospel_position1:first').text();
-    //$(".pref-panel").append("<tr><td><label for='radio-eothinon-1'>"+gospel_label1+"</label></td>"
-    //+ "<td><input id='radio-eothinon-1' type='radio' name='radio-eothinon'></td></tr>");
-    //$(".pref-panel").append(spacer_text);
-    $('.pref-opts').append("<div class='pref-left'><label for='radio-eothinon-1'>"+gospel_label1+"</label></div>"
+  var prev_ode = null; var cur_ode = null;
+  opt_list.forEach(function(item) {
+    var className = item.class;
+    var dispText = item.text;
+    if (className.indexOf('bmc_eothinongospel_position1') == 0) {
+      var gospel_label1 = $('.bmc_eothinongospel_position1:first').text();
+      $('.pref-opts').append("<div class='pref-left'><label for='radio-eothinon-1'>"+gospel_label1+"</label></div>"
           + "<div class='pref-right'><input id='radio-eothinon-1' type='radio' name='radio-eothinon'></div>"
           + spacer_text);
-  }
-
-  $(".pref-opts").append( make_ode_html(1) );
-  $(".pref-opts").append( make_ode_html(2) );
-  $(".pref-opts").append( make_ode_html(3) );
-
-  if (short_litany_html(3))
-    $(".pref-opts").append( short_litany_html(3) + spacer_text );
-
-  // Kontakion and Mid-ode Kathisma
-  var kathisma_label = $('.bmc_ode3_kathisma:first').text();
-  var kontak_label2 = $('.bmc_kontakion_position2:first').text();
-
-  if ($('.bmc_kontakion_position2').nextAll('.bmc_ode3_kathisma').length !== 0) {
-    console.log("position2");
-    if (kontak_label2 != '')
-      $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-2'>"+kontak_label2+"</label></div>"
-          + "<div class='pref-right'><input id='cb-kontakion-2' type='checkbox'></div>");
-    if (kathisma_label != '')
-      $(".pref-opts").append("<div class='pref-left'><label for='cb-midode-kathisma'>"+kathisma_label+"</label></div>"
-          + "<div class='pref-right'><input id='cb-midode-kathisma' type='checkbox'></div>"
-          + spacer_text);
-  } else {
-    if (kathisma_label != '')
-      $(".pref-opts").append("<div class='pref-left'><label for='cb-midode-kathisma'>"+kathisma_label+"</label></div>"
-          + "<div class='pref-right'><input id='cb-midode-kathisma' type='checkbox'></div>");
-    if (kontak_label2 != '')
-      $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-2'>"+kontak_label2+"</label></div>"
-          + "<div class='pref-right'><input id='cb-kontakion-2' type='checkbox'></div>"
-          + spacer_text);
-  }
-    
-
-  $(".pref-opts").append( make_ode_html(4) );
-  $(".pref-opts").append( make_ode_html(5) );
-  $(".pref-opts").append( make_ode_html(6) );
-
-  // Short litany after Ode 6
-  if (short_litany_html(6))
-    $(".pref-opts").append( short_litany_html(6) + spacer_text );
-
-  // Kontakion and Synaxarion
-  var kontak_label1 = $('.bmc_kontakion_position1:first').text();
-  if (kontak_label1 != '') {
-    $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-1'>"+kontak_label1+"</label></div>"
-        + "<div class='pref-right'><input id='cb-kontakion-1' type='checkbox'></div>" + spacer_text);  
-  }
-
-  var extended_synax_label = $('.bmc_synaxarion_extended:first').text();
-  if (extended_synax_label != '')
-    $(".pref-opts").append("<div class='pref-left'><label for='cb-extended_synaxarion'>"+extended_synax_label+"</label></div>"
-        + "<div class='pref-right'><input id='cb-extended_synaxarion' type='checkbox'></div>" + spacer_text );
-  
-  $(".pref-opts").append( make_ode_html(7) );
-  $(".pref-opts").append( make_ode_html(8) );
-
-  var kontak_label12 = $('.bmc_kontakion_position12:first').text();
-  if (kontak_label12 != '') {
-    $(".pref-opts").append("<div class='pref-left'><label for='cb-kontakion-12'>"+kontak_label12+"</label></div>"
-      + "<div class='pref-right'><input id='cb-kontakion-12' type='checkbox'></div>");  
-  }
-  
-
-  // Katavasias 1-8
-  $(".pref-opts").append("<div class='pref-left'><label for='cb-katavasias1345678'>Katavasias 1345678</label></div>"
-        + "<div class='pref-right'><input id='cb-katavasias1345678' type='checkbox'></div>"
-        + spacer_text);
-
-
-  // Eothinon Gospel
-  if (has_eothinon_gospel) {
-    var gospel_label2 = $('.bmc_eothinongospel_position2:first').text();
-    $(".pref-opts").append("<div class='pref-left'><label for='radio-eothinon-2'>"+gospel_label2+"</label></div>"
+    } else if (className.indexOf('bmc_eothinongospel_position2') == 0) {
+      var gospel_label2 = $('.bmc_eothinongospel_position2:first').text();
+      $(".pref-opts").append("<div class='pref-left'><label for='radio-eothinon-2'>"+gospel_label2+"</label></div>"
           + "<div class='pref-right'><input id='radio-eothinon-2' type='radio' name='radio-eothinon'></div>"
           + spacer_text);
+    } else {
+      var idx = className.indexOf('ode');
+      if (idx > 0) {
+        cur_ode = className.slice(idx + 3, idx + 4);
+        // console.log("Current ode: " + cur_ode);
+      }
+      if (cur_ode !== prev_ode) {
+        $(".pref-opts").append(spacer_text);
+      }
+
+      prev_ode = cur_ode;
+
+      if (className !== 'bmc_matins_dismissal') {
+        $('.pref-opts').append(make_checkbox(className, dispText));
+      }
+
+      if ((className == "bmc_ode3_litany")  ||
+        (className == "bmc_ode6_litany")    ||
+        (className == "bmc_ode8_katavasia") ||
+        (className == "bmc_ode9_katavasia")) {
+        $(".pref-opts").append(spacer_text);
+      }
+    }
+  });
+
+  function make_checkbox(className, dispText) {
+    var cb_id = "cb_" + className.slice(4);
+    var out_html = "<div class='pref-left'><label for='"+cb_id+"'>"+dispText+"</label></div>"
+             + "<div class='pref-right'><input id='"+cb_id+"' type='checkbox'></div>";
+    var $cb = $("<input>", {type: 'checkbox', id: cb_id});
+    var $right = $("<div></div>").addClass('pref-right').append($cb);
+    var $left = $('<div></div>').addClass('pref-left');
+    var $label = $('<label></label>').text(dispText).attr('for', cb_id);
+    $left.append($label);
+    var $container = $('<div></div>').append($left).append($right);
+    return $container;
   }
-
-  // Ode 9
-  var mag_label1 = $('.bmc_magnificat_modeokatavasia:first').text();
-  var mag_label2 = $('.bmc_magnificat_modeofcanon:first').text();
-  if (mag_label1 != '')
-    $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-katavasia'>" + mag_label1 + "</label></div>"
-        + "<div class='pref-right'><input type='radio' name='radio-magnificat' id='radio-mag-katavasia'></div>");
-  
-  if (mag_label2 != '')
-    $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-modeofcanon'>" + mag_label2 + "</label></div>"
-        + "<div class='pref-right'><input type='radio' name='radio-magnificat' id='radio-mag-modeofcanon'></div>"
-        + spacer_text);
-
-  $(".pref-opts").append( make_ode_html(9) );
-
-  var dismissal_label1 = $('.bmc_matins_end_no_dismissal:first').text();
-  var dismissal_label2 = $('.bmc_matins_end_before_dismissal:first').text();
-  var dismissal_label3 = $('.bmc_matins_close:first').text();
-
-  if (dismissal_label1 != '')
-    $(".pref-opts").append("<div class='pref-left'><label for='cb-dismissal1'>"+dismissal_label1+"</label></div>"
-      + "<div class='pref-right'><input type='checkbox' id='cb-dismissal1'></div>");
-  if (dismissal_label2 != '')
-    $(".pref-opts").append("<div class='pref-left'><label for='cb-dismissal2'>"+dismissal_label2+"</label></div>"
-      + "<div class='pref-right'><input type='checkbox' id='cb-dismissal2'></div>");
-  if (dismissal_label3 != '')
-    $(".pref-opts").append("<div class='pref-left'><label for='cb-dismissal3'>"+dismissal_label3+"</label></div>"
-      + "<div class='pref-right'><input type='checkbox' id='cb-dismissal3'></div>");
 
   $(".pref-opts").append("<div class='pref-closer'>Apply</div>");
 
@@ -724,22 +666,23 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   });
 
   // Bind click functions for Kontakion
-  $("#cb-kontakion-1, #cb-kontakion-2, #cb-kontakion-12").click(function() {
-    var kNum = this.id.split('-')[2];
+  $('#cb_kontakion_position1, #cb_kontakion_position2, #cb_kontakion_position12').click(function() {
+    var kNum = parseInt(this.id.split('_')[2].slice(8));
     show_kontakion(kNum, this.checked);
     if (kNum == 12) {
       show_kontakion(1, false);
       show_kontakion(2, false);
-      $("#cb-kontakion-1").prop("checked",false);
-      $("#cb-kontakion-2").prop("checked",false);
+      $("#cb_kontakion_position1").prop("checked",false);
+      //$("#cb_kontakion_position2").prop("checked",false);
     } else if ((kNum == 1) || (kNum == 2)) {
+    //} else if (kNum == 1) {
       show_kontakion(12, false);
-      $("#cb-kontakion-12").prop("checked", false);
+      $("#cb_kontakion_position12").prop("checked", false);
     }
   });
 
   // Bind click functions for canon odes
-  $('[id^="cb-ode"]').click(function() {
+  $('[id^="cb_ode"]').click(function() {
     if (this.checked) {
       $('tr:has(p.bmc_'+this.id.slice(3)+')').nextUntil('tr:has(p.emc_'+this.id.slice(3)+')').show();
     } else {
@@ -749,17 +692,17 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
     if (this.id.indexOf('_katavasia') >= 0) {
       var test_katavasia = check_ode_katavasia();
       if (test_katavasia) {
-        $('#cb-katavasias1345678').prop('checked',false);
+        $('#cb_odes1345678_katavasia').prop('checked',false);
         $('tr:has(p.bmc_odes1345678_katavasia)').nextUntil('tr:has(p.emc_odes1345678_katavasia)').hide();
-        $("#cb-katavasias1345678").attr('disabled',true);
+        $("#cb_odes1345678_katavasia").attr('disabled',true);
       } else {
-        $('#cb-katavasias1345678').attr('disabled',false);
+        $('#cb_odes1345678_katavasia').attr('disabled',false);
       }
     }
   });
 
   // Bind click function for midode Kathisma
-  $("#cb-midode-kathisma").click(function() {
+  $("#cb_ode3_kathisma").click(function() {
     if (this.checked) {
       $("tr:has(p.bmc_ode3_kathisma)").nextUntil('tr:has(p.emc_ode3_kathisma)').show();
     } else {
@@ -768,7 +711,7 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   });
 
   // Bind click function for katavasia1345678
-  $("#cb-katavasias1345678").click(function() {
+  $("#cb_odes1345678_katavasia").click(function() {
     if (this.checked) {
       $("tr:has(p.bmc_odes1345678_katavasia)").nextUntil('tr:has(p.emc_odes1345678_katavasia)').show();
     } else {
@@ -797,53 +740,61 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   });
 
   // Bind click functions for dismissal options
-  $('#cb-dismissal1').click(function() {
+  $('#cb_matins_end_no_dismissal').click(function() {
     if (this.checked) {
       $('tr:has(p.bmc_matins_end_no_dismissal)').nextUntil('tr:has(p.emc_matins_end_no_dismissal)').show();
       $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').hide();
       $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
       $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').hide();
-      if ($('#cb-dismissal2').prop('checked'))
-        $('#cb-dismissal2').click();
-      if ($('#cb-dismissal3').prop('checked'))
-        $('#cb-dismissal3').click();
+      if ($('#cb_matins_end_before_dismissal').prop('checked'))
+        $('#cb_matins_end_before_dismissal').click();
+      // if ($('#cb_matins_dismissal').prop('checked'))
+      //   $('#cb_matins_dismissal').click();
     } else {
       $('tr:has(p.bmc_matins_end_no_dismissal)').nextUntil('tr:has(p.emc_matins_end_no_dismissal)').hide();
     }
   });
-  $('#cb-dismissal2').click(function() {
+  $('#cb_matins_end_before_dismissal').click(function() {
     if (this.checked) {
       $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').show();
       $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').show();
       // Hide dismissal 1 if it's visible
-      if ($('#cb-dismissal1').prop('checked')) {
-        $('#cb-dismissal1').click();
+      if ($('#cb_matins_end_no_dismissal').prop('checked')) {
+        $('#cb_matins_end_no_dismissal').click();
       }
     } else {
       $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').hide();
       $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
     }
   });
-  $('#cb-dismissal3').click(function() {
+  // $('#cb_matins_dismissal').click(function() {
+  //   if (this.checked) {
+  //     $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').show();  
+  //   } else {
+  //     $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
+  //   }
+  //   if ($('#cb_matins_end_no_dismissal').prop('checked'))
+  //     $('#cb_matins_end_no_dismissal').click();
+  // });
+  $('#cb_matins_close').click(function() {
+    console.log("cb clicked!");
     if (this.checked) {
-      $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').show();  
+      $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').show();
     } else {
       $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').hide();
     }
-    if ($('#cb-dismissal1').prop('checked'))
-      $('#cb-dismissal1').click();
-  });
+  })
 
   // Make it look like a default service
   hide_all_canons();
   show_kontakion(1,false);
   show_kontakion(2,false);
-  $("#cb-kontakion-12").click();
+  $("#cb_kontakion_position12").click();
   $("#radio-eothinon-2").click();
-  $("#cb-katavasias1345678").click();
+  $("#cb_odes1345678_katavasia").click();
   $("#radio-mag-katavasia").click();
-  $("#cb-ode9_katavasia").click();
-  $('#cb-ode9_katavasia').prop('disabled',true);
+  $("#cb_ode9_katavasia").click();
+  $('#cb_ode9_katavasia').prop('disabled',true);
   $('tr:has(p.bmc_matins_end_no_dismissal)').nextUntil('tr:has(p.emc_matins_end_no_dismissal)').hide();
   $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').hide();
   $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
@@ -866,38 +817,6 @@ function hide_all_canons() {
 	$('tr:has([class^="bmc_ode"])').each(function() {
 		$(this).nextUntil('tr:has([class^="emc_ode"])').hide();
 	});
-}
-/*
-function ode_to_html(canon_list, ode_num) {
-	var out_html = "";
-	for (var i=0;i<canon_list.length;i++) {
-    var p_label = $(".bmc_ode"+ode_num+"_"+canon_list[i]+":first").text();
-		var cb_id = "cb-ode"+ode_num+"_"+canon_list[i];
-    out_html += "<div class='pref-left'><label for='"+cb_id+"'>"+p_label+"</label></div>"
-        + "<div class='pref-right'><input id='"+cb_id+"' type='checkbox'></div>";
-	}
-	return out_html;
-}*/
-
-function make_ode_html(ode_num) {
-  var ode_list = []; 
-  $('[class^="bmc_ode'+ode_num+'"]').each(function() {
-    var class_name = $(this).attr('class');
-    if (ode_list.indexOf(class_name) == -1)
-      if ((class_name.indexOf("litany") == -1) && (class_name.indexOf("kathisma") == -1))
-        ode_list.push(class_name);
-  });
-
-  var out_html = '';
-  ode_list.map(function(ode_name) {
-    var pref_label = $('.'+ode_name+':first').text();
-    var cb_id = "cb-ode"+ode_num+"_"+ode_name.slice(9);
-    out_html += "<div class='pref-left'><label for='"+cb_id+"'>"+pref_label+"</label></div>"
-             + "<div class='pref-right'><input id='"+cb_id+"' type='checkbox'></div>";
-  });
-  if (ode_list.length > 0)
-    out_html += spacer_text;
-  return out_html; 
 }
 
 function short_litany_html(ode_num) {
@@ -923,22 +842,18 @@ function show_eothinon(num) {
 }
 
 function show_kontakion(num, showhide) {
-	//console.log("Showing Kontakion: " + num);
 	var show_kontak = num;
-	//var hide_kontak = num == 1 ? 2 : 1;
   if (showhide)
 	  $("tr:has(p.bmc_kontakion_position"+show_kontak+")").nextUntil("tr:has(p.emc_kontakion_position"+show_kontak+")").show();
   else
     $("tr:has(p.bmc_kontakion_position"+show_kontak+")").nextUntil("tr:has(p.emc_kontakion_position"+show_kontak+")").hide();
-	//$("tr:has(p.bmc_kontakion_position"+hide_kontak+")").nextUntil("tr:has(p.emc_kontakion_position"+hide_kontak+")").hide();
 }
 
 
 function check_ode_katavasia() {
   var ode_katavasia_shown = false;
   $('input[type=checkbox]').filter('[id$="katavasia"]').each(function() {
-    if (this.id.indexOf('ode9') < 0)
-      if (this.checked) {
+    if ((this.id.indexOf('ode9') < 0) && (this.checked) && (this.id.indexOf('odes1345678') < 0)) {
         ode_katavasia_shown = true;
       }
   });
