@@ -615,6 +615,17 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
       $(".pref-opts").append("<div class='pref-left'><label for='radio-eothinon-2'>"+gospel_label2+"</label></div>"
           + "<div class='pref-right'><input id='radio-eothinon-2' type='radio' name='radio-eothinon'></div>"
           + spacer_text);
+
+    } else if (className.indexOf('bmc_magnificat') == 0) {
+      if (className.indexOf('modeofcanon') >= 0) {
+        $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-modeofcanon'>"+dispText+"</label></div>"
+          + "<div class='pref-right'><input id='radio-mag-modeofcanon' type='radio' name='radio-magnificat'></div>"
+          + spacer_text);
+      } else if (className.indexOf('modeokatavasia') >= 0) {
+        $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-katavasia'>"+dispText+"</label></div>"
+          + "<div class='pref-right'><input id='radio-mag-katavasia' type='radio' name='radio-magnificat'></div>"
+          + spacer_text);
+      }
     } else {
       var idx = className.indexOf('ode');
       if (idx > 0) {
@@ -792,14 +803,16 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   $("#cb_kontakion_position12").click();
   $("#radio-eothinon-2").click();
   $("#cb_odes1345678_katavasia").click();
-  $("#radio-mag-katavasia").click();
   $("#cb_ode9_katavasia").click();
   $('#cb_ode9_katavasia').prop('disabled',true);
   $('tr:has(p.bmc_matins_end_no_dismissal)').nextUntil('tr:has(p.emc_matins_end_no_dismissal)').hide();
   $('tr:has(p.bmc_matins_end_before_dismissal)').nextUntil('tr:has(p.emc_matins_end_before_dismissal)').hide();
   $('tr:has(p.bmc_matins_dismissal)').nextUntil('tr:has(p.emc_matins_dismissal)').hide();
   $('tr:has(p.bmc_matins_close)').nextUntil('tr:has(p.emc_matins_close)').hide();
-
+  $('tr:has(p.bmc_magnificat_modeokatavasia)').nextUntil('tr:has(p.emc_magnificat_modeofkatavasia)').hide();
+  $('tr:has(p.bmc_magnificat_modeofcanon)').nextUntil('tr:has(p.emc_magnificat_modeofcanon)').hide();
+  $("#radio-mag-katavasia").click();
+  
   $('.pref-panel').show();
 
   $(".print-service").click(function(ev) {
