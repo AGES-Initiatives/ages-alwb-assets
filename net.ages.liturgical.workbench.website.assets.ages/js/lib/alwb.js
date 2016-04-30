@@ -608,21 +608,18 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
     if (className.indexOf('bmc_eothinongospel_position1') == 0) {
       var gospel_label1 = $('.bmc_eothinongospel_position1:first').text();
       $('.pref-opts').append("<div class='pref-left'><label for='radio-eothinon-1'>"+gospel_label1+"</label></div>"
-          + "<div class='pref-right'><input id='radio-eothinon-1' type='radio' name='radio-eothinon'></div>"
-          + spacer_text);
+          + "<div class='pref-right'><input id='radio-eothinon-1' type='radio' name='radio-eothinon'></div>");
     } else if (className.indexOf('bmc_eothinongospel_position2') == 0) {
       var gospel_label2 = $('.bmc_eothinongospel_position2:first').text();
       $(".pref-opts").append("<div class='pref-left'><label for='radio-eothinon-2'>"+gospel_label2+"</label></div>"
-          + "<div class='pref-right'><input id='radio-eothinon-2' type='radio' name='radio-eothinon'></div>"
-          + spacer_text);
+          + "<div class='pref-right'><input id='radio-eothinon-2' type='radio' name='radio-eothinon'></div>");
 
     } else if (className.indexOf('bmc_magnificat') == 0) {
       if (className.indexOf('modeofcanon') >= 0) {
-        $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-modeofcanon'>"+dispText+"</label></div>"
-          + "<div class='pref-right'><input id='radio-mag-modeofcanon' type='radio' name='radio-magnificat'></div>"
-          + spacer_text);
+        $(".pref-opts").append(spacer_text + "<div class='pref-left'><label for='radio-mag-modeofcanon'>"+dispText+"</label></div>"
+          + "<div class='pref-right'><input id='radio-mag-modeofcanon' type='radio' name='radio-magnificat'></div>");
       } else if (className.indexOf('modeokatavasia') >= 0) {
-        $(".pref-opts").append("<div class='pref-left'><label for='radio-mag-katavasia'>"+dispText+"</label></div>"
+        $(".pref-opts").append(spacer_text + "<div class='pref-left'><label for='radio-mag-katavasia'>"+dispText+"</label></div>"
           + "<div class='pref-right'><input id='radio-mag-katavasia' type='radio' name='radio-magnificat'></div>"
           + spacer_text);
       }
@@ -632,11 +629,16 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
         cur_ode = className.slice(idx + 3, idx + 4);
         // console.log("Current ode: " + cur_ode);
       }
-      if (cur_ode !== prev_ode) {
+      if ((cur_ode !== prev_ode) || (className.indexOf('litany') >= 0)) {
         $(".pref-opts").append(spacer_text);
       }
 
       prev_ode = cur_ode;
+
+      if (className.indexOf('matins_end_no_dismissal') >= 0) {
+        $hr = $('<hr>').css({'border': '1px solid #555', 'width': '80%'});
+        $('.pref-opts').append($hr);
+      }
 
       if (className !== 'bmc_matins_dismissal') {
         $('.pref-opts').append(make_checkbox(className, dispText));
@@ -644,8 +646,7 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
 
       if ((className == "bmc_ode3_litany")  ||
         (className == "bmc_ode6_litany")    ||
-        (className == "bmc_ode8_katavasia") ||
-        (className == "bmc_ode9_katavasia")) {
+        (className == "bmc_ode8_katavasia")) {
         $(".pref-opts").append(spacer_text);
       }
     }
@@ -812,7 +813,7 @@ if ((window.location.href.indexOf('ma2') >= 0) || (window.location.href.indexOf(
   $('tr:has(p.bmc_magnificat_modeokatavasia)').nextUntil('tr:has(p.emc_magnificat_modeofkatavasia)').hide();
   $('tr:has(p.bmc_magnificat_modeofcanon)').nextUntil('tr:has(p.emc_magnificat_modeofcanon)').hide();
   $("#radio-mag-katavasia").click();
-  
+
   $('.pref-panel').show();
 
   $(".print-service").click(function(ev) {
