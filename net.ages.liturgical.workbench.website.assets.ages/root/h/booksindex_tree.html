@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Sacraments and Services Index</title>
+		<base href='../'/>
+		<!-- Meta Declarations -->
+		<meta charset="utf-8"> 
+		<meta name="viewport" content="width=device-width"/>		
+	
+			<!-- Stylesheets -->
+			<link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+			<link rel='stylesheet' type='text/css' href='css/alwb.css'>
+			<link rel='stylesheet' type='text/css' href='css/dcs.css'>
+			<link rel='stylesheet' type='text/css' href='js/lib/bootstrap/css/bootstrap.css'>
+			<link rel="stylesheet" type="text/css" href="css/jquery.dropdown.css" />
+	
+			<style>
+	
+				body {
+					background-color: #FBF0D9;
+				}
+	
+				#dcs_tree_container {
+					margin-left: -40px;
+				}
+				#dcs_tree{
+					
+				}
+				#dcs_tree li { 
+					font-family: "Arimo", sans-serif;
+					display:block; 
+					text-decoration:none; 
+					padding-left:10px; 
+				}
+	
+				p.treetitle {
+					text-align:center;
+					display:block; 
+					font-size: 16pt;
+					font-weight: bold;
+					color: #FF0000;
+					border-top-style:none;
+				}
+				p.treesubtitle {
+					text-align:center;
+					display:block; 
+					font-size: 10pt;
+					font-style: italic;
+					color: #000000;
+				}
+				.level_1 {
+					display:block; 
+					font-size: 16pt;
+					font-weight: bold;
+					color: #FF0000;
+					border-top-style:none;
+				}
+	
+				.level_2 {
+					margin-left: -25px;
+					font-size: 12pt;
+					font-weight: bold;
+					color: #CC0000;
+					border-top-style:solid; 
+					border-top-width:1px; 
+				}
+	
+				.level_3 {
+					margin-left: -25px;
+					font-size: 12pt;
+					font-weight: bold;
+					color: #990000;
+					border-top-style:solid; 
+					border-top-width:1px; 
+				}
+	
+				.level_4 {
+					margin-left: -25px;
+					font-size: 12pt;
+					font-weight: bold;
+					color: #660000;
+					border-top-style:solid; 
+					border-top-width:1px; 
+				}
+	
+				.level_5 {
+					margin-left: -25px;
+					font-size: 12pt;
+					font-weight: bold;
+					color: #330000;
+					border-top-style:solid; 
+					border-top-width:1px; 
+				}
+	
+				a {
+					color:#000000;
+				}
+	
+				.treelink {
+					margin-left: -25px;
+					font-size: 12pt;
+					font-weight: normal;
+					color: #000000;
+				}
+	
+				.treelink:hover {
+					cursor: pointer;
+				}
+	
+				.treeparent:hover {
+					cursor: cell;
+				}
+	
+				li span {
+					display: block;
+				}
+	
+				.treerubric {
+					font-size: 8pt;
+					font-weight: thin;
+					font-style: italic;
+					color: #000000;
+				}
+	
+				.notavailable a {
+					color: #B3B3B3;
+					font-style: italic;
+				}		
+			</style>
+	
+			<!-- Scripts -->
+			<script data-main="js/app" src="js/lib/require.js"></script>
+			<script src="js/lib/jquery-2.0.3.min.js"></script>
+			<script src="js/lib/dcs_tree.js"></script>
+			
+			<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+				<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+				<!--[if lt IE 9]>
+					<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+				    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+				<![endif]-->
+	    			<script type="text/javascript">
+	    					var alwbTooltips = {
+	    						l1: {
+	    							Audio: "Click to hear an audio recording.", 
+	    							Byzantine: "Click to view score in Byzantine notation.",
+	    							Western: "Click to view score in Western notation."
+	    							},
+	    						l2: {
+	    							Audio: "To hear an audio recording, click here.", 
+	    							Byzantine: "To view a Byzantine score, click here.",
+	    							Western: "To view a Western score, click here."
+	    							}
+	    					};
+	    			</script>
+	</head>
+	<body>
+		<div class='agesMenu'>
+			<!-- Menu Bar Icons-->
+			<a href="#" data-jqm-dropdown="#jqm-dropdown-pages" title="Go to..."><i class="fa fa-bars ages-menu-link"></i></a>
+			<span id="clockbox" class="clockbox"></span>
+			
+			<!-- Dropdown Menu Contents -->
+			<div id="jqm-dropdown-pages" class="jqm-dropdown jqm-dropdown-tip">
+			    <ul class="jqm-dropdown-menu jqm-dropdown-relative">
+					<li><a href="servicesindex.html"><i class="fa fa-calendar">&nbsp;Daily Services by Date</i></a></li>
+				    <li><a href="booksindex.html"><i class="fa fa-arrows">&nbsp;Sacraments and Services</i></a></li>
+				    <li><a href="customindex.html"><i class="fa fa-list-alt">&nbsp;Additional Texts and Music</i></a></li>
+					<li class="jqm-dropdown-divider"></li>
+				    <li><a href="about.html"><i class="fa fa-info-circle">&nbsp;About</i></a></li>
+				    <li><a href="contact.html"><i class="fa fa-envelope">&nbsp;Contact</i></a></li>
+				    <li><a href="donate.html"><i class="fa fa-money">&nbsp;Donate</i></a></li>
+					<li class="jqm-dropdown-divider"></li>
+				    <li><a href="javascript:(showInfo())"><i class="fa fa-laptop">&nbsp;Browser Information</i></a></li>
+					<li class="jqm-dropdown-divider"></li>
+				    <li><a href="help.html"><i class="fa fa-question-circle">&nbsp;Help</i></a></li>
+			 	</ul>
+			</div>
+		</div>
+	<br><br>
+	
+		<p class="treetitle">Sacraments and Services</p>
+		<div id="dcs_tree_container">
+		    <ul id="dcs_tree">
+				<li class="level_1">Funeral
+					<ul>
+						<li class="level_3">English
+							<ul>
+								<li dcslink="p/b/funeral/en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/funeral/en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek
+							<ul>
+								<li dcslink="p/b/funeral/gr/index.html">PDF - PRINT</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek-English
+							<ul>
+								<li dcslink="p/b/funeral/gr-en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/funeral/gr-en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="level_1">Funeral During Bright Week
+					<ul>
+						<li class="level_3">English
+							<ul>
+								<li dcslink="p/b/funeral_brightweek/en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/funeral_brightweek/en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek
+							<ul>
+								<li dcslink="p/b/funeral_brightweek/gr/index.html">PDF - PRINT</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek-English
+							<ul>
+								<li dcslink="p/b/funeral_brightweek/gr-en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/funeral_brightweek/gr-en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="level_1">Great Paraklesis
+					<ul>
+						<li class="level_3">English
+							<ul>
+								<li dcslink="p/b/ho/s24/en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/ho/s24/en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek
+							<ul>
+								<li dcslink="p/b/ho/s24/gr/index.html">PDF - PRINT</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek-English
+							<ul>
+								<li dcslink="p/b/ho/s24/gr-en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/ho/s24/gr-en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="level_1">Memorial
+					<ul>
+						<li class="level_3">English
+							<ul>
+								<li dcslink="p/b/memorial/en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/memorial/en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek
+							<ul>
+								<li dcslink="p/b/memorial/gr/index.html">PDF - PRINT</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek-English
+							<ul>
+								<li dcslink="p/b/memorial/gr-en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/memorial/gr-en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="level_1">Small Paraklesis
+					<ul>
+						<li class="level_3">English
+							<ul>
+								<li dcslink="p/b/ho/s23/en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/ho/s23/en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek
+							<ul>
+								<li dcslink="p/b/ho/s23/gr/index.html">PDF - PRINT</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek-English
+							<ul>
+								<li dcslink="p/b/ho/s23/gr-en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/ho/s23/gr-en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="level_1">Unction
+					<ul>
+						<li class="level_3">English
+							<ul>
+								<li dcslink="p/b/unction/en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/unction/en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek
+							<ul>
+								<li dcslink="p/b/unction/gr/index.html">PDF - PRINT</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek-English
+							<ul>
+								<li dcslink="p/b/unction/gr-en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/unction/gr-en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="level_1">Water Blessing (Small)
+					<ul>
+						<li class="level_3">English
+							<ul>
+								<li dcslink="p/b/smallwaterblessing/en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/smallwaterblessing/en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek
+							<ul>
+								<li dcslink="p/b/smallwaterblessing/gr/index.html">PDF - PRINT</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek-English
+							<ul>
+								<li dcslink="p/b/smallwaterblessing/gr-en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/smallwaterblessing/gr-en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="level_1">Wedding
+					<ul>
+						<li class="level_3">English
+							<ul>
+								<li dcslink="p/b/wedding/en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/wedding/en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek
+							<ul>
+								<li dcslink="p/b/wedding/gr/index.html">PDF - PRINT</li>
+							</ul>
+						</li>
+						<li class="level_3">Greek-English
+							<ul>
+								<li dcslink="p/b/wedding/gr-en/index.html">PDF - PRINT</li>
+								<li dcslink="h/b/wedding/gr-en/index.html">DCS - TEXT and MUSIC</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<br>
+				<li class="level_1">The Hours (outside of Lent)
+					<ul>
+						<p class="treerubric">These pdf files are intended to be printed once and supplemented with the changeable parts for each day, which are found in the dated services.</p>
+						<li class="level_2">Small Compline
+							<ul>
+								<li dcslink="p/b/skeleton/smallcompline/en/index.html">English</li>
+								<li dcslink="p/b/skeleton/smallcompline/gr/index.html">Greek</li>
+								<li dcslink="p/b/skeleton/smallcompline/gr-en/index.html">Greek-English</li>
+							</ul>
+						</li>
+						<li class="level_2">First Hour
+							<ul>
+								<li dcslink="p/b/skeleton/h1/en/index.html">English</li>
+								<li dcslink="p/b/skeleton/h1/gr/index.html">Greek</li>
+								<li dcslink="p/b/skeleton/h1/gr-en/index.html">Greek-English</li>
+							</ul>
+						</li>
+						<li class="level_2">Third Hour
+							<ul>
+								<li dcslink="p/b/skeleton/h3/en/index.html">English</li>
+								<li dcslink="p/b/skeleton/h3/gr/index.html">Greek</li>
+								<li dcslink="p/b/skeleton/h3/gr-en/index.html">Greek-English</li>
+							</ul>
+						</li>
+						<li class="level_2">Sixth Hour
+							<ul>
+								<li dcslink="p/b/skeleton/h6/en/index.html">English</li>
+								<li dcslink="p/b/skeleton/h6/gr/index.html">Greek</li>
+								<li dcslink="p/b/skeleton/h6/gr-en/index.html">Greek-English</li>
+							</ul>
+						</li>
+						<li class="level_2">Ninth Hour
+							<ul>
+								<li dcslink="p/b/skeleton/h9/en/index.html">English</li>
+								<li dcslink="p/b/skeleton/h9/gr/index.html">Greek</li>
+								<li dcslink="p/b/skeleton/h9/gr-en/index.html">Greek-English</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<br><br>	
+	</body>
+</html>
