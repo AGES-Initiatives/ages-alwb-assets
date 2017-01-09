@@ -186,7 +186,7 @@ div.media-group-empty {
 .m-g-e {
 }
 .m-g-e::after {
-	content:"(Other version has media.)";
+	content:"(No media for this version.)";
 	text-align:center;
 	color:SlateGray;
 	font-size:80%;
