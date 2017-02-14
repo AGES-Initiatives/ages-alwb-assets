@@ -402,6 +402,9 @@ p.name {
     margin-top: 3px;
     margin-bottom: 3px;
 }
+.optional {
+    font-style:italic;
+}
 p.prayerzero {
     text-align:left;
     text-indent: 28px;
