@@ -887,6 +887,55 @@ $('[data-toggle="tooltip"]').tooltip({
 $('a.mediaMode').tooltip('show');
 $('a.mediaMode').trigger('mouseout');
 
+if ($('.services-index-table').length > 0) { // Service index page
+  var monthStr; 
+  switch(new Date().getMonth()) {
+    case 0: 
+      monthStr = "January";
+      break;
+    case 1:
+      monthStr = "February";
+      break;
+    case 2:
+      monthStr = "March";
+      break;
+    case 3:
+      monthStr = "April";
+      break;
+    case 4:
+      monthStr = "May";
+      break;
+    case 5:
+      monthStr = "June";
+      break;
+    case 6:
+      monthStr = "July";
+      break;
+    case 7:
+      monthStr = "August";
+      break;
+    case 8:
+      monthStr = "September";
+      break;
+    case 9:
+      monthStr = "October";
+      break;
+    case 10:
+      monthStr = "November";
+      break;
+    case 11:
+      monthStr = "December";
+  }
+  var yearStr = new Date().getFullYear();
+  var dateString = monthStr + " " + yearStr;
+
+  $('.index-month').each(function() {
+    if ($(this).text() == dateString) {
+      $("html, body").scrollTop($(this).offset().top - 50);
+    }
+  });
+}
+
 notAvailable();
   
  });
