@@ -450,7 +450,7 @@ p.rubric {
 }
 p.small {
     font-family: "Arimo", sans-serif;
-    text-align:center;
+    text-align:inherit;
     font-size:70%;
     font-weight:bold;
     color:red;
