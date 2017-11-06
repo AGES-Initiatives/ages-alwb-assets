@@ -457,6 +457,15 @@ p.small {
   	margin-top: 3px;
   	margin-bottom: 3px;
 }
+p.smallcenter {
+    font-family: "Arimo", sans-serif;
+    text-align:center;
+    font-size:70%;
+    font-weight:bold;
+    color:red;
+  	margin-top: 3px;
+  	margin-bottom: 3px;
+}
 p.source {
     margin-top: 6px;
 	font-weight:normal;
