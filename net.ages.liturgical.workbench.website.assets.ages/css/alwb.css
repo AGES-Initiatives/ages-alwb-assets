@@ -599,21 +599,21 @@ span.anum {
 span.melody {
 	font-style:italic;
 	color:red;	
-	white-space: nowrap;
+	white-space: normal;
 }
 
 span.mode {
 	font-style:normal;
 	font-weight:bolder;
 	color:red;
-	white-space: nowrap;
+	white-space: normal;
 }
 
 span.designation {
 	font-style:normal;
 	font-weight:bolder;
 	color:red;
-	white-space: nowrap;
+	white-space: normal;
 }
 
 span.reference{
