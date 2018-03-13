@@ -405,6 +405,10 @@ p.name {
 .optional {
     font-style:italic;
 }
+p.plain {
+    font-weight:normal;
+    font-style:normal;
+}
 p.prayerzero {
     text-align:left;
     text-indent: 28px;
