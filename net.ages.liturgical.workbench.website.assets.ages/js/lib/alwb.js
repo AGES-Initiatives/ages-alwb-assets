@@ -142,6 +142,13 @@ function notAvailable() {
 $("p.hymn:notext").removeClass("hymn").addClass("rubric").text("(The English text of this hymn is missing, because it was either inaccessible at the time of publication or unavailable due to copyright restrictions.)").css("background-color","white");
 }
 
+$.expr[':'].noValue = function detectNoValue(x){	return ($(x).text().trim().length === 0);  };
+
+function hideEmptyRows() {
+	$("tr:noValue").css("display","none");
+	}
+
+
 function setViewPort() {
 	 viewport.setAttribute('content', 'width = ' + screen.width + ', user-scalable=yes');
 }
@@ -937,5 +944,6 @@ if ($('.services-index-table').length > 0) { // Service index page
 }
 
 notAvailable();
-  
+hideEmptyRows();
+ 
  });
