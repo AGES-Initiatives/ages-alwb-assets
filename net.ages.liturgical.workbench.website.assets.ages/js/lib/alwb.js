@@ -131,9 +131,10 @@ function showAll() {
 	displayingBilingual = true;
 }
 
-$(document).ready(function(){
-	$("td.leftCell span.versiondesignation").css("display","none");
-	});
+//This function is handled by pref.generation.ares
+//$(document).ready(function(){
+//	$("td.leftCell span.versiondesignation").css("display","none");
+//	});
 
 
 $.expr[':'].notext = function detectNoText(x){ return x.innerHTML && x.innerHTML.replace(/(<!--.*(?!-->))|\s+/g, '').length === 0 }
