@@ -142,8 +142,15 @@ $.expr[':'].notext = function detectNoText(x){ return x.innerHTML && x.innerHTML
 function notAvailable() {
 $("p.hymn:notext").removeClass("hymn").addClass("rubric").text("(The English text of this hymn is missing, because it was either inaccessible at the time of publication or unavailable due to copyright restrictions.)").css("background-color","white");
 }
-
-$.expr[':'].noValue = function detectNoValue(x){	return ($(x).text().trim().length === 0);  };
+$.expr[':'].noValue = function detectNoValue(x){
+	if ($(x).find("div.media-group").length > 0) {
+	  return false;
+	} else if ($(x).text().trim().length === 0) {
+	   return true;
+	} else {
+	  return false;
+	}
+};
 
 function hideEmptyRows() {
 	$("tr:noValue").css("display","none");
