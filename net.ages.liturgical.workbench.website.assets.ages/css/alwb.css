@@ -404,6 +404,8 @@ p.name {
 }
 .optional {
     font-style:italic;
+    font-size: 80%;
+    color:#651612;
 }
 p.plain {
     font-weight:normal;
