@@ -402,6 +402,16 @@ p.name {
     margin-top: 3px;
     margin-bottom: 3px;
 }
+.notavailable {
+	font-style:italic;
+	font-weight:lighter;
+	font-size:70%;
+    line-height:130%;
+    text-indent: 16px;
+	color:gray;
+	float: right;
+}
+
 .optional {
     font-style:italic;
     font-size: 80%;
