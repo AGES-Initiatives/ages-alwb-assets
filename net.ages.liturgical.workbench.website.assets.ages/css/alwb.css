@@ -759,8 +759,8 @@ iframe {
   width: 36.5%;
   position: fixed;
   bottom: 0;
-  height: 4.5em;
-  margin-bottom: -2.75em;
+  height: 5em;
+  margin-bottom: 0em;
   z-index: 0;
 }
 #FrameScore {
