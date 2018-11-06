@@ -113,6 +113,48 @@ $('.fa-caret-square-o-right.ages-col-picker').show();
 displayingBilingual = false;
 }
 
+function editTextIndex() {
+    $(document).ready(function() {
+        $.ajax({
+            //  url: 'js/lib/indexcorrector.json',
+            url: 'indexcorrector.json',
+            success: function(data) {
+
+                for (var i = 0; i < data.items.length; i++) {
+                    var type = $("a.index-file-link").attr('href');
+
+                    try {
+
+                        if (type.includes(data.items[i].date)) {
+
+                            var x = document.getElementsByClassName("index-service-day");
+                            var j = 0;
+                            while (j < data.items.length) {
+                                var k = 0;
+                                while (k < data.items.length) {
+                                    if (x[j].textContent == data.items[k].prevText && data.items[i].date == data.items[k].date) {
+
+                                        x[j].innerHTML = data.items[k].altText;
+
+                                    }
+                                    k++;
+                                }
+                                j++;
+                            }
+
+                        }
+                    } catch (e) {
+
+                    }
+                }
+
+
+            }
+        });
+    });
+}
+
+editTextIndex();
 
 function showAll() {
 	$("div.media-group-empty").css("display","none");
