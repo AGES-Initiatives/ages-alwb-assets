@@ -548,6 +548,17 @@ p.typikoncenteromitted {
     font-family: serif;
 	font-size: 80%;
 }
+p.typikoncommemoration {
+	text-align: left;
+    font-family: serif;
+	font-size: 80%;
+    font-weight:bold;
+}
+p.typikonnote {
+	text-align: left;
+    font-family: serif;
+	font-size: 70%;
+}
 p.verse {
     text-align:left;
     text-indent: 28px;
