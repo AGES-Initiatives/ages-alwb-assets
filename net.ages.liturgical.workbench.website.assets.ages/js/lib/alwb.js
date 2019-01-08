@@ -113,51 +113,38 @@ $('.fa-caret-square-o-right.ages-col-picker').show();
 displayingBilingual = false;
 }
 
-function editTextIndex() { 
+function editTextIndex() {
+	  $(document).ready(function() {
+	    $.ajax({
+	      url: "indexcorrector.json",
+	      success: function(data) {
+	        console.log(data);
 
+	        $.each(data, function(index, value) {
+	          try {
+	            var type = $("a.index-file-link").attr("href");
+	            var newType =
+	              type.substring(4, 8) +
+	              type.substring(9, 11) +
+	              type.substring(12, 14);
 
-	$(document).ready(function() {
+	            if (newType.includes(index)) {
+	              var x = document.getElementsByClassName("index-service-day");
 
-		$.ajax({
-		url: 'indexcorrector.json',
-		success: function(data) {
-		      console.log(data);
-		      
-
-		    $.each(data, function(index, value) {
-		      		
-		      		try {
-	    			var type = $("a.index-file-link").attr('href');
-	    			var newType = type.substring(4,8) + type.substring(9,11) + type.substring(12,14);
-	    			
-
-	    			if (newType.includes(index)) {
-			        
-			      		var x = document.getElementsByClassName("index-service-day");
-				            
-						$.each(value, function(i, v) {	
-				    		for (var i = 0; i < x.length; i++) {         
-				    			if(x[i].textContent == v.prevText) {
-				                
-				        		 x[i].innerHTML = v.altText;
-				    			}
-				    		}           
-						});
-				              
-				            
-			        	
-			    	}
-			    	} catch (e) {
-			        		
-			       	}  
-			});
-			  
-		}
-
-		   
-		
-		});
-	});
+	              $.each(value, function(i, v) {
+	                for (var i = 0; i < x.length; i++) {
+	                  console.log(x[i].textContent);
+	                  if (x[i].textContent == v.prevText && newType == index) {
+	                    x[i].innerHTML = v.altText;
+	                  }
+	                }
+	              });
+	            }
+	          } catch (e) {}
+	        });
+	      }
+	    });
+	  });
 	}
 
 	editTextIndex();

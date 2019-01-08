@@ -529,6 +529,11 @@ p.typikon {
     font-family: serif;
 	font-size: 80%;
 }
+p.typikonblock {
+	text-align: left;
+    font-family: serif;
+	font-size: 80%;
+}
 p.typikonomitted {
 	background-color:#e9e9e9;
 	padding-left: 22px;
@@ -553,6 +558,12 @@ p.typikoncommemoration {
     font-family: serif;
 	font-size: 80%;
     font-weight:bold;
+}
+p.typikonindent {
+	text-align: left;
+ 	text-indent: 22px;
+    font-family: serif;
+	font-size: 80%;
 }
 p.typikonnote {
 	text-align: left;
