@@ -116,7 +116,7 @@ displayingBilingual = false;
 function editTextIndex() {
 	  $(document).ready(function() {
 	    $.ajax({
-	      url: "indexcorrector.json",
+	      url: "indexmodifier.json",
 	      success: function(data) {
 	        console.log(data);
 
