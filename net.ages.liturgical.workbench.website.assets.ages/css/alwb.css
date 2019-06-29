@@ -1,4 +1,4 @@
-/* alwb.css
+/* alwb2.css
 *  Note: css for dropdown menu is jquery.dropdown.css
 */
 
@@ -191,7 +191,7 @@ div.media-group-empty {
 	color:SlateGray;
 	font-size:80%;
 }
-title, p.designation, p.mixed, p.mode, p.melody {
+title, p.designation, p.mixed, p.mode, p.melody, p.noprintdesig {
     font-family: "Arimo", sans-serif;
     text-align:center;
     font-weight:normal;
@@ -217,6 +217,19 @@ p.actor {
     margin-bottom: 0px;
 }
 p.actor:first-letter {
+    text-align:left;
+    font-size:125%;
+}
+p.noprintactor {
+    text-align:left;
+    font-size:80%;
+    color:red;
+    font-weight:bold;
+    text-indent: 0px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+p.noprintactor:first-letter {
     text-align:left;
     font-size:125%;
 }
@@ -281,6 +294,11 @@ p.bmc_collapse {
 	cursor: pointer;
 }
 p.designation {
+    font-style:normal;
+    font-weight:bolder;
+    color:red;
+}
+p.noprintdesig {
     font-style:normal;
     font-weight:bolder;
     color:red;
@@ -434,6 +452,12 @@ p.prayer {
     line-height:150%;
     margin-bottom: 6px;
 }
+p.noprintprayer {
+    text-align:left;
+    text-indent: 28px;
+    line-height:150%;
+    margin-bottom: 6px;
+}
 p.readingzero {
     text-align:left;
     text-indent: 28px;
@@ -459,6 +483,13 @@ p.readingcenter {
     margin-bottom: 6px;
 }
 p.rubric {
+    color:red;
+    font-size:80%;
+    font-style:italic;
+    text-align:left;
+    text-indent: 28px;
+}
+p.noprintrub {
     color:red;
     font-size:80%;
     font-style:italic;
@@ -680,6 +711,12 @@ span.designation {
 	color:red;
 	white-space: normal;
 }
+span.noprintdesig {
+	font-style:normal;
+	font-weight:bolder;
+	color:red;
+	white-space: normal;
+}
 
 span.reference{
 	font-variant:normal;
@@ -689,6 +726,13 @@ span.reference{
 	color:red;	
 }
 span.rubric{
+	font-variant:normal;
+	font-weight:normal;
+	font-style:italic;
+	font-size:80%;
+	color:red;	
+}
+span.noprintrub{
 	font-variant:normal;
 	font-weight:normal;
 	font-style:italic;
