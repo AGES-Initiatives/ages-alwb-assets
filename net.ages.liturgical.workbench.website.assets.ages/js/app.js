@@ -7,16 +7,19 @@ requirejs.config({
       "bootstrap": "bootstrap/js/bootstrap",
       "ui_bootstrap_tpls": "ui_bootstrap_tpls",
       "angular_app": "../app/angular_app",
-      "angular": "angular"
+      "angular": "angular",
+      "pref_storage": "pref_storage",
+      "pref_app": "../app/pref_app"
     },
     "shim": {
-    		"angular": { exports:"angular"},
+    		"angular": { exports:"angular" },
         "jqueryMenu":["jquery"],
         "bootstrap": ["jquery"],
         "ui_bootstrap_tpls": ["angular"],
         "alwb": ["jquery", "jqueryMenu", "bootstrap"],
         "dcs": ["alwb"],
-        "angular_app":["angular"]
+        "angular_app":["angular"],
+        "pref_app": ["jquery"]
     }
 });
 
