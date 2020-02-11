@@ -465,6 +465,29 @@ p.rubric {
     text-align:left;
     text-indent: 28px;
 }
+p.servicesources {
+	padding-left: 25px;
+	text-align: left;
+    font-family: serif;
+	font-size: 80%;
+	color:red;
+    font-weight:bold;
+}
+p.servicesourcessection {
+	padding-left: 25px;
+	padding-bottom: 5px;
+    text-indent: 15px;
+	text-align: left;
+    font-family: serif;
+	font-size: 80%;
+}
+p.servicesourcestitle {
+	padding-left: 10px;
+	text-align: left;
+    font-family: serif;
+	font-size: 90%;
+    font-weight:bold;
+}
 p.small {
     font-family: "Arimo", sans-serif;
     text-align:inherit;
