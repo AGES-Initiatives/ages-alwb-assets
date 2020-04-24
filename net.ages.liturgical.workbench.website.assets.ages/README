@@ -1,4 +1,4 @@
 Assets
 =======
 The viewer folder is to be placed manually at the same level as the m folder (media) and is shared by all websites.
-The other folders (excluding "samples") are copied into each site automatically by the ALWB generator.
+The css, js, and root folders are copied into each site automatically by the ALWB generator.
