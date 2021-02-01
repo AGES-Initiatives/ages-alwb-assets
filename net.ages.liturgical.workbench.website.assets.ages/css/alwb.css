@@ -713,6 +713,14 @@ span.designation {
 	white-space: normal;
 }
 
+span.chapverse {
+    font-weight:normal;
+    font-style:italic;
+    color:red;
+    font-size: 85%;
+	white-space: normal;
+}
+
 span.reference{
 	font-variant:normal;
 	font-weight:normal;
@@ -1154,7 +1162,7 @@ table.custom-index-table {
   .melody,
   .chapverse {
     color: #ff0000 !important;
-    font-family: palatino !important;
+    font-family: liberation !important;
   }
 
   .boldred {
@@ -1162,7 +1170,7 @@ table.custom-index-table {
   }
 
   .mixed {
-    font-family: palatino !important;
+    font-family: liberation !important;
   }
 
   .source {
