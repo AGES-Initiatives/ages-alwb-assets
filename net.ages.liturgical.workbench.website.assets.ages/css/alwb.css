@@ -794,6 +794,9 @@ span.numright {
 	color:red;
 }
 
+span.smaller {
+	font-size:70%;
+}
 span.versiondesignation {
 	font-style:normal;
 	font-weight:lighter;
