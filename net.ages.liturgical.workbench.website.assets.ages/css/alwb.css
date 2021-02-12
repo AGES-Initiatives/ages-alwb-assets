@@ -545,6 +545,93 @@ p.source1 {
     position:relative;
     top:-6em;
 }
+p.synaxarioncommemoration {
+    text-align:left;
+    text-indent: 14px;
+    line-height:150%;
+  	margin-top: 6px;
+    margin-bottom: 6px;
+}
+p.synaxarioncommemoration:first-letter {
+    color:red;
+    font-size:180%;
+    font-weight:normal;
+}
+p.synaxarionversetitle {
+    color:red;
+	text-align:center;
+    font-weight:normal;
+    font-size:90%;
+  	margin-top: 6px;
+  	margin-bottom: 0px;
+}
+p.synaxarionverse0 {
+    text-align:center;
+    font-style:normal;
+    font-size:90%;
+    line-height:100%;
+    margin-bottom: 0px;
+}
+p.synaxarionverse {
+    text-align:center;
+    font-style:normal;
+    font-size:90%;
+    line-height:100%;
+    margin-bottom: 3px;
+}
+p.synaxarionnarrationtitle {
+    color:red;
+	text-align:center;
+    font-weight:normal;
+    font-size:70%;
+  	margin-top: 6px;
+  	margin-bottom: 0px;
+}
+p.synaxarionnarration1 {
+    text-align:left;
+    font-size:70%;
+    line-height:150%;
+    margin-bottom: 6px;
+}
+p.synaxarionnarration1:first-letter {
+    font-size:180%;
+    font-weight:normal;
+}
+p.synaxarionnarration10 {
+    text-align:left;
+    font-size:70%;
+    line-height:150%;
+    margin-bottom: 0px;
+}
+p.synaxarionnarration10:first-letter {
+    font-size:180%;
+    font-weight:normal;
+}
+p.synaxarionnarration0 {
+    text-align:left;
+    text-indent: 14px;
+    font-size:70%;
+    line-height:150%;
+    margin-bottom: 0px;
+}
+p.synaxarionnarrationlast {
+    text-align:left;
+    text-indent: 14px;
+    font-size:70%;
+    line-height:150%;
+    margin-bottom: 6px;
+}
+p.synaxarionnote {
+    text-align:left;
+    text-indent: 14px;
+	font-size:70%;
+	font-style:normal;
+    font-weight:normal;
+    color:red;
+    line-height:150%;
+  	margin-top: 3px;
+  	margin-bottom: 3px;
+}
 p.titlezero {
 	text-align:center;
 	font-style:normal;
