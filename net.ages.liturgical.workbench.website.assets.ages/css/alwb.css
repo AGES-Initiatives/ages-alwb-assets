@@ -935,12 +935,14 @@ iframe {
   z-index: 0;
 }
 #FrameAudio {
-  width: 36.5%;
+  width: 35em;
   position: fixed;
   bottom: 0;
-  height: 5em;
+  height: 7em;
   margin-bottom: 0em;
+  margin-left: 7em;
   z-index: 0;
+  left: 39%;
 }
 #FrameScore {
   width: 61%;
@@ -948,6 +950,7 @@ iframe {
   position: fixed;
   left: 39%;
   top: 0;
+  z-index: 0;
 }
 .index-title {
    text-align:center;
@@ -957,7 +960,6 @@ iframe {
    text-indent: 0px;
    margin-top: 5px;
    margin-bottom: 10px;
-
 }
 .index-title-date {
    text-align:center;
