@@ -849,6 +849,14 @@ span.bolditalics {
 	font-weight:bold;
 	font-style:italic;
 }
+span.blue {
+	font-style:inherit;
+	color:#0080c0;
+}
+span.goared {
+	font-style:inherit;
+	color:#900C3F;
+}
 span.red {
 	font-style:inherit;
 	color:red;
