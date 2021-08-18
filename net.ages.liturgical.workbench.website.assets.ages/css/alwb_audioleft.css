@@ -361,6 +361,9 @@ p.inaudible {
     text-align:left;
     line-height:150%;
 }
+p.logoleft {
+	text-indent: -14px;
+}
 p.mode {
     color:red;
     font-weight:bold;
