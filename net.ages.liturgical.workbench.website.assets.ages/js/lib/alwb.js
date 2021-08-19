@@ -456,7 +456,7 @@ $(window).on('resize orientationChanged', function() {
 });
 
 $(document).ready(function(){
-	$('.collapse').collapse()
+	$('.collapse').collapse();
 	adjustedFontSize = $("body").css('font-size');
 	dayBackgroundColor = $("body").css('background-color');
 	dayFontColor = $("body").css('color');
@@ -464,6 +464,13 @@ $(document).ready(function(){
 	dayMenuBarColor  = $("div.agesMenu").css('background-color');
 	redElements = $('*').filter(function(){ return ( $(this).css('color') == "rgb(255, 0, 0)");  });
 
+    /* Remove Content from Dropdown Menu */
+    $('div#jqm-dropdown-pages > ul > li:eq(10)').remove(); // help
+    $('div#jqm-dropdown-pages > ul > li:eq(9)').remove(); // hr
+    $('div#jqm-dropdown-pages > ul > li:eq(8)').remove(); // browser info link
+    $('div#jqm-dropdown-pages > ul > li:eq(7)').remove(); // hr
+    $('div#jqm-dropdown-pages > ul > li:eq(6)').remove(); // donate link
+    
 	if (getLanguages()) {
         setLangVars();
     }
