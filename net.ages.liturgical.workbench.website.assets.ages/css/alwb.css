@@ -976,7 +976,7 @@ iframe {
 .index-title {
    text-align:center;
    font-size:100%;
-   color:red;
+   color:#cc0000;
    font-weight:bold;
    text-indent: 0px;
    margin-top: 5px;
@@ -985,7 +985,7 @@ iframe {
 .index-title-date {
    text-align:center;
    font-size:100%;
-   color:red;
+   color:#cc0000;
    font-weight:bold;
    text-indent: 0px;
    margin-top: 5px;
@@ -1028,7 +1028,7 @@ iframe {
 .index-month-td {
 }
 .index-month {
-	color:red;
+	color:#cc0000;
 }
 
 .index-day-tr {
@@ -1044,10 +1044,10 @@ iframe {
 	padding-left: 0px !important;	
 }
 .index-service-day {
-	color:red;
+	color:#cc0000;
 }
 .index-commemoration {
-	color: red;
+	color:#cc0000;
 }
 
 .index-service-language-tr {
