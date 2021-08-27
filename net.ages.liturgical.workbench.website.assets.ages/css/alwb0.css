@@ -2,8 +2,6 @@
 *  Note: css for dropdown menu is jquery.dropdown.css
 */
 
-a       { color: #2a6496; }
-a:hover { color: #0099ff; }
 
 div.alwb-media-dropdown-div {
 	font-size: 70% !important;
@@ -39,7 +37,7 @@ span.mediaMenuItemPeople {
 html, body {
 	font-family: "Arimo", sans-serif;
 	font-size: 12pt;
-    background-color: #f3ebe1;
+    background-color: #FBF0D9;
     color: black; /* do not remove. Used in Javascript */
     height: 100%;
     width: 100%;
@@ -47,11 +45,11 @@ html, body {
 /* Properties for the Menu Bar */
 div.agesMenu {
 	border-style: none;
-	font-size: 120%;
+	font-size: 100%;
 	width: 100%;
 	min-width: 100%;
 	max-width: 100%;
-	background-color: #484043;
+	background-color:#72A0CE;
 	position: fixed;
 	padding-top: 0px;
 	padding-bottom: 0px;
@@ -506,7 +504,6 @@ p.servicesourcessection {
 	font-size: 80%;
 }
 p.servicesourcestitle {
-	padding-top: 10px;
 	padding-left: 10px;
 	text-align: left;
     font-family: serif;
@@ -871,7 +868,7 @@ span.blue {
 }
 span.goared {
 	font-style:inherit;
-	color:#a91827;
+	color:#cc0000;
 }
 span.red {
 	font-style:inherit;
@@ -979,7 +976,7 @@ iframe {
 .index-title {
    text-align:center;
    font-size:100%;
-   color:#a91827;
+   color:#cc0000;
    font-weight:bold;
    text-indent: 0px;
    margin-top: 5px;
@@ -988,7 +985,7 @@ iframe {
 .index-title-date {
    text-align:center;
    font-size:100%;
-   color:#a91827;
+   color:#cc0000;
    font-weight:bold;
    text-indent: 0px;
    margin-top: 5px;
@@ -1029,10 +1026,9 @@ iframe {
 .index-month-tr {
 }
 .index-month-td {
-	padding-top: 1em;
 }
 .index-month {
-	color:#a91827;
+	color:#cc0000;
 }
 
 .index-day-tr {
@@ -1048,10 +1044,10 @@ iframe {
 	padding-left: 0px !important;	
 }
 .index-service-day {
-	color:#a91827;
+	color:#cc0000;
 }
 .index-commemoration {
-	color:#a91827;
+	color:#cc0000;
 }
 
 .index-service-language-tr {
