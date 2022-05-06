@@ -34,7 +34,7 @@ define("pref_app", ["pref_storage"], function(pref_storage) {
     // Service listing for date
     if (prefs["show-pdf-links"] === false) {
         $("a.index-file-link").each((i, obj) => {
-            if ($(obj).html() == "PDF/Print") {
+            if ($(obj).html() == "Print") {
                 $(obj).parent().parent().css("display", "none");
             }
         })
@@ -42,7 +42,7 @@ define("pref_app", ["pref_storage"], function(pref_storage) {
 
     if (prefs["show-textmusic-links"] === false) {
         $("a.index-file-link").each((i, obj) => {
-            if ($(obj).html() == "Text/Music") {
+            if ($(obj).html() == "View") {
                 $(obj).parent().parent().css("display", "none");
             }
         })
