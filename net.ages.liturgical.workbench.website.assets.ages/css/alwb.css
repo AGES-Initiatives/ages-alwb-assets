@@ -301,6 +301,17 @@ p.dialog {
     line-height:130%;
     margin-bottom: 5px;
 }
+p.greekmelody {
+    font-family: "Arimo", sans-serif;
+    text-align:center;
+    font-weight:normal;
+    font-size:70%;
+	font-weight:normal;
+    font-style:italic;
+    color:red;
+  	margin-top: 3px;
+  	margin-bottom: 3px;
+}
 p.heirmos {
     text-align:left;
     text-indent: 0px;
