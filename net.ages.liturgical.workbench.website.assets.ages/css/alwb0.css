@@ -191,7 +191,7 @@ div.media-group-empty {
 	color:SlateGray;
 	font-size:80%;
 }
-title, p.designation, p.mixed, p.mode, p.melody {
+p.title, p.designation, p.mixed, p.mode, p.melody {
     font-family: "Arimo", sans-serif;
     text-align:center;
     font-weight:normal;
