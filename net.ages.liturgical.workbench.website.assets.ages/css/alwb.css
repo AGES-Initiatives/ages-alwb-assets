@@ -183,7 +183,7 @@ div.media-group {
 }
 div.media-group-empty {
     text-align:center;
-    height:18pt;
+    height:0pt;
 }
 .m-g-e {
 }
@@ -191,7 +191,7 @@ div.media-group-empty {
 	content:"(No media for this version.)";
 	text-align:center;
 	color:SlateGray;
-	font-size:80%;
+	font-size:0%;
 }
 p.title, p.designation, p.mixed, p.mode, p.melody {
     font-family: "Arimo", sans-serif;
