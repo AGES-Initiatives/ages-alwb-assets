@@ -2,7 +2,14 @@
 <html>
 	<head>
 		<title>Redirect</title>
-		<script src="js/lib/devices.js"></script>
+		<!--	<script src="js/lib/devices.js"></script> -->
+		<script>
+			if (screen.width < 500){
+				document.location = "servicesindex.html";
+			} else{
+				document.location = "dcs.html";
+			}
+		</script>
 		<meta property="og:title" content="GOA Digital Chant Stand" />
 		<meta property="og:site_name" content="GOA Digital Chant Stand" />
 		<meta property="og:type" content="website" />
@@ -16,6 +23,13 @@
 		<li><a href="servicesindex.html">Mobile</a></li>
 		<li><a href="dcs.html">Desktop</a></li>
 		</ul>
-		<script src="js/lib/devices.js"></script>
+		<!--	<script src="js/lib/devices.js"></script> -->
+		<script>
+			if (screen.width < 500){
+				document.location = "servicesindex.html";
+			} else{
+				document.location = "dcs.html";
+			}
+		</script>
 	</body>
 </html>

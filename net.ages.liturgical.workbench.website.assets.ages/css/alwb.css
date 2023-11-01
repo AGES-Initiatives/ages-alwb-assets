@@ -12,7 +12,7 @@ div.alwb-media-dropdown-div {
 span.mediaMenuItemId {
     font-weight: bold;
     font-style: normal;
-    color: red
+    color: red;
 }
 span.mediaMenuItemPeople {
     font-weight: bold;
@@ -30,7 +30,16 @@ span.mediaMenuItemPeople {
 }
 
 @font-face {
-  font-family: 'ED Psaltica';
+	font-family: "LiberationSerif";
+	src:
+		url('fonts/LiberationSerif-Bold.ttf') format('truetype'),
+		url('fonts/LiberationSerif-BoldItalic.ttf') format('truetype'),
+		url('fonts/LiberationSerif-Italic.ttf') format('truetype'),
+		url('fonts/LiberationSerif-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Psaltica';
   src: url('fonts/Psaltica.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -99,7 +108,7 @@ div.panel-heading {
     padding-top: 1px;
 }
 .fa-byznote:before{
-  font-family: 'ED Psaltica';
+  font-family: 'Psaltica';
   font-size: 250%;
   content: "\006c";
   line-height: 0;
@@ -218,7 +227,7 @@ p.actor {
     margin-top: 5px;
     margin-bottom: 0px;
 }
-p.actor:first-letter {
+p.actor::first-letter {
     text-align:left;
     font-size:125%;
 }
@@ -236,10 +245,14 @@ p.chant {
     line-height:150%;
     margin-bottom: 10px;
 }
-p.chant:first-letter {
+p.chant::first-letter {
     color:red;
-    font-size:180%;
-    font-weight:normal;
+    font-family:LiberationSerif-Regular;
+    font-size:100%;
+    font-weight:300;
+    padding-right: 4px;
+    -webkit-initial-letter: 2;
+    initial-letter: 2;
 }
 p.chapverse {
     font-weight:normal;
@@ -318,10 +331,14 @@ p.heirmos {
     line-height:150%;
     margin-bottom: 10px;
 }
-p.heirmos:first-letter {
+p.heirmos::first-letter {
     color:red;
-    font-size:180%;
-    font-weight:normal;
+    font-family:LiberationSerif-Regular;
+    font-size:100%;
+    font-weight:300;
+    padding-right: 4px;
+    -webkit-initial-letter: 2;
+    initial-letter: 2;
 }
 p.hymn {
     text-align:left;
@@ -329,19 +346,14 @@ p.hymn {
     line-height:150%;
     margin-bottom: 10px;
 }
-p.hymn:first-letter {
+p.hymn::first-letter {
     color:red;
-    font-size:180%;
-    font-weight:normal;
-}
-p.hymn:first-letter(drop) {
-    float: left;
-    font-size: 320%;
-    line-height: 0.5em;
-    padding-bottom: 0.05em;
-    padding-top: 0.2em;
-    padding-right: 0.05em;
-    color:red;
+    font-family:LiberationSerif-Regular;
+    font-size:100%;
+    font-weight:300;
+    padding-right: 4px;
+    -webkit-initial-letter: 2;
+    initial-letter: 2;
 }
 p.hymnlinefirst {
     text-align:left;
@@ -349,7 +361,7 @@ p.hymnlinefirst {
     line-height:150%;
     margin-bottom: 0;
 }
-p.hymnlinefirst:first-letter {
+p.hymnlinefirst::first-letter {
     color:red;
     font-size:180%;
     font-weight:normal;
@@ -578,7 +590,7 @@ p.synaxarioncommemoration {
   	margin-top: 6px;
     margin-bottom: 6px;
 }
-p.synaxarioncommemoration:first-letter {
+p.synaxarioncommemoration::first-letter {
     color:red;
     font-size:180%;
     font-weight:normal;
@@ -619,7 +631,7 @@ p.synaxarionnarration1 {
     line-height:150%;
     margin-bottom: 6px;
 }
-p.synaxarionnarration1:first-letter {
+p.synaxarionnarration1::first-letter {
     font-size:180%;
     font-weight:normal;
 }
@@ -629,7 +641,7 @@ p.synaxarionnarration10 {
     line-height:150%;
     margin-bottom: 0px;
 }
-p.synaxarionnarration10:first-letter {
+p.synaxarionnarration10::first-letter {
     font-size:180%;
     font-weight:normal;
 }
