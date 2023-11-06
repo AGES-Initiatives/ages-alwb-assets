@@ -2,18 +2,25 @@
 *  Note: css for dropdown menu is jquery.dropdown.css
 */
 
-a       { color: #2a6496; }
-a:hover { color: #0099ff; }
+a {
+	color: #2a6496;
+}
+
+a:hover {
+	color: #0099ff;
+}
 
 div.alwb-media-dropdown-div {
 	font-size: 70% !important;
 	position: absolute;
 }
+
 span.mediaMenuItemId {
-    font-weight: bold;
-    font-style: normal;
     color: red;
+    font-style: normal;
+	font-weight: bold;
 }
+
 span.mediaMenuItemPeople {
     font-weight: bold;
     font-style: normal;
@@ -21,7 +28,7 @@ span.mediaMenuItemPeople {
 }
 
 @font-face {
-	font-family: "Arimo";
+	font-family: 'Arimo';
 	src:
 		url('fonts/Arimo-Bold.ttf') format('truetype'),
 		url('fonts/Arimo-BoldItalic.ttf') format('truetype'),
@@ -30,7 +37,7 @@ span.mediaMenuItemPeople {
 }
 
 @font-face {
-	font-family: "LiberationSerif";
+	font-family: 'LiberationSerif';
 	src:
 		url('fonts/LiberationSerif-Bold.ttf') format('truetype'),
 		url('fonts/LiberationSerif-BoldItalic.ttf') format('truetype'),
@@ -46,13 +53,14 @@ span.mediaMenuItemPeople {
 }
 
 html, body {
-	font-family: "Arimo", sans-serif;
+	font-family: 'Arimo', sans-serif;
 	font-size: 12pt;
     background-color: #f3ebe1;
     color: black; /* do not remove. Used in Javascript */
     height: 100%;
     width: 100%;
 }
+
 /* Properties for the Menu Bar */
 div.agesMenu {
 	border-style: none;
@@ -62,10 +70,10 @@ div.agesMenu {
 	max-width: 100%;
 	background-color: #484043;
 	position: fixed;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	top: 0px;
-	left: 0px;
+	padding-top: 0;
+	padding-bottom: 0;
+	top: 0;
+	left: 0;
 	opacity: 1;
 	z-index: 10000;
 }
@@ -73,7 +81,6 @@ div.agesMenu {
 .agesMenu a .fa {
 	font-size: 1em; 
 }
-
 
 /* Properties to control the spacing between menu bar icons
    and their color.
@@ -94,6 +101,7 @@ i.ages-menu-link {
 .panelTitle {
 	font-size: 100%;
 }
+
 .panel-body {
 	background-color: #FBF0D9;
 }
@@ -104,35 +112,54 @@ div.panel-heading {
 
 /* Placeholders to change specific icons */
 .fa-arrows {}
+
 .fa-bars {
     padding-top: 1px;
 }
+
 .fa-byznote:before{
   font-family: 'Psaltica';
   font-size: 250%;
-  content: "\006c";
+  content: '\006c';
   line-height: 0;
   position: relative;
   bottom: -18px;
 }
+
 .fa-calendar {}
+
 .fa-caret-square-o-left {}
+
 .fa-caret-square-o-right {}
+
 .fa-columns {}
+
 .fa-columns {}
+
 .fa-envelope {}
+
 .fa-info-circle {
 	padding-left: 2px;
 }
+
 .fa-list-alt {}
+
 .fa-minus {}
+
 .fa-mobile {}
+
 .fa-money {}
+
 .fa-music {}
+
 .fa-plus {}
+
 .fa-question-circle {}
+
 .fa-text-height {}
+
 .fa-undo {}
+
 .fa-volume-up {
 	padding-left: 3px;
 }
@@ -143,7 +170,7 @@ div.panel-heading {
 	width: 15pt;
 }
 
-/* Properties of the "button" hyperlinks in the Index pages */
+/* Properties of the 'button' hyperlinks in the Index pages */
 .IndexLink {
     font-size: 100% !important;
 	background-color: #BCB6A9;
@@ -156,7 +183,7 @@ div.panel-heading {
 }
 
 span.clockbox {
-  font-family: "Arial Unicode MS", sans-serif;
+  font-family: 'Arial Unicode MS', sans-serif;
   font-size: 0.75em;
   color: white;
   line-height: 0em;
@@ -181,345 +208,391 @@ div.index-content {
 }
 
 span.media-icon {
-    font-family: "Arimo", sans-serif;
+    font-family: 'Arimo', sans-serif;
     font-style:italic;
  	margin: 0 3px;
 }
 
 div.media-group {
-    text-align:center;
-    height:18pt;
+    text-align: center;
+    height: 18pt;
 }
+
 div.media-group-empty {
-    text-align:center;
-    height:0pt;
+    text-align: center;
+    height: 0;
 }
+
 .m-g-e {
 }
+
 .m-g-e::after {
-	content:"(No media for this version.)";
-	text-align:center;
-	color:SlateGray;
-	font-size:0%;
+	content: '(No media for this version.)';
+	text-align: center;
+	color: SlateGray;
+	font-size: 0%;
 }
+
 p.title, p.designation, p.mixed, p.mode, p.melody {
-    font-family: "Arimo", sans-serif;
-    text-align:center;
-    font-weight:normal;
-    font-size:95%;
+    font-family: 'Arimo', sans-serif;
+    text-align: center;
+    font-weight: normal;
+    font-size: 95%;
   	margin-top: 6px;
-  	margin-bottom: 0px;
+  	margin-bottom: 0;
 }
+
 p {
 	color: black;   /* night mode #FBF0D9 */
     text-align: left;
-    font-family: "Arimo", sans-serif;
+    font-family: 'Arimo', sans-serif;
 /*    font-weight: normal; */
-    padding-left: -50px;
     margin-bottom: 0em; /* to control spacing after para */
 }
+
 p.actor {
-    text-align:left;
-    font-size:80%;
-    color:red;
-    font-weight:bold;
-    text-indent: 0px;
+    text-align: left;
+    font-size: 80%;
+    color: red;
+    font-weight: bold;
+    text-indent: 0;
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
+
 p.actor::first-letter {
-    text-align:left;
-    font-size:125%;
+    text-align: left;
+    font-size: 125%;
 }
+
 p.alttext {
-	font-size:80%;
-	background-color:#CCCCCC;
-	margin-left:2em;
+	font-size: 80%;
+	background-color: #CCCCCC;
+	margin-left: 2em;
 }
+
 p.break {
     margin-bottom: 10px;
 }
+
 p.chant {
-    text-align:left;
-    text-indent: 0px;
-    line-height:150%;
+    text-align: left;
+    text-indent: 0;
+    line-height: 150%;
     margin-bottom: 10px;
 }
+
 p.chant::first-letter {
-    color:red;
-    font-family:LiberationSerif-Regular;
-    font-size:100%;
-    font-weight:300;
-    padding-right: 4px;
     -webkit-initial-letter: 2;
     initial-letter: 2;
-}
-p.chapverse {
-    font-weight:normal;
-    font-style:italic;
-    text-indent: 0px;
-    text-align:center;
-    color:red;
-    font-size: 80%;
-    margin-top: 0px;
-    margin-bottom: 0px;
+	color: red;
+    font-family: LiberationSerif-Regular;
+    font-size: 200%;
+    font-weight: 300;
+    padding-right: 4px;
 }
 
-p[class^="bmc_"], p[class^="emc_"] {
+p.chapverse {
+    font-weight: normal;
+    font-style: italic;
+    text-indent: 0;
+    text-align: center;
+    color: red;
+    font-size: 80%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+p[class^='bmc_'], p[class^='emc_'] {
   display: none;
 }
 
 p.emc_collapse {
-    display:block;
-    text-align:center;
-    font-style:normal;
-    font-size:90%;
-    color:blue;
-    line-height:100%;
+    display: block;
+    text-align: center;
+    font-style: normal;
+    font-size: 90%;
+    color: blue;
+    line-height: 100%;
     margin-top: 12px;
     margin-bottom: 3px;
 }
+
 .emc_collapse:hover {
 	cursor: pointer;
 }
+
 p.bmc_collapse {
-    display:block;
-	text-align:center;
-    font-style:normal;
-    font-size:90%;
-    color:blue;
-    line-height:100%;
+    display: block;
+	text-align: center;
+    font-style: normal;
+    font-size: 90%;
+    color: blue;
+    line-height: 100%;
     margin-top: 4px;
     margin-bottom: 12px;
 }
+
 .bmc_collapse:hover {
 	cursor: pointer;
 }
+
 p.designation {
-    font-style:normal;
-    font-weight:bolder;
-    color:red;
+    font-style: normal;
+    font-weight: bolder;
+    color: red;
 }
+
 p.dialogzero {
-    text-align:left;
+    text-align: left;
     text-indent: 28px;
-    font-size:95%;
-    line-height:130%;
-    margin-bottom: 0px;
+    font-size: 95%;
+    line-height: 130%;
+    margin-bottom: 0;
 }
+
 p.dialog {
-    text-align:left;
+    text-align: left;
     text-indent: 28px;
-    font-size:95%;
-    line-height:130%;
+    font-size: 95%;
+    line-height: 130%;
     margin-bottom: 5px;
 }
+
 p.greekmelody {
-    font-family: "Arimo", sans-serif;
-    text-align:center;
-    font-weight:normal;
-    font-size:70%;
-	font-weight:normal;
-    font-style:italic;
-    color:red;
+    font-family: 'Arimo', sans-serif;
+    text-align: center;
+    font-weight: normal;
+    font-size: 70%;
+	font-weight: normal;
+    font-style: italic;
+    color: red;
   	margin-top: 3px;
   	margin-bottom: 3px;
 }
+
 p.heirmos {
-    text-align:left;
-    text-indent: 0px;
-    line-height:150%;
+    text-align: left;
+    text-indent: 0;
+    line-height: 150%;
     margin-bottom: 10px;
 }
+
 p.heirmos::first-letter {
-    color:red;
-    font-family:LiberationSerif-Regular;
-    font-size:100%;
-    font-weight:300;
-    padding-right: 4px;
     -webkit-initial-letter: 2;
     initial-letter: 2;
+	color: red;
+    font-family: LiberationSerif-Regular;
+    font-size: 200%;
+    font-weight: 300;
+    padding-right: 4px;
 }
+
 p.hymn {
-    text-align:left;
-    text-indent: 0px;
-    line-height:150%;
+    text-align: left;
+    text-indent: 0;
+    line-height: 150%;
     margin-bottom: 10px;
 }
+
 p.hymn::first-letter {
-    color:red;
-    font-family:LiberationSerif-Regular;
-    font-size:100%;
-    font-weight:300;
-    padding-right: 4px;
     -webkit-initial-letter: 2;
     initial-letter: 2;
+	color: red;
+    font-family: LiberationSerif-Regular;
+    font-size: 200%;
+    font-weight: 300;
+    padding-right: 4px;
 }
+
 p.hymnlinefirst {
-    text-align:left;
-    text-indent: 0px;
-    line-height:150%;
+    text-align: left;
+    text-indent: 0;
+    line-height: 150%;
     margin-bottom: 0;
 }
+
 p.hymnlinefirst::first-letter {
-    color:red;
-    font-size:180%;
-    font-weight:normal;
+    color: red;
+    font-size: 180%;
+    font-weight: normal;
 }
+
 p.hymnlinemiddle {
-    text-align:left;
-    text-indent: 0px;
-    line-height:150%;
+    text-align: left;
+    text-indent: 0;
+    line-height: 150%;
     margin-top: 0;
     margin-bottom: 0;
 }
+
 p.hymnlinelast {
-    text-align:left;
-    text-indent: 0px;
-    line-height:150%;
+    text-align: left;
+    text-indent: 0;
+    line-height: 150%;
     margin-top: 0;
     margin-bottom: 10px;
 }
+
 p.inaudible {
     text-indent: 28px;
-	font-size:80%;
-    text-align:left;
-    line-height:150%;
+	font-size: 80%;
+    text-align: left;
+    line-height: 150%;
 }
+
 p.logoleft {
 	text-indent: -14px;
 }
+
 p.mode {
-    color:red;
-    font-weight:bold;
+    color: red;
+    font-weight: bold;
 }
+
 p.mixed {
-    font-weight:normal;
-    font-style:normal;
+    font-weight: normal;
+    font-style: normal;
 }
 
 p.melody {
-    font-weight:normal;
-    font-style:italic;
-    color:red;
+    font-weight: normal;
+    font-style: italic;
+    color: red;
 }
+
 p.missalreading {
-    text-align:left;
-    text-align-last:right;
-    font-size:80%;
-    font-weight:normal;
+    text-align: left;
+    text-align-last: right;
+    font-size: 80%;
+    font-weight: normal;
     text-indent: 28px;
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
+
 p.missaltitle {
-    text-align:left;
-    text-align-last:right;
-    font-size:80%;
-    color:red;
-    font-weight:bold;
-    text-indent: 0px;
+    text-align: left;
+    text-align-last: right;
+    font-size: 80%;
+    color: red;
+    font-weight: bold;
+    text-indent: 0;
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
+
 p.name {
-    font-weight:normal;
-    font-style:italic;
-    text-align:center;
-    color:red;
+    font-weight: normal;
+    font-style: italic;
+    text-align: center;
+    color: red;
     font-size: 80%;
     margin-top: 3px;
     margin-bottom: 3px;
 }
+
 .noprintdesig {
-    font-family: "Arimo", sans-serif;
-    font-weight:normal;
-    font-size:95%;
-	font-style:normal;
-    color:red;
+    font-family: 'Arimo', sans-serif;
+    font-weight: normal;
+    font-size: 95%;
+	font-style: normal;
+    color: red;
   	margin-top: 6px;
-  	margin-bottom: 0px;
-    text-align:center;
+  	margin-bottom: 0;
+    text-align: center;
 }
+
 .notavailable {
-	font-style:italic;
-	font-weight:lighter;
-	font-size:70%;
-    line-height:130%;
+	font-style: italic;
+	font-weight: lighter;
+	font-size: 70%;
+    line-height: 130%;
     text-indent: 16px;
-	color:gray;
+	color: gray;
 	float: right;
 }
 
 .optional {
-    font-style:italic;
+    font-style: italic;
     font-size: 80%;
-    color:#651612;
+    color: #651612;
 }
+
 p.plain {
-    font-weight:normal;
-    font-style:normal;
+    font-weight: normal;
+    font-style: normal;
 }
+
 p.prayerzero {
-    text-align:left;
+    text-align: left;
     text-indent: 28px;
-    line-height:150%;
-    margin-bottom: 0px;
+    line-height: 150%;
+    margin-bottom: 0;
 }
+
 p.prayer {
-    text-align:left;
+    text-align: left;
     text-indent: 28px;
-    line-height:150%;
+    line-height: 150%;
     margin-bottom: 6px;
 }
+
 p.prayeroptional {
-    text-align:left;
+    text-align: left;
     text-indent: 28px;
-    line-height:150%;
+    line-height: 150%;
     margin-bottom: 6px;
-	font-style:italic;
+	font-style: italic;
     font-size: 80%;
-    color:#651612;
+    color: #651612;
 }
+
 p.readingzero {
-    text-align:left;
+    text-align: left;
     text-indent: 28px;
-    line-height:150%;
-    margin-bottom: 0px;
+    line-height: 150%;
+    margin-bottom: 0;
 }
+
 p.reading {
-    text-align:left;
+    text-align: left;
     text-indent: 28px;
-    line-height:150%;
+    line-height: 150%;
     margin-bottom: 6px;
 }
+
 p.readingcenterzero {
-    text-align:center;
-	font-size:100%;
-    line-height:150%;
-    margin-bottom: 0px;
+    text-align: center;
+	font-size: 100%;
+    line-height: 150%;
+    margin-bottom: 0;
 }
+
 p.readingcenter {
-    text-align:center;
-	font-size:100%;
-    line-height:150%;
+    text-align: center;
+	font-size: 100%;
+    line-height: 150%;
     margin-bottom: 6px;
 }
+
 p.rubric {
-    color:red;
-    font-size:80%;
-    font-style:italic;
-    text-align:left;
+    color: red;
+    font-size: 80%;
+    font-style: italic;
+    text-align: left;
     text-indent: 28px;
 }
+
 p.servicesources {
 	padding-left: 25px;
 	text-align: left;
     font-family: serif;
 	font-size: 80%;
-	color:red;
-    font-weight:bold;
+	color: red;
+    font-weight: bold;
 }
+
 p.servicesourcessection {
 	padding-left: 25px;
 	padding-bottom: 5px;
@@ -528,157 +601,178 @@ p.servicesourcessection {
     font-family: serif;
 	font-size: 80%;
 }
+
 p.servicesourcestitle {
 	padding-left: 10px;
 	text-align: left;
     font-family: serif;
 	font-size: 90%;
-    font-weight:bold;
+    font-weight: bold;
 }
+
 p.small {
-    font-family: "Arimo", sans-serif;
-    text-align:inherit;
-    font-size:70%;
-    font-weight:bold;
-    color:red;
+    font-family: 'Arimo', sans-serif;
+    text-align: inherit;
+    font-size: 70%;
+    font-weight: bold;
+    color: red;
   	margin-top: 3px;
   	margin-bottom: 3px;
 }
+
 p.smallcenter {
-    font-family: "Arimo", sans-serif;
-    text-align:center;
-    font-size:70%;
-    font-weight:bold;
-    color:red;
+    font-family: 'Arimo', sans-serif;
+    text-align: center;
+    font-size: 70%;
+    font-weight: bold;
+    color: red;
   	margin-top: 3px;
   	margin-bottom: 3px;
 }
+
 p.source {
     margin-top: 6px;
-	font-weight:normal;
-    font-style:normal;
-    font-size:70%;
-    color:gray;
-    text-align:left;
+	font-weight: normal;
+    font-style: normal;
+    font-size: 70%;
+    color: gray;
+    text-align: left;
 }
+
 p.source0 {
-    margin-top: 0px;
-	font-weight:normal;
-    font-style:normal;
-    font-size:70%;
-    color:gray;
-    text-align:left;
-    height:0;
-    position:relative;
-    top:-3em;
+    margin-top: 0;
+	font-weight: normal;
+    font-style: normal;
+    font-size: 70%;
+    color: gray;
+    text-align: left;
+    height: 0;
+    position: relative;
+    top: -3em;
 }
+
 p.source1 {
-    margin-top: 0px;
-	font-weight:normal;
-    font-style:normal;
-    font-size:70%;
-    color:gray;
-    text-align:left;
-    height:0;
-    position:relative;
-    top:-6em;
+    margin-top: 0;
+	font-weight: normal;
+    font-style: normal;
+    font-size: 70%;
+    color: gray;
+    text-align: left;
+    height: 0;
+    position: relative;
+    top: -6em;
 }
+
 p.synaxarioncommemoration {
-    text-align:left;
+    text-align: left;
     text-indent: 14px;
-    line-height:150%;
+    line-height: 150%;
   	margin-top: 6px;
     margin-bottom: 6px;
 }
+
 p.synaxarioncommemoration::first-letter {
-    color:red;
-    font-size:180%;
-    font-weight:normal;
+    color: red;
+    font-size: 180%;
+    font-weight: normal;
 }
+
 p.synaxarionversetitle {
-    color:red;
-	text-align:center;
-    font-weight:normal;
-    font-size:90%;
+    color: red;
+	text-align: center;
+    font-weight: normal;
+    font-size: 90%;
   	margin-top: 6px;
-  	margin-bottom: 0px;
+  	margin-bottom: 0;
 }
+
 p.synaxarionverse0 {
-    text-align:center;
-    font-style:normal;
-    font-size:90%;
-    line-height:100%;
-    margin-bottom: 0px;
+    text-align: center;
+    font-style: normal;
+    font-size: 90%;
+    line-height: 100%;
+    margin-bottom: 0;
 }
+
 p.synaxarionverse {
-    text-align:center;
-    font-style:normal;
-    font-size:90%;
-    line-height:100%;
+    text-align: center;
+    font-style: normal;
+    font-size: 90%;
+    line-height: 100%;
     margin-bottom: 3px;
 }
+
 p.synaxarionnarrationtitle {
-    color:red;
-	text-align:center;
-    font-weight:normal;
-    font-size:70%;
+    color: red;
+	text-align: center;
+    font-weight: normal;
+    font-size: 70%;
   	margin-top: 6px;
-  	margin-bottom: 0px;
+  	margin-bottom: 0;
 }
+
 p.synaxarionnarration1 {
-    text-align:left;
-    font-size:70%;
-    line-height:150%;
+    text-align: left;
+    font-size: 70%;
+    line-height: 150%;
     margin-bottom: 6px;
 }
+
 p.synaxarionnarration1::first-letter {
-    font-size:180%;
-    font-weight:normal;
+    font-size: 180%;
+    font-weight: normal;
 }
+
 p.synaxarionnarration10 {
-    text-align:left;
-    font-size:70%;
-    line-height:150%;
-    margin-bottom: 0px;
+    text-align: left;
+    font-size: 70%;
+    line-height: 150%;
+    margin-bottom: 0;
 }
+
 p.synaxarionnarration10::first-letter {
-    font-size:180%;
-    font-weight:normal;
+    font-size: 180%;
+    font-weight: normal;
 }
+
 p.synaxarionnarration0 {
-    text-align:left;
+    text-align: left;
     text-indent: 14px;
-    font-size:70%;
-    line-height:150%;
-    margin-bottom: 0px;
+    font-size: 70%;
+    line-height: 150%;
+    margin-bottom: 0;
 }
+
 p.synaxarionnarrationlast {
-    text-align:left;
+    text-align: left;
     text-indent: 14px;
-    font-size:70%;
-    line-height:150%;
+    font-size: 70%;
+    line-height: 150%;
     margin-bottom: 6px;
 }
+
 p.synaxarionnote {
-    text-align:left;
+    text-align: left;
     text-indent: 14px;
-	font-size:70%;
-	font-style:normal;
-    font-weight:normal;
-    color:red;
-    line-height:150%;
+	font-size: 70%;
+	font-style: normal;
+    font-weight: normal;
+    color: red;
+    line-height: 150%;
   	margin-top: 3px;
   	margin-bottom: 3px;
 }
+
 p.titlezero {
-	text-align:center;
-	font-style:normal;
-    font-weight:bolder;
-    color:red;
-    font-size:80%;
+	text-align: center;
+	font-style: normal;
+    font-weight: bolder;
+    color: red;
+    font-size: 80%;
   	margin-top: -7px;
-  	margin-bottom: 0px;
+  	margin-bottom: 0;
 }
+
 p.typikon {
 	padding-left: 22px;
 	text-indent: -22px;
@@ -686,256 +780,287 @@ p.typikon {
     font-family: serif;
 	font-size: 80%;
 }
+
 p.typikonblock {
 	text-align: left;
     font-family: serif;
 	font-size: 80%;
 }
+
 p.typikonomitted {
-	background-color:#e9e9e9;
+	background-color: #e9e9e9;
 	padding-left: 22px;
 	text-indent: -22px;
 	text-align: left;
     font-family: serif;
 	font-size: 80%;
 }
+
 p.typikoncenter {
 	text-align: center;
     font-family: serif;
 	font-size: 80%;
 }
+
 p.typikoncenteromitted {
-	background-color:#e9e9e9;
+	background-color: #e9e9e9;
 	text-align: center;
     font-family: serif;
 	font-size: 80%;
 }
+
 p.typikoncommemoration {
 	text-align: left;
     font-family: serif;
 	font-size: 80%;
-    font-weight:bold;
+    font-weight: bold;
 }
+
 p.typikonindent {
 	text-align: left;
  	text-indent: 22px;
     font-family: serif;
 	font-size: 80%;
 }
+
 p.typikonnote {
 	text-align: left;
     font-family: serif;
 	font-size: 70%;
 }
+
 p.verse {
-    text-align:left;
+    text-align: left;
     text-indent: 28px;
-    font-style:italic;
-    font-size:100%;
-    line-height:150%;
+    font-style: italic;
+    font-size: 100%;
+    line-height: 150%;
     margin-bottom: 3px;
 }
+
 p.versecenter {
-    text-align:center;
-    font-style:italic;
-    font-size:90%;
-    line-height:100%;
+    text-align: center;
+    font-style: italic;
+    font-size: 90%;
+    line-height: 100%;
     margin-bottom: 3px;
 }
+
 p.cover1 {
     font-family: sans-serif;
-    text-align:right;
-    font-weight:normal;
-    font-size:48pt;
+    text-align: right;
+    font-weight: normal;
+    font-size: 48pt;
     margin-top: 1in;
     margin-bottom: 1in;
 }
+
 p.cover2 {
     font-family: sans-serif;
-    text-align:right;
-    font-weight:bold;
-    font-size:24pt;
+    text-align: right;
+    font-weight: bold;
+    font-size: 24pt;
     margin-bottom: 1em;
 }
+
 p.cover3 {
     font-family: sans-serif;
-    text-align:right;
-    font-weight:bold;
-    font-size:12pt;
-    color:red;
+    text-align: right;
+    font-weight: bold;
+    font-size: 12pt;
+    color: red;
     text-indent: 20px;
     margin-left: 2in;
     margin-bottom: 2em;
 }
+
 p.cover4 {
     font-family: sans-serif;
-    text-align:right;
-    font-weight:bold;
-    font-size:16pt;
-    color:red;
+    text-align: right;
+    font-weight: bold;
+    font-size: 16pt;
+    color: red;
     margin-bottom: 1em;
 }
+
 p.cover5 {
     font-family: sans-serif;
-    text-align:right;
-    font-weight:bold;
-    font-size:16pt;
+    text-align: right;
+    font-weight: bold;
+    font-size: 16pt;
     margin-top: 1in;
 }
+
 .verticalLine {
-	position:fixed;
+	position: fixed;
 	left: .5in;    
 	border-left: thick solid #ff0000;
     height: 10in;
 }
+
 .horizontalLine {
- 	position:fixed;
+ 	position: fixed;
 	top: .5in;    
     border-top: thick solid #ff0000;
     width: 7in;
 }
+
 p.credits1 {
-    font-family: "Arimo", serif;
+    font-family: 'Arimo', serif;
     margin-top: 1em;
-    text-align:left;
-    font-weight:bold;
-    font-size:10pt;
+    text-align: left;
+    font-weight: bold;
+    font-size: 10pt;
     margin-bottom: 1em;
 }
+
 p.credits2 {
-    font-family: "Arimo", serif;
-    text-align:left;
-    font-size:9pt;
+    font-family: 'Arimo', serif;
+    text-align: left;
+    font-size: 9pt;
 }
+
 p.credits3 {
-    font-family: "Arimo", serif;
-    text-align:left;
-    font-size:9pt;
+    font-family: 'Arimo', serif;
+    text-align: left;
+    font-size: 9pt;
     margin-bottom: 1em;
 }
+
 span.anum {
 	color: red;
-    font-size:80%;
+    font-size: 80%;
 }
 
 span.melody {
-	font-style:italic;
-	color:red;	
+	font-style: italic;
+	color: red;	
 	white-space: normal;
 }
 
 span.mode {
-	font-style:normal;
-	font-weight:bolder;
-	color:red;
+	font-style: normal;
+	font-weight: bolder;
+	color: red;
 	white-space: normal;
 }
 
 span.designation {
-	font-style:normal;
-	font-weight:bolder;
-	color:red;
+	font-style: normal;
+	font-weight: bolder;
+	color: red;
 	white-space: normal;
 }
 
 span.chapverse {
-    font-weight:normal;
-    font-style:italic;
-    color:red;
+    font-weight: normal;
+    font-style: italic;
+    color: red;
     font-size: 85%;
 	white-space: normal;
 }
 
 span.reference{
-	font-variant:normal;
-	font-weight:normal;
-	font-style:italic;
-	font-size:70%;
-	color:red;	
+	font-variant: normal;
+	font-weight: normal;
+	font-style: italic;
+	font-size: 70%;
+	color: red;	
 }
+
 span.rubric{
-	font-variant:normal;
-	font-weight:normal;
-	font-style:italic;
-	font-size:80%;
-	color:red;	
+	font-variant: normal;
+	font-weight: normal;
+	font-style: italic;
+	font-size: 80%;
+	color: red;	
 }
+
 span.italics {
-	font-style:italic;
+	font-style: italic;
 }
+
 span.strong {
-	font-weight:bold;
+	font-weight: bold;
 }
+
 span.bigblack {
-	font-weight:normal;
-	font-style:normal;
-	font-size:150%;
-	display:inline-block;
-	line-height:150%;
-	color:black;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 150%;
+	display: inline-block;
+	line-height: 150%;
+	color: black;
 }
+
 span.black {
-	font-style:normal;
-	color:black;
+	font-style: normal;
+	color: black;
 }
 
 span.bold {
-	font-weight:bold;
-	font-style:inherit;
+	font-weight: bold;
+	font-style: inherit;
 }
+
 span.bolditalics {
-	font-weight:bold;
-	font-style:italic;
+	font-weight: bold;
+	font-style: italic;
 }
+
 span.blue {
-	font-style:inherit;
-	color:#0080c0;
+	font-style: inherit;
+	color: #0080c0;
 }
+
 span.goared {
-	font-style:inherit;
-	color:#a91827;
+	font-style: inherit;
+	color: #a91827;
 }
+
 span.red {
-	font-style:inherit;
-	color:red;
+	font-style: inherit;
+	color: red;
 }
 
 span.boldred {
-	font-weight:bold;
-	color:red;
-	font-style:inherit;
+	font-weight: bold;
+	color: red;
+	font-style: inherit;
 }
 
 span.italicsblack {
-	font-style:italic;
-	color:black;
+	font-style: italic;
+	color: black;
 }
+
 span.italicsred {
-	font-style:italic;
-	color:red;
+	font-style: italic;
+	color: red;
 }
 
 span.bolditalicsred {
-	font-weight:bold;
-	font-style:italic;
-	color:red;
+	font-weight: bold;
+	font-style: italic;
+	color: red;
 }
 
 span.numright {
-	font-style:inherit;
+	font-style: inherit;
 	float: right;
-	color:red;
+	color: red;
 }
 
 span.smaller {
-	font-size:70%;
+	font-size: 70%;
 }
+
 span.versiondesignation {
-	font-style:normal;
-	font-weight:lighter;
-	font-size:50%;
-	vertical-align:middle;
-	color:#428bca;
+	font-style: normal;
+	font-weight: lighter;
+	font-size: 50%;
+	vertical-align: middle;
+	color: #428bca;
 	float: right;
 	}
 
@@ -943,29 +1068,35 @@ table {
   margin: 0 3pt;
   padding: 0;
   border-collapse: collapse;
-  border-spacing:0 5px;
+  border-spacing: 0 5px;
   display: inline;
 }
+
 tr {
-	border-spacing:0 5px;
+	border-spacing: 0 5px;
 }
+
 td {
   vertical-align: top;
   width: 50%;
   padding-left: 8px;
   padding-right: 8px;
 }
+
 td.leftCell {
   border-right: thin solid silver;
 }
+
 .glyphicon {
  	margin: 0 3px;
 }
+
 iframe {
   border:  none;
   margin: 0;
   padding: 0;
 }
+
 #FrameLinks {
   width: 38%;
   position: fixed;
@@ -974,12 +1105,14 @@ iframe {
   margin-top: 1em;
   z-index: 1;
 }
+
 #FrameText {
   width: 38%;
   height: 100%;
   position: fixed;
   z-index: 0;
 }
+
 #FrameAudio {
   width: 35em;
   position: fixed;
@@ -990,6 +1123,7 @@ iframe {
   z-index: 0;
   left: 39%;
 }
+
 #FrameScore {
   width: 61%;
   height: 100%;
@@ -998,91 +1132,106 @@ iframe {
   top: 0;
   z-index: 0;
 }
+
 .index-title {
-   text-align:center;
-   font-size:100%;
-   color:#a91827;
-   font-weight:bold;
-   text-indent: 0px;
+   text-align: center;
+   font-size: 100%;
+   color: #a91827;
+   font-weight: bold;
+   text-indent: 0;
    margin-top: 5px;
    margin-bottom: 10px;
 }
+
 .index-title-date {
-   text-align:center;
-   font-size:100%;
-   color:#a91827;
-   font-weight:bold;
-   text-indent: 0px;
+   text-align: center;
+   font-size: 100%;
+   color: #a91827;
+   font-weight: bold;
+   text-indent: 0;
    margin-top: 5px;
    margin-bottom: 10px;
 
 }
+
 .index-desc-1 {
-   text-align:left;
+   text-align: left;
    text-indent: 28px;
-   font-size:80%;
-   line-height:100%;
+   font-size: 80%;
+   line-height: 100%;
    margin-bottom: 5px;
-   max-width:350px;
+   max-width: 350px;
 }
+
 .index-desc-2 {
-   text-align:left;
+   text-align: left;
    text-indent: 28px;
-   font-size:80%;
-   line-height:100%;
+   font-size: 80%;
+   line-height: 100%;
    margin-bottom: 5px;
-   max-width:350px;
+   max-width: 350px;
 }
+
 .index-desc-3 {
-   text-align:left;
+   text-align: left;
    text-indent: 28px;
-   font-size:80%;
-   line-height:100%;
+   font-size: 80%;
+   line-height: 100%;
    margin-bottom: 5px;
-   max-width:350px;
+   max-width: 350px;
 }
+
 .index-file-timestamp {
    font-size: 70%;
-   font-weight:lighter;
+   font-weight: lighter;
    color: #6E6E6E;
    vertical-align: 2px;
 }
 
 .index-month-tr {
 }
+
 .index-month-td {
 	padding-top: 1em;
 }
+
 .index-month {
-	color:#a91827;
+	color: #a91827;
 }
 
 .index-day-tr {
 }
+
 .index-day-td {
 }
+
 .index-day-link {
 }
 
 .index-service-day-tr {
 }
+
 .index-service-day-td {
-	padding-left: 0px !important;	
+	padding-left: 0 !important;	
 }
+
 .index-service-day {
-	color:#a91827;
+	color: #a91827;
 }
+
 .index-commemoration {
-	color:#a91827;
+	color: #a91827;
 }
 
 .index-service-language-tr {
 }
+
 .index-service-language-td {
 	vertical-align: middle;
-	padding-right: 0px !important;
+	padding-right: 0 !important;
 	width: 34%;
 }
+
 .index-service-language {
 	vertical-align: middle;
 }
@@ -1091,112 +1240,132 @@ iframe {
 	vertical-align: middle;
 	width: 33%;
 }
+
 .index-file-link {
 	vertical-align: middle;
 }
+
 .index-file-timestamp-td {
 	vertical-align: middle;
-	padding: 0px !important;
+	padding: 0 !important;
 	width: 33%;
 }
 
   .pixels {
-        font-size:16px;
-        line-height:30px;
-        margin-bottom:20px;
-        padding:20px;
-        background-color:#222222;
+        font-size: 16px;
+        line-height: 30px;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #222222;
     }
+
     .point {
-        font-size:12pt;
-        line-height:30px;
-        margin-bottom:20px;
-        padding:20px;
-        background-color:#222222;
+        font-size: 12pt;
+        line-height: 30px;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #222222;
     }
+
     .em {
-        font-size:1em;
-        margin-bottom:20px;
-        padding:20px;
-        background-color:#222222;
+        font-size: 1em;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #222222;
     }
+
     .percentage {
-        font-size:100%;
-        margin-bottom:20px;
-        padding:20px;
-        background-color:#222222;
+        font-size: 100%;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #222222;
     }
+
     .undefined {
-        margin-bottom:20px;
-        padding:20px;
-        background-color:#222222;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #222222;
     }
+
     #changeFont {
-        position:absolute;
-        top:10px;
-        right:10px;
-        background-color:#333333;
-        padding:5px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #333333;
+        padding: 5px;
     }
+
 table.books-index-table {
-	table-layout:fixed !important;
+	table-layout: fixed !important;
 	width: 100% !important;
 }
+
 .index-books-language-td {
 	vertical-align: middle;
-	padding-right: 0px !important;
+	padding-right: 0 !important;
 	width: 25% !important;
 }
+
 .index-books-language {
 	vertical-align: middle;
 }
+
 .index-books-file-link-td {
 	vertical-align: middle;
-	padding-right: 0px !important;
+	padding-right: 0 !important;
 	width: 45% !important;
 }
+
 .index-books-file-link {
 	vertical-align: center;
 }
+
 .index-books-file-type-td {
 	vertical-align: middle;
-	padding: 0px !important;
+	padding: 0 !important;
 	width: 25% !important;
 }
+
 .index-books-file-timestamp-td {
 	vertical-align: middle;
-	padding: 0px !important;
+	padding: 0 !important;
 	width: 5% !important;
 }
 
 table.custom-index-table {
-	table-layout:fixed !important;
+	table-layout: fixed !important;
 	width: 60% !important;
 }
+
 .index-custom-language-td {
 	vertical-align: middle;
-	padding-right: 0px !important;
+	padding-right: 0 !important;
 	width: 25% !important;
 }
+
 .index-custom-language {
 	vertical-align: middle;
 }
+
 .index-custom-file-link-td {
 	vertical-align: middle;
-	padding-right: 0px !important;
+	padding-right: 0 !important;
 	width: 25% !important;
 }
+
 .index-custom-file-link {
 	vertical-align: center;
 }
+
 .index-custom-file-type-td {
 	vertical-align: middle;
-	padding: 0px !important;
+	padding: 0 !important;
 	width: 25% !important;
 }
+
 .index-custom-file-timestamp-td {
 	vertical-align: middle;
-	padding: 0px !important;
+	padding: 0 !important;
 	width: 25% !important;
 }
 
@@ -1206,7 +1375,7 @@ table.custom-index-table {
   overflow-y: scroll;
   height: 100%;
   width: 100%;
-  left: 0px;
+  left: 0;
   top: 20px;
   padding: 10px;
   padding-bottom: 50px;
@@ -1279,8 +1448,6 @@ table.custom-index-table {
     float: right;
 }
 
-
-
 @media print {
   @page {
     margin: .5in .75in .5in .75in;
@@ -1330,7 +1497,6 @@ table.custom-index-table {
   tr .melody {
     page-break-after: avoid !important;
   }
-
 
   .glyphicon,
   .fa-byznote {
