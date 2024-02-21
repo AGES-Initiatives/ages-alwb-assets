@@ -276,20 +276,10 @@ p.break {
 }
 
 p.chant {
-    text-align: left;
-    text-indent: 0;
     line-height: 150%;
-    margin-bottom: 10px;
-}
-
-p.chant::first-letter {
-    -webkit-initial-letter: 2;
-    initial-letter: 2;
-	color: red;
-    font-family: LiberationSerif-Regular;
-    font-size: 200%;
-    font-weight: 300;
-    padding-right: 4px;
+    margin-bottom: 5px;
+    text-align: left;
+    text-indent: 28px;
 }
 
 p.chapverse {
