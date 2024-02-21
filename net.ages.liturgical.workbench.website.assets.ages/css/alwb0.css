@@ -903,7 +903,13 @@ span.numright {
 }
 
 span.smaller {
-	font-size:70%;
+	color: inherit;
+	font-variant: normal;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 80%;
+}
+
 }
 span.versiondesignation {
 	font-style:normal;

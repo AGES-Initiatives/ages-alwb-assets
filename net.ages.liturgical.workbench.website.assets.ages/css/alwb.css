@@ -1052,6 +1052,10 @@ span.numright {
 }
 
 span.smaller {
+	color: inherit;
+	font-variant: normal;
+	font-weight: normal;
+	font-style: normal;
 	font-size: 80%;
 }
 
