@@ -538,6 +538,9 @@ p.prayeroptional {
     color: #651612;
 }
 
+p.pseudosection {
+	display: none;
+}
 p.readingzero {
     text-align: left;
     text-indent: 28px;
