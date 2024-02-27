@@ -282,6 +282,11 @@ p.chant {
     text-indent: 28px;
 }
 
+p.chant::first-letter {
+    color: red;
+    font-size: 125%;
+}
+
 p.chapverse {
     font-weight: normal;
     font-style: italic;
