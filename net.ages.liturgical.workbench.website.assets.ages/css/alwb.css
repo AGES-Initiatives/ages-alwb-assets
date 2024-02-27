@@ -482,6 +482,10 @@ p.name {
     margin-bottom: 3px;
 }
 
+p.nodisplay {
+	display: none;
+}
+
 .noprintdesig {
     font-family: 'Arimo', sans-serif;
     font-weight: normal;
@@ -538,9 +542,6 @@ p.prayeroptional {
     color: #651612;
 }
 
-p.pseudosection {
-	display: none;
-}
 p.readingzero {
     text-align: left;
     text-indent: 28px;
