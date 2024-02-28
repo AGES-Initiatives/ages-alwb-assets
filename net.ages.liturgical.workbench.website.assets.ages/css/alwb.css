@@ -265,6 +265,17 @@ p.actor::first-letter {
     font-size: 125%;
 }
 
+p.actorinaudible {
+    color: red;
+    font-weight: bold;
+	text-indent: 28px;
+	font-size: 80%;
+    text-align: left;
+    line-height: 150%;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
 p.alttext {
 	font-size: 80%;
 	background-color: #CCCCCC;
@@ -434,6 +445,7 @@ p.inaudible {
 	font-size: 80%;
     text-align: left;
     line-height: 150%;
+    margin-top: 0px;
 }
 
 p.logoleft {
