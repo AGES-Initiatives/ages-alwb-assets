@@ -369,7 +369,7 @@ p.greekmelody {
     font-family: 'Arimo', sans-serif;
     text-align: center;
     font-weight: normal;
-    font-size: 70%;
+    font-size: 75%;
 	font-weight: normal;
     font-style: italic;
     color: red;
@@ -621,20 +621,38 @@ p.servicesourcestitle {
     font-weight: bold;
 }
 
-p.small {
+p.smallcenter {
     font-family: 'Arimo', sans-serif;
-    text-align: inherit;
-    font-size: 70%;
+    text-align: center;
+    font-size: 75%;
     font-weight: bold;
     color: red;
   	margin-top: 3px;
   	margin-bottom: 3px;
 }
 
-p.smallcenter {
+p.smaller {
+	color: inherit;
+	font-variant: normal;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 75%;
+}
+
+p.smallred {
     font-family: 'Arimo', sans-serif;
-    text-align: center;
-    font-size: 70%;
+    text-align: inherit;
+    font-size: 75%;
+    font-weight: normal;
+    color: red;
+  	margin-top: 3px;
+  	margin-bottom: 3px;
+}
+
+p.smallredbold {
+    font-family: 'Arimo', sans-serif;
+    text-align: inherit;
+    font-size: 75%;
     font-weight: bold;
     color: red;
   	margin-top: 3px;
@@ -1067,7 +1085,7 @@ span.smaller {
 	font-variant: normal;
 	font-weight: normal;
 	font-style: normal;
-	font-size: 80%;
+	font-size: 75%;
 }
 
 span.versiondesignation {
