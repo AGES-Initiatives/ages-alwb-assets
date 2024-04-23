@@ -874,7 +874,7 @@ p.title {
 p.titlezero {
 	text-align: center;
 	font-style: normal;
-    font-weight: bolder;
+    font-weight: bold;
     color: #a91827;
     font-size: 9.5pt;
   	margin-top: -7px;
@@ -1028,7 +1028,7 @@ span.chapverse {
 
 span.designation {
 	font-style: normal;
-	font-weight: bolder;
+	font-weight: bold;
 	color: #a91827;
 }
 
@@ -1052,13 +1052,14 @@ span.italicsred {
 }
 
 span.melody {
-	font-style: italic;
 	color: #a91827;	
+	font-style: italic;
+	font-weight: normal;
 }
 
 span.mode {
 	font-style: normal;
-	font-weight: bolder;
+	font-weight: bold;
 	color: #a91827;
 }
 
