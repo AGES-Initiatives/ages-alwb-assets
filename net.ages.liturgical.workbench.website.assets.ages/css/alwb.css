@@ -337,51 +337,6 @@ p.emc_collapse {
 	cursor: pointer;
 }
 
-p.cover1 {
-    font-family: sans-serif;
-    text-align: right;
-    font-weight: normal;
-    font-size: 48pt;
-    margin-top: 1in;
-    margin-bottom: 1in;
-}
-
-p.cover2 {
-    font-family: sans-serif;
-    text-align: right;
-    font-weight: bold;
-    font-size: 24pt;
-    margin-bottom: 1em;
-}
-
-p.cover3 {
-    font-family: sans-serif;
-    text-align: right;
-    font-weight: bold;
-    font-size: 12pt;
-    color: #a91827;
-    text-indent: 20px;
-    margin-left: 2in;
-    margin-bottom: 2em;
-}
-
-p.cover4 {
-    font-family: sans-serif;
-    text-align: right;
-    font-weight: bold;
-    font-size: 16pt;
-    color: #a91827;
-    margin-bottom: 1em;
-}
-
-p.cover5 {
-    font-family: sans-serif;
-    text-align: right;
-    font-weight: bold;
-    font-size: 16pt;
-    margin-top: 1in;
-}
-
 p.credits1 {
     font-family: 'Arimo', serif;
     margin-top: 1em;
@@ -590,7 +545,7 @@ p.nodisplay {
 	display: none;
 }
 
-.noprintdesig {
+p.noprintdesig {
     font-family: 'Arimo', sans-serif;
     font-weight: normal;
     font-size: 95%;
