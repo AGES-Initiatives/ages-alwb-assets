@@ -235,6 +235,7 @@ div.media-group-empty {
 
 p {
 	color: black;   /* night mode #FBF0D9 */
+    font-size: 13pt;
     text-align: left;
     font-family: 'Arimo', sans-serif;
     margin-bottom: 0em; /* to control spacing after para */
@@ -251,7 +252,7 @@ p.actor {
 }
 
 p.actor::first-letter {
-    font-size: 125%;
+    font-size: 118%;
 }
 
 p.actorinaudible {
@@ -988,6 +989,13 @@ span.designation {
 	font-style: normal;
 	font-weight: bold;
 	color: #a91827;
+}
+
+span.dialogafteractor {
+	color: black;
+	font-size: 118%;
+	font-style: normal;
+	font-weight: normal;
 }
 
 span.goared {
