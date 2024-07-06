@@ -1107,6 +1107,11 @@ span.versiondesignation {
 	color: #428bca;
 	float: right;
 	}
+	
+span.troparionfirstletter {
+	color: #a91827;
+	margin-right: -3pt;
+	}
 
 table {
   margin: 0 3pt;
