@@ -468,6 +468,53 @@ p.hymnlinelast {
     margin-bottom: 10px;
 }
 
+p.iambiccanon1 {
+	font-size: 100%;
+    line-height: 150%;
+    margin-bottom: 0;
+	text-align: left;
+    padding-left: 23px;
+    text-indent: -23px;
+}
+
+p.iambiccanon1::first-letter {
+    color: #a91827;
+    font-size: 180%;
+    font-weight: normal;
+}
+
+p.iambiccanon234 {
+	font-size: 100%;
+	text-align: left;
+    line-height: 150%;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 18px;
+    text-indent: -18px;
+}
+
+p.iambiccanon234::first-letter {
+    color: #a91827;
+    font-size: 125%;
+    font-weight: normal;
+}
+
+p.iambiccanon5 {
+	font-size: 100%;
+	text-align: left;
+    line-height: 150%;
+    margin-top: 0;
+    margin-bottom: 18px;
+    padding-left: 18px;
+    text-indent: -18px;
+}
+
+p.iambiccanon5::first-letter {
+    color: #a91827;
+    font-size: 125%;
+    font-weight: normal;
+}
+
 p.inaudible {
     text-indent: 28px;
 	font-size: 80%;
@@ -1102,16 +1149,22 @@ span.strong {
 span.versiondesignation {
 	font-style: normal;
 	font-weight: lighter;
-	font-size:50%;
+	font-size: 50%;
 	vertical-align: middle;
 	color: #428bca;
 	float: right;
-	}
+}
 	
 span.troparionfirstletter {
 	color: #a91827;
-	margin-right: -3pt;
-	}
+}
+span.troparionlinefirstletter {
+	color: #a91827;
+}
+span.troparionminusfirstletter {
+	font-size: 100%;
+	margin-left: -3px;
+}
 
 table {
   margin: 0 3pt;
