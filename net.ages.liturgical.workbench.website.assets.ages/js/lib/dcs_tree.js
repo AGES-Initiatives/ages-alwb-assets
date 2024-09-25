@@ -15,10 +15,13 @@
 	
 				var pdf_patt = /.pdf/i;
 				var mp3_patt = /.mp3/i;
+				var m4a_patt = /.m4a/i;
 				var html_patt = /.html/i;
 				var p_patt = /p\//i;
 
 				if (mp3_patt.test($(this).attr('dcslink'))) {
+					dcs_target = "FrameAudio";
+				} else if (m4a_patt.test( $(this).attr('dcslink'))) {
 					dcs_target = "FrameAudio";
 				} else if (p_patt.test( $(this).attr('dcslink'))) {
 					dcs_target = "FrameScore";
