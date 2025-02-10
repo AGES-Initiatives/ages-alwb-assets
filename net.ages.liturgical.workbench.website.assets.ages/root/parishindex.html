@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Parish Index</title>
+		<base href="https://dcs.goarch.org/goa/dcs/"/>
+		<!-- Meta Declarations -->
+		<meta charset="utf-8"> 
+		<meta name="viewport" content="width=device-width"/>		
+	
+			<!-- Stylesheets -->
+			<link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+			<link rel='stylesheet' type='text/css' href='css/alwb.css'>
+			<link rel='stylesheet' type='text/css' href='css/dcs.css'>
+			<link rel='stylesheet' type='text/css' href='js/lib/bootstrap/css/bootstrap.css'>
+			<link rel="stylesheet" type="text/css" href="css/jquery.dropdown.css" />
+			<style>
+			p.parishcenter1 {
+			    color: #a91827;
+			    font-family: 'Arimo', sans-serif;
+			    font-size: 300%;
+			    font-style: normal;
+			    font-weight: bold;
+			  	margin-top: 6px;
+			  	margin-bottom: 0;
+			    text-align: center;
+			}
+			p.parishcenter2 {
+			    color: #a91827;
+			    font-family: 'Arimo', sans-serif;
+			    font-size: 500%;
+			    font-style: normal;
+			    font-weight: bold;
+			  	margin-top: 6px;
+			  	margin-bottom: 0;
+			    text-align: center;
+			}
+			</style>
+	
+			<!-- Scripts -->
+			<script data-main="js/app" src="js/lib/require.js"></script>
+			<script src="js/lib/jquery-2.0.3.min.js"></script>
+			<script src="js/lib/alwb.js"></script>
+			<script src="js/lib/parish.js"></script>
+			
+	</head>
+	<body>
+	<br>
+		<div class='index-content'>
+			<p class='logoleft'><img style="border:0;" src="img/goa-dcs-app-logotype-1200.png" alt="Digital Chant Stand of the Greek Orthodox Archdiocese of America" width="100%" height="100%"></p>
+			<p class="parishcenter1" id="current-date"></p>
+			<p class="parishcenter1">Today's Services</p>
+		<br>
+		<br>
+		<p class="parishcenter2"><a href="h/s/2025/01/01/ma/gr-en/index.html?run_script" target="_blank">Matins</a></p>
+		<br>
+		<br>
+		<p class="parishcenter2"><a href="h/s/2025/01/01/li/gr-en/index.html?run_script" target="_blank">Liturgy</a></p>
+		<br>
+		<br>
+		<p class="parishcenter2"><a href="h/s/2025/01/01/ve/gr-en/index.html?run_script" target="_blank">Vespers</a></p>
+		
+		</div>
+	<script>
+	  const dateElement = document.getElementById('current-date');
+	  const today = new Date();
+	  const options = { month: 'long', day: 'numeric', weekday: 'long' };
+	  const formattedDate = today.toLocaleDateString(undefined, options);
+	  dateElement.textContent = formattedDate;
+	</script>
+	
+	<script>
+		function updateDateInHref() {
+			  const links = document.querySelectorAll('a');
+	
+			  const today = new Date();
+			  const year = today.getFullYear();
+			  const month = String(today.getMonth() + 1).padStart(2, '0');
+			  const day = String(today.getDate()).padStart(2, '0');
+			  const formattedDate = `${year}/${month}/${day}`;
+	
+	
+			  links.forEach(link => {
+			    const href = link.href;
+	
+			    const dateRegex = /(\d{4}[-.\/]?\d{2}[-.\/]?\d{2})/;
+	
+			    const match = href.match(dateRegex);
+	
+			    if (match) {
+			      const originalDate = match[1];
+			      const newHref = href.replace(originalDate, formattedDate);
+			      link.href = newHref;
+			    }
+			  });
+			}
+			window.addEventListener('DOMContentLoaded', updateDateInHref);
+	</script>
+		
+	</body>
+</html>
