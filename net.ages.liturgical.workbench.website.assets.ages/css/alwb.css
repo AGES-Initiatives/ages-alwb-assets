@@ -1045,6 +1045,19 @@ span.dialogafteractor {
 	font-weight: normal;
 }
 
+p.dialogwithactor {
+    font-size: 95%;
+    line-height: 130%;
+    margin-bottom: 6pt;	
+    text-align: left;
+}
+
+span.actorwithdialog {
+	color: #a91827;
+    font-size: 88%;
+	font-weight: bold;
+}
+
 span.goared {
 	font-style: inherit;
 	color: #a91827;
