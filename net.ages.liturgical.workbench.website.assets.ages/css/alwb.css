@@ -258,7 +258,7 @@ p.actor::first-letter {
 p.actorinaudible {
     color: #a91827;
     font-weight: bold;
-	text-indent: 28px;
+	text-indent: 20pt;
 	font-size: 80%;
     text-align: left;
     line-height: 150%;
@@ -283,9 +283,9 @@ p.break {
 p.chant {
 	font-size: 100%;
 	line-height: 150%;
-    margin-bottom: 5px;
+    margin-bottom: 6pt;
     text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
 }
 
 p.chant::first-letter {
@@ -373,15 +373,15 @@ p.designation {
 
 p.dialog {
     text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
     font-size: 95%;
     line-height: 130%;
-    margin-bottom: 5px;
+    margin-bottom: 6pt;
 }
 
 p.dialogzero {
     text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
     font-size: 95%;
     line-height: 130%;
     margin-bottom: 0;
@@ -516,7 +516,7 @@ p.iambiccanon5::first-letter {
 }
 
 p.inaudible {
-    text-indent: 28px;
+    text-indent: 20pt;
 	font-size: 80%;
     text-align: left;
     line-height: 150%;
@@ -543,7 +543,7 @@ p.missalreading {
     text-align-last: right;
     font-size: 80%;
     font-weight: normal;
-    text-indent: 28px;
+    text-indent: 20pt;
     margin-top: 5px;
     margin-bottom: 0;
 }
@@ -617,14 +617,14 @@ p.noprintdesig {
 p.prayer {
 	font-size: 100%;
 	text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
     line-height: 150%;
     margin-bottom: 6px;
 }
 
 p.prayeroptional {
     text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
     line-height: 150%;
     margin-bottom: 6px;
 	font-style: italic;
@@ -635,7 +635,7 @@ p.prayeroptional {
 p.prayerzero {
 	font-size: 100%;
 	text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
     line-height: 150%;
     margin-bottom: 0;
 }
@@ -643,7 +643,7 @@ p.prayerzero {
 p.reading {
 	font-size: 100%;
 	text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
     line-height: 150%;
     margin-bottom: 6px;
 }
@@ -665,7 +665,7 @@ p.readingcenter {
 p.readingzero {
 	font-size: 100%;
 	text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
     line-height: 150%;
     margin-bottom: 0;
 }
@@ -675,7 +675,7 @@ p.rubric {
     font-size: 80%;
     font-style: italic;
     text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
 }
 
 p.servicesources {
@@ -945,7 +945,7 @@ p.typikonomitted {
 
 p.verse {
     text-align: left;
-    text-indent: 28px;
+    text-indent: 20pt;
     font-style: italic;
 	font-size: 100%;
     line-height: 150%;
@@ -1271,28 +1271,28 @@ iframe {
 
 .index-desc-1 {
    text-align: left;
-   text-indent: 28px;
+   text-indent: 20pt;
    font-size: 80%;
    line-height: 100%;
-   margin-bottom: 5px;
+   margin-bottom: 6pt;
    max-width: 350px;
 }
 
 .index-desc-2 {
    text-align: left;
-   text-indent: 28px;
+   text-indent: 20pt;
    font-size: 80%;
    line-height: 100%;
-   margin-bottom: 5px;
+   margin-bottom: 6pt;
    max-width: 350px;
 }
 
 .index-desc-3 {
    text-align: left;
-   text-indent: 28px;
+   text-indent: 20pt;
    font-size: 80%;
    line-height: 100%;
-   margin-bottom: 5px;
+   margin-bottom: 6pt;
    max-width: 350px;
 }
 
