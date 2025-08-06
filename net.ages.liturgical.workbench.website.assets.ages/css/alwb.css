@@ -276,6 +276,43 @@ p.alttext {
 	margin-left: 2em;
 }
 
+p.bkmrk01 {
+	font-size: 0;
+	line-height: 0;
+}
+p.bkmrk02 {
+	font-size: 0;
+	line-height: 0;
+}
+p.bkmrk03 {
+	font-size: 0;
+	line-height: 0;
+}
+p.bkmrk04 {
+	font-size: 0;
+	line-height: 0;
+}
+p.bkmrk05 {
+	font-size: 0;
+	line-height: 0;
+}
+p.bkmrk06 {
+	font-size: 0;
+	line-height: 0;
+}
+p.bkmrk07 {
+	font-size: 0;
+	line-height: 0;
+}
+p.bkmrk08 {
+	font-size: 0;
+	line-height: 0;
+}
+p.bkmrk09 {
+	font-size: 0;
+	line-height: 0;
+}
+
 p.break {
     margin-bottom: 10px;
 }
@@ -676,34 +713,6 @@ p.rubric {
     font-style: italic;
     text-align: left;
     text-indent: 20pt;
-}
-
-p.scrollto02 {
-	display: none;
-}
-p.scrollto03 {
-	display: none;
-}
-p.scrollto03 {
-	display: none;
-}
-p.scrollto04 {
-	display: none;
-}
-p.scrollto05 {
-	display: none;
-}
-p.scrollto06 {
-	display: none;
-}
-p.scrollto07 {
-	display: none;
-}
-p.scrollto08 {
-	display: none;
-}
-p.scrollto09 {
-	display: none;
 }
 
 p.servicesources {
