@@ -275,7 +275,11 @@ p.alttext {
 	background-color: #CCCCCC;
 	margin-left: 2em;
 }
-
+p.bkmrk {
+	color: #FBF0D9;
+	font-size: .1%;
+	line-height: .1%;
+}
 p.bkmrk01 {
 	color: #FBF0D9;
 	font-size: .1%;
