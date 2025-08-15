@@ -275,6 +275,28 @@ p.alttext {
 	background-color: #CCCCCC;
 	margin-left: 2em;
 }
+#LoB {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    font-size: 12pt;
+    font-weight: bold;
+    line-height: 350%;
+}
+p.lobTitle {
+    color: #a91827;
+    font-size: 12pt;
+    font-weight: bold;
+    line-height: 200%;
+    text-align: center;
+}
+p.bookmarklink {
+    font-size: 12pt;
+    font-weight: bold;
+    line-height: 200%;
+    text-align: center;
+}
 p.bkmrk {
 	color: #FBF0D9;
 	font-size: .1%;

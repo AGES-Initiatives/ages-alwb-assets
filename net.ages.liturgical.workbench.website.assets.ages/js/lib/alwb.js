@@ -986,3 +986,66 @@ $(document).ready(function(){
   hideEmptyRows();
  
 });
+
+$(document).ready(function () {
+
+	const pageTitle = document.title;
+	const validEndings = ['.li', '.li1', '.li4', '.li6', '.li9'];
+
+	//Service is a liturgy
+	//if (pageTitle.endsWith('.li')) {
+  if (validEndings.some(ending => pageTitle.endsWith(ending))) {
+		console.log(`Document is a Divine Liturgy. Running content insertion script.`);
+
+		// --- Content Insertion Script ---
+		// Function to create and insert the div before the table
+		function addDivBeforeTable() {
+			// Step 1: Get a reference to the table using its ID
+			const table = document.getElementById("biTable");
+
+			// Step 2: Create the new div element
+			const newDiv = document.createElement("div");
+
+			// Step 3: Add the new ID to the div
+			newDiv.id = "LoB";
+
+			// Step 4: Add the new class to the div
+			//newDiv.classList.add("bookmarkDivStyle");
+
+			// Step 5: Add content to the new div using innerHTML with a template literal
+			const currentPath = document.location.origin + document.location.pathname;
+
+			newDiv.innerHTML = `<p class="lobTitle">Quick Links</p>
+    <p class="bookmarklink"><a href="${currentPath}#bkmrk01">Through the intercessions</a></p>
+    <p class="bookmarklink"><a href="${currentPath}#bkmrk02">Save us, O Son of God</a></p>
+    <p class="bookmarklink"><a href="${currentPath}#bkmrk03">Small Entrance</a></p>
+    <p class="bookmarklink"><a href="${currentPath}#bkmrk04">Holy God</a></p>
+    <p class="bookmarklink"><a href="${currentPath}#bkmrk05">Readings</a></p>
+    <p class="bookmarklink"><a href="${currentPath}#bkmrk06">After Gospel</a></p>
+    <p class="bookmarklink"><a href="${currentPath}#bkmrk07">After Great Entrance</a></p>
+`;
+			// Step 6: Get the parent element of the table and insert the new div
+			const parent = table.parentNode;
+			parent.insertBefore(newDiv, table);
+		}
+
+		// Call the function to run the code
+		addDivBeforeTable();
+
+		// Get all elements with a class attribute that starts with "bkmrk"
+		const bookmarks = document.querySelectorAll('[class^="bkmrk"]');
+
+		// Loop through the NodeList of elements
+		bookmarks.forEach(bookmark => {
+			// Get the specific class name (e.g., "bkmrk01")
+			const oldClassName = bookmark.classList[0];
+
+			// Replace the specific class with the new name "bkmrk"
+			// This will not remove other classes if they exist
+			bookmark.classList.replace(oldClassName, 'bkmrk');
+
+			// Set the id of the element to the class name
+			bookmark.id = oldClassName;
+		});
+	}
+})
