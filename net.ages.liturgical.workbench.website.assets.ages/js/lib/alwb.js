@@ -1023,6 +1023,7 @@ $(document).ready(function () {
     <p class="bookmarklink"><a href="${currentPath}#bkmrk05">Readings</a></p>
     <p class="bookmarklink"><a href="${currentPath}#bkmrk06">After Gospel</a></p>
     <p class="bookmarklink"><a href="${currentPath}#bkmrk07">After Great Entrance</a></p>
+    <p class="bookmarklink"><a href="${currentPath}#bkmrk08">Special Service</a></p>
 `;
 			// Step 6: Get the parent element of the table and insert the new div
 			const parent = table.parentNode;

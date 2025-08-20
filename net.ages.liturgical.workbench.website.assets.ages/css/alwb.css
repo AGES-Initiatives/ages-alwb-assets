@@ -1251,6 +1251,9 @@ span.troparionminusfirstletter {
 	margin-left: -3px;
 }
 span.achoir {
+    background-color: #ffff8c;
+	font-size: larger;
+	font-weight: bold;
 }
 span.aclergy {
 }
@@ -1264,6 +1267,9 @@ span.areader {
 }
 
 span.dchoir {
+    background-color: #ffff8c;
+	font-size: larger;
+	font-weight: bold;
 }
 span.dclergy {
 }
@@ -1274,6 +1280,22 @@ span.dhierarch {
 span.dpriest {
 }
 span.dreader {
+}
+
+span.dwachoir {
+    background-color: #ffff8c;
+	font-size: larger;
+	font-weight: bold;
+}
+span.dwaclergy {
+}
+span.dwadeacon {
+}
+span.dwahierarch {
+}
+span.dwapriest {
+}
+span.dwareader {
 }
 
 table {
