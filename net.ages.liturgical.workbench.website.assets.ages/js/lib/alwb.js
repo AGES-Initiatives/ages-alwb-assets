@@ -987,6 +987,7 @@ $(document).ready(function(){
  
 });
 
+/*
 $(document).ready(function () {
 
 	const pageTitle = document.title;
@@ -1048,4 +1049,4 @@ $(document).ready(function () {
 			bookmark.id = oldClassName;
 		});
 	}
-})
+}) */
