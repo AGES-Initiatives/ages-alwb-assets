@@ -997,30 +997,6 @@ $(document).ready(function () {
   convertClassToId();
 });
 
-function hideClassesForParish() {
-  const classesToHide = ["media-group", "source", "source0", "source1", "nav-flex-row", "noprintdesig", "servicesourcestitle", "servicesources", "servicesourcessection"];
-  const idsToDisplay = ["increaseFont", "decreaseFont", "toggle-col0", "toggle-col1"];
-
-  // Hide all classes listed above
-  classesToHide.forEach(className => { // Renamed 'unclass' to 'className' for clarity
-    const elements = document.getElementsByClassName(className);
-    // getElementsByClassName returns an HTMLCollection, which is live
-    // but not a true Array. We convert it to an Array to use forEach.
-    Array.from(elements).forEach(element => {
-      element.style.display = "none";
-    });
-  });
-  console.log("Classes hidden by hideClassesForParish."); // More specific log
-
-  //diplay the font size and language options
-  idsToDisplay.forEach(idName => {
-    const element = document.getElementById(idName);
-    if (element) {
-      element.style.display = "block";
-    }
-  });
-}
-
 function insertLiturgyTOB() {
 
   const pageTitle = document.title;
@@ -2077,6 +2053,7 @@ function insertMatinsOrdinary() {
         // 5. Replace the entire target row with the new HTML.
         //    (The replacementHTML variable must be defined elsewhere in your code)
         targetRow.replaceWith(replacementHTML);
+        
         hideGreekInEnglishOnlyService();
 
         console.log(`Row containing bookmark (${targetBookmark.attr('id')}) has been replaced.`);
@@ -2537,19 +2514,8 @@ function scrollToBkmrk20() {
   }, 10);
 }
 
-function hideLeftCell() {
-    // Finds all <td> elements with the class "leftCell" in the main document.
-    const leftCells = document.querySelectorAll('td.leftCell');
-
-    // Loops through the found elements and sets their display style to 'none'.
-    leftCells.forEach(cell => {
-        cell.style.display = 'none';
-    });
-    
-    console.log("All 'leftCell' elements are now display: none.");
-}
-
 function hideGreekInEnglishOnlyService() {
+  // This function is called in insertMatinsOrdinary
   // Search the document for the element with the ID "bkmark02".
   const bookmarkElement = document.getElementById("bkmrk02");
 
@@ -2572,3 +2538,84 @@ function hideGreekInEnglishOnlyService() {
     console.warn("❌ Bookmark 'bkmrk02' WAS found. No 'leftCell' elements will be hidden.");
   }
 }
+
+
+
+//Functions for the parish version
+
+function hideClassesForParish() {
+  const classesToHide = ["media-group", "source", "source0", "source1", "nav-flex-row", "noprintdesig", "servicesourcestitle", "servicesources", "servicesourcessection"];
+  const idsToDisplay = ["increaseFont", "decreaseFont", "toggle-col0", "toggle-col1"];
+
+  // Hide all classes listed above
+  classesToHide.forEach(className => { // Renamed 'unclass' to 'className' for clarity
+    const elements = document.getElementsByClassName(className);
+    // getElementsByClassName returns an HTMLCollection, which is live
+    // but not a true Array. We convert it to an Array to use forEach.
+    Array.from(elements).forEach(element => {
+      element.style.display = "none";
+    });
+  });
+  console.log("Classes hidden by hideClassesForParish."); // More specific log
+
+  //diplay the font size and language options
+  idsToDisplay.forEach(idName => {
+    const element = document.getElementById(idName);
+    if (element) {
+      element.style.display = "block";
+    }
+  });
+}
+
+function hideSpaceAsterisk() {
+  // This function is for parish 
+  // 1. Get the main content element (document body)
+  const body = document.body;
+
+  // 2. Define the string to hide: a literal space followed by an asterisk.
+  // The asterisk must be escaped with a backslash (\*) in a regular expression
+  const stringToHide = ' \\*';
+
+  // 3. Create a Regular Expression for a global (g) search
+  const regex = new RegExp(stringToHide, 'g');
+
+  // 4. Replace all occurrences of the pattern with an empty string
+  body.innerHTML = body.innerHTML.replace(regex, '');
+}
+
+function hideSpaceAsteriskAndBrackets() {
+  // This function is for parish 
+  // 1. Get the main content element (document body)
+  const body = document.body;
+
+  // 2. Define the patterns to hide:
+  //    a) The literal string: ' *' (space followed by literal asterisk)
+  //    b) The literal character: '[' (open bracket)
+  //    c) The literal character: ']' (close bracket)
+  
+  // Note: Asterisk (*), open bracket ([), and close bracket (]) are
+  // special metacharacters in regex and must be escaped with a backslash (\).
+  
+  // The expression uses the alternation operator (|) to match any of the patterns.
+  // The character class [\[\]] is a shorter way to match either [ or ].
+  const regex = new RegExp('\\ \\*|[\\[\\]]', 'g');
+
+  // 3. Replace all occurrences of the patterns with an empty string
+  body.innerHTML = body.innerHTML.replace(regex, '');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const requiredReferrer = 'https://dcs.goarch.org/goa/dcs/parish.html';
+    const currentReferrer = document.referrer;
+
+    if (currentReferrer === requiredReferrer) {
+        console.log("referrer matched!"); // For testing
+        hideClassesForParish();
+        hideSpaceAsteriskAndBrackets()
+    } else {
+        console.log("hideClassesForParish did NOT run. Referrer was:", currentReferrer || "[Direct access or no referrer]"); // For testing
+    }
+});
+
+
+
