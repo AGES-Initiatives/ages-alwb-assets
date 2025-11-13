@@ -558,24 +558,6 @@ $(document).ready(function () {
     return false;
   });
 
-  $("tr:has(.bmc_collapse)").nextUntil("tr:has(.emc_collapse)").hide();
-  $("tr:has(.emc_collapse)").hide();
-
-  $("tr:has(.bmc_collapse)").click(function () {
-    $(this).nextUntil('tr:has(.emc_collapse)').show();
-    $(this).nextUntil('tr:has(.emc_collapse)').css("background-color", "#FDF6E7");
-    $(this).hide();
-    $(this).nextAll('tr:has(.emc_collapse):first').show();
-  });
-  $("tr:has(.emc_collapse)").click(function () {
-    $(this).prevUntil('tr:has(.bmc_collapse)').hide();
-    $(this).hide();
-    $(this).prevAll('tr:has(.bmc_collapse):first').show();
-
-    var show_pos = $(this).prevAll('tr:has(.bmc_collapse):first').position();
-    window.scrollTo(0, show_pos.top - 50);
-  });
-
   // function setCookie(cname, cvalue, exdays) {
   //     var d = new Date();
   //     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -2567,22 +2549,6 @@ function hideClassesForParish() {
   });
 }
 
-function hideSpaceAsterisk() {
-  // This function is for parish 
-  // 1. Get the main content element (document body)
-  const body = document.body;
-
-  // 2. Define the string to hide: a literal space followed by an asterisk.
-  // The asterisk must be escaped with a backslash (\*) in a regular expression
-  const stringToHide = ' \\*';
-
-  // 3. Create a Regular Expression for a global (g) search
-  const regex = new RegExp(stringToHide, 'g');
-
-  // 4. Replace all occurrences of the pattern with an empty string
-  body.innerHTML = body.innerHTML.replace(regex, '');
-}
-
 function hideSpaceAsteriskAndBrackets() {
   // This function is for parish 
   // 1. Get the main content element (document body)
@@ -2604,18 +2570,139 @@ function hideSpaceAsteriskAndBrackets() {
   body.innerHTML = body.innerHTML.replace(regex, '');
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function () {
     const requiredReferrer = 'https://dcs.goarch.org/goa/dcs/parish.html';
     const currentReferrer = document.referrer;
 
     if (currentReferrer === requiredReferrer) {
         console.log("referrer matched!"); // For testing
         hideClassesForParish();
-        hideSpaceAsteriskAndBrackets()
+        hideSpaceAsteriskAndBrackets();
+        console.log("referrer matched!", currentReferrer); // For testing
     } else {
         console.log("hideClassesForParish did NOT run. Referrer was:", currentReferrer || "[Direct access or no referrer]"); // For testing
     }
 });
 
 
+/**
+ * @function initCollapsibleRows
+ * @description Initializes the behavior for a collapsible table structure.
+ * It handles showing/hiding blocks of table rows based on clicks
+ * on rows containing specific collapse markers (.bmc_collapse and .emc_collapse).
+ * The logic implements an accordion-like functionality for table content.
+ * @version 1.0.0
+ */
+function initCollapsibleRows() {
+    // --- Initial State Setup ---
+    // Hide all rows between a 'bmc_collapse' row and the next 'emc_collapse' row (the content).
+    $("tr:has(.bmc_collapse)").nextUntil("tr:has(.emc_collapse)").hide();
+    // Hide all 'emc_collapse' rows (the collapse markers/footers).
+    $("tr:has(.emc_collapse)").hide();
 
+    // --- Big/Main Collapse (BMC) Click Handler ---
+    // When a row with a '.bmc_collapse' marker is clicked:
+    $("tr:has(.bmc_collapse)").click(function () {
+        // 1. Show all subsequent content rows up until the next 'emc_collapse' row.
+        $(this).nextUntil('tr:has(.emc_collapse)').show();
+        // 2. Apply a background color to the shown content rows for visual emphasis.
+        $(this).nextUntil('tr:has(.emc_collapse)').css("background-color", "#FDF6E7");
+        // 3. Hide the clicked 'bmc_collapse' row itself.
+        $(this).hide();
+        // 4. Show the corresponding 'emc_collapse' row (the collapse marker/footer).
+        $(this).nextAll('tr:has(.emc_collapse):first').show();
+    });
+
+    // --- End/Exit Collapse (EMC) Click Handler ---
+    // When a row with an '.emc_collapse' marker is clicked:
+    $("tr:has(.emc_collapse)").click(function () {
+        // 1. Hide all preceding content rows down to the previous 'bmc_collapse' row.
+        $(this).prevUntil('tr:has(.bmc_collapse)').hide();
+        // 2. Hide the clicked 'emc_collapse' row itself.
+        $(this).hide();
+        // 3. Show the corresponding 'bmc_collapse' row (the main opener).
+        $(this).prevAll('tr:has(.bmc_collapse):first').show();
+
+        // 4. Scroll the viewport to the newly shown 'bmc_collapse' row.
+        var show_pos = $(this).prevAll('tr:has(.bmc_collapse):first').position();
+        window.scrollTo(0, show_pos.top - 50);
+    });
+}
+
+// --- Execution ---
+// Execute the function once the entire document is ready.
+$(document).ready(function() {
+    initCollapsibleRows();
+});
+
+
+/**
+ * Creates centered, borderless toggle buttons that control the display of elements with class 'PBC'.
+ * The button text changes between "Show Prayers" and "Hide Prayers" based on content visibility.
+ */
+// function initializePBCToggleComponent() {
+//   const targetElements = document.querySelectorAll('.prayersbeforecommunionlink');
+
+//   if (targetElements.length === 0) {
+//     console.error('No elements with class "prayersbeforecommunionlink" found.');
+//     return;
+//   }
+
+//   // Define selectors for reuse
+//   const pbcSelector = '.pbc';
+//   const buttonClass = 'pbc-toggle-btn';
+
+//   // 1. DEFINE THE TOGGLE & TEXT UPDATE LOGIC
+//   const toggleDisplay = (event) => {
+//     const pbcElements = document.querySelectorAll(pbcSelector);
+    
+//     // Determine the CURRENT state: We'll check the first PBC element.
+//     // Assuming all PBC elements are toggled together, we check the first one.
+//     const isCurrentlyHidden = (pbcElements[0] && (pbcElements[0].style.display === 'none' || pbcElements[0].style.display === ''));
+    
+//     // Calculate the NEW state for the content and the buttons
+//     const newDisplayState = isCurrentlyHidden ? 'block' : 'none';
+//     const newButtonText = isCurrentlyHidden ? 'Hide Prayers' : 'Show Prayers';
+
+//     // Toggle the content's display state
+//     pbcElements.forEach(element => {
+//       element.style.display = newDisplayState;
+//     });
+
+//     // Update ALL buttons' text content
+//     const allToggleButtons = document.querySelectorAll('.' + buttonClass);
+//     allToggleButtons.forEach(button => {
+//       button.textContent = newButtonText;
+//     });
+//   };
+  
+//   // 2. ITERATE AND REPLACE TARGET ELEMENTS WITH BUTTONS
+//   targetElements.forEach(targetElement => {
+//     // a. CREATE A NEW BUTTON
+//     const toggleButton = document.createElement('button');
+//     // Set initial text: Assume content is hidden, so button should prompt to "Show Prayers"
+//     toggleButton.textContent = 'Show Prayers'; 
+//     toggleButton.className = buttonClass;
+//     toggleButton.addEventListener('click', toggleDisplay);
+    
+//     // Apply styling for borderless, centered, link-like appearance
+//     toggleButton.style.border = 'none'; 
+//     toggleButton.style.backgroundColor = 'transparent'; 
+//     toggleButton.style.cursor = 'pointer'; 
+//     toggleButton.style.textDecoration = 'underline'; // Added for link-like look
+
+//     // b. CREATE A CONTAINER DIV AND APPLY CENTER ALIGNMENT
+//     const buttonContainer = document.createElement('div');
+//     buttonContainer.style.textAlign = 'center'; 
+//     buttonContainer.className = 'pbc-button-container'; 
+    
+//     // c. PLACE THE BUTTON INSIDE THE CONTAINER
+//     buttonContainer.appendChild(toggleButton);
+
+//     // d. REPLACE THE TARGET ELEMENT WITH THE NEW CENTERED CONTAINER
+//     targetElement.parentNode.replaceChild(buttonContainer, targetElement);
+//   });
+// }
+
+// // Call the function to set up the buttons and logic
+// initializePBCToggleComponent();

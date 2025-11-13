@@ -1360,6 +1360,33 @@ span.dwapriest {
 span.dwareader {
 }
 
+p.prayersbeforecommunionlink {
+    display: block;
+	text-align: center;
+    font-style: normal;
+    font-size: 90%;
+    color: blue;
+    line-height: 100%;
+    margin-top: 4px;
+    margin-bottom: 12px;
+}
+span.pbc {
+	display: none;
+}
+.pbc-toggle-btn {
+  	border: none;
+	display: block;
+	text-align: center;
+    font-style: normal;
+    font-size: 90%;
+    color: blue;
+    line-height: 100%;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 table {
   margin: 0 3pt;
   padding: 0;
