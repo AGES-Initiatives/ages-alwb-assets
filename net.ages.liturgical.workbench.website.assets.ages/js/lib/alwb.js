@@ -2636,73 +2636,37 @@ $(document).ready(function() {
 });
 
 
+
+
+// --- Frame Visibility and Playback Control Functions ---
+
 /**
- * Creates centered, borderless toggle buttons that control the display of elements with class 'PBC'.
- * The button text changes between "Show Prayers" and "Hide Prayers" based on content visibility.
+ * Hides the FrameAudio iframe, stops playback, and moves it off-screen.
  */
-// function initializePBCToggleComponent() {
-//   const targetElements = document.querySelectorAll('.prayersbeforecommunionlink');
-
-//   if (targetElements.length === 0) {
-//     console.error('No elements with class "prayersbeforecommunionlink" found.');
-//     return;
-//   }
-
-//   // Define selectors for reuse
-//   const pbcSelector = '.pbc';
-//   const buttonClass = 'pbc-toggle-btn';
-
-//   // 1. DEFINE THE TOGGLE & TEXT UPDATE LOGIC
-//   const toggleDisplay = (event) => {
-//     const pbcElements = document.querySelectorAll(pbcSelector);
+function hideAudioFrame() {
+    const audioFrame = document.getElementById('FrameAudio');
     
-//     // Determine the CURRENT state: We'll check the first PBC element.
-//     // Assuming all PBC elements are toggled together, we check the first one.
-//     const isCurrentlyHidden = (pbcElements[0] && (pbcElements[0].style.display === 'none' || pbcElements[0].style.display === ''));
+    if (audioFrame) {
+        // 1. Stop playback: Setting src to 'about:blank'.
+        audioFrame.src = 'about:blank'; 
+        
+    }
+}
+
+ /**
+ * Shows the FrameAudio iframe, restores its position, and explicitly sets a high z-index.
+ * This is triggered by the audio links inside FrameText.
+ */
+function showAudioFrame() {
+    const audioFrame = document.getElementById('FrameAudio');
     
-//     // Calculate the NEW state for the content and the buttons
-//     const newDisplayState = isCurrentlyHidden ? 'block' : 'none';
-//     const newButtonText = isCurrentlyHidden ? 'Hide Prayers' : 'Show Prayers';
+    if (audioFrame) {
+        // 1. Make the frame fully visible
+        audioFrame.style.opacity = '1'; 
+        
+        // 2. Explicitly ensure it is on top of all other elements (e.g., FrameScore/FrameText)
+        audioFrame.style.zIndex = '100'; // Use a high number to guarantee it's on top
+        
+    }
+}
 
-//     // Toggle the content's display state
-//     pbcElements.forEach(element => {
-//       element.style.display = newDisplayState;
-//     });
-
-//     // Update ALL buttons' text content
-//     const allToggleButtons = document.querySelectorAll('.' + buttonClass);
-//     allToggleButtons.forEach(button => {
-//       button.textContent = newButtonText;
-//     });
-//   };
-  
-//   // 2. ITERATE AND REPLACE TARGET ELEMENTS WITH BUTTONS
-//   targetElements.forEach(targetElement => {
-//     // a. CREATE A NEW BUTTON
-//     const toggleButton = document.createElement('button');
-//     // Set initial text: Assume content is hidden, so button should prompt to "Show Prayers"
-//     toggleButton.textContent = 'Show Prayers'; 
-//     toggleButton.className = buttonClass;
-//     toggleButton.addEventListener('click', toggleDisplay);
-    
-//     // Apply styling for borderless, centered, link-like appearance
-//     toggleButton.style.border = 'none'; 
-//     toggleButton.style.backgroundColor = 'transparent'; 
-//     toggleButton.style.cursor = 'pointer'; 
-//     toggleButton.style.textDecoration = 'underline'; // Added for link-like look
-
-//     // b. CREATE A CONTAINER DIV AND APPLY CENTER ALIGNMENT
-//     const buttonContainer = document.createElement('div');
-//     buttonContainer.style.textAlign = 'center'; 
-//     buttonContainer.className = 'pbc-button-container'; 
-    
-//     // c. PLACE THE BUTTON INSIDE THE CONTAINER
-//     buttonContainer.appendChild(toggleButton);
-
-//     // d. REPLACE THE TARGET ELEMENT WITH THE NEW CENTERED CONTAINER
-//     targetElement.parentNode.replaceChild(buttonContainer, targetElement);
-//   });
-// }
-
-// // Call the function to set up the buttons and logic
-// initializePBCToggleComponent();

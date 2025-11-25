@@ -61,6 +61,156 @@ html, body {
     width: 100%;
 }
 
+#FrameLinks {
+  width: 38%;
+  position: fixed;
+  top: 0;
+  height: 2em;
+  margin-top: 1em;
+  z-index: 1;
+}
+
+#FrameText {
+  width: 38%;
+  height: 100%;
+  position: fixed;
+  z-index: 0;
+}
+
+#FrameScore {
+  width: 61%;
+  height: 100%;
+  position: fixed;
+  left: 39%;
+  top: 0;
+  z-index: 0;
+}
+
+/* ======================================================= */
+/* 1. FRAME AUDIO STYLES (REQUIRED FOR VISIBLE POSITIONING) */
+/* (This replaces your existing #FrameAudio block)       */
+/* ======================================================= */
+#FrameAudio {
+    /* REMOVED: width: 35em; */
+    
+    position: fixed;
+    bottom: 0;
+    height: 3em;
+    margin-bottom: 0em;
+    z-index: 100;
+    
+    /* REVISED HORIZONTAL POSITION: Center the player within the 38% column */
+    /* 1. Set the anchor point to the center of the 38% area (19%) */
+    left: 19%; 
+
+    /* 2. Use transform to shift the player back by exactly half its (unknown) width */
+    transform: translateX(-50%); 
+}
+/* ======================================================= */
+/* 2. TURN OFF BUTTON STYLES (BOTTOM-RIGHT OF FRAMESCORE)  */
+/* ======================================================= */
+#turnOffAudioButton {
+    /* PRIMARY POSITIONING: Anchors the button to the viewport (screen) */
+    position: fixed; 
+ /* VERTICAL POSITION: Match the clock's top position (1.2em) */
+    top: auto; 
+    bottom: 0; 
+    
+    /* HORIZONTAL POSITION: Position the button's left edge next to the clock's right edge. */
+    /* Clock's New Right Anchor: 10em. Margin: 0.5em. */
+    /* Button's RIGHT edge is placed at: (10em) - (Button Width) - (Margin) 
+       To simplify, we'll position the button's LEFT edge based on the clock's LEFT edge. 
+       Let's stick to using the RIGHT property to keep it simple: */
+    
+    /* We place the button's right edge just to the right of the clock's original location (5px). 
+       Since the clock moved left, we just need to place the button exactly where the clock used to be. */
+    right: auto;
+    left: 38%;
+
+    /* STACKING: Must be high so it is clickable and visible */
+    z-index: 101; /* Slightly higher than FrameAudio to ensure it's on top */
+
+    /* STYLING */
+    padding: 0.2em 0.5em; /* Determines the size of the button */
+    background-color: #CC0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* ======================================================= */
+/* 3. TOOLTIP STYLES (The text that pops up on hover)      */
+/* ======================================================= */
+
+/* Tooltip container generation and initial hidden state */
+#turnOffAudioButton::after {
+    content: "Hide Audio Player";
+    
+    /* Initial State */
+    opacity: 0; 
+    visibility: hidden; 
+    
+    /* Positioning relative to the button */
+    position: absolute;
+    padding: 5px;
+    
+    /* HORIZONTAL PLACEMENT: Anchor the tooltip's right edge next to the button's left edge (This remains the anchor point) */
+    right: 100%; /* Positioned left of the button */
+    left: auto;  
+    
+    /* VERTICAL PLACEMENT: Place the tooltip BELOW the button */
+    top: auto;
+    bottom: 100%;
+    
+     
+    /* SPACING: Add a small vertical gap between the button and the tooltip */
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    
+    /* Appearance */
+    background-color: #333;
+    color: #fff;
+    text-align: right; 
+    border-radius: 4px;
+    font-size: 0.8em;
+    white-space: nowrap; 
+    transition: opacity 0.3s, visibility 0.3s; 
+
+/* Ensure no conflicting transforms are here */
+    transform: none;
+}
+
+/* Hover effect: Show tooltip and change button color */
+#turnOffAudioButton:hover {
+    background-color: #FF3333;
+}
+
+#turnOffAudioButton:hover::after {
+    /* Show the tooltip */
+    opacity: 1;
+    visibility: visible;
+}
+
+span.clockbox {
+  font-family: 'Arial Unicode MS', sans-serif;
+  font-size: 0.75em;
+  color: white;
+  line-height: 0em;
+  position: fixed;
+  top: 1.2em;
+  right: 5px;
+  padding-right: 30px;
+}
+
+iframe {
+  border:  none;
+  margin: 0;
+  padding: 0;
+}
+
 /* Properties for the Menu Bar */
 div.agesMenu {
 	border-style: none;
@@ -182,21 +332,12 @@ div.panel-heading {
     height: 100%;
 }
 
-span.clockbox {
-  font-family: 'Arial Unicode MS', sans-serif;
-  font-size: 0.75em;
-  color: white;
-  line-height: 0em;
-  position: fixed;
-  top: 1.2em;
-  right: 5px;
-}
-
 /* Properties for the main content on a service or book */
 div.content {
 	position: absolute;
 	top: 30px;
 	left: 5px;
+    overflow-x: hidden;
 }
 
 /* Properties for the content of an index page */
@@ -1412,48 +1553,6 @@ td.leftCell {
 
 .glyphicon {
  	margin: 0 3px;
-}
-
-iframe {
-  border:  none;
-  margin: 0;
-  padding: 0;
-}
-
-#FrameLinks {
-  width: 38%;
-  position: fixed;
-  top: 0;
-  height: 2em;
-  margin-top: 1em;
-  z-index: 1;
-}
-
-#FrameText {
-  width: 38%;
-  height: 100%;
-  position: fixed;
-  z-index: 0;
-}
-
-#FrameAudio {
-  width: 35em;
-  position: fixed;
-  bottom: 0;
-  height: 7em;
-  margin-bottom: 0em;
-  margin-left: 7em;
-  z-index: 0;
-  left: 39%;
-}
-
-#FrameScore {
-  width: 61%;
-  height: 100%;
-  position: fixed;
-  left: 39%;
-  top: 0;
-  z-index: 0;
 }
 
 .index-title {
