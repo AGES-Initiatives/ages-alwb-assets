@@ -2035,7 +2035,7 @@ function insertMatinsOrdinary() {
         // 5. Replace the entire target row with the new HTML.
         //    (The replacementHTML variable must be defined elsewhere in your code)
         targetRow.replaceWith(replacementHTML);
-        
+
         hideGreekInEnglishOnlyService();
 
         console.log(`Row containing bookmark (${targetBookmark.attr('id')}) has been replaced.`);
@@ -2504,85 +2504,384 @@ function hideGreekInEnglishOnlyService() {
   // Check if the element was NOT found (i.e., bookmarkElement is null).
   if (!bookmarkElement) {
     console.log("✅ Bookmark 'bkmrk02' was NOT found. Proceeding to hide leftCell.");
-    
+
     // Finds all <td> elements with the class "leftCell" in the main document.
     const leftCells = document.querySelectorAll('td.leftCell');
 
     // Loops through the found elements and sets their display style to 'none'.
     leftCells.forEach(cell => {
-        cell.style.display = 'none';
+      cell.style.display = 'none';
     });
-    
+
     console.log("All 'leftCell' elements are now display: none.");
-    
+
   } else {
     // This runs if the bookmark *was* found.
     console.warn("❌ Bookmark 'bkmrk02' WAS found. No 'leftCell' elements will be hidden.");
   }
 }
 
+// ====================================================================
+// PARISH MENU CORE JAVASCRIPT FUNCTIONS
+// This file contains all dynamic behavior for the Parish-specific view.
+// ====================================================================
 
+// NOTE: This script assumes jQuery is loaded BEFORE this file.
 
-//Functions for the parish version
+// Global state variable to track the currently selected language view
+let activeLanguageView = 'both'; 
+
+// ----------------------------------------------------
+// 1. UTILITY FUNCTIONS (Hiding, Font Sizing, etc.)
+// ----------------------------------------------------
 
 function hideClassesForParish() {
-  const classesToHide = ["media-group", "source", "source0", "source1", "nav-flex-row", "noprintdesig", "servicesourcestitle", "servicesources", "servicesourcessection"];
-  const idsToDisplay = ["increaseFont", "decreaseFont", "toggle-col0", "toggle-col1"];
+    const classesToHide = ["agesMenu", "dayMode", "nightMode", "versionMode", "clockbox", "fa-bars", "media-group", "source", "source0", "source1", "nav-flex-row", "noprintdesig", "servicesourcestitle", "servicesources", "servicesourcessection"];
 
-  // Hide all classes listed above
-  classesToHide.forEach(className => { // Renamed 'unclass' to 'className' for clarity
-    const elements = document.getElementsByClassName(className);
-    // getElementsByClassName returns an HTMLCollection, which is live
-    // but not a true Array. We convert it to an Array to use forEach.
-    Array.from(elements).forEach(element => {
-      element.style.display = "none";
+    classesToHide.forEach(className => {
+        const elements = document.getElementsByClassName(className);
+        Array.from(elements).forEach(element => {
+            element.style.display = "none";
+        });
     });
-  });
-  console.log("Classes hidden by hideClassesForParish."); // More specific log
+    console.log("Classes hidden by hideClassesForParish.");
+}
 
-  //diplay the font size and language options
-  idsToDisplay.forEach(idName => {
-    const element = document.getElementById(idName);
-    if (element) {
-      element.style.display = "block";
+function hideParishSpaceAsteriskAndBrackets() {
+    const body = document.body;
+    const regex = new RegExp('\\ \\*|[\\[\\]]', 'g');
+    body.innerHTML = body.innerHTML.replace(regex, '');
+}
+
+/**
+ * Multiplies the current font size of the main content area 
+ * by a given factor (e.g., 1.2 for larger, 0.8 for smaller).
+ */
+function setParishFont(factor) {
+    const target = $('body');
+    let currentSize = parseFloat(target.css('font-size'));
+    let newSize = currentSize * factor;
+
+    // Set limits
+    const MIN_SIZE = 10;
+    const MAX_SIZE = 32;
+
+    if (newSize < MIN_SIZE) {
+        newSize = MIN_SIZE;
+    } else if (newSize > MAX_SIZE) {
+        newSize = MAX_SIZE;
     }
-  });
+
+    target.css('font-size', newSize + 'px');
+    console.log(`Font size changed to: ${newSize}px`);
 }
 
-function hideSpaceAsteriskAndBrackets() {
-  // This function is for parish 
-  // 1. Get the main content element (document body)
-  const body = document.body;
+/**
+ * Toggles the visibility of the Greek/English cells within a single row.
+ * This is used for the tap-to-swap feature when only one language is displayed.
+ * @param {HTMLElement} rowElement - The table row (<tr>) that was clicked.
+ */
+function swapParishLang(rowElement) {
+    const $row = $(rowElement);
+    const $greekCell = $row.find("td:even");
+    const $englishCell = $row.find("td:odd");
 
-  // 2. Define the patterns to hide:
-  //    a) The literal string: ' *' (space followed by literal asterisk)
-  //    b) The literal character: '[' (open bracket)
-  //    c) The literal character: ']' (close bracket)
-  
-  // Note: Asterisk (*), open bracket ([), and close bracket (]) are
-  // special metacharacters in regex and must be escaped with a backslash (\).
-  
-  // The expression uses the alternation operator (|) to match any of the patterns.
-  // The character class [\[\]] is a shorter way to match either [ or ].
-  const regex = new RegExp('\\ \\*|[\\[\\]]', 'g');
-
-  // 3. Replace all occurrences of the patterns with an empty string
-  body.innerHTML = body.innerHTML.replace(regex, '');
+    if ($greekCell.css('display') !== 'none') {
+        // Greek is visible, so hide Greek and show English
+        $greekCell.css('display', 'none');
+        $englishCell.css('display', '');
+    } else if ($englishCell.css('display') !== 'none') {
+        // English is visible, so hide English and show Greek
+        $englishCell.css('display', 'none');
+        $greekCell.css('display', '');
+    }
 }
+
+// Prevents the row click event (swapParishLang) from firing when clicking media icons/links.
+function stopParishSwap(element) {
+    $(element).closest('tr').removeAttr("onclick");
+}
+
+// Re-enables the row click event after the mouse leaves the media icon/link area.
+function resumeParishSwap(element) {
+    $(element).closest('tr').attr("onclick", "swapParishLang(this)");
+}
+
+
+// NOTE: These are the core column hiding utilities.
+function hideParishAllLeft() {
+    // Logic to hide the LEFT (Greek) column, leaving only the RIGHT (English) column visible.
+    
+    // 1. Reset all
+    $("td").css("display", "");
+    $("div.media-group-empty").css("display", "");
+    $("div.media-group-empty").addClass("m-g-e");
+
+    // 2. Attach swap handlers for single-language mode
+    $("tr:has(p.alttext,p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.readingcenter,p.readingcenterzero,p.rubric,.media-group,.dialogafteractor,p.iambiccanon1,p.iambiccanon234,p.iambiccanon5)").attr("onclick", "swapParishLang(this)");
+    $(".media-icon,i,li").attr("onmousedown", "stopParishSwap(this)");
+    $(".media-icon,i,li").attr("onmouseout", "resumeParishSwap(this)");
+    
+    // 3. Hide the Greek columns
+    //$("td:even").css("background-color", "#FFF7E6");
+    $("td:even").css("display", "none"); 
+    $("td").css("border", "0");
+    
+    console.log("Hiding all left columns (English only view, tap-to-swap enabled).");
+}
+
+function hideParishAllRight() {
+    // Logic to hide the RIGHT (English) column, leaving only the LEFT (Greek) column visible.
+    
+    // 1. Reset all
+    $("td").css("display", "");
+    $("div.media-group-empty").css("display", "");
+    $("div.media-group-empty").addClass("m-g-e");
+
+    // 2. Attach swap handlers for single-language mode
+    $("tr:has(p.alttext,p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.readingcenter,p.readingcenterzero,p.rubric,.media-group,.dialogafteractor,p.iambiccanon1,p.iambiccanon234,p.iambiccanon5)").attr("onclick", "swapParishLang(this)");
+    $(".media-icon,i,li").attr("onmousedown", "stopParishSwap(this)");
+    $(".media-icon,i,li").attr("onmouseout", "resumeParishSwap(this)");
+    
+    // 3. Hide the English columns
+    //$("td:even").css("background-color", "#FFF7E6");
+    $("td:odd").css("display", "none");
+    $("td").css("border", "0");
+    
+    console.log("Hiding all right columns (Greek only view, tap-to-swap enabled).");
+}
+
+/**
+ * Executes the function to reset the column display to show both.
+ * This also removes swap handlers.
+ */
+function showParishBothColumns() {
+    // 1. Reset all display properties
+    $("td").css("display", ""); // Show both columns
+    //$("td").css("background-color", "#FFF7E6"); // Reapply colors as per your original code
+    $("div.media-group-empty").css("display", "");
+    
+    // 2. Remove swap handlers for bilingual mode
+    $("tr").removeAttr("onclick");
+    $(".media-icon,i,li").removeAttr("onmousedown").removeAttr("onmouseout");
+
+    console.log("Both columns are now displayed (default state, tap-to-swap disabled).");
+}
+
+// ----------------------------------------------------
+// 2. MENU CREATION AND CONTROL
+// ----------------------------------------------------
+
+/**
+ * Creates the menu button element and attaches its click handler.
+ */
+function createParishMenuButton() {
+    if (document.getElementById('menu-button')) {
+        return;
+    }
+
+    let menuButton = document.createElement('button');
+    menuButton.id = 'menu-button';
+    // Using 'fa' class as per your specific Font Awesome version
+    menuButton.innerHTML = '<i class="fa fa-bars"></i>'; 
+    menuButton.onclick = createParishMenu;
+    document.body.appendChild(menuButton);
+
+    console.log("Created menu button.");
+}
+
+function createParishMenu() {
+    let existingMenu = document.getElementById('parish-menu');
+
+    if (existingMenu) {
+        console.log("Menu already exists.");
+        return;
+    }
+
+    let menuDiv = document.createElement('div');
+    menuDiv.className = 'parishMenu';
+    menuDiv.id = 'parish-menu'; 
+    
+    // --- Dynamic button state generation ---
+    const isBothActive = activeLanguageView === 'both';
+    const isGreekActive = activeLanguageView === 'greek';
+    const isEnglishActive = activeLanguageView === 'english';
+
+    const bothClass = isBothActive ? 'active-lang' : '';
+    const greekClass = isGreekActive ? 'active-lang' : '';
+    const englishClass = isEnglishActive ? 'active-lang' : '';
+
+    const bothIcon = isBothActive ? 'fa-check-square' : 'fa-language';
+    const greekIcon = isGreekActive ? 'fa-check-square' : 'fa-language';
+    const englishIcon = isEnglishActive ? 'fa-check-square' : 'fa-language';
+
+    // Menu content with font controls and language toggles
+    menuDiv.innerHTML = `
+      <h2>Preferences</h2>
+      <hr> <!-- Line break separating Heading from Font Controls -->
+
+      <!-- FONT SIZE CONTROLS -->
+      <h3>Text Size</h3>
+      <div class="font-controls">
+          <button class="enlargeFontBtn">
+              <i class="fa fa-plus-circle"></i> Enlarge Text
+          </button>
+          <br>
+          <button class="shrinkFontBtn">
+              <i class="fa fa-minus-circle"></i> Shrink Text
+          </button>
+      </div>
+      
+      <hr> <!-- Line break separating Font Controls and Language View Group -->
+      
+      <!-- LANGUAGE CONTROLS: Now using three mutually exclusive buttons -->
+      <h3>Language View</h3>
+      <div class="lang-btn-group">
+          
+          <!-- Greek and English (Both) Button: Dynamic state applied -->
+          <button id="view-both-btn" class="lang-view-btn ${bothClass}" onclick="setParishLanguageView('both')">
+              <i class="fa ${bothIcon}"></i> Greek | English
+          </button>
+          <br>
+
+          <!-- Greek Only Button: Dynamic state applied -->
+          <button id="view-greek-only-btn" class="lang-view-btn ${greekClass}" onclick="setParishLanguageView('greek')">
+              <i class="fa ${greekIcon}"></i> Greek
+          </button>
+          <br>
+
+          <!-- English Only Button: Dynamic state applied -->
+          <button id="view-english-only-btn" class="lang-view-btn ${englishClass}" onclick="setParishLanguageView('english')">
+              <i class="fa ${englishIcon}"></i> English
+          </button>
+          <br>
+          <h5>When you select one language, Greek or English, you can tap on any paragraph in the service, and it will switch to the other language.</h5>
+      </div>
+
+      <hr> 
+      
+      <!-- CLOSE BUTTON -->
+      <button class="closeParishMenuBtn" onclick="document.getElementById('parish-menu').remove()">
+          <i class="fa fa-times"></i> Close Menu
+      </button>
+    `;
+
+    document.body.appendChild(menuDiv);
+    console.log("Created .parishMenu div.");
+}
+
+/**
+ * Checks if a click occurred outside the menu or the open button and closes the menu.
+ */
+function closeParishMenuOnOutsideClick(event) {
+    const menu = document.getElementById('parish-menu');
+    const button = document.getElementById('menu-button'); 
+
+    if (!menu) {
+        return;
+    }
+
+    const clickedOutsideMenu = !menu.contains(event.target);
+    const clickedNotOnButton = !button.contains(event.target);
+
+    if (clickedOutsideMenu && clickedNotOnButton) {
+        menu.remove();
+        console.log("Parish Menu closed by outside click.");
+    }
+}
+
+
+/**
+ * Sets the main language view (Greek Only, English Only, or Both).
+ * This function ensures only one view button is active at a time.
+ * @param {string} view - 'greek', 'english', or 'both'.
+ */
+function setParishLanguageView(view) {
+    // 1. Reset all buttons visually to inactive
+    $(".lang-view-btn").removeClass('active-lang');
+    // Change active icon (check-square) back to inactive icon (language)
+    $(".lang-view-btn").find('.fa').removeClass('fa-check-square').addClass('fa-language');
+
+    let targetButton;
+    let viewFunction;
+
+    // 2. Determine the target button and the corresponding view function
+    if (view === 'greek') {
+        targetButton = $("#view-greek-only-btn");
+        viewFunction = hideParishAllRight;
+    } else if (view === 'english') {
+        targetButton = $("#view-english-only-btn");
+        viewFunction = hideParishAllLeft;
+    } else if (view === 'both') {
+        targetButton = $("#view-both-btn");
+        viewFunction = showParishBothColumns;
+    } else {
+        console.error("Invalid language view specified:", view);
+        return;
+    }
+
+    // 3. Set the target button to active state (for immediate feedback)
+    targetButton.addClass('active-lang');
+    // Change inactive icon (language) to active icon (check-square)
+    targetButton.find('.fa').removeClass('fa-language').addClass('fa-check-square');
+    
+    // 4. Update the global state
+    activeLanguageView = view;
+
+    // 5. Apply the selected view
+    viewFunction();
+    console.log(`Switched to ${view} view.`);
+}
+
+
+// ----------------------------------------------------
+// 3. INITIALIZATION AND EVENT DELEGATION
+// ----------------------------------------------------
 
 $(document).ready(function () {
+    // --- Event Delegation for Dynamic Buttons (Font Control) ---
+    // Delegation is attached to the document for dynamically created buttons.
+    
+    // INCREASE FONT SIZE BUTTON
+    $(document).on('click', '.enlargeFontBtn', function (e) {
+        e.preventDefault(); 
+        setParishFont(1.2);
+    });
+
+    // DECREASE FONT SIZE BUTTON
+    $(document).on('click', '.shrinkFontBtn', function (e) {
+        e.preventDefault();
+        setParishFont(0.8);
+    });
+
+
+    // --- Conditional Initialization ---
+    
     const requiredReferrer = 'https://dcs.goarch.org/goa/dcs/parish.html';
     const currentReferrer = document.referrer;
 
     if (currentReferrer === requiredReferrer) {
-        console.log("referrer matched!"); // For testing
+        console.log("Parish referrer matched. Initializing features.");
+        
+        // 1. Set default state to show both columns (tap-to-swap disabled by default)
+        showParishBothColumns(); 
+
+        // 2. Run initial hiding and modification functions
         hideClassesForParish();
-        hideSpaceAsteriskAndBrackets();
-        console.log("referrer matched!", currentReferrer); // For testing
+        hideParishSpaceAsteriskAndBrackets();
+
+        // 3. Create the menu and attach the outside click listener
+        createParishMenuButton();
+        $(document).on('click', closeParishMenuOnOutsideClick);
+        
     } else {
-        console.log("hideClassesForParish did NOT run. Referrer was:", currentReferrer || "[Direct access or no referrer]"); // For testing
+        console.log("Parish features NOT initialized. Referrer was:", currentReferrer || "[Direct access or no referrer]");
     }
 });
+
+// ----------------------------------------------------
+// END PARISH FUNCTIONS
+// ----------------------------------------------------
 
 
 /**
@@ -2594,45 +2893,45 @@ $(document).ready(function () {
  * @version 1.0.0
  */
 function initCollapsibleRows() {
-    // --- Initial State Setup ---
-    // Hide all rows between a 'bmc_collapse' row and the next 'emc_collapse' row (the content).
-    $("tr:has(.bmc_collapse)").nextUntil("tr:has(.emc_collapse)").hide();
-    // Hide all 'emc_collapse' rows (the collapse markers/footers).
-    $("tr:has(.emc_collapse)").hide();
+  // --- Initial State Setup ---
+  // Hide all rows between a 'bmc_collapse' row and the next 'emc_collapse' row (the content).
+  $("tr:has(.bmc_collapse)").nextUntil("tr:has(.emc_collapse)").hide();
+  // Hide all 'emc_collapse' rows (the collapse markers/footers).
+  $("tr:has(.emc_collapse)").hide();
 
-    // --- Big/Main Collapse (BMC) Click Handler ---
-    // When a row with a '.bmc_collapse' marker is clicked:
-    $("tr:has(.bmc_collapse)").click(function () {
-        // 1. Show all subsequent content rows up until the next 'emc_collapse' row.
-        $(this).nextUntil('tr:has(.emc_collapse)').show();
-        // 2. Apply a background color to the shown content rows for visual emphasis.
-        $(this).nextUntil('tr:has(.emc_collapse)').css("background-color", "#FDF6E7");
-        // 3. Hide the clicked 'bmc_collapse' row itself.
-        $(this).hide();
-        // 4. Show the corresponding 'emc_collapse' row (the collapse marker/footer).
-        $(this).nextAll('tr:has(.emc_collapse):first').show();
-    });
+  // --- Big/Main Collapse (BMC) Click Handler ---
+  // When a row with a '.bmc_collapse' marker is clicked:
+  $("tr:has(.bmc_collapse)").click(function () {
+    // 1. Show all subsequent content rows up until the next 'emc_collapse' row.
+    $(this).nextUntil('tr:has(.emc_collapse)').show();
+    // 2. Apply a background color to the shown content rows for visual emphasis.
+    $(this).nextUntil('tr:has(.emc_collapse)').css("background-color", "#FDF6E7");
+    // 3. Hide the clicked 'bmc_collapse' row itself.
+    $(this).hide();
+    // 4. Show the corresponding 'emc_collapse' row (the collapse marker/footer).
+    $(this).nextAll('tr:has(.emc_collapse):first').show();
+  });
 
-    // --- End/Exit Collapse (EMC) Click Handler ---
-    // When a row with an '.emc_collapse' marker is clicked:
-    $("tr:has(.emc_collapse)").click(function () {
-        // 1. Hide all preceding content rows down to the previous 'bmc_collapse' row.
-        $(this).prevUntil('tr:has(.bmc_collapse)').hide();
-        // 2. Hide the clicked 'emc_collapse' row itself.
-        $(this).hide();
-        // 3. Show the corresponding 'bmc_collapse' row (the main opener).
-        $(this).prevAll('tr:has(.bmc_collapse):first').show();
+  // --- End/Exit Collapse (EMC) Click Handler ---
+  // When a row with an '.emc_collapse' marker is clicked:
+  $("tr:has(.emc_collapse)").click(function () {
+    // 1. Hide all preceding content rows down to the previous 'bmc_collapse' row.
+    $(this).prevUntil('tr:has(.bmc_collapse)').hide();
+    // 2. Hide the clicked 'emc_collapse' row itself.
+    $(this).hide();
+    // 3. Show the corresponding 'bmc_collapse' row (the main opener).
+    $(this).prevAll('tr:has(.bmc_collapse):first').show();
 
-        // 4. Scroll the viewport to the newly shown 'bmc_collapse' row.
-        var show_pos = $(this).prevAll('tr:has(.bmc_collapse):first').position();
-        window.scrollTo(0, show_pos.top - 50);
-    });
+    // 4. Scroll the viewport to the newly shown 'bmc_collapse' row.
+    var show_pos = $(this).prevAll('tr:has(.bmc_collapse):first').position();
+    window.scrollTo(0, show_pos.top - 50);
+  });
 }
 
 // --- Execution ---
 // Execute the function once the entire document is ready.
-$(document).ready(function() {
-    initCollapsibleRows();
+$(document).ready(function () {
+  initCollapsibleRows();
 });
 
 
@@ -2644,29 +2943,29 @@ $(document).ready(function() {
  * Hides the FrameAudio iframe, stops playback, and moves it off-screen.
  */
 function hideAudioFrame() {
-    const audioFrame = document.getElementById('FrameAudio');
-    
-    if (audioFrame) {
-        // 1. Stop playback: Setting src to 'about:blank'.
-        audioFrame.src = 'about:blank'; 
-        
-    }
+  const audioFrame = document.getElementById('FrameAudio');
+
+  if (audioFrame) {
+    // 1. Stop playback: Setting src to 'about:blank'.
+    audioFrame.src = 'about:blank';
+
+  }
 }
 
- /**
- * Shows the FrameAudio iframe, restores its position, and explicitly sets a high z-index.
- * This is triggered by the audio links inside FrameText.
- */
+/**
+* Shows the FrameAudio iframe, restores its position, and explicitly sets a high z-index.
+* This is triggered by the audio links inside FrameText.
+*/
 function showAudioFrame() {
-    const audioFrame = document.getElementById('FrameAudio');
-    
-    if (audioFrame) {
-        // 1. Make the frame fully visible
-        audioFrame.style.opacity = '1'; 
-        
-        // 2. Explicitly ensure it is on top of all other elements (e.g., FrameScore/FrameText)
-        audioFrame.style.zIndex = '100'; // Use a high number to guarantee it's on top
-        
-    }
+  const audioFrame = document.getElementById('FrameAudio');
+
+  if (audioFrame) {
+    // 1. Make the frame fully visible
+    audioFrame.style.opacity = '1';
+
+    // 2. Explicitly ensure it is on top of all other elements (e.g., FrameScore/FrameText)
+    audioFrame.style.zIndex = '100'; // Use a high number to guarantee it's on top
+
+  }
 }
 

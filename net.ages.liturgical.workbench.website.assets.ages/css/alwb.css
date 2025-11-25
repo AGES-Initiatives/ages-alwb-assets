@@ -225,7 +225,7 @@ div.agesMenu {
 	top: 0;
 	left: 0;
 	opacity: 1;
-	z-index: 10000;
+	z-index: 102;
 }
 
 .agesMenu a .fa {
@@ -240,6 +240,60 @@ div.agesMenu {
 i.ages-menu-link {
 	padding: 0.25em;
 	color: white;
+}
+
+/* alwb.css */
+
+.parishMenu {
+  /* Positioning: Fixed to the viewport */
+  position: fixed; 
+  top: 0;          
+  left: 0;         
+  
+  /* Sizing */
+  width: 300px;
+  height: 100vh; 
+  
+  /* Styling */
+  background-color: #333; 
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); 
+  z-index: 1000; /* Ensure it is above all other content */
+}
+
+/* Optional: Style for the button itself */
+#menu-button {
+    position: fixed; /* Keep the button visible and static */
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.enlargeFontBtn {
+    margin: 10px;
+}
+.shrinkFontBtn {
+    margin: 10px;
+}
+.lang-view-btn {
+    margin: 10px;
+}
+
+
+
+.closeParishMenuBtn {
+    /* Example: Give it a distinct look */
+    background-color: #a04040; /* Dark Reddish color */
+    color: white;
+    margin: 10px; 
+    font-weight: bold;
+    /* This button also inherits general styles from .parishMenu button */
 }
 
 /* Sets the color of icons in content div */
