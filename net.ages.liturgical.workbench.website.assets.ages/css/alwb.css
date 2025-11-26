@@ -98,13 +98,13 @@ html, body {
     height: 3em;
     margin-bottom: 0em;
     z-index: 100;
-    
-    /* REVISED HORIZONTAL POSITION: Center the player within the 38% column */
-    /* 1. Set the anchor point to the center of the 38% area (19%) */
     left: 19%; 
-
-    /* 2. Use transform to shift the player back by exactly half its (unknown) width */
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
+}
+/* ADDITION: Class to make the frame visible when media is active (optional, can be done via JS inline style) */
+.frame-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 /* ======================================================= */
 /* 2. TURN OFF BUTTON STYLES (BOTTOM-RIGHT OF FRAMESCORE)  */

@@ -2857,7 +2857,7 @@ $(document).ready(function () {
 
     // --- Conditional Initialization ---
     
-    const requiredReferrer = 'https://dcs.goarch.org/goa/dcs/parish.html';
+    const requiredReferrer = 'https://dcs.goarch.org/test/dcs/parish.html';
     const currentReferrer = document.referrer;
 
     if (currentReferrer === requiredReferrer) {
@@ -2935,37 +2935,108 @@ $(document).ready(function () {
 });
 
 
+// This file assumes jQuery is loaded elsewhere on the page.
 
+window.onload = function() {
+    
+    const frameAudioElement = document.getElementById('FrameAudio');
 
-// --- Frame Visibility and Playback Control Functions ---
+    if (!frameAudioElement) {
+        // If the frame isn't found, stop silently.
+        return;
+    }
 
-/**
- * Hides the FrameAudio iframe, stops playback, and moves it off-screen.
- */
-function hideAudioFrame() {
-  const audioFrame = document.getElementById('FrameAudio');
+    // --- I. Helper Functions ---
+    
+    const removeButtonFromDOM = () => {
+        let currentButton = document.getElementById('turnOffAudioButton');
+        if (currentButton && currentButton.parentNode) {
+            currentButton.parentNode.removeChild(currentButton);
+        }
+    };
+    
+    const createButtonInDOM = () => {
+        let stopButton = document.getElementById('turnOffAudioButton');
+        if (!stopButton) {
+            stopButton = document.createElement('button');
+            stopButton.id = 'turnOffAudioButton';
+            stopButton.textContent = 'X'; 
+            stopButton.onclick = terminateMediaSession;
+            document.body.appendChild(stopButton);
+        }
+    };
 
-  if (audioFrame) {
-    // 1. Stop playback: Setting src to 'about:blank'.
-    audioFrame.src = 'about:blank';
+    // --- II. Termination (Close Player) Function ---
 
-  }
-}
+    function terminateMediaSession() {
+        
+        if (frameAudioElement && frameAudioElement.contentWindow) {
+            let frameDocument = frameAudioElement.contentDocument || frameAudioElement.contentWindow.document;
+            let mediaElement = frameDocument.querySelector('video[name="media"]'); 
 
-/**
-* Shows the FrameAudio iframe, restores its position, and explicitly sets a high z-index.
-* This is triggered by the audio links inside FrameText.
-*/
-function showAudioFrame() {
-  const audioFrame = document.getElementById('FrameAudio');
+            if (mediaElement) {
+                // Robust media shutdown
+                mediaElement.pause();
+                mediaElement.currentTime = 0;
+                mediaElement.src = ""; 
+                mediaElement.load(); 
+            }
+        }
+        
+        // Final cleanup
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.playbackState = 'none';
+        }
+        
+        if (frameAudioElement) {
+            frameAudioElement.src = 'about:blank';
+        }
+        
+        removeButtonFromDOM();
+    }
 
-  if (audioFrame) {
-    // 1. Make the frame fully visible
-    audioFrame.style.opacity = '1';
+    // --- III. Event Delegation (jQuery Click Handler) ---
+    
+    // Selects links ending in .mp3 and targeting FrameAudio
+    const mp3LinkSelector = "a[href$='.mp3'][target='FrameAudio']";
 
-    // 2. Explicitly ensure it is on top of all other elements (e.g., FrameScore/FrameText)
-    audioFrame.style.zIndex = '100'; // Use a high number to guarantee it's on top
+    // Attach delegated click listener to the document body using jQuery
+    $(document).on('click', mp3LinkSelector, function(event) {
+        
+        // Clear old session before starting a new one
+        removeButtonFromDOM();
+        if (frameAudioElement) {
+             frameAudioElement.src = 'about:blank';
+        }
+        // Let the browser handle navigating the iframe via the link's href.
+    });
 
-  }
-}
+    // --- IV. Iframe Load Listener ---
+
+    frameAudioElement.addEventListener('load', () => {
+        
+        // Small delay remains a robust safeguard for DOM rendering
+        setTimeout(() => {
+            let frameDocument = frameAudioElement.contentDocument || frameAudioElement.contentWindow.document;
+            let mediaElementInFrame = frameDocument.querySelector('video[name="media"]'); 
+
+            if (mediaElementInFrame) {
+                
+                // Create the button immediately upon element discovery
+                createButtonInDOM();
+
+                // Attach the removal listeners (only on terminal pause/end)
+                mediaElementInFrame.addEventListener('pause', () => {
+                    if (mediaElementInFrame.currentTime === 0 || mediaElementInFrame.ended) {
+                        removeButtonFromDOM();
+                    }
+                });
+                
+                mediaElementInFrame.addEventListener('ended', removeButtonFromDOM);
+            }
+        }, 100); 
+    });
+
+}; // End of window.onload
+
 
