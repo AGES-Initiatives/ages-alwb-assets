@@ -2857,7 +2857,7 @@ $(document).ready(function () {
 
     // --- Conditional Initialization ---
     
-    const requiredReferrer = 'https://dcs.goarch.org/test/dcs/parish.html';
+    const requiredReferrer = 'https://dcs.goarch.org/goa/dcs/parish.html';
     const currentReferrer = document.referrer;
 
     if (currentReferrer === requiredReferrer) {
