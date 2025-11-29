@@ -2668,6 +2668,15 @@ function showParishBothColumns() {
     console.log("Both columns are now displayed (default state, tap-to-swap disabled).");
 }
 
+/**
+ * Scrolls the document smoothly back to the top (0, 0 position).
+ */
+function scrollToTop() {
+    $('html, body').animate({ scrollTop: 0 }, 600);
+    console.log("Scrolled document to top.");
+}
+
+
 // ----------------------------------------------------
 // 2. MENU CREATION AND CONTROL
 // ----------------------------------------------------
@@ -2756,6 +2765,16 @@ function createParishMenu() {
           </button>
           <br>
           <h5>When you select one language, Greek or English, you can tap on any paragraph in the service, and it will switch to the other language.</h5>
+      </div>
+
+      <hr> <!-- Line break separating Language Controls and Navigation -->
+      
+      <!-- NAVIGATION CONTROLS -->
+      <h3>Navigation</h3>
+      <div class="nav-controls">
+          <button class="scroll-top-btn" onclick="scrollToTop()">
+              <i class="fa fa-arrow-up"></i> Go to Quick Links
+          </button>
       </div>
 
       <hr> 
@@ -2882,7 +2901,6 @@ $(document).ready(function () {
 // ----------------------------------------------------
 // END PARISH FUNCTIONS
 // ----------------------------------------------------
-
 
 /**
  * @function initCollapsibleRows
