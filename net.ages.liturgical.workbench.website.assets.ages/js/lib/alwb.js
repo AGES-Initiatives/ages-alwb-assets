@@ -239,6 +239,8 @@ function showInfo() {
     + " \nwindow.width=" + jQuery(window).width()
   );
 }
+
+
 function getClock() {
   d = new Date();
   nhour = d.getHours();
@@ -557,6 +559,70 @@ $(document).ready(function () {
     $("p.source0").visibilityToggle();
     return false;
   });
+
+  /*******************
+  // --- 1. Core Scrolling Function ---
+  /**
+   * NOTE: The function 'scrollToTop()' is assumed to be defined elsewhere in this same file.
+   * We are removing its definition here to prevent duplication, but the call in setupTopModeButtonListener 
+   * will work because it is available in the global scope (or module scope if using modules).
+   */
+
+
+  // --- 2. Button Insertion Function (Simplified) ---
+  /**
+   * Inserts the 'topMode' button immediately after the element with the class 'versionMode'.
+   */
+  function insertTopModeButton() {
+    // Find the existing element to insert after.
+    const existingElement = document.querySelector('.versionMode');
+
+    // Define the HTML for the new button, now including the 'title' attribute for the hover tooltip.
+    const newButtonHTML = `
+        <a href="#" class="topMode" title="Scroll to Top">
+            <i class="fa fa-arrow-up topMode ages-menu-link"></i>
+        </a>
+    `;
+
+    // Insert the new HTML after the existing element, if found.
+    if (existingElement) {
+      existingElement.insertAdjacentHTML('afterend', newButtonHTML.trim());
+    }
+  }
+  // --- 3. Setup and Event Listener Binding ---
+  /**
+   * Finds the newly inserted button and attaches the click event listener 
+   * to execute the existing scrollToTop() function.
+   */
+  function setupTopModeButtonListener() {
+    // 1. Call the function to ensure the button is in the DOM.
+    insertTopModeButton();
+
+    // 2. Find the new button using its class selector.
+    const topButton = document.querySelector('.topMode');
+
+    // 3. Attach the event listener.
+    if (topButton) {
+      // When clicked, prevent the default anchor action and call the existing scrollToTop() function.
+      topButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        // Call the function that already exists in your script
+        scrollToTop();
+      });
+    }
+  }
+  // --- Execute Setup (Using 'document ready' pattern) ---
+  (function () {
+    if (document.readyState === 'loading') {
+      // If the document is still loading, wait for the DOMContentLoaded event.
+      document.addEventListener('DOMContentLoaded', setupTopModeButtonListener);
+    } else {
+      // If the script is loaded after the DOM is ready, execute immediately.
+      setupTopModeButtonListener();
+    }
+  })();
+
+  /************************************************ */
 
   // function setCookie(cname, cvalue, exdays) {
   //     var d = new Date();
@@ -973,11 +1039,261 @@ $(document).ready(function () {
 $(document).ready(function () {
   convertClassToId();
   //hideClassesForParish();
+  insertVespersTOB();
   insertLiturgyTOB();
   insertMatinsOrdinary();
   insertMatinsTOB();
   convertClassToId();
 });
+
+// function insertVespersTOB() {
+//   const pageTitle = document.title;
+//   const validEndings = ['.ve', '.ve1', '.ve2', '.ve3', '.ve4', '.ve5', '.ve6', '.ve7', '.ve8', '.ve9', '.vl', '.vl2', '.pl1', '.pl5'];
+//   const targetTableId = "biTable"; // Define target ID once
+//   const newDivId = "LoB";
+
+//   // 1. Check if the page title matches any valid ending
+//   if (!validEndings.some(ending => pageTitle.endsWith(ending))) {
+//     // Page is not a Vespers service, exit early.
+//     return false;
+//   }
+
+//   console.log(`Document is a Vespers. Running content insertion script.`);
+
+//   // --- Content Insertion Script ---
+
+//   // 2. Define the HTML content template outside the main logic
+//   const quickLinksHTML = `
+//     <p class="lobTitle">Quick Links</p>
+//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk01(); return false;">Lord, I have cried</a></p>
+//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk02(); return false;">Gladsome Light</a></p>
+//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk03(); return false;">Readings</a></p>
+//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk04(); return false;">Litanies</a></p>
+//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk05(); return false;">Aposticha</a></p>
+//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk06(); return false;">Pre-festal Canon</a></p>
+//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk07(); return false;">Akathist</a></p>
+//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk08(); return false;">Paraklesis</a></p>
+//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk09(); return false;">Trisagion - Apolytikia</a></p>
+//   `;
+
+//   function addDivBeforeTable() {
+//     // Step 1: Get a reference to the table using its ID
+//     const table = document.getElementById(targetTableId);
+
+//     // 3. Add existence check: If the table isn't found, stop here.
+//     if (!table) {
+//       console.warn(`Target table with ID '${targetTableId}' not found. Aborting content insertion.`);
+//       return false;
+//     }
+
+//     // Step 2: Create the new div element
+//     const newDiv = document.createElement("div");
+
+//     // Step 3 & 4: Set ID and optional classes
+//     newDiv.id = newDivId;
+//     //newDiv.classList.add("bookmarkDivStyle"); // Uncomment if you decide to use this class
+
+//     // Step 5: Add content from the extracted template
+//     newDiv.innerHTML = quickLinksHTML;
+
+//     // Step 6: Get the parent element of the table and insert the new div
+//     const parent = table.parentNode;
+//     parent.insertBefore(newDiv, table);
+
+//     return true; // Indicate success
+//   }
+
+//   // Call the function to run the code
+//   const insertionSuccess = addDivBeforeTable();
+
+//   // You can decide to return the success status
+//   return insertionSuccess;
+// }
+
+function insertVespersTOB() {
+  // --- Constants ---
+  const VALID_ENDINGS = ['.ve', '.ve1', '.ve2', '.ve3', '.ve4', '.ve5', '.ve6', '.ve7', '.ve8', '.ve9', '.vl', '.vl2', '.pl1', '.pl5'];
+  const TARGET_TABLE_ID = "biTable";
+  const NEW_DIV_ID = "LoB";
+  const pageTitle = document.title;
+
+  // 1. Initial Validation
+  if (!VALID_ENDINGS.some(ending => pageTitle.endsWith(ending))) {
+    return false;
+  }
+
+  console.log(`Document is a Vespers. Running content insertion script.`);
+
+  // ----------------------------------------------
+  // --- Core Utility Functions (Encapsulated) ---
+  // ----------------------------------------------
+
+  /**
+   * Extracts the service date (month/day) from the <title> tag content and 
+   * infers the year by comparing it to the file generation date.
+   */
+  function getServiceDate() {
+    const titleElement = document.querySelector('title');
+
+    if (!titleElement) {
+        console.error("Could not find the <title> element in the document.");
+        return null;
+    }
+    
+    // 1. Extract the File Generation Date/Time from data-timestamp
+    const timestamp = titleElement.getAttribute('data-timestamp');
+    if (!timestamp) { return null; }
+    
+    const parts = timestamp.split('.');
+    if (parts.length < 3) { return null; }
+
+    const fileGenerationDate = new Date(
+      parseInt(parts[0], 10), 
+      parseInt(parts[1], 10) - 1, 
+      parseInt(parts[2], 10), 
+      12, 0, 0 
+    );
+    const fileGenerationYear = fileGenerationDate.getFullYear();
+
+    // 2. Extract the Month and Day from title tag content (e.g., 'se.m08.d05.ve')
+    const filenameContent = titleElement.textContent;
+    const dateMatch = filenameContent ? filenameContent.match(/m(\d{2})\.d(\d{2})/) : null;
+
+    if (!dateMatch || dateMatch.length < 3) {
+      console.error(`Could not parse month/day from title content: ${filenameContent}`);
+      return null;
+    }
+
+    const serviceMonthIndex = parseInt(dateMatch[1], 10) - 1; 
+    const serviceDay = parseInt(dateMatch[2], 10);
+    
+    // 3. Infer the Service Year
+    let serviceYear = fileGenerationYear;
+    let initialServiceDate = new Date(serviceYear, serviceMonthIndex, serviceDay, 12, 0, 0);
+
+    // If the service date has already passed in the file generation year, assume next year.
+    if (initialServiceDate < fileGenerationDate) {
+      serviceYear += 1;
+      console.log(`Service date before generation date. Inferring year ${serviceYear}.`);
+    } else {
+        console.log(`Service year inferred as ${serviceYear}.`);
+    }
+
+    // 4. Create the final and accurate Date object
+    const finalServiceDate = new Date(serviceYear, serviceMonthIndex, serviceDay, 12, 0, 0);
+    console.log(`Final Service Liturgical Date: ${finalServiceDate.toDateString()}`);
+    return finalServiceDate;
+  }
+  
+  /**
+   * Checks the liturgical date against special requirements for conditional links.
+   * @returns {Object} An object containing the active link(s) keyed by their bookmark number.
+   */
+  function isSpecialDay() {
+    const liturgicalDate = getServiceDate();
+    if (!liturgicalDate) { return {}; }
+    
+    const month = liturgicalDate.getMonth();      
+    const day = liturgicalDate.getDate();         
+    const dayOfWeek = liturgicalDate.getDay();    
+    
+    const specialLinks = {}; 
+    const isNotSunday = (dayOfWeek !== 0); 
+    const isSaturday = (dayOfWeek === 6);
+
+    // 1. Pre-festal Canon (Bkmrk06: Jan 2-5 OR Dec 20-24, NOT Sunday)
+    const isPreCanonJan = (month === 0) && (day >= 2 && day <= 5) && isNotSunday;
+    const isPreCanonDec = (month === 11) && (day >= 20 && day <= 24) && isNotSunday;
+    if (isPreCanonJan || isPreCanonDec) { specialLinks['Bkmrk06'] = 'Pre-festal Canon'; }
+    
+    // 2. Akathist (Bkmrk07: Mar 25 OR Mar 26, AND is a Saturday)
+    const isMarch = (month === 2);
+    const isDate25or26 = (day === 25 || day === 26);
+    const isAkathistDay = isMarch && isDate25or26 && isSaturday;
+    if (isAkathistDay) { specialLinks['Bkmrk07'] = 'Akathist'; }
+    
+    // 3. Paraklesis (Bkmrk08: Aug 2-5, NOT Sunday)
+    const isParaklesisDay = (month === 7) && (day >= 2 && day <= 5) && isNotSunday;
+    if (isParaklesisDay) { specialLinks['Bkmrk08'] = 'Paraklesis'; }
+
+    return specialLinks; 
+  }
+
+  /**
+   * Generates the HTML string for the conditional links, ensuring they are ordered 6, 7, 8.
+   * Since only one link will ever be active, this guarantees Bkmrk06 is checked before Bkmrk07, etc.
+   * @returns {string} The HTML string for the optional links.
+   */
+  function getOptionalLinksHTML() {
+    const activeLinks = isSpecialDay(); 
+    let optionalLinks = '';
+    
+    const linkMap = {
+        'Bkmrk06': `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk06(); return false;">Pre-festal Canon</a></p>`,
+        'Bkmrk07': `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk07(); return false;">Akathist</a></p>`,
+        'Bkmrk08': `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk08(); return false;">Paraklesis</a></p>`,
+    };
+    
+    // Explicitly iterate through the desired order: Bkmrk06, Bkmrk07, Bkmrk08
+    const orderedKeys = ['Bkmrk06', 'Bkmrk07', 'Bkmrk08'];
+
+    orderedKeys.forEach(key => {
+        // If the date condition was met for this bookmark number
+        if (activeLinks.hasOwnProperty(key)) {
+            optionalLinks += linkMap[key];
+        }
+    });
+    
+    return optionalLinks;
+  }
+  
+  // ----------------------------------------------
+  // --- Insertion Logic ---
+  // ----------------------------------------------
+
+  const bkmrk09HTML = `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk09(); return false;">Trisagion - Apolytikia</a></p>`;
+  
+  // Base links (Bkmrk 01 through 05)
+  const baseLinksHTML = `
+    <p class="lobTitle">Quick Links</p>
+    <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk01(); return false;">Lord, I have cried</a></p>
+    <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk02(); return false;">Entrance | Gladsome Light</a></p>
+    <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk03(); return false;">Prokeimenon | Readings</a></p>
+    <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk04(); return false;">Litanies</a></p>
+    <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk05(); return false;">Aposticha</a></p>
+  `;
+
+  function addDivBeforeTable() {
+    const table = document.getElementById(TARGET_TABLE_ID);
+
+    if (!table) {
+      console.warn(`Target table with ID '${TARGET_TABLE_ID}' not found. Aborting content insertion.`);
+      return false;
+    }
+
+    const newDiv = document.createElement("div");
+    newDiv.id = NEW_DIV_ID;
+
+    const optionalLinks = getOptionalLinksHTML();
+    
+    // Construct the final HTML: Bkmrk01-05 + Conditional Links (6, 7, 8 in order) + Bkmrk09
+    newDiv.innerHTML = baseLinksHTML + optionalLinks + bkmrk09HTML;
+
+    const parent = table.parentNode;
+    parent.insertBefore(newDiv, table);
+
+    return true;
+  }
+
+  // Execute the content insertion
+  const insertionSuccess = addDivBeforeTable();
+  return insertionSuccess;
+}
+
+
+
+
+
 
 function insertLiturgyTOB() {
 
@@ -2083,7 +2399,7 @@ function insertMatinsTOB() {
 <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk01(); return false;">Six Psalms</a></p>
 <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk02(); return false;">God is the Lord / Alleluia</a></p>
 <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk03(); return false;">Kathismata</a></p>
-<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk04(); return false;">Evlogetaria (Sundays)</a></p>
+<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk04(); return false;">Evlogetaria (Saturdays / Sundays)</a></p>
 <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk05(); return false;">Antiphons (Sundays / Feastdays)</a></p>
 <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk06(); return false;">Synaxarion</a></p>
 <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk07(); return false;">Katavasias / Heirmos</a></p>
@@ -2529,28 +2845,28 @@ function hideGreekInEnglishOnlyService() {
 // NOTE: This script assumes jQuery is loaded BEFORE this file.
 
 // Global state variable to track the currently selected language view
-let activeLanguageView = 'both'; 
+let activeLanguageView = 'both';
 
 // ----------------------------------------------------
 // 1. UTILITY FUNCTIONS (Hiding, Font Sizing, etc.)
 // ----------------------------------------------------
 
 function hideClassesForParish() {
-    const classesToHide = ["agesMenu", "dayMode", "nightMode", "versionMode", "clockbox", "fa-bars", "media-group", "source", "source0", "source1", "nav-flex-row", "noprintdesig", "servicesourcestitle", "servicesources", "servicesourcessection"];
+  const classesToHide = ["agesMenu", "dayMode", "nightMode", "versionMode", "clockbox", "fa-bars", "media-group", "source", "source0", "source1", "nav-flex-row", "noprintdesig", "servicesourcestitle", "servicesources", "servicesourcessection"];
 
-    classesToHide.forEach(className => {
-        const elements = document.getElementsByClassName(className);
-        Array.from(elements).forEach(element => {
-            element.style.display = "none";
-        });
+  classesToHide.forEach(className => {
+    const elements = document.getElementsByClassName(className);
+    Array.from(elements).forEach(element => {
+      element.style.display = "none";
     });
-    console.log("Classes hidden by hideClassesForParish.");
+  });
+  console.log("Classes hidden by hideClassesForParish.");
 }
 
 function hideParishSpaceAsteriskAndBrackets() {
-    const body = document.body;
-    const regex = new RegExp('\\ \\*|[\\[\\]]', 'g');
-    body.innerHTML = body.innerHTML.replace(regex, '');
+  const body = document.body;
+  const regex = new RegExp('\\ \\*|[\\[\\]]', 'g');
+  body.innerHTML = body.innerHTML.replace(regex, '');
 }
 
 /**
@@ -2558,22 +2874,22 @@ function hideParishSpaceAsteriskAndBrackets() {
  * by a given factor (e.g., 1.2 for larger, 0.8 for smaller).
  */
 function setParishFont(factor) {
-    const target = $('body');
-    let currentSize = parseFloat(target.css('font-size'));
-    let newSize = currentSize * factor;
+  const target = $('body');
+  let currentSize = parseFloat(target.css('font-size'));
+  let newSize = currentSize * factor;
 
-    // Set limits
-    const MIN_SIZE = 10;
-    const MAX_SIZE = 32;
+  // Set limits
+  const MIN_SIZE = 10;
+  const MAX_SIZE = 32;
 
-    if (newSize < MIN_SIZE) {
-        newSize = MIN_SIZE;
-    } else if (newSize > MAX_SIZE) {
-        newSize = MAX_SIZE;
-    }
+  if (newSize < MIN_SIZE) {
+    newSize = MIN_SIZE;
+  } else if (newSize > MAX_SIZE) {
+    newSize = MAX_SIZE;
+  }
 
-    target.css('font-size', newSize + 'px');
-    console.log(`Font size changed to: ${newSize}px`);
+  target.css('font-size', newSize + 'px');
+  console.log(`Font size changed to: ${newSize}px`);
 }
 
 /**
@@ -2582,73 +2898,73 @@ function setParishFont(factor) {
  * @param {HTMLElement} rowElement - The table row (<tr>) that was clicked.
  */
 function swapParishLang(rowElement) {
-    const $row = $(rowElement);
-    const $greekCell = $row.find("td:even");
-    const $englishCell = $row.find("td:odd");
+  const $row = $(rowElement);
+  const $greekCell = $row.find("td:even");
+  const $englishCell = $row.find("td:odd");
 
-    if ($greekCell.css('display') !== 'none') {
-        // Greek is visible, so hide Greek and show English
-        $greekCell.css('display', 'none');
-        $englishCell.css('display', '');
-    } else if ($englishCell.css('display') !== 'none') {
-        // English is visible, so hide English and show Greek
-        $englishCell.css('display', 'none');
-        $greekCell.css('display', '');
-    }
+  if ($greekCell.css('display') !== 'none') {
+    // Greek is visible, so hide Greek and show English
+    $greekCell.css('display', 'none');
+    $englishCell.css('display', '');
+  } else if ($englishCell.css('display') !== 'none') {
+    // English is visible, so hide English and show Greek
+    $englishCell.css('display', 'none');
+    $greekCell.css('display', '');
+  }
 }
 
 // Prevents the row click event (swapParishLang) from firing when clicking media icons/links.
 function stopParishSwap(element) {
-    $(element).closest('tr').removeAttr("onclick");
+  $(element).closest('tr').removeAttr("onclick");
 }
 
 // Re-enables the row click event after the mouse leaves the media icon/link area.
 function resumeParishSwap(element) {
-    $(element).closest('tr').attr("onclick", "swapParishLang(this)");
+  $(element).closest('tr').attr("onclick", "swapParishLang(this)");
 }
 
 
 // NOTE: These are the core column hiding utilities.
 function hideParishAllLeft() {
-    // Logic to hide the LEFT (Greek) column, leaving only the RIGHT (English) column visible.
-    
-    // 1. Reset all
-    $("td").css("display", "");
-    $("div.media-group-empty").css("display", "");
-    $("div.media-group-empty").addClass("m-g-e");
+  // Logic to hide the LEFT (Greek) column, leaving only the RIGHT (English) column visible.
 
-    // 2. Attach swap handlers for single-language mode
-    $("tr:has(p.alttext,p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.readingcenter,p.readingcenterzero,p.rubric,.media-group,.dialogafteractor,p.iambiccanon1,p.iambiccanon234,p.iambiccanon5)").attr("onclick", "swapParishLang(this)");
-    $(".media-icon,i,li").attr("onmousedown", "stopParishSwap(this)");
-    $(".media-icon,i,li").attr("onmouseout", "resumeParishSwap(this)");
-    
-    // 3. Hide the Greek columns
-    //$("td:even").css("background-color", "#FFF7E6");
-    $("td:even").css("display", "none"); 
-    $("td").css("border", "0");
-    
-    console.log("Hiding all left columns (English only view, tap-to-swap enabled).");
+  // 1. Reset all
+  $("td").css("display", "");
+  $("div.media-group-empty").css("display", "");
+  $("div.media-group-empty").addClass("m-g-e");
+
+  // 2. Attach swap handlers for single-language mode
+  $("tr:has(p.alttext,p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.readingcenter,p.readingcenterzero,p.rubric,.media-group,.dialogafteractor,p.iambiccanon1,p.iambiccanon234,p.iambiccanon5)").attr("onclick", "swapParishLang(this)");
+  $(".media-icon,i,li").attr("onmousedown", "stopParishSwap(this)");
+  $(".media-icon,i,li").attr("onmouseout", "resumeParishSwap(this)");
+
+  // 3. Hide the Greek columns
+  //$("td:even").css("background-color", "#FFF7E6");
+  $("td:even").css("display", "none");
+  $("td").css("border", "0");
+
+  console.log("Hiding all left columns (English only view, tap-to-swap enabled).");
 }
 
 function hideParishAllRight() {
-    // Logic to hide the RIGHT (English) column, leaving only the LEFT (Greek) column visible.
-    
-    // 1. Reset all
-    $("td").css("display", "");
-    $("div.media-group-empty").css("display", "");
-    $("div.media-group-empty").addClass("m-g-e");
+  // Logic to hide the RIGHT (English) column, leaving only the LEFT (Greek) column visible.
 
-    // 2. Attach swap handlers for single-language mode
-    $("tr:has(p.alttext,p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.readingcenter,p.readingcenterzero,p.rubric,.media-group,.dialogafteractor,p.iambiccanon1,p.iambiccanon234,p.iambiccanon5)").attr("onclick", "swapParishLang(this)");
-    $(".media-icon,i,li").attr("onmousedown", "stopParishSwap(this)");
-    $(".media-icon,i,li").attr("onmouseout", "resumeParishSwap(this)");
-    
-    // 3. Hide the English columns
-    //$("td:even").css("background-color", "#FFF7E6");
-    $("td:odd").css("display", "none");
-    $("td").css("border", "0");
-    
-    console.log("Hiding all right columns (Greek only view, tap-to-swap enabled).");
+  // 1. Reset all
+  $("td").css("display", "");
+  $("div.media-group-empty").css("display", "");
+  $("div.media-group-empty").addClass("m-g-e");
+
+  // 2. Attach swap handlers for single-language mode
+  $("tr:has(p.alttext,p.chant,p.heirmos,p.hymn,p.hymnlinefirst,p.hymnlinemiddle,p.hymnlinelast,p.prayer,p.prayerzero,p.verse,p.versecenter,p.inaudible,p.dialog,p.dialogzero,p.reading,p.readingzero,p.readingcenter,p.readingcenterzero,p.rubric,.media-group,.dialogafteractor,p.iambiccanon1,p.iambiccanon234,p.iambiccanon5)").attr("onclick", "swapParishLang(this)");
+  $(".media-icon,i,li").attr("onmousedown", "stopParishSwap(this)");
+  $(".media-icon,i,li").attr("onmouseout", "resumeParishSwap(this)");
+
+  // 3. Hide the English columns
+  //$("td:even").css("background-color", "#FFF7E6");
+  $("td:odd").css("display", "none");
+  $("td").css("border", "0");
+
+  console.log("Hiding all right columns (Greek only view, tap-to-swap enabled).");
 }
 
 /**
@@ -2656,24 +2972,24 @@ function hideParishAllRight() {
  * This also removes swap handlers.
  */
 function showParishBothColumns() {
-    // 1. Reset all display properties
-    $("td").css("display", ""); // Show both columns
-    //$("td").css("background-color", "#FFF7E6"); // Reapply colors as per your original code
-    $("div.media-group-empty").css("display", "");
-    
-    // 2. Remove swap handlers for bilingual mode
-    $("tr").removeAttr("onclick");
-    $(".media-icon,i,li").removeAttr("onmousedown").removeAttr("onmouseout");
+  // 1. Reset all display properties
+  $("td").css("display", ""); // Show both columns
+  //$("td").css("background-color", "#FFF7E6"); // Reapply colors as per your original code
+  $("div.media-group-empty").css("display", "");
 
-    console.log("Both columns are now displayed (default state, tap-to-swap disabled).");
+  // 2. Remove swap handlers for bilingual mode
+  $("tr").removeAttr("onclick");
+  $(".media-icon,i,li").removeAttr("onmousedown").removeAttr("onmouseout");
+
+  console.log("Both columns are now displayed (default state, tap-to-swap disabled).");
 }
 
 /**
  * Scrolls the document smoothly back to the top (0, 0 position).
  */
 function scrollToTop() {
-    $('html, body').animate({ scrollTop: 0 }, 600);
-    console.log("Scrolled document to top.");
+  $('html, body').animate({ scrollTop: 0 }, 600);
+  console.log("Scrolled document to top.");
 }
 
 
@@ -2685,47 +3001,47 @@ function scrollToTop() {
  * Creates the menu button element and attaches its click handler.
  */
 function createParishMenuButton() {
-    if (document.getElementById('menu-button')) {
-        return;
-    }
+  if (document.getElementById('menu-button')) {
+    return;
+  }
 
-    let menuButton = document.createElement('button');
-    menuButton.id = 'menu-button';
-    // Using 'fa' class as per your specific Font Awesome version
-    menuButton.innerHTML = '<i class="fa fa-bars"></i>'; 
-    menuButton.onclick = createParishMenu;
-    document.body.appendChild(menuButton);
+  let menuButton = document.createElement('button');
+  menuButton.id = 'menu-button';
+  // Using 'fa' class as per your specific Font Awesome version
+  menuButton.innerHTML = '<i class="fa fa-bars"></i>';
+  menuButton.onclick = createParishMenu;
+  document.body.appendChild(menuButton);
 
-    console.log("Created menu button.");
+  console.log("Created menu button.");
 }
 
 function createParishMenu() {
-    let existingMenu = document.getElementById('parish-menu');
+  let existingMenu = document.getElementById('parish-menu');
 
-    if (existingMenu) {
-        console.log("Menu already exists.");
-        return;
-    }
+  if (existingMenu) {
+    console.log("Menu already exists.");
+    return;
+  }
 
-    let menuDiv = document.createElement('div');
-    menuDiv.className = 'parishMenu';
-    menuDiv.id = 'parish-menu'; 
-    
-    // --- Dynamic button state generation ---
-    const isBothActive = activeLanguageView === 'both';
-    const isGreekActive = activeLanguageView === 'greek';
-    const isEnglishActive = activeLanguageView === 'english';
+  let menuDiv = document.createElement('div');
+  menuDiv.className = 'parishMenu';
+  menuDiv.id = 'parish-menu';
 
-    const bothClass = isBothActive ? 'active-lang' : '';
-    const greekClass = isGreekActive ? 'active-lang' : '';
-    const englishClass = isEnglishActive ? 'active-lang' : '';
+  // --- Dynamic button state generation ---
+  const isBothActive = activeLanguageView === 'both';
+  const isGreekActive = activeLanguageView === 'greek';
+  const isEnglishActive = activeLanguageView === 'english';
 
-    const bothIcon = isBothActive ? 'fa-check-square' : 'fa-language';
-    const greekIcon = isGreekActive ? 'fa-check-square' : 'fa-language';
-    const englishIcon = isEnglishActive ? 'fa-check-square' : 'fa-language';
+  const bothClass = isBothActive ? 'active-lang' : '';
+  const greekClass = isGreekActive ? 'active-lang' : '';
+  const englishClass = isEnglishActive ? 'active-lang' : '';
 
-    // Menu content with font controls and language toggles
-    menuDiv.innerHTML = `
+  const bothIcon = isBothActive ? 'fa-check-square' : 'fa-language';
+  const greekIcon = isGreekActive ? 'fa-check-square' : 'fa-language';
+  const englishIcon = isEnglishActive ? 'fa-check-square' : 'fa-language';
+
+  // Menu content with font controls and language toggles
+  menuDiv.innerHTML = `
       <h2>Preferences</h2>
       <hr> <!-- Line break separating Heading from Font Controls -->
 
@@ -2785,28 +3101,28 @@ function createParishMenu() {
       </button>
     `;
 
-    document.body.appendChild(menuDiv);
-    console.log("Created .parishMenu div.");
+  document.body.appendChild(menuDiv);
+  console.log("Created .parishMenu div.");
 }
 
 /**
  * Checks if a click occurred outside the menu or the open button and closes the menu.
  */
 function closeParishMenuOnOutsideClick(event) {
-    const menu = document.getElementById('parish-menu');
-    const button = document.getElementById('menu-button'); 
+  const menu = document.getElementById('parish-menu');
+  const button = document.getElementById('menu-button');
 
-    if (!menu) {
-        return;
-    }
+  if (!menu) {
+    return;
+  }
 
-    const clickedOutsideMenu = !menu.contains(event.target);
-    const clickedNotOnButton = !button.contains(event.target);
+  const clickedOutsideMenu = !menu.contains(event.target);
+  const clickedNotOnButton = !button.contains(event.target);
 
-    if (clickedOutsideMenu && clickedNotOnButton) {
-        menu.remove();
-        console.log("Parish Menu closed by outside click.");
-    }
+  if (clickedOutsideMenu && clickedNotOnButton) {
+    menu.remove();
+    console.log("Parish Menu closed by outside click.");
+  }
 }
 
 
@@ -2816,40 +3132,40 @@ function closeParishMenuOnOutsideClick(event) {
  * @param {string} view - 'greek', 'english', or 'both'.
  */
 function setParishLanguageView(view) {
-    // 1. Reset all buttons visually to inactive
-    $(".lang-view-btn").removeClass('active-lang');
-    // Change active icon (check-square) back to inactive icon (language)
-    $(".lang-view-btn").find('.fa').removeClass('fa-check-square').addClass('fa-language');
+  // 1. Reset all buttons visually to inactive
+  $(".lang-view-btn").removeClass('active-lang');
+  // Change active icon (check-square) back to inactive icon (language)
+  $(".lang-view-btn").find('.fa').removeClass('fa-check-square').addClass('fa-language');
 
-    let targetButton;
-    let viewFunction;
+  let targetButton;
+  let viewFunction;
 
-    // 2. Determine the target button and the corresponding view function
-    if (view === 'greek') {
-        targetButton = $("#view-greek-only-btn");
-        viewFunction = hideParishAllRight;
-    } else if (view === 'english') {
-        targetButton = $("#view-english-only-btn");
-        viewFunction = hideParishAllLeft;
-    } else if (view === 'both') {
-        targetButton = $("#view-both-btn");
-        viewFunction = showParishBothColumns;
-    } else {
-        console.error("Invalid language view specified:", view);
-        return;
-    }
+  // 2. Determine the target button and the corresponding view function
+  if (view === 'greek') {
+    targetButton = $("#view-greek-only-btn");
+    viewFunction = hideParishAllRight;
+  } else if (view === 'english') {
+    targetButton = $("#view-english-only-btn");
+    viewFunction = hideParishAllLeft;
+  } else if (view === 'both') {
+    targetButton = $("#view-both-btn");
+    viewFunction = showParishBothColumns;
+  } else {
+    console.error("Invalid language view specified:", view);
+    return;
+  }
 
-    // 3. Set the target button to active state (for immediate feedback)
-    targetButton.addClass('active-lang');
-    // Change inactive icon (language) to active icon (check-square)
-    targetButton.find('.fa').removeClass('fa-language').addClass('fa-check-square');
-    
-    // 4. Update the global state
-    activeLanguageView = view;
+  // 3. Set the target button to active state (for immediate feedback)
+  targetButton.addClass('active-lang');
+  // Change inactive icon (language) to active icon (check-square)
+  targetButton.find('.fa').removeClass('fa-language').addClass('fa-check-square');
 
-    // 5. Apply the selected view
-    viewFunction();
-    console.log(`Switched to ${view} view.`);
+  // 4. Update the global state
+  activeLanguageView = view;
+
+  // 5. Apply the selected view
+  viewFunction();
+  console.log(`Switched to ${view} view.`);
 }
 
 
@@ -2858,44 +3174,44 @@ function setParishLanguageView(view) {
 // ----------------------------------------------------
 
 $(document).ready(function () {
-    // --- Event Delegation for Dynamic Buttons (Font Control) ---
-    // Delegation is attached to the document for dynamically created buttons.
-    
-    // INCREASE FONT SIZE BUTTON
-    $(document).on('click', '.enlargeFontBtn', function (e) {
-        e.preventDefault(); 
-        setParishFont(1.2);
-    });
+  // --- Event Delegation for Dynamic Buttons (Font Control) ---
+  // Delegation is attached to the document for dynamically created buttons.
 
-    // DECREASE FONT SIZE BUTTON
-    $(document).on('click', '.shrinkFontBtn', function (e) {
-        e.preventDefault();
-        setParishFont(0.8);
-    });
+  // INCREASE FONT SIZE BUTTON
+  $(document).on('click', '.enlargeFontBtn', function (e) {
+    e.preventDefault();
+    setParishFont(1.2);
+  });
+
+  // DECREASE FONT SIZE BUTTON
+  $(document).on('click', '.shrinkFontBtn', function (e) {
+    e.preventDefault();
+    setParishFont(0.8);
+  });
 
 
-    // --- Conditional Initialization ---
-    
-    const requiredReferrer = 'https://dcs.goarch.org/goa/dcs/parish.html';
-    const currentReferrer = document.referrer;
+  // --- Conditional Initialization ---
 
-    if (currentReferrer === requiredReferrer) {
-        console.log("Parish referrer matched. Initializing features.");
-        
-        // 1. Set default state to show both columns (tap-to-swap disabled by default)
-        showParishBothColumns(); 
+  const requiredReferrer = 'https://dcs.goarch.org/goa/dcs/parish.html';
+  const currentReferrer = document.referrer;
 
-        // 2. Run initial hiding and modification functions
-        hideClassesForParish();
-        hideParishSpaceAsteriskAndBrackets();
+  if (currentReferrer === requiredReferrer) {
+    console.log("Parish referrer matched. Initializing features.");
 
-        // 3. Create the menu and attach the outside click listener
-        createParishMenuButton();
-        $(document).on('click', closeParishMenuOnOutsideClick);
-        
-    } else {
-        console.log("Parish features NOT initialized. Referrer was:", currentReferrer || "[Direct access or no referrer]");
-    }
+    // 1. Set default state to show both columns (tap-to-swap disabled by default)
+    showParishBothColumns();
+
+    // 2. Run initial hiding and modification functions
+    hideClassesForParish();
+    hideParishSpaceAsteriskAndBrackets();
+
+    // 3. Create the menu and attach the outside click listener
+    createParishMenuButton();
+    $(document).on('click', closeParishMenuOnOutsideClick);
+
+  } else {
+    console.log("Parish features NOT initialized. Referrer was:", currentReferrer || "[Direct access or no referrer]");
+  }
 });
 
 // ----------------------------------------------------
@@ -2955,105 +3271,105 @@ $(document).ready(function () {
 
 // This file assumes jQuery is loaded elsewhere on the page.
 
-window.onload = function() {
-    
-    const frameAudioElement = document.getElementById('FrameAudio');
+window.onload = function () {
 
-    if (!frameAudioElement) {
-        // If the frame isn't found, stop silently.
-        return;
+  const frameAudioElement = document.getElementById('FrameAudio');
+
+  if (!frameAudioElement) {
+    // If the frame isn't found, stop silently.
+    return;
+  }
+
+  // --- I. Helper Functions ---
+
+  const removeButtonFromDOM = () => {
+    let currentButton = document.getElementById('turnOffAudioButton');
+    if (currentButton && currentButton.parentNode) {
+      currentButton.parentNode.removeChild(currentButton);
+    }
+  };
+
+  const createButtonInDOM = () => {
+    let stopButton = document.getElementById('turnOffAudioButton');
+    if (!stopButton) {
+      stopButton = document.createElement('button');
+      stopButton.id = 'turnOffAudioButton';
+      stopButton.textContent = 'X';
+      stopButton.onclick = terminateMediaSession;
+      document.body.appendChild(stopButton);
+    }
+  };
+
+  // --- II. Termination (Close Player) Function ---
+
+  function terminateMediaSession() {
+
+    if (frameAudioElement && frameAudioElement.contentWindow) {
+      let frameDocument = frameAudioElement.contentDocument || frameAudioElement.contentWindow.document;
+      let mediaElement = frameDocument.querySelector('video[name="media"]');
+
+      if (mediaElement) {
+        // Robust media shutdown
+        mediaElement.pause();
+        mediaElement.currentTime = 0;
+        mediaElement.src = "";
+        mediaElement.load();
+      }
     }
 
-    // --- I. Helper Functions ---
-    
-    const removeButtonFromDOM = () => {
-        let currentButton = document.getElementById('turnOffAudioButton');
-        if (currentButton && currentButton.parentNode) {
-            currentButton.parentNode.removeChild(currentButton);
-        }
-    };
-    
-    const createButtonInDOM = () => {
-        let stopButton = document.getElementById('turnOffAudioButton');
-        if (!stopButton) {
-            stopButton = document.createElement('button');
-            stopButton.id = 'turnOffAudioButton';
-            stopButton.textContent = 'X'; 
-            stopButton.onclick = terminateMediaSession;
-            document.body.appendChild(stopButton);
-        }
-    };
-
-    // --- II. Termination (Close Player) Function ---
-
-    function terminateMediaSession() {
-        
-        if (frameAudioElement && frameAudioElement.contentWindow) {
-            let frameDocument = frameAudioElement.contentDocument || frameAudioElement.contentWindow.document;
-            let mediaElement = frameDocument.querySelector('video[name="media"]'); 
-
-            if (mediaElement) {
-                // Robust media shutdown
-                mediaElement.pause();
-                mediaElement.currentTime = 0;
-                mediaElement.src = ""; 
-                mediaElement.load(); 
-            }
-        }
-        
-        // Final cleanup
-        if ('mediaSession' in navigator) {
-            navigator.mediaSession.playbackState = 'none';
-        }
-        
-        if (frameAudioElement) {
-            frameAudioElement.src = 'about:blank';
-        }
-        
-        removeButtonFromDOM();
+    // Final cleanup
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = 'none';
     }
 
-    // --- III. Event Delegation (jQuery Click Handler) ---
-    
-    // Selects links ending in .mp3 and targeting FrameAudio
-    const mp3LinkSelector = "a[href$='.mp3'][target='FrameAudio']";
+    if (frameAudioElement) {
+      frameAudioElement.src = 'about:blank';
+    }
 
-    // Attach delegated click listener to the document body using jQuery
-    $(document).on('click', mp3LinkSelector, function(event) {
-        
-        // Clear old session before starting a new one
-        removeButtonFromDOM();
-        if (frameAudioElement) {
-             frameAudioElement.src = 'about:blank';
-        }
-        // Let the browser handle navigating the iframe via the link's href.
-    });
+    removeButtonFromDOM();
+  }
 
-    // --- IV. Iframe Load Listener ---
+  // --- III. Event Delegation (jQuery Click Handler) ---
 
-    frameAudioElement.addEventListener('load', () => {
-        
-        // Small delay remains a robust safeguard for DOM rendering
-        setTimeout(() => {
-            let frameDocument = frameAudioElement.contentDocument || frameAudioElement.contentWindow.document;
-            let mediaElementInFrame = frameDocument.querySelector('video[name="media"]'); 
+  // Selects links ending in .mp3 and targeting FrameAudio
+  const mp3LinkSelector = "a[href$='.mp3'][target='FrameAudio']";
 
-            if (mediaElementInFrame) {
-                
-                // Create the button immediately upon element discovery
-                createButtonInDOM();
+  // Attach delegated click listener to the document body using jQuery
+  $(document).on('click', mp3LinkSelector, function (event) {
 
-                // Attach the removal listeners (only on terminal pause/end)
-                mediaElementInFrame.addEventListener('pause', () => {
-                    if (mediaElementInFrame.currentTime === 0 || mediaElementInFrame.ended) {
-                        removeButtonFromDOM();
-                    }
-                });
-                
-                mediaElementInFrame.addEventListener('ended', removeButtonFromDOM);
-            }
-        }, 100); 
-    });
+    // Clear old session before starting a new one
+    removeButtonFromDOM();
+    if (frameAudioElement) {
+      frameAudioElement.src = 'about:blank';
+    }
+    // Let the browser handle navigating the iframe via the link's href.
+  });
+
+  // --- IV. Iframe Load Listener ---
+
+  frameAudioElement.addEventListener('load', () => {
+
+    // Small delay remains a robust safeguard for DOM rendering
+    setTimeout(() => {
+      let frameDocument = frameAudioElement.contentDocument || frameAudioElement.contentWindow.document;
+      let mediaElementInFrame = frameDocument.querySelector('video[name="media"]');
+
+      if (mediaElementInFrame) {
+
+        // Create the button immediately upon element discovery
+        createButtonInDOM();
+
+        // Attach the removal listeners (only on terminal pause/end)
+        mediaElementInFrame.addEventListener('pause', () => {
+          if (mediaElementInFrame.currentTime === 0 || mediaElementInFrame.ended) {
+            removeButtonFromDOM();
+          }
+        });
+
+        mediaElementInFrame.addEventListener('ended', removeButtonFromDOM);
+      }
+    }, 100);
+  });
 
 }; // End of window.onload
 
