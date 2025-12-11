@@ -2979,6 +2979,16 @@ function createParishMenu() {
 
   // Menu content with font controls and language toggles
   menuDiv.innerHTML = `
+      <!-- NAVIGATION CONTROLS -->
+<!--  <h3>Navigation</h3> -->
+      <div class="nav-controls">
+          <button class="scroll-top-btn" onclick="scrollToTop(); document.getElementById('parish-menu').remove()">
+              <i class="fa fa-arrow-up"></i> Go to Quick Links
+          </button>
+      </div>
+
+      <hr> 
+
       <h2>Preferences</h2>
       <hr> <!-- Line break separating Heading from Font Controls -->
 
@@ -3020,17 +3030,7 @@ function createParishMenu() {
           <h5>When you select one language, Greek or English, you can tap on any paragraph in the service, and it will switch to the other language.</h5>
       </div>
 
-      <hr> <!-- Line break separating Language Controls and Navigation -->
-      
-      <!-- NAVIGATION CONTROLS -->
-      <h3>Navigation</h3>
-      <div class="nav-controls">
-          <button class="scroll-top-btn" onclick="scrollToTop()">
-              <i class="fa fa-arrow-up"></i> Go to Quick Links
-          </button>
-      </div>
-
-      <hr> 
+      <hr> <!-- Line break separating Language Controls and Close Button -->
       
       <!-- CLOSE BUTTON -->
       <button class="closeParishMenuBtn" onclick="document.getElementById('parish-menu').remove()">
@@ -3562,3 +3562,190 @@ function initializeAudioInterception() {
 // --- 7. Start the entire process immediately (The final line of execution) ---
 initializeAudioInterception();
 
+/**
+ * Searches for elements with a 'data-key' attribute that are descendants of 
+ * a 'span.melody'. It generates a dropdown containing Staff and Byzantine scores 
+ * (target="FrameScore") and an Audio link that targets "FrameAudio".
+ */
+function generateDynamicLinks() {
+    console.log('✅ Function generateDynamicLinks() started.');
+
+    // Configuration constants
+    const scoreBasePrefix = 'https://dcs.goarch.org/goa/dcs/'; 
+    const scoreUrlStructure = 'js/viewer/web/viewer.html?file=/media/m/dedes/'; 
+    const audioRootPrefix = 'https://dcs.goarch.org/media/a/'; 
+    
+    const dataKeyAttribute = 'data-key';
+    let dropdownCounter = 1;
+
+    // 1. Selector: Target elements must be descendants of 'span.melody' and have 'data-key'.
+    const targetElements = document.querySelectorAll(`span.melody [${dataKeyAttribute}]`);
+    console.log(`🔎 Found ${targetElements.length} element(s) to process.`);
+
+    targetElements.forEach((span, index) => {
+        
+        // --- 1. Exclusion Check ---
+        if (span.classList.contains('dummy')) {
+             console.log(`--- Processing Element ${index + 1} ---`);
+             console.log('   ⚠️ SKIPPING: Element has class "dummy".');
+             return; 
+        }
+        
+        const fullKeyValue = span.getAttribute(dataKeyAttribute);
+        
+        console.log(`--- Processing Element ${index + 1} ---`);
+
+        if (!fullKeyValue) {
+             console.log('   ⚠️ SKIPPING: Data Key was empty.');
+             return; 
+        }
+
+        // --- EXTRACT ORIGINAL TEXT BEFORE MODIFICATION ---
+        const originalMelodyName = span.textContent.trim();
+        if (originalMelodyName.length === 0) {
+            console.log('   ⚠️ SKIPPING: Original text content is empty.');
+            return;
+        }
+
+        // --- 2. Language/Context Check ---
+        const parentTD = $(span).closest('td');
+        let scoreLangCode = 'en'; 
+        let audioContextCode = 'tbd'; 
+
+        if (parentTD.hasClass('leftCell')) {
+            scoreLangCode = 'gr';
+            audioContextCode = 'gr'; 
+        } else if (parentTD.hasClass('rightCell')) {
+            scoreLangCode = 'en';
+            audioContextCode = 'tbd'; 
+        } 
+        
+        const scoreUrlPrefix = scoreBasePrefix + scoreUrlStructure + scoreLangCode + '/'; 
+        const audioUrlPrefix = audioRootPrefix + audioContextCode + '/';
+        
+        const dropdownID = `jqm-dropdown-${Date.now()}-${dropdownCounter++}`; 
+
+        // --- 3. Data Key Parsing ---
+        const initialParts = fullKeyValue.split('|');
+        const prefixPart = initialParts[0]; 
+        let suffixPart = initialParts.pop(); 
+        
+        const prefixSegments = prefixPart.split('.'); 
+        let bookSegment = 'book_missing';
+        let segmentA = 'seg_missing';
+        let modeSegment = 'm0'; 
+
+        if (prefixSegments[0]) {
+            bookSegment = prefixSegments[0]; 
+        }
+        if (prefixSegments[1]) {
+            segmentA = prefixSegments[1]; 
+        }
+        
+        if (prefixSegments.length >= 3 && prefixSegments[2]) {
+            modeSegment = prefixSegments[2].split('_')[0]; 
+        }
+        
+        // --- B. Extract File Name ('OteEkTouXylou') from Suffix ---
+        const lastDotIndex = suffixPart.lastIndexOf('.');
+        let fileNameSegment = suffixPart;
+
+        if (lastDotIndex !== -1) {
+            fileNameSegment = fileNameSegment.substring(0, lastDotIndex); 
+        }
+        
+        const prefixToRemove = 'heAU.';
+        
+        if (fileNameSegment.startsWith(prefixToRemove)) {
+            fileNameSegment = fileNameSegment.slice(prefixToRemove.length);
+        }
+        
+        // --- 4. Construct Path Segments ---
+        const scorePathBase = 
+            `${bookSegment}/` + 
+            `${segmentA}/` + 
+            `${modeSegment}/`; 
+            
+        const audioPathBase = 
+            `${bookSegment}/` + 
+            `${segmentA}/` +
+            `${modeSegment}/`; 
+
+        // ------------------------------------------------------------------
+        // --- 5. CREATE DROPDOWN TRIGGER LINK (MELODY NAME) ---
+        // ------------------------------------------------------------------
+        
+        const melodyLink = document.createElement('a');
+        melodyLink.href = '#'; 
+        melodyLink.textContent = originalMelodyName; 
+        melodyLink.setAttribute('data-jqm-dropdown', `#${dropdownID}`); 
+        melodyLink.title = 'Select notation score or audio.'; 
+
+        // ------------------------------------------------------------------
+        // --- 6. CREATE DROPDOWN CONTENT (Staff, Byzantine, Audio) ---
+        // ------------------------------------------------------------------
+        
+        const dropdownDiv = document.createElement('div');
+        dropdownDiv.id = dropdownID;
+        dropdownDiv.className = 'jqm-dropdown jqm-dropdown-tip alwb-media-dropdown-div';
+
+        const dropdownList = document.createElement('ul');
+        dropdownList.className = 'jqm-dropdown-menu jqm-dropdown-relative alwb-media-dropdown-menu';
+
+        const linkOptions = [
+            { type: 'score', notation: 'w', label: 'Staff' },
+            { type: 'score', notation: 'b', label: 'Byzantine' },
+            { type: 'audio', notation: null, label: 'Audio' } 
+        ];
+
+        linkOptions.forEach(option => {
+            let finalUrl = '';
+            let targetAttr = '';
+            
+            if (option.type === 'score') {
+                finalUrl = scoreUrlPrefix + scorePathBase + option.notation + '/' + fileNameSegment + '.pdf';
+                targetAttr = 'FrameScore'; // Set target for PDF files
+            } else { // Audio
+                finalUrl = audioUrlPrefix + audioPathBase + fileNameSegment + '.mp3';
+                targetAttr = 'FrameAudio'; // Set specific target for audio files
+            }
+            
+            const listItem = document.createElement('li');
+            const linkElement = document.createElement('a');
+            
+            linkElement.href = finalUrl;
+            linkElement.textContent = option.label;
+            
+            if (targetAttr) {
+                linkElement.target = targetAttr;
+                console.log(`   🔗 Generated ${option.label} Link (Target: ${targetAttr}): ${finalUrl}`);
+            } else {
+                 console.log(`   🔗 Generated ${option.label} Link (No Target): ${finalUrl}`);
+            }
+
+            listItem.appendChild(linkElement);
+            dropdownList.appendChild(listItem);
+        });
+
+        // Assemble the dropdown structure
+        dropdownDiv.appendChild(dropdownList);
+
+        // ------------------------------------------------------------------
+        // --- 7. FINAL REPLACEMENT: Assemble link and dropdown container ---
+        // ------------------------------------------------------------------
+        
+        span.innerHTML = '';
+        span.appendChild(melodyLink);
+        span.appendChild(dropdownDiv);
+        
+        console.log('   ✔️ Element updated successfully. PDF links target "FrameScore".');
+    });
+    console.log('✅ Function generateDynamicLinks() finished.');
+}
+
+// ------------------------------------------------------------------
+// --- jQuery Execution Wrapper ---
+//$(function() {
+//    generateDynamicLinks();
+//});
+// ------------------------------------------------------------------

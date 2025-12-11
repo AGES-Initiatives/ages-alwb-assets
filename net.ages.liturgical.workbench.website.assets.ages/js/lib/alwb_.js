@@ -1046,69 +1046,6 @@ $(document).ready(function () {
   convertClassToId();
 });
 
-// function insertVespersTOB() {
-//   const pageTitle = document.title;
-//   const validEndings = ['.ve', '.ve1', '.ve2', '.ve3', '.ve4', '.ve5', '.ve6', '.ve7', '.ve8', '.ve9', '.vl', '.vl2', '.pl1', '.pl5'];
-//   const targetTableId = "biTable"; // Define target ID once
-//   const newDivId = "LoB";
-
-//   // 1. Check if the page title matches any valid ending
-//   if (!validEndings.some(ending => pageTitle.endsWith(ending))) {
-//     // Page is not a Vespers service, exit early.
-//     return false;
-//   }
-
-//   console.log(`Document is a Vespers. Running content insertion script.`);
-
-//   // --- Content Insertion Script ---
-
-//   // 2. Define the HTML content template outside the main logic
-//   const quickLinksHTML = `
-//     <p class="lobTitle">Quick Links</p>
-//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk01(); return false;">Lord, I have cried</a></p>
-//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk02(); return false;">Gladsome Light</a></p>
-//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk03(); return false;">Readings</a></p>
-//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk04(); return false;">Litanies</a></p>
-//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk05(); return false;">Aposticha</a></p>
-//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk06(); return false;">Pre-festal Canon</a></p>
-//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk07(); return false;">Akathist</a></p>
-//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk08(); return false;">Paraklesis</a></p>
-//     <p class="bookmarklink"><a href="#" onclick="scrollToBkmrk09(); return false;">Trisagion - Apolytikia</a></p>
-//   `;
-
-//   function addDivBeforeTable() {
-//     // Step 1: Get a reference to the table using its ID
-//     const table = document.getElementById(targetTableId);
-
-//     // 3. Add existence check: If the table isn't found, stop here.
-//     if (!table) {
-//       console.warn(`Target table with ID '${targetTableId}' not found. Aborting content insertion.`);
-//       return false;
-//     }
-
-//     // Step 2: Create the new div element
-//     const newDiv = document.createElement("div");
-
-//     // Step 3 & 4: Set ID and optional classes
-//     newDiv.id = newDivId;
-//     //newDiv.classList.add("bookmarkDivStyle"); // Uncomment if you decide to use this class
-
-//     // Step 5: Add content from the extracted template
-//     newDiv.innerHTML = quickLinksHTML;
-
-//     // Step 6: Get the parent element of the table and insert the new div
-//     const parent = table.parentNode;
-//     parent.insertBefore(newDiv, table);
-
-//     return true; // Indicate success
-//   }
-
-//   // Call the function to run the code
-//   const insertionSuccess = addDivBeforeTable();
-
-//   // You can decide to return the success status
-//   return insertionSuccess;
-// }
 
 function insertVespersTOB() {
   // --- Constants ---
@@ -3042,6 +2979,16 @@ function createParishMenu() {
 
   // Menu content with font controls and language toggles
   menuDiv.innerHTML = `
+      <!-- NAVIGATION CONTROLS -->
+<!--  <h3>Navigation</h3> -->
+      <div class="nav-controls">
+          <button class="scroll-top-btn" onclick="scrollToTop(); document.getElementById('parish-menu').remove()">
+              <i class="fa fa-arrow-up"></i> Go to Quick Links
+          </button>
+      </div>
+
+      <hr> 
+
       <h2>Preferences</h2>
       <hr> <!-- Line break separating Heading from Font Controls -->
 
@@ -3083,17 +3030,7 @@ function createParishMenu() {
           <h5>When you select one language, Greek or English, you can tap on any paragraph in the service, and it will switch to the other language.</h5>
       </div>
 
-      <hr> <!-- Line break separating Language Controls and Navigation -->
-      
-      <!-- NAVIGATION CONTROLS -->
-      <h3>Navigation</h3>
-      <div class="nav-controls">
-          <button class="scroll-top-btn" onclick="scrollToTop()">
-              <i class="fa fa-arrow-up"></i> Go to Quick Links
-          </button>
-      </div>
-
-      <hr> 
+      <hr> <!-- Line break separating Language Controls and Close Button -->
       
       <!-- CLOSE BUTTON -->
       <button class="closeParishMenuBtn" onclick="document.getElementById('parish-menu').remove()">
@@ -3269,108 +3206,359 @@ $(document).ready(function () {
 });
 
 
-// This file assumes jQuery is loaded elsewhere on the page.
+//************************** */
+//AUDIO PLAYER
+//********************** */
+// ALWB.JS - Unified Audio Player Logic (DIV-based)
+"use strict"; 
 
-window.onload = function () {
+console.log("ALWB.JS: Script loaded.");
 
-  const frameAudioElement = document.getElementById('FrameAudio');
+// --- Global State Variables (Updated for DIV player) ---
+let playerDiv = null; 
+let audioElement = null;
+let isDragging = false;
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+let pendingUpdate = false; 
+let latestClientX = 0;
+let latestClientY = 0;
 
-  if (!frameAudioElement) {
-    // If the frame isn't found, stop silently.
-    return;
-  }
+let initialSearchLogged = false; 
 
-  // --- I. Helper Functions ---
+// --- 1. Player HTML Structure (Template for native DIV) ---
+const PLAYER_HTML_TEMPLATE = (audioUrl) => `
+    <div id="player-drag-handle" class="audio-player-header" 
+         style="user-select: none; touch-action: none;">
+        <span class="header-drag-text">Drag Player</span>
+        
+        <div class="header-controls-group">
+            <a id="download-link" 
+               href="${audioUrl}" 
+               download="audio_file.mp3" 
+               class="header-download-btn"
+               title="Download Audio File">
+                Download
+            </a>
+            <button id="close-button"
+                    class="header-close-btn"
+                    title="Close and Stop Player">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="audio-player-body">
+        <audio id="main-audio-player" controls preload="auto" class="w-full" src="${audioUrl}">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+`;
 
-  const removeButtonFromDOM = () => {
-    let currentButton = document.getElementById('turnOffAudioButton');
-    if (currentButton && currentButton.parentNode) {
-      currentButton.parentNode.removeChild(currentButton);
+// --- 2. Player Creation and Initialization ---
+function createMiniPlayer(audioUrl) {
+    if (playerDiv) return;
+
+    // Create the main container DIV
+    playerDiv = document.createElement('div');
+    playerDiv.id = 'floating-audio-player';
+    
+    // Apply REQUIRED fixed position styles
+    // NOTE: Player container needs a single class for overall styling, and position/z-index must be set inline.
+    playerDiv.className = 'audio-player-container';
+    playerDiv.style.width = '350px'; 
+    playerDiv.style.height = 'min-content';
+    
+    // FIX 1: Explicitly set position to fixed to ensure it floats and doesn't take up layout space.
+    playerDiv.style.position = 'fixed'; 
+    
+    // Initial State and Position (Bottom Left)
+    playerDiv.style.opacity = '0';
+    playerDiv.style.visibility = 'hidden';
+    playerDiv.style.bottom = '20px';
+    playerDiv.style.left = '20px';
+    playerDiv.style.zIndex = '9998'; 
+
+    // Inject the inner HTML
+    playerDiv.innerHTML = PLAYER_HTML_TEMPLATE(audioUrl);
+    document.body.appendChild(playerDiv);
+
+    // Get element references and attach listeners
+    audioElement = playerDiv.querySelector('#main-audio-player');
+    const closeButton = playerDiv.querySelector('#close-button');
+    const dragHandle = playerDiv.querySelector('#player-drag-handle');
+
+    // Attach click and drag listeners
+    if (closeButton) closeButton.addEventListener('click', window.hidePlayer);
+    if (dragHandle) dragHandle.addEventListener('pointerdown', handleDragStart);
+
+    // Set download file name for the link
+    const downloadLink = playerDiv.querySelector('#download-link');
+    const filename = audioUrl.split('/').pop().split('?')[0];
+    if (downloadLink) downloadLink.download = filename || 'audio_file.mp3';
+}
+
+
+// --- 3. Public Show/Hide Functions (Called by link conversion and close button) ---
+/**
+ * REPLACEMENT for window.loadNewAudio. Shows/creates the DIV player and starts playback.
+ * NOTE: Renamed to showPlayer for clarity.
+ */
+window.showPlayer = function(audioUrl) {
+    console.log(`[SHOW PLAYER]: Called with URL: ${audioUrl}`);
+    
+    if (!playerDiv) {
+        // Create player the first time it is called
+        createMiniPlayer(audioUrl);
     }
-  };
-
-  const createButtonInDOM = () => {
-    let stopButton = document.getElementById('turnOffAudioButton');
-    if (!stopButton) {
-      stopButton = document.createElement('button');
-      stopButton.id = 'turnOffAudioButton';
-      stopButton.textContent = 'X';
-      stopButton.onclick = terminateMediaSession;
-      document.body.appendChild(stopButton);
+    
+    // Update source only if needed
+    if (audioElement && audioElement.src !== audioUrl) {
+        audioElement.src = audioUrl;
     }
-  };
+    
+    // Show the player and attempt autoplay
+    if (playerDiv) {
+        playerDiv.style.opacity = '1';
+        playerDiv.style.visibility = 'visible';
+    }
+    if (audioElement) {
+        audioElement.play().catch(e => console.warn("Autoplay prevented:", e));
+    }
+}
 
-  // --- II. Termination (Close Player) Function ---
+/**
+ * Global function to hide the floating audio player DIV. (Called by close button)
+ */
+window.hidePlayer = function() {
+    console.log("[HIDE PLAYER]: Hiding audio player DIV.");
+    if (audioElement) {
+        audioElement.pause();
+        audioElement.currentTime = 0; 
+    }
+    if (playerDiv) { 
+        playerDiv.style.opacity = '0';
+        playerDiv.style.visibility = 'hidden';
+    }
+}
 
-  function terminateMediaSession() {
 
-    if (frameAudioElement && frameAudioElement.contentWindow) {
-      let frameDocument = frameAudioElement.contentDocument || frameAudioElement.contentWindow.document;
-      let mediaElement = frameDocument.querySelector('video[name="media"]');
+// --- 4. DRAG LOGIC (Robust, Native, and Fast) ---
 
-      if (mediaElement) {
-        // Robust media shutdown
-        mediaElement.pause();
-        mediaElement.currentTime = 0;
-        mediaElement.src = "";
-        mediaElement.load();
-      }
+function handleDragStart(e) {
+    if (!playerDiv) return;
+    
+    e.preventDefault(); 
+    
+    // Crucial for reliable dragging: Release pointer capture
+    if (e.pointerId !== undefined) {
+        e.currentTarget.releasePointerCapture(e.pointerId);
     }
 
-    // Final cleanup
-    if ('mediaSession' in navigator) {
-      navigator.mediaSession.playbackState = 'none';
+    const rect = playerDiv.getBoundingClientRect();
+
+    dragOffsetX = e.clientX - rect.left;
+    dragOffsetY = e.clientY - rect.top;
+    
+    isDragging = true;
+    playerDiv.style.zIndex = '9999'; 
+
+    // Attach listeners to the main document for movement and release
+    document.addEventListener('pointermove', dragMove);
+    document.addEventListener('pointerup', dragEnd);
+}
+
+function updatePlayerPosition() {
+    if (!playerDiv || !isDragging) {
+        pendingUpdate = false;
+        return;
     }
 
-    if (frameAudioElement) {
-      frameAudioElement.src = 'about:blank';
+    let newLeft = latestClientX - dragOffsetX;
+    let newTop = latestClientY - dragOffsetY;
+
+    // Boundary check (5px margin from the edge)
+    const maxWidth = window.innerWidth - playerDiv.offsetWidth;
+    const maxHeight = window.innerHeight - playerDiv.offsetHeight;
+
+    newLeft = Math.max(5, Math.min(newLeft, maxWidth - 5)); 
+    newTop = Math.max(5, Math.min(newTop, maxHeight - 5)); 
+    
+    // Apply new position
+    playerDiv.style.left = `${newLeft}px`;
+    playerDiv.style.top = `${newTop}px`;
+    
+    // Clear initial positioning properties (in case it started bottom/right)
+    playerDiv.style.bottom = 'auto';
+    playerDiv.style.right = 'auto';
+
+    pendingUpdate = false;
+}
+
+function dragMove(e) {
+    if (!isDragging || !playerDiv) return;
+    e.preventDefault(); 
+
+    latestClientX = e.clientX;
+    latestClientY = e.clientY;
+
+    if (!pendingUpdate) {
+        requestAnimationFrame(updatePlayerPosition);
+        pendingUpdate = true;
     }
+}
 
-    removeButtonFromDOM();
-  }
+function dragEnd() {
+    if (isDragging) {
+        isDragging = false;
+        playerDiv.style.zIndex = '9998'; 
 
-  // --- III. Event Delegation (jQuery Click Handler) ---
-
-  // Selects links ending in .mp3 and targeting FrameAudio
-  const mp3LinkSelector = "a[href$='.mp3'][target='FrameAudio']";
-
-  // Attach delegated click listener to the document body using jQuery
-  $(document).on('click', mp3LinkSelector, function (event) {
-
-    // Clear old session before starting a new one
-    removeButtonFromDOM();
-    if (frameAudioElement) {
-      frameAudioElement.src = 'about:blank';
+        // CRITICAL: Clean up global listeners
+        document.removeEventListener('pointermove', dragMove);
+        document.removeEventListener('pointerup', dragEnd);
+        
+        // Ensure the last move is processed
+        if (pendingUpdate) {
+            requestAnimationFrame(updatePlayerPosition);
+        }
     }
-    // Let the browser handle navigating the iframe via the link's href.
-  });
+}
 
-  // --- IV. Iframe Load Listener ---
 
-  frameAudioElement.addEventListener('load', () => {
+// ----------------------------------------------------------------------------------
+// --- 5. The Link Conversion Function (KEPT from original logic) -------------------
+// ----------------------------------------------------------------------------------
+/**
+ * Finds all MP3 links in the given document and converts them to call the parent's function.
+ * @param {Document} doc - The iframe's content document.
+ */
+function convertLinksToOnclick(doc) {
+    // Find all anchor tags whose href ends with .mp3 or .MP3
+    const mp3Links = doc.querySelectorAll('a[href$=".mp3"], a[href$=".MP3"]');
+    
+    if (mp3Links.length === 0) {
+        console.log("  [CONVERSION]: No MP3 links found for conversion.");
+        return;
+    }
+    
+    console.log(`  [CONVERSION]: Found ${mp3Links.length} MP3 links. Converting...`);
 
-    // Small delay remains a robust safeguard for DOM rendering
-    setTimeout(() => {
-      let frameDocument = frameAudioElement.contentDocument || frameAudioElement.contentWindow.document;
-      let mediaElementInFrame = frameDocument.querySelector('video[name="media"]');
+    mp3Links.forEach(link => {
+        
+        // --- Extract the clean root-relative path ---
+        let audioUrl; 
+        
+        try {
+            // Use the native URL API to parse the full absolute URL.
+            const urlObject = new URL(link.href);
+            // Extract only the path, search, and hash (gives /media/a/dedes/...)
+            audioUrl = urlObject.pathname + urlObject.search + urlObject.hash;
 
-      if (mediaElementInFrame) {
+        } catch (e) {
+            // Fallback
+            console.warn("  [CONVERSION]: URL API failed. Falling back to link.pathname.", e);
+            audioUrl = link.pathname;
+        }
+        
+        // Post-Extraction Safety Checks (Ensure it's root relative)
+        if (audioUrl && audioUrl.charAt(0) !== '/') {
+             audioUrl = '/' + audioUrl;
+        }
+        // ----------------------------------------------------------
+        
+        // Check if the link has already been converted to avoid redundant processing
+        if (link.dataset.alwbConverted === 'true') {
+            return;
+        }
 
-        // Create the button immediately upon element discovery
-        createButtonInDOM();
+        // 1. Overwrite the click handler directly for reliable interception
+        link.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // FIX 2: Call window.showPlayer directly since this script runs in the main window.
+            window.showPlayer(audioUrl); 
+            console.log(`  [CONVERSION]: Playing URL: ${audioUrl}`); // Log the exact URL being sent
+            return false;
+        };
+        
+        // 2. Clear the href to prevent default navigation (optional, but safe)
+        link.href = 'javascript:void(0)';
+        
+        // 3. Mark the link as converted
+        link.dataset.alwbConverted = 'true';
+    });
 
-        // Attach the removal listeners (only on terminal pause/end)
-        mediaElementInFrame.addEventListener('pause', () => {
-          if (mediaElementInFrame.currentTime === 0 || mediaElementInFrame.ended) {
-            removeButtonFromDOM();
-          }
-        });
+    console.log("  [CONVERSION]: All MP3 links successfully converted to custom player calls.");
+}
 
-        mediaElementInFrame.addEventListener('ended', removeButtonFromDOM);
-      }
-    }, 100);
-  });
+// ----------------------------------------------------------------------------------
+// --- 6. The Robust Initialization Function (KEPT from original logic) -------------
+// ----------------------------------------------------------------------------------
+/**
+ * Initiates the search for the FrameText element and, once found, sets up the load handler.
+ */
+function initializeAudioInterception() {
+    
+    // Only log the initial search message once to reduce console spam
+    if (!initialSearchLogged) {
+        console.log("ALWB.JS: Starting element search. Polling every 50ms until found...");
+        initialSearchLogged = true;
+    }
+    
+    // Attempt to find the iframe element
+    const frameText = document.getElementById('FrameText'); 
 
-}; // End of window.onload
+    if (!frameText) {
+        // If the element is not yet in the DOM (timing issue), retry shortly.
+        setTimeout(initializeAudioInterception, 50);
+        return;
+    }
+    
+    // --- ELEMENT FOUND! PROCEED WITH SETUP ---
+    console.log("ALWB.JS: Element 'FrameText' found. Attaching handler.");
 
+    /**
+     * Executes when the iframe content loads. It checks readiness and performs conversion.
+     */
+    const handleFrameLoad = function() {
+        try {
+            // Ensure the iframe and its document are accessible
+            if (!frameText.contentWindow || !frameText.contentWindow.document) {
+                return;
+            }
+
+            const iframeDocument = frameText.contentWindow.document;
+
+            // Check if the document is fully loaded before manipulating the DOM
+            if (iframeDocument.readyState === 'complete') {
+                console.log("  [HANDLER]: Frame content is complete. Starting link conversion.");
+                
+                // CRITICAL STEP: Convert the links in the newly loaded document
+                convertLinksToOnclick(iframeDocument);
+                
+                // Re-attach the function to the native onload event for future navigations
+                frameText.onload = handleFrameLoad;
+                
+            } else {
+                // Poll manually until the inner frame's document is ready
+                setTimeout(handleFrameLoad, 100); 
+            }
+
+        } catch (e) {
+            // This usually catches cross-origin security errors or transient failures
+            console.error("  [ERROR]: Frame access failure or handler error.", e);
+        }
+    };
+    
+    // 1. Attach to the native onload event (as a safety net for future navigations)
+    frameText.onload = handleFrameLoad;
+    
+    // 2. Execute immediately to catch the initial load of servicesindex.html
+    handleFrameLoad();
+}
+
+
+// --- 7. Start the entire process immediately (The final line of execution) ---
+initializeAudioInterception();
 
