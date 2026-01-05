@@ -1041,6 +1041,7 @@ $(document).ready(function () {
   //hideClassesForParish();
   insertVespersTOB();
   insertLiturgyTOB();
+  insertVesperalLiturgyTOB();
   insertMatinsOrdinary();
   insertMatinsTOB();
   convertClassToId();
@@ -1049,7 +1050,7 @@ $(document).ready(function () {
 
 function insertVespersTOB() {
   // --- Constants ---
-  const VALID_ENDINGS = ['.ve', '.ve1', '.ve2', '.ve3', '.ve4', '.ve5', '.ve6', '.ve7', '.ve8', '.ve9', '.vl', '.vl2', '.pl1', '.pl5'];
+  const VALID_ENDINGS = ['.ve', '.ve1', '.ve2', '.ve3', '.ve4', '.ve5', '.ve6', '.ve7', '.ve8', '.ve9', '.pl1', '.pl5'];
   const TARGET_TABLE_ID = "biTable";
   const NEW_DIV_ID = "LoB";
   const pageTitle = document.title;
@@ -1227,11 +1228,6 @@ function insertVespersTOB() {
   return insertionSuccess;
 }
 
-
-
-
-
-
 function insertLiturgyTOB() {
 
   const pageTitle = document.title;
@@ -1281,7 +1277,59 @@ function insertLiturgyTOB() {
     //convertClassToId();
     return; //stop b/c li is finished processing
   }//end if
-}//end li
+}//end insertLiturgyTOB
+
+function insertVesperalLiturgyTOB() {
+
+  const pageTitle = document.title;
+  const validEndings = ['.vl', '.vl2'];
+
+  //Service is a vesperal liturgy
+  //if (pageTitle.endsWith('.li')) {
+  if (validEndings.some(ending => pageTitle.endsWith(ending))) {
+    console.log(`Document is a Vesperal Liturgy. Running content insertion script.`);
+
+    // --- Content Insertion Script ---
+    // Function to create and insert the div before the table
+    function addDivBeforeTable() {
+      // Step 1: Get a reference to the table using its ID
+      const table = document.getElementById("biTable");
+
+      // Step 2: Create the new div element
+      const newDiv = document.createElement("div");
+
+      // Step 3: Add the new ID to the div
+      newDiv.id = "LoB";
+
+      // Step 4: Add the new class to the div
+      //newDiv.classList.add("bookmarkDivStyle");
+
+      // Step 5: Add content to the new div using innerHTML with a template literal
+      // const currentPath used when href is a link to one bookmark and not the onclick
+      // const currentPath = document.location.origin + document.location.pathname;
+
+      newDiv.innerHTML = `<p class="lobTitle">Quick Links</p>
+<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk01(); return false;">Lord, I have cried</a></p>
+<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk02(); return false;">Entrance | Gladsome Light</a></p>
+<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk03(); return false;">Readings</a></p>
+<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk04(); return false;">Epistle Reading</a></p>
+<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk05(); return false;">Gospel Reading</a></p>
+<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk06(); return false;">Great Entrance</a></p>
+<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk07(); return false;">The Creed</a></p>
+<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk08(); return false;">Lord's Prayer</a></p>
+`;
+      // Step 6: Get the parent element of the table and insert the new div
+      const parent = table.parentNode;
+      parent.insertBefore(newDiv, table);
+    }
+
+    // Call the function to run the code
+    addDivBeforeTable();
+
+    //convertClassToId();
+    return; //stop b/c li is finished processing
+  }//end if
+}//end insertVesperalLiturgyTOB
 
 function insertMatinsOrdinary() {
 
