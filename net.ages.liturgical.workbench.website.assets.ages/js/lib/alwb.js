@@ -2850,7 +2850,7 @@ function hideClassesForParish() {
 
 function hideParishSpaceAsteriskAndBrackets() {
   const body = document.body;
-  const regex = new RegExp('\\ \\*|[\\[\\]]', 'g');
+  const regex = new RegExp('\\ \\*|[\\[\\]]|\u2044\u2044\ |\u2044\ ', 'g');
   body.innerHTML = body.innerHTML.replace(regex, '');
 }
 
