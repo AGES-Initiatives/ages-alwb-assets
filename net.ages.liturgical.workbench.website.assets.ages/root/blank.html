@@ -9,662 +9,123 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="https://templates.goarch.org/assets/templates/common/icons/favicon-128.png"
         sizes="128x128">
-    <style>
-        html {
-            height: 100%;
-            min-height: 100%;
-            min-width: 100%;
-        }
 
+    <style>
+        html,
         body {
+            height: 100%;
             background: #fff;
+            margin: 0;
+            padding: 0;
         }
 
         .vertical-center {
-            min-height: 100%;
-            min-height: 100vh;
+            /* Changed from 'center' to 'flex-start' to fix the logo position */
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 20px;
+            /* Gives the logo a little breathing room from the top */
         }
 
         .jumbotron {
             background: none;
+            padding-top: 0 !important;
+            /* Removes Bootstrap's massive top gap */
+            width: 100%;
         }
 
         .jumbotron img {
             display: block;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 600px) {
-            .jumbotron h3 {
-                font-size: 20px;
-            }
-        }
-
-        /* borders */
-        hr.dashed {
-            border-top: 1px dashed #bbb;
-        }
-
-        hr.solid {
-            border-top: 1px solid #bbb;
-        }
-
-        p.indent {
-            margin-left: 20px;
-            margin-bottom: 0;
-            font-size: 14px;
+            margin: 0 auto 20px auto;
+            /* Centers logo and adds space below it */
         }
 
         p.description {
-            font-size: 16px;
-            font-weight: normal;
-            margin-left: 9%;
-            margin-right: 6%;
+            font-size: 14px;
+            margin: 0 6% 15px 9%;
             text-align: left;
-            text-indent: 0pt;
         }
 
         p.explanation1 {
             color: red;
-            font-size: 16px;
-            font-weight: normal;
-            margin-left: 0%;
-            margin-right: 10%;
+            font-size: 14px;
+            margin: 0 10% 10px 10pt;
             text-align: left;
-            text-indent: 10pt;
         }
 
-        p.explanation2 {
+        span.explanation2 {
             color: red;
-            font-size: 12px;
-            font-weight: normal;
-            margin-left: 0%;
-            margin-right: 10%;
-            margin-top: -10pt;
-            text-align: left;
-            text-indent: 10pt;
+            font-size: 14px;
         }
 
-        h5 {
-            margin-bottom: 5px;
+        hr.solid {
+            border-top: 1px solid #bbb;
+            margin: 20px 0;
+        }
+
+        #newsFrame {
+            transition: height 0.3s ease;
+            /* Makes the expansion look like a smooth slide rather than a snap */
         }
     </style>
+
 </head>
 
 <body>
     <div class="container vertical-center">
         <div class="jumbotron">
             <img src="img/goa-dcs-app-logotype-1000.png" alt="GOARCH Logo" width="90%" height="auto" />
+
             <p class="description">The Digital Chant Stand of the Greek Orthodox Archdiocese of America provides
                 resources intended to enhance the worship experience of the Orthodox faithful with easily accessible
                 liturgical texts and music.</p>
+
             <hr class="solid">
+
             <p class="explanation1">This pane is where musical scores and audio recordings open when you tap a media
-                link.</p>
-            <p class="explanation1">On mobile devices, select from the following options.</p>
-            <p><b><a href="https://dcs.goarch.org/goa/dcs/servicesindex.html" target="_blank">Remove this pane.</a></b>
-            </p>
-            <p class="explanation2">This will open the DCS without the media pane.</p>
-            <p><b><a href="https://dcs.goarch.org/parish" target="_blank">Go to today's services.</a></b></p>
-            <p class="explanation2">This will open Today's Services.</p>
+                link. On mobile devices, select from the following options.</p>
+
+            <p class="explanation1"><b><a href="https://dcs.goarch.org/goa/dcs/servicesindex.html"
+                        target="_blank">Remove pane. </a></b><span class="explanation2">Open the full DCS without the
+                    media pane.</span></p>
+
+            <p class="explanation1"><b><a href="https://dcs.goarch.org/parish" target="_blank">Today's Services.
+                    </a></b><span class="explanation2">Go to the Liturgical texts of Today's Services.</span></p>
+
             <hr class="solid">
-            <h3><b>DCS News and Updates</b></h3>
-            <h4><b>01-16-2026</b></h4>
-            <p>The DCS is updated through the end of 2026.</p>
-            <hr class="dashed">
-            <h4><b>12-04-2025</b></h4>
-            <h4>
-                <FONT COLOR="#ff0000">New Feature Alert</FONT>
-            </h4>
-            <h5>There are now Quick Links at the top of Vespers, Matins, and Liturgy, as well as a new "Scroll to top"
-                button on the toolbar.</h5>
-            <h5>Audio recordings are now played in a new audio player that can be dragged and closed. You will need to refresh your browser and delete the DCS browsing data in your casche. This new feature does not function well on Android tablets using Firefox. We recommend using Chrome browser on Android.</h5>
-            <hr class="dashed">
-            <h4><b>11-16-2025</b></h4>
-            <p>The DCS is updated through June 2026.</p>
-            <hr class="dashed">
-            <h4><b>03-04-2025</b></h4>
-            <p>The DCS is updated through the end of 2025.</p>
-            <hr class="dashed">
-            <h4><b>02-19-2025</b></h4>
-            <p>The DCS is updated through June 2025.</p>
-            <p>Saturday of the Souls</p>
-            <h5>The Saturday of the Souls, this year, is on Feb 22. The following two Saturdays, March 1 and 8, strictly
-                speaking are not Saturdays of Souls, according to the liturgical books, and that is why you won't see
-                hymns about the deceased on those days. March 1 is the Saturday of Cheese Week, which each year is
-                dedicated to honor the memory of the holy Ascetics. The next Saturday, this year March 8, is the
-                Saturday of the first week of Lent, which is always dedicated to the memory of the miracle of the kolyva
-                by St. Theodore. It is the following three Saturdays that again are dedicated to praying for the
-                deceased. In common parish practice, after the first Saturday of the Souls (this year Feb 22), the next
-                two Saturdays are thought of as also being Saturdays of Souls, and folks expect and get a memorial
-                service at the end of liturgy, however inconsistent this is with the liturgical books.</h5>
-            <h5>All that having been said, we've appended the special litany and prayer for Saturday of Souls to the end
-                of the Memorial Service on the DCS. You can find it using the menu: <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/eu/memorial/en/bk.eu.memorial.pdf"
-                    target="_blank">Sacraments and Services > Sacraments and Blessings > Memorial</a>.</h5>
-            <hr class="dashed">
-            <h4><b>01-17-2025</b></h4>
-            <p>The DCS is updated through April 2025.</p>
-            <h4><a href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2025.pdf"
-                    target="_blank">DCS Liturgical Guide 2025</a></h4>
-            <h6>Sacraments and Services > Liturgical Guides > Sundays/Feastdays. Or <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2025.pdf"
-                    target="_blank">here</a>.</h6>
-            <hr class="dashed">
-            <h4><b>12-17-2024</b></h4>
-            <h4>
-                <FONT COLOR="#ff0000">New Materials Alert</FONT>
-            </h4>
-            <h5><b>Audio recordings of Saturday evening Vespers</b></h5>
-            <h5>Recordings of resurrectional hymns from the Octoechos are being produced by Eikona. These are recordings
-                of the scores that are currently available on the DCS. They are provided to assist church musicians to
-                learn to sing them well in church. So far Modes 1, 2, 3, and 4 have been completed and are available on
-                the DCS. The rest of the Modes will be added as they become available.</h5>
 
-            <h5><b><a href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2025.pdf"
-                        target="_blank">DCS Liturgical Guide 2025</a></b></h5>
-            <h6>Sacraments and Services > Liturgical Guides > Sundays/Feastdays. Or <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2025.pdf"
-                    target="_blank">here</a>.</h6>
-
-
-            <hr class="dashed">
-            <h4><b>11-22-2024</b></h4>
-            <p>The DCS is updated through February 2025.</p>
-            <h4><a href="https://dcs.goarch.org/goa_2024_0104/dcs/" target="_blank">Sep – Dec 2024 services archived
-                    here</a>.</h4>
-            <h6>Sacraments and Services > DCS Archives > <a href="https://dcs.goarch.org/goa_2024_0912/dcs/"
-                    target="_blank">Archive Sep – Dec 2024</a>.</h6>
-            <h4><a href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2025.pdf"
-                    target="_blank">DCS Liturgical Guide 2025</a></h4>
-            <h6>Sacraments and Services > Liturgical Guides > Sundays/Feastdays. Or <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2025.pdf"
-                    target="_blank">here</a>.</h6>
-            <h4>
-                <FONT COLOR="#ff0000">New Materials Alert</FONT>
-            </h4>
-            <h5><b>Epiphany Canons and Katavasias</b></h5>
-            <ul>
-                <li>New metered translations of both canons of Epiphany (including the acrostics) have been created.
-                </li>
-                <li>The Katavasias of Epiphany and Ode ix of both canons have been reviewed, corrected, and improved.
-                </li>
-                <li>The new scores (in both notations) and new audio recordings of these are available on the DCS.</li>
-            </ul>
-            <p class=indent>Here are links to translation notes, for those who are interested:</p>
-            <ul>
-                <li><a href="https://dcs.goarch.org/media/m/dedes/en/other/t/EpiphanyCanon1Notes.pdf"
-                        target="_blank">Epiphany Canon 1 - Translation Notes</a></li>
-                <li><a href="https://dcs.goarch.org/media/m/dedes/en/other/t/EpiphanyCanon2Notes.pdf"
-                        target="_blank">Epiphany Iambic Canon - Translation Notes</a></li>
-            </ul>
-            <hr class="dashed">
-            <h4><b>09-23-2024</b></h4>
-            <h4>
-                <FONT COLOR="#ff0000">New Materials Alert</FONT>
-            </h4>
-            <h5><b>Christmas Canons and Katavasias</b></h5>
-            <ul>
-                <li>A new translation of the Iambic Canon (including the acrostic) has been created.</li>
-                <li>The Katavasias of Christmas and Ode ix of both canons have been reviewed, corrected, and improved.
-                </li>
-                <li>The new scores (in both notations) and new audio recordings of these are available on the DCS.</li>
-            </ul>
-            <p class=indent>Here are links to translation notes, for those who are interested:</p>
-            <ul>
-                <li><a href="https://dcs.goarch.org/media/m/dedes/en/other/t/XmasKA1Notes.pdf" target="_blank">Christmas
-                        Canon 1 Katavasias and Ode ix - Translation Notes</a></li>
-                <li><a href="https://dcs.goarch.org/media/m/dedes/en/other/t/XmasCanon2Notes.pdf"
-                        target="_blank">Christmas Iambic Canon - Translation Notes</a></li>
-            </ul>
-            <h5><b>Sacraments: Baptism and Wedding Scores and Audio</b></h5>
-            <p class="indent">The scores (in both notations) and audio recordings of the hymns sung at baptisms and
-                weddings have been updated. Find these using the DCS menu: Sacraments and Services > Sacraments and
-                Blessings.</p>
-            <hr class="dashed">
-            <h4><b>09-06-2024</b></h4>
-            <h4>
-                <FONT COLOR="#ff0000">DCS App Updates</FONT>
-            </h4>
-            <h5>App users have reported that they are not getting the updates to the Services Calendar. You may need to
-                do this manually. </h5>
-            <ul>
-                <li><b>iPad/iPhone:</b> Open the Services Calendar index; tap the refresh button, which looks like a
-                    circular arrow. Wait a minute. This may cause the app to hang. If so, simply exit the app and
-                    relaunch it. Do this regularly to be sure you have the latest updates.</li>
-                <li><b>Android:</b> You may need to manually clear the app’s cache. Go to the settings of your Android
-                    phone or device, go to Apps > GOA Digital Chant Stand > App info > Storage & cache. Tap on Clear
-                    storage/data and Clear cache. Then launch the app.</li>
-            </ul>
-            <hr class="dashed">
-            <h4><b>09-04-2024</b></h4>
-            <h4>
-                <FONT COLOR="#ff0000">New Materials Alert</FONT>
-            </h4>
-            <h5>In response to several requests, augmented versions of Vespers and Matins for the Sep 17 commemoration
-                of St. Sophia and her daughters Faith, Hope, and Love have been added to the DCS, for those who wish to
-                celebrate it festively.</h5>
-            <hr class="dashed">
-            <h5><b>08-13-2024</b></h5>
-            <p>The DCS is updated through December 2024.</p>
-            <h4><a href="https://dcs.goarch.org/goa_2024_0508/dcs/" target="_blank">May – Aug 2024 services archived
-                    here</a>.</h4>
-            <h6>Sacraments and Services > DCS Archives > <a href="https://dcs.goarch.org/goa_2024_0508/dcs/"
-                    target="_blank">Archive May – Aug 2024</a>.</h6>
-            <h4>
-                <FONT COLOR="#ff0000">New Materials Alert</FONT>
-            </h4>
-            <h5>New audio recordings of Saturday evening Vespers (resurrectional hymns from the Octoechos) are being
-                produced by Eikona. These are recordings of the scores that are currently available on the DCS. They are
-                provided to assist church musicians to learn to sing them well in church. So far Mode 1 and Mode 2 have
-                been completed and are available on the DCS. The rest of the Modes will be added as they become
-                available.</h5>
-            <hr class="dashed">
-            <h5><b>06-11-2024</b></h5>
-            <h4>
-                <FONT COLOR="#ff0000">New Feature Alert</FONT>
-            </h4>
-            <h5>The Liturgy Variables are now offered in two separate files, one with Antiphons, and another with Typika
-                and Beatitudes, when appropriate.</h5>
-            <hr class="dashed">
-            <h5><b>05-16-2024</b></h5>
-            <p>The DCS is updated through August 2024.</p>
-            <h4><a href="https://dcs.goarch.org/goa_2024_0104/dcs/" target="_blank">Jan – Apr 2024 services archived
-                    here</a>.</h4>
-            <h6>Sacraments and Services > DCS Archives > <a href="https://dcs.goarch.org/goa_2024_0104/dcs/"
-                    target="_blank">Archive Jan – Apr 2024</a>.</h6>
-            <hr class="dashed">
-            <h5><b>04-30-2024</b></h5>
-            <h4>
-                <FONT COLOR="#ff0000">Service Correction Alert</FONT>
-            </h4>
-            <h5>The text of the holy Unction service on May 1 had an error: Prayer 7 was missing. This has been
-                corrected. In order to be sure to get the latest files, be sure to empty your browser's cache
-                beforehand.</h5>
-            <hr class="dashed">
-            <h5><b>03-16-2024</b></h5>
-            <p>The DCS is updated through June 2024.</p>
-            <h4><a href="https://dcs.goarch.org/goa_2024_0104/dcs/" target="_blank">Jan – Apr 2024 services archived
-                    here</a>.</h4>
-            <h6>Sacraments and Services > DCS Archives > <a href="https://dcs.goarch.org/goa_2024_0104/dcs/"
-                    target="_blank">Archive Jan – Apr 2024</a>.</h6>
-            <h4>
-                <FONT COLOR="#ff0000">New Materials Alert</FONT>
-            </h4>
-            <h5>We are in the process of loading the Patriarchal Greek text of the New Testament lessons, i.e. the
-                Epistle and Gospel readings, into the DCS. You will begin seeing this in most of the dated services.
-            </h5>
-            <h4>
-                <FONT COLOR="#ff0000">New Feature Alert</FONT>
-            </h4>
-            <h5>The list of Katavasias music has been moved to the Music List on the Sacraments and Services page.</h5>
-            <hr class="dashed">
-            <h5><b>02-27-2024</b></h5>
-            <p>Feast of the Forty Martyrs - March 8 this year</p>
-            <h5>The feast of the holy Forty Martyrs is normally celebrated on March 9. This year, March 9 is the
-                Saturday of the Souls, and therefore, according to the typicon, the commemoration of the Forty Martyrs
-                is moved to Friday, March 8. Because this is a minor feast on a Friday, the normal fasting rule for
-                Friday is somewhat relaxed: wine, oil, mollusks, and crustaceans are allowed. Refrain from meat, fish,
-                dairy, and eggs.</h5>
-            <hr class="dashed">
-            <h5><b>02-22-2024</b></h5>
-            <p>Saturday of the Souls</p>
-            <h5>The Saturday of the Souls, this year, is on March 9. The following two Saturdays, March 16 and 23,
-                strictly speaking are not Saturdays of Souls, according to the liturgical books, and that is why you
-                won't see hymns about the deceased on those days. March 16 is the Saturday of Cheese Week, which each
-                year is dedicated to honor the memory of the holy Ascetics. The next Saturday, this year March 21, is
-                the Saturday of the first week of Lent, which is always dedicated to the memory of the miracle of the
-                kolyva by St. Theodore. It is the following three Saturdays that again are dedicated to praying for the
-                deceased. In common parish practice, after the first Saturday of the Souls (this year March 9), the next
-                two Saturdays are thought of as also being Saturdays of Souls, and folks expect and get a memorial
-                service at the end of liturgy, however inconsistent this is with the liturgical books.</h5>
-            <h5>All that having been said, we've appended the special litany and prayer for Saturday of Souls to the end
-                of the Memorial Service on the DCS. You can find it using the menu: <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/eu/memorial/en/bk.eu.memorial.pdf"
-                    target="_blank">Sacraments and Services > Sacraments and Blessings > Memorial</a>.</h5>
-            <hr class="dashed">
-            <h5><b>01-18-2024</b></h5>
-            <p>The DCS is updated through April 2024.</p>
-            <h4><a href="https://dcs.goarch.org/goa_2023_0912/dcs/" target="_blank">Sep thru Dec 2023 services archived
-                    here</a>.</h4>
-            <h6>Sacraments and Services > DCS Archives > <a href="https://dcs.goarch.org/goa_2023_0912/dcs/"
-                    target="_blank">Archive Sep-Dec 2023</a>.</h6>
-            <h4><a href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2024.pdf"
-                    target="_blank">Liturgical Guide 2024</a></h4>
-            <h6>Sacraments and Services > Liturgical Guides > Sundays/Feastdays. Or <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2024.pdf"
-                    target="_blank">here</a>.</h6>
-            <hr class="dashed">
-            <h5><b>11-02-2023</b></h5>
-            <p>The DCS is updated through February 2024.</p>
-            <h5>
-                <FONT COLOR="#ff0000">It is strongly recommended that users refresh/reload the DCS on the apps and and
-                    refresh browser window/frames on computers, in order to be sure to get the latest files.</FONT>
-            </h5>
-            <br>
-            <h4><a href="https://dcs.goarch.org/goa_2023_0912/dcs/" target="_blank">Sep thru Dec 2023 services archived
-                    here</a>.</h4>
-            <h6>Sacraments and Services > DCS Archives > <a href="https://dcs.goarch.org/goa_2023_0912/dcs/"
-                    target="_blank">Archive Sep-Dec 2023</a>.</h6>
-            <h4><a href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2024.pdf"
-                    target="_blank">Liturgical Guide 2024</a></h4>
-            <h6>Sacraments and Services > Liturgical Guides > Sundays/Feastdays. Or <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2024.pdf"
-                    target="_blank">here</a>.</h6>
-            <hr class="dashed">
-            <h5><b>10-19-2023</b></h5>
-            <h4>
-                <FONT COLOR="#ff0000">New Feature Alert</FONT>
-            </h4>
-            <h5>There is a new index of the musical scores and audio recording that are currently available in the DCS,
-                for the four principal liturgical sources, Octoechos, Menaion, Triodion, and Pentecostarion. This index
-                will be updated periodically, as new scores and recordings are added. You can find the new index, "Media
-                Lists," on the Sacraments and Services page.</h5>
-            <hr class="dashed">
-            <h5><b>10-16-2023</b></h5>
-            <h4>New Materials Alert</h4>
-            <h5>There are new scores in Byzantine notation, Greek and English, for the Great Doxology as well as the
-                Sunday Troparion in the Eight Modes, which can be accessed through the media links preceding the Great
-                Doxology at the end of Matins. These were produced by Georgios Theodoridis, Archon Music Instructor of
-                the Greek Orthodox Archdiocese of America.</h5>
-            <hr class="dashed">
-            <h5><b>09-01-2023</b></h5>
-            <p>The DCS is updated through December 2023.</p>
-            <h5>
-                <FONT COLOR="#ff0000">It is strongly recommended that users refresh/reload the DCS on the apps and and
-                    refresh browser window/frames on computers, in order to be sure to get the latest files.</FONT>
-            </h5>
-            <br>
-            <h4><a href="https://dcs.goarch.org/goa_2023_0508/dcs/" target="_blank">May thru Aug 2023 services archived
-                    here</a>.</h4>
-            <h6>Sacraments and Services > DCS Archives > <a href="https://dcs.goarch.org/goa_2023_0508/dcs/"
-                    target="_blank">Archive May-Aug 2023</a>.</h6>
-            <h4><a href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2024.pdf"
-                    target="_blank">Liturgical Guide 2024</a></h4>
-            <h6>Sacraments and Services > Liturgical Guides > Sundays/Feastdays. Or <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2024.pdf"
-                    target="_blank">here</a>.</h6>
-            <hr class="dashed">
-            <h5><b>08-12-2023</b></h5>
-            <h4>
-                <FONT COLOR="#ff0000">Service Correction Alert</FONT>
-            </h4>
-            <h5>The following corrections have been made affecting Sunday, Aug 13, Divine Liturgy, Variable Parts, and
-                Liturgical Guide:</h5>
-            <ul>
-                <li>The refrain for the Second Antiphon should be of the feast: "Save us, O Son of God, <FONT
-                        COLOR="#ff0000">who were transfigured on Mt. Tabor.</FONT> We sing to You, Alleluia."</li>
-                <li>The Entrance Hymn should be: "For with You, Lord, is the fountain of life; in Your light we shall
-                    see light. Save us, O Son of God, <FONT COLOR="#ff0000">risen from the dead...</FONT>"</li>
-                <li>After the Entrance, the Apolytikion of the parish church is not sung.</li>
-                <li>The Communion Hymn is only of the feast.</li>
-            </ul>
-            <hr class="dashed">
-            <h5><b>08-07-2023</b></h5>
-            <h4>Small and Great Paraklesis services</h4>
-            <h5>Some folks are having a hard time accessing the pdf files of the Small and Great Paraklesis services. If
-                you are unable to open the files using the links in menu on the DCS, you can use these links:</h5>
-            <h6><a href="https://dcs.goarch.org/m/other/t/spge.pdf" target="_blank">Small Paraklesis: Greek-English</a>
-            </h6>
-            <h6><a href="https://dcs.goarch.org/m/other/t/spen.pdf" target="_blank">Small Paraklesis: English</a></h6>
-            <h6><a href="https://dcs.goarch.org/m/other/t/gpge.pdf" target="_blank">Great Paraklesis: Greek-English</a>
-            </h6>
-            <h6><a href="https://dcs.goarch.org/m/other/t/gpen.pdf" target="_blank">Great Paraklesis: English</a></h6>
-            <hr class="dashed">
-            <h5><b>08-02-2023</b></h5>
-            <p>The DCS is updated through October 2023.</p>
-            <h4>New Materials Alert</h4>
-            <h5>There are new scores in Byzantine notation, Greek and English, for the Small and Great Paraklesis
-                Supplication services to the Theotokos. These were produced by Georgios Theodoridis, Archon Music
-                Instructor of the Greek Orthodox Archdiocese of America.</h5>
-            <h5>The painstaking work of reviewing and updating of the English translation of the hymns for Sunday Matins
-                has been completed. Scores are available in both staff and Byzantine notations. Also new audio
-                recordings of these hymns are available for the first six modes, to assist church singers in the arduous
-                task of learning the new material. The rest will be added soon.</h5>
-            <h5>The new updated translation of the hymns of the Eleven Eothina (Exaposteilaria, Theotokia, and
-                Doxastica) has also been completed. The new texts will begin appearing in August. Scores in both
-                notations and audio recordings will be added as they become available.</h5>
-            <hr class="dashed">
-            <h5><b>07-10-2023</b></h5>
-            <h4>New Materials Alert</h4>
-            <h5>The review and updating of the English translation of the hymns for Sunday Matins of Grave Mode has been
-                completed, with new musical scores. The first instance of this will be on Sunday, July 30.</h5>
-            <hr class="dashed">
-            <h5><b>07-01-2023</b></h5>
-            <h4>New Materials Alert</h4>
-            <h5>There is a new translation and score for the Lauds Glory of the Sunday of the Holy Fathers. The first
-                instance of this will be on July 16 at Sunday Matins.</h5>
-            <h5>The review and updating of the English translation of the hymns for Sunday Matins of Mode pl. 2 has been
-                completed, with new musical scores. The first instance of this will be on Sunday, July 23.</h5>
-            <hr class="dashed">
-            <h5><b>06-24-2023</b></h5>
-            <h4>New Octoechos Texts and Music</h4>
-            <h5>The review and updating of the English translation of the hymns for Sunday Matins of Mode pl. 1 has been
-                completed, with new musical scores. The first instance of this will be on Sunday, July 16. With God's
-                help, we are on track to complete the review and rescoring of the rest of Sunday Matins by the end of
-                July.</h5>
-            <hr class="dashed">
-            <h5><b>06-16-2023</b></h5>
-            <h4>New Octoechos Texts and Music</h4>
-            <h5>The review and updating of the English translation of the hymns for Sunday Matins of Mode 4 has been
-                completed, with new musical scores. We hope to produce new audio recordings, to help church singers
-                learn the new music.</h5>
-            <hr class="dashed">
-            <h5><b>06-12-2023</b></h5>
-            <h4>New Octoechos Texts and Music</h4>
-            <h5>The review and updating of the English translation of the hymns for Sunday Matins of Modes 1, 2, and 3
-                has been completed, with new musical scores. The new texts will begin appearing on Sunday, June 18. We
-                hope to produce new audio recordings, to help church singers learn the new music.</h5>
-            <hr class="dashed">
-            <h5><b>05-16-2023</b></h5>
-            <p>The DCS is updated through August 2023.</p>
-            <h4>New Octoechos Texts and Music</h4>
-            <h5>The new English translation and musical scores of Octoechos resurrectional hymns for Saturday evening
-                Vespers has been completed and included in this update. The older scores are appended to the new scores.
-            </h5>
-            <hr class="dashed">
-            <h5><b>04-19-2023</b></h5>
-            <h4>New Materials Alert</h4>
-            <h5>A new English translation and musical scores of Octoechos resurrectional hymns for Saturday evening
-                Vespers, Mode pl. 1, will begin to appear in the services beginning in Bright Week. The older scores are
-                appended to the new scores.</h5>
-            <hr class="dashed">
-            <h5><b>04-12-2023</b></h5>
-            <h4>HOLY UNCTION.</h4>
-            <p>Texts and music for Holy Unction are available on the DCS, Holy Wednesday, April 12.</p>
-            <h6>Sacraments and Services > Sacraments > Unction.</h6>
-            <h6>For the Greek/English text <a href="https://dcs.goarch.org/goa/dcs/p/b/unction/gr-en/bk.unction.pdf"
-                    target="_blank">click here</a>.</h6>
-            <hr class="dashed">
-            <h5><b>04-05-2023</b></h5>
-            <p>The DCS is updated through June 2023.</p>
-            <h4>New Materials Alert</h4>
-            <h5>Metered canons for the following:</h5>
-            <ul>
-                <li>Tue May 02 - Sunday of Myrrh-bearers</li>
-                <li>Mon May 08 - Sunday of Paralytic</li>
-                <li>Mon May 08 - St. John the Theologian</li>
-            </ul>
-            <h5>Other Metered Canons for this period</h5>
-            <ul>
-                <li>Canon of Thomas Sunday</li>
-                <li>Canons / Katavasias of Mid-Pentecost</li>
-                <li>Canons / Katavasias of Ascension and Pentecost</li>
-                <li>Canons of Sundays of Holy Father and All Saints</li>
-            </ul>
-            <h4>New Octoechos Texts and Music</h4>
-            <h5>A new English translation and musical scores of Octoechos resurrectional hymns for Saturday evening
-                Vespers, Modes 1 - 4, will begin to appear in the services beginning in Bright Week. The texts and
-                scores of the rest of the Modes will be posted as they become available. The older scores are appended
-                to the new scores.</h5>
-            <hr class="dashed">
-            <h5><b>03-24-2023</b></h5>
-            <h4>New Materials Alert</h4>
-            <h5>The text of the Doxoloxy service for the Greek Revolution has been inserted at the end of the Liturgy
-                files of March 25.</h5>
-            <hr class="dashed">
-            <h5><b>02-28-2023</b></h5>
-            <h4>Service Correction Alert</h4>
-            <h5>The files of the service of D. Liturgy on Sunday, Mar 26, had an error in the rubrics and content. The
-                corrected order, as indicated in the Hemerologion, is to sing the Antiphons of Sunday. The files have
-                been corrected and uploaded.</h5>
-            <hr class="dashed">
-            <h5><b>02-13-2023</b></h5>
-            <h4>New Materials Alert</h4>
-            <h5>A new English translation of the hymns from the Octoechos for Saturday evening Vespers in the eight
-                modes is in the works. This is an ongoing project. Modes 1 - 4 have been tentatively completed. The
-                texts and scores of the rest of the Modes will be posted as they become available. The plan is to begin
-                integrating the new texts and music in the dated services during Holy Week, Easter, and Bright Week,
-                2023. The older scores will be appended to the new scores. In the mean time, we will post the new texts
-                and scores of each mode, as each set becomes available. Links to these files are available on the DCS:
-                Sacraments and Services > Octoechos > New Saturday Evening Vespers.</h5>
-            <hr class="dashed">
-            <h5><b>01-21-2023</b></h5>
-            <p>The DCS is updated through April 2023.</p>
-            <h4>New Materials Alert</h4>
-            <h5>A new and improved translation of the Mode 3 Kathisma, "Tin Oraiotita," has replaced what was known as
-                "Seeing how beautiful." The first instance of this will be on Feb. 19 at Sunday Matins. It will also
-                appear as the final hymn at the Salutations services on the Fridays of Lent. An new score is provided,
-                with the previous version attached.</h5>
-            <hr class="dashed">
-            <h5><b>12-20-2022</b></h5>
-            <h4>Service Correction Alert</h4>
-            <h5>The files of the service of Matins on Saturday, Dec 24, had an error in the rubrics and order. The
-                corrected order, as indicated in the Hemerologion, is to sing Lauds and the Great Doxology. The files
-                have been corrected and uploaded.</h5>
-            <hr class="dashed">
-            <h5><b>11-17-2022</b></h5>
-            <p>The DCS is updated through February 2023.</p>
-            <h4><a href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2023.pdf"
-                    target="_blank">Liturgical Guide 2023</a></h4>
-            <h6>Sacraments and Services > Liturgical Guides > Sundays/Feastdays. Or <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2023.pdf"
-                    target="_blank">here</a>.</h6>
-            <h4>Sep thru Dec 2022 services archived <a href="https://dcs.goarch.org/goa_2022_0912/dcs/"
-                    target="_blank">here</a>.</h4>
-            <hr class="dashed">
-            <h5><b>11-12-2022</b></h5>
-            <h4>Service Changes Alert</h4>
-            <h5>Following the decision of Holy Eparchial Synod on Nov. 10, the specific petitions related to the
-                coronavirus pandemic have been removed from the services.</h5>
-            <hr class="dashed">
-            <h5><b>10-31-2022</b></h5>
-            <h4>New Materials Alert</h4>
-            <h5>The services for Nov 2 (Sts. Acindynos, Pegasios, Aphthonios, Elpidophoros, and Anempodistos) have been
-                updated and made festal, in honor of Archbishop Elpidophoros.</h5>
-            <hr class="dashed">
-            <h5><b>09-22-2022</b></h5>
-            <p>The DCS is updated through December.</p>
-            <hr class="dashed">
-            <h5><b>08-02-2022</b></h5>
-            <p>The DCS is updated through October.</p>
-            <h4>New Materials Alert</h4>
-            <h5>Metered canons for the following:</h5>
-            <ul>
-                <li>Sun Aug 28 - St. Moses</li>
-                <li>Sun Sep 04 - St. Babylas</li>
-                <li>Sun Sep 25 - St. Euphrosene</li>
-                <li>Sun Oct 02 - Sts. Cyprian and Justina</li>
-                <li>Sun Oct 16 - Sunday of the Holy Fathers</li>
-                <li>Tue Oct 18 - St. Luke</li>
-                <li>Wed Oct 26 - St. Demetrius</li>
-                <li>Fri Oct 28 - Holy Protection</li>
-                <li>Sun Oct 30 - Sts. Zenobius and Zenobia</li>
-            </ul>
-            <h4><a href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2023.pdf"
-                    target="_blank">Liturgical Guide 2023</a></h4>
-            <h6>Sacraments and Services > Liturgical Guides > Sundays/Feastdays. Or <a
-                    href="https://dcs.goarch.org/goa/dcs/p/b/liturgicalguide/Liturgical_Guide_2023.pdf"
-                    target="_blank">here</a>.</h6>
-
-            <hr class="dashed">
-            <h5><b>07-31-2022</b></h5>
-            <h4>New Translation Alerts</h4>
-            <ul>
-                <li>Megalynaria of GOA Churches: Sacraments and Services > Paraklesis. Or <a
-                        href="https://dcs.goarch.org/m/other/t/megalynaria_parishes.pdf" target="_blank">here</a>.</li>
-                <li>Links to Megalynaria of GOA Churches added to Paraklesis in DCS</li>
-            </ul>
-            <hr class="dashed">
-            <h5><b>06-21-2022</b></h5>
-            <p>The DCS is updated through September.</p>
-            <h4>May thru Aug services archived <a href="https://dcs.goarch.org/goa_2022_0508/dcs/"
-                    target="_blank">here</a>.</h4>
-            <hr class="dashed">
-            <h5><b>05-20-2022</b></h5>
-            <p>The DCS is updated through August.</p>
-            <h4>New Materials Alert</h4>
-            <ul>
-                <li>Metered canons for Jul 17 and Aug 28</li>
-                <li>St Phanourios (Aug 27) Vespers/Matins/Liturgy</li>
-                <li>Octoechos audio by Pres. Stacey Dorrence</li>
-            </ul>
-            <hr class="dashed">
-            <h5><b>04-16-2022</b></h5>
-            <h4>New Translation Alerts</h4>
-            <ul>
-                <li>Paschal Matins, Ode ix Heirmos/Katavasia</li>
-                <li>Paschal Liturgy, Hymn for the Theotokos</li>
-            </ul>
-            <hr class="dashed">
-            <h5><b>03-31-2022</b></h5>
-            <p>The DCS is updated through June.</p>
-            <h4>Jan and Feb services archived <a href="https://dcs.goarch.org/goa_2022_0104/dcs/"
-                    target="_blank">here</a>.</h4>
-            <h4>New Translation Alerts</h4>
-            <ul>
-                <li>Lamentations of Good Friday evening</li>
-                <li>Canon of Thomas Sunday</li>
-                <li>Canons / Katavasias of Mid-Pentecost</li>
-                <li>Canons / Katavasias of Ascension and Pentecost</li>
-                <li>Canons of Sundays of Holy Father and All Saints</li>
-            </ul>
-            <hr class="dashed">
-            <h5><b>01-28-2022</b></h5>
-            <p>Modifications were made to the services.</p>
-            <h4>Sunday Matins</h4>
-            <ul>
-                <li>Standard verses at God is the Lord</li>
-                <li>Correction of Priest/Deacon roles</li>
-                <li>Insertion of short litany before Kontakion</li>
-            </ul>
-            <h4>Weekday Vespers and Matins</h4>
-            <ul>
-                <li>Removal of ektenia before dismissal</li>
-                <li>Removal of introduction to dismissal</li>
-            </ul>
-            <h4>Divine Liturgy</h4>
-            <ul>
-                <li>Rewording of some petitions</li>
-                <li>Removal of Alleluia verses before Gospel reading</li>
-                <li>Removal of optional litanies and prayers after Gospel reading</li>
-                <li>Modification of responses to commemorations after consecration of gifts</li>
-                <li>Removal of the text of the prayer: "Wash away..." which is said inaudibly by the priest</li>
-                <li>Removal of optional post communion hymn "Let our mouths be filled."</li>
-            </ul>
-            <h4>New Translation Alerts</h4>
-            <ul>
-                <li>Canon / Katavasias of Meeting</li>
-                <li>Lamentations of Good Friday evening</li>
-                <li>Canon of Thomas Sunday</li>
-                <li>Canons / Katavasias of Mid-Pentecost</li>
-                <li>Canons / Katavasias of Ascension and Pentecost</li>
-                <li>Canons of Sundays of Holy Father and All Saints</li>
-            </ul>
-
-            <h3>Download the Mobile App!</h3>
-            <p style="text-align: center;"><a href="https://apps.apple.com/us/app/digital-chant-stand/id891132857"
-                    target="_blank"><img alt="Available on the App Store" src="/goa/dcs/img/ios-app-store.jpg"
-                        style="display:inline-block"></a>&nbsp; &nbsp;<a
-                    href="https://play.google.com/store/apps/details?id=com.agesinitiatives.servicebook&amp;hl=en_US&amp;gl=US"
-                    target="_blank"><img alt="Get it on Google Play" src="/goa/dcs/img/android-app-store.jpg"
-                        style="display:inline-block" /></a></p>
-
+            <div style="margin-top: 20px;">
+                <iframe src="news.html" id="newsFrame" style="width: 100%; border: none; display: block;"
+                    title="DCS News Updates">
+                </iframe>
+            </div>
 
         </div>
     </div>
+    <script>
+        function resizeIframe() {
+            var frame = document.getElementById('newsFrame');
+            if (frame && frame.contentWindow && frame.contentWindow.document.body) {
+                // Set the height of the iframe to the exact height of the news.html content
+                frame.style.height = frame.contentWindow.document.body.scrollHeight + 'px';
+            }
+        }
+
+        // Initial resize when the frame loads
+        document.getElementById('newsFrame').onload = resizeIframe;
+
+        // Listen for clicks inside the iframe (for the collapsible sections)
+        window.addEventListener('message', function (e) {
+            if (e.data === 'resize') {
+                resizeIframe();
+            }
+        });
+
+        // A fallback to catch any layout changes
+        setInterval(resizeIframe, 500); 
+    </script>
 </body>
 
 </html>
