@@ -1446,13 +1446,6 @@ span.designation {
     color: #a91827;
 }
 
-span.dialogafteractor {
-    color: black;
-    font-size: 118%;
-    font-style: normal;
-    font-weight: normal;
-}
-
 p.dialogwithactor {
     font-size: 95%;
     line-height: 130%;
@@ -1513,7 +1506,6 @@ span.reference {
     font-weight: normal;
     font-style: italic;
     font-size: 70%;
-    ;
     color: #a91827;
 }
 

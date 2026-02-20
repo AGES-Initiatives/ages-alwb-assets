@@ -1,0 +1,458 @@
+/* DCS Liturgical Stylesheet - Full Export */
+
+/* --- Global Body Setup --- */
+/* We removed the @page block here because it is now handled by the JavaScript */
+
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 13pt;
+}
+
+/* --- Table Setup --- */
+table {
+    width: 100% !important;
+    /* Set to 100% so it fills the Page or the Column */
+    border-collapse: collapse;
+    page-break-inside: auto;
+    /* Allows table rows to flow across columns */
+    mso-table-lspace: 0pt;
+    mso-table-rspace: 0pt;
+}
+
+td {
+    vertical-align: top;
+    padding: 0pt;
+    /* Provides the gutter between text */
+}
+
+/* --- Layout Logic --- */
+
+/* 1. Bilingual: Ensure 50/50 split when both cells are present */
+td.leftCell,
+td.rightCell {
+    width: 50%;
+}
+
+/* 2. Single Column: If a cell is alone (English-only or Greek-only), 
+   it must take up 100% of the available column width. */
+td:only-child {
+    width: 100% !important;
+}
+
+/* 3. Row Logic: Allow breaks between rows, but try not to break inside a single row */
+tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+}
+
+/* --- Global Baseline --- */
+
+p,
+td,
+span {
+    font-family: "Times New Roman", Times, serif;
+    /* Removed global font-size from here so it doesn't fight specific P tags */
+}
+
+p {
+    font-size: 13pt;
+    /* Your base size */
+    line-height: 1.15;
+    mso-line-height-rule: exactly;
+    /* The "Anchor" for bilingual alignment */
+    margin-bottom: 6pt;
+    text-align: left;
+}
+
+p.actor {
+    mso-style-name: "actor";
+    font-size: 11pt;
+    color: #a91827;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+p.actorinaudible {
+    mso-style-name: "actorinaudible";
+    font-size: 10pt;
+    color: #a91827;
+    font-weight: bold;
+}
+
+p.alttext {
+    mso-style-name: "alttext";
+    font-size: 10pt;
+    background-color: #E6E6E6;
+}
+
+p.chant {
+    mso-style-name: "chant";
+    text-indent: 20pt;
+}
+
+p.chapverse {
+    mso-style-name: "chapverse";
+    font-size: 10pt;
+    color: #a91827;
+    font-style: italic;
+    text-align: center;
+}
+
+p.designation {
+    mso-style-name: "designation Para";
+    color: #a91827;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+p.dialog {
+    mso-style-name: "dialog";
+    text-align: left;
+    text-indent: 20pt;
+}
+
+p.dialogzero {
+    mso-style-name: "dialogzero";
+    text-indent: 20pt;
+    margin-bottom: 0;
+}
+
+p.dialogwithactor {
+    mso-style-name: "dialogwithactor";
+    font-size: 13pt;
+}
+
+p.greekmelody {
+    mso-style-name: "greekmelody";
+    font-size: 8pt;
+    color: #a91827;
+    font-style: italic;
+    text-align: center;
+}
+
+p.heirmos {
+    mso-style-name: "heirmos";
+    text-indent: 20pt;
+}
+
+p.hymn {
+    mso-style-name: "hymn";
+    text-indent: 20pt;
+}
+
+p.hymnlinefirst {
+    mso-style-name: "hymn line first";
+    margin-bottom: 0;
+    text-indent: 20pt;
+}
+
+p.hymnlinemiddle {
+    mso-style-name: "hymn line middle";
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+p.hymnlinelast {
+    mso-style-name: "hymn line last";
+    margin-top: 0;
+    text-align: left;
+}
+
+p.inaudible {
+    mso-style-name: "inaudible Para";
+    font-size: 11pt;
+    text-indent: 20pt;
+}
+
+p.melody {
+    mso-style-name: "melody Para";
+    font-size: 12pt;
+    color: #a91827;
+    font-style: italic;
+    text-align: center;
+}
+
+p.mixed {
+    mso-style-name: "mixed Para";
+    font-size: 12pt;
+    margin-top: 6pt;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+p.mode {
+    mso-style-name: "mode Para";
+    font-size: 12pt;
+    color: #a91827;
+    font-weight: bold;
+    text-align: center;
+}
+
+p.name {
+    mso-style-name: "name";
+    text-align: center;
+    color: #a91827;
+    font-size: 12pt;
+    margin-top: 2.25pt;
+    margin-bottom: 2.25pt;
+}
+
+p.normal {
+    mso-style-name: "normal Para";
+    font-size: 13pt;
+    color: #000000;
+    text-align: left;
+}
+
+p.prayer {
+    mso-style-name: "prayer";
+    line-height: 1.5;
+    font-size: 12pt;
+    text-indent: 20pt;
+}
+
+p.reading {
+    mso-style-name: "reading";
+    font-size: 13pt;
+    text-indent: 20pt;
+}
+
+p.rubric {
+    mso-style-name: "rubric Para";
+    font-size: 10pt;
+    color: #a91827;
+    font-style: italic;
+    text-indent: 20pt;
+}
+
+p.servicesources {
+    mso-style-name: "service sources";
+    text-align: left;
+    font-size: 10pt;
+    color: #a91827;
+    font-weight: bold;
+}
+
+p.servicesourcessection {
+    mso-style-name: "service sources section";
+    padding-bottom: 5pt;
+    text-indent: .2in;
+    font-size: 10pt;
+}
+
+p.servicesourcestitle {
+    mso-style-name: "service sources title";
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+p.titlezero {
+    mso-style-name: "title zero";
+    font-size: 10pt;
+    color: #a91827;
+    text-align: center;
+}
+
+p.verse {
+    mso-style-name: "verse";
+    font-size: 13pt;
+    font-style: italic;
+    text-indent: 20pt;
+}
+
+p.versecenter {
+    mso-style-name: "verse center";
+    font-size: 13pt;
+    font-style: italic;
+    text-align: center;
+}
+
+/* --- CHARACTER STYLES --- */
+
+span.actorwithdialog {
+    mso-style-name: "actor with dialog Char";
+    color: #a91827;
+    font-size: 12pt;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+span.anum {
+    mso-style-name: "anum";
+    color: #a91827;
+    font-size: 12pt;
+}
+
+span.bigblack {
+    mso-style-name: "big black";
+    font-size: 14pt;
+}
+
+span.bigred {
+    mso-style-name: "big red";
+    font-size: 14pt;
+    color: #a91827;
+}
+
+span.black {
+    mso-style-name: "black";
+    font-style: normal;
+    color: black;
+}
+
+span.blue {
+    mso-style-name: "blue";
+    color: #0080c0;
+}
+
+span.bold {
+    mso-style-name: "bold";
+    font-weight: bold;
+}
+
+span.boldred {
+    mso-style-name: "bold red";
+    color: #a91827;
+    font-weight: bold;
+}
+
+span.bolditalicsred {
+    mso-style-name: "bold italics red";
+    color: #a91827;
+    font-weight: bold;
+    font-style: italic;
+}
+
+span.chapverse {
+    mso-style-name: "chapverse Char";
+    font-style: italic;
+    color: #a91827;
+    font-size: 10pt;
+}
+
+span.designation {
+    mso-style-name: "designation Char";
+    font-size: 10pt;
+    font-weight: bold;
+    color: #a91827;
+}
+
+span.dialogafteractor {
+    mso-style-name: "dialog after actor";
+    color: black;
+    font-size: 11pt;
+    font-style: normal;
+    font-weight: normal;
+}
+
+span.italics {
+    mso-style-name: "italics";
+    font-style: italic;
+}
+
+span.inlinerubric {
+    mso-style-name: "in-line rubric";
+    font-size: 10pt;
+    color: #a91827;
+    font-style: italic;
+}
+
+span.melody {
+    mso-style-name: "melody Char";
+    font-size: 12pt;
+    color: #a91827;
+    font-style: italic;
+}
+
+span.mode {
+    mso-style-name: "mode Char";
+    font-size: 12pt;
+    font-weight: bold;
+    color: #a91827;
+}
+
+span.optional {
+    mso-style-name: "optional Char";
+    font-style: italic;
+    font-size: 12pt;
+    color: #651612;
+}
+
+span.red {
+    mso-style-name: "red Char";
+    color: #a91827;
+}
+
+span.reference {
+    mso-style-name: "reference Char";
+    font-style: italic;
+    font-size: 11pt;
+    color: #a91827;
+}
+
+span.rubric {
+    mso-style-name: "rubric Char";
+    font-style: italic;
+    font-size: 12pt;
+    color: #a91827;
+}
+
+span.smaller {
+    mso-style-name: "smaller Char";
+    font-size: 10pt;
+}
+
+span.smallred {
+    mso-style-name: "small red Char";
+    color: #a91827;
+    font-size: 10pt;
+}
+
+span.smallreditalic {
+    mso-style-name: "small red italic Char";
+    color: #a91827;
+    font-size: 10pt;
+    font-style: italic;
+}
+
+span.smallredbold {
+    mso-style-name: "small red bold Char";
+    color: #a91827;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+span.smallreditalicbold {
+    mso-style-name: "small red bold ital Char";
+    color: #a91827;
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: bold;
+}
+
+span.strong {
+    mso-style-name: "strong Char";
+    font-weight: bold;
+}
+
+span.versiondesignation {
+    mso-style-name: "version designation";
+    font-size: 8pt;
+    color: #a91827;
+}
+
+
+/* --- STRUCTURAL --- */
+
+.nodisplay,
+.noprintactor,
+.noprintrub,
+.noprintprayer {
+    display: none;
+    mso-hide: all;
+    /* Optional: ensures Word doesn't reserve vertical space for the hidden item */
+    height: 0;
+    font-size: 0;
+}

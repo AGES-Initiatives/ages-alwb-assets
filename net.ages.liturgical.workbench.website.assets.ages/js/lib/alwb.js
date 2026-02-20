@@ -1074,22 +1074,22 @@ function insertVespersTOB() {
     const titleElement = document.querySelector('title');
 
     if (!titleElement) {
-        console.error("Could not find the <title> element in the document.");
-        return null;
+      console.error("Could not find the <title> element in the document.");
+      return null;
     }
-    
+
     // 1. Extract the File Generation Date/Time from data-timestamp
     const timestamp = titleElement.getAttribute('data-timestamp');
     if (!timestamp) { return null; }
-    
+
     const parts = timestamp.split('.');
     if (parts.length < 3) { return null; }
 
     const fileGenerationDate = new Date(
-      parseInt(parts[0], 10), 
-      parseInt(parts[1], 10) - 1, 
-      parseInt(parts[2], 10), 
-      12, 0, 0 
+      parseInt(parts[0], 10),
+      parseInt(parts[1], 10) - 1,
+      parseInt(parts[2], 10),
+      12, 0, 0
     );
     const fileGenerationYear = fileGenerationDate.getFullYear();
 
@@ -1102,9 +1102,9 @@ function insertVespersTOB() {
       return null;
     }
 
-    const serviceMonthIndex = parseInt(dateMatch[1], 10) - 1; 
+    const serviceMonthIndex = parseInt(dateMatch[1], 10) - 1;
     const serviceDay = parseInt(dateMatch[2], 10);
-    
+
     // 3. Infer the Service Year
     let serviceYear = fileGenerationYear;
     let initialServiceDate = new Date(serviceYear, serviceMonthIndex, serviceDay, 12, 0, 0);
@@ -1114,7 +1114,7 @@ function insertVespersTOB() {
       serviceYear += 1;
       console.log(`Service date before generation date. Inferring year ${serviceYear}.`);
     } else {
-        console.log(`Service year inferred as ${serviceYear}.`);
+      console.log(`Service year inferred as ${serviceYear}.`);
     }
 
     // 4. Create the final and accurate Date object
@@ -1122,7 +1122,7 @@ function insertVespersTOB() {
     console.log(`Final Service Liturgical Date: ${finalServiceDate.toDateString()}`);
     return finalServiceDate;
   }
-  
+
   /**
    * Checks the liturgical date against special requirements for conditional links.
    * @returns {Object} An object containing the active link(s) keyed by their bookmark number.
@@ -1130,31 +1130,31 @@ function insertVespersTOB() {
   function isSpecialDay() {
     const liturgicalDate = getServiceDate();
     if (!liturgicalDate) { return {}; }
-    
-    const month = liturgicalDate.getMonth();      
-    const day = liturgicalDate.getDate();         
-    const dayOfWeek = liturgicalDate.getDay();    
-    
-    const specialLinks = {}; 
-    const isNotSunday = (dayOfWeek !== 0); 
+
+    const month = liturgicalDate.getMonth();
+    const day = liturgicalDate.getDate();
+    const dayOfWeek = liturgicalDate.getDay();
+
+    const specialLinks = {};
+    const isNotSunday = (dayOfWeek !== 0);
     const isSaturday = (dayOfWeek === 6);
 
     // 1. Pre-festal Canon (Bkmrk06: Jan 2-5 OR Dec 20-24, NOT Sunday)
     const isPreCanonJan = (month === 0) && (day >= 2 && day <= 5) && isNotSunday;
     const isPreCanonDec = (month === 11) && (day >= 20 && day <= 24) && isNotSunday;
     if (isPreCanonJan || isPreCanonDec) { specialLinks['Bkmrk06'] = 'Pre-festal Canon'; }
-    
+
     // 2. Akathist (Bkmrk07: Mar 25 OR Mar 26, AND is a Saturday)
     const isMarch = (month === 2);
     const isDate25or26 = (day === 25 || day === 26);
     const isAkathistDay = isMarch && isDate25or26 && isSaturday;
     if (isAkathistDay) { specialLinks['Bkmrk07'] = 'Akathist'; }
-    
+
     // 3. Paraklesis (Bkmrk08: Aug 2-5, NOT Sunday)
     const isParaklesisDay = (month === 7) && (day >= 2 && day <= 5) && isNotSunday;
     if (isParaklesisDay) { specialLinks['Bkmrk08'] = 'Paraklesis'; }
 
-    return specialLinks; 
+    return specialLinks;
   }
 
   /**
@@ -1163,34 +1163,34 @@ function insertVespersTOB() {
    * @returns {string} The HTML string for the optional links.
    */
   function getOptionalLinksHTML() {
-    const activeLinks = isSpecialDay(); 
+    const activeLinks = isSpecialDay();
     let optionalLinks = '';
-    
+
     const linkMap = {
-        'Bkmrk06': `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk06(); return false;">Pre-festal Canon</a></p>`,
-        'Bkmrk07': `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk07(); return false;">Akathist</a></p>`,
-        'Bkmrk08': `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk08(); return false;">Paraklesis</a></p>`,
+      'Bkmrk06': `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk06(); return false;">Pre-festal Canon</a></p>`,
+      'Bkmrk07': `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk07(); return false;">Akathist</a></p>`,
+      'Bkmrk08': `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk08(); return false;">Paraklesis</a></p>`,
     };
-    
+
     // Explicitly iterate through the desired order: Bkmrk06, Bkmrk07, Bkmrk08
     const orderedKeys = ['Bkmrk06', 'Bkmrk07', 'Bkmrk08'];
 
     orderedKeys.forEach(key => {
-        // If the date condition was met for this bookmark number
-        if (activeLinks.hasOwnProperty(key)) {
-            optionalLinks += linkMap[key];
-        }
+      // If the date condition was met for this bookmark number
+      if (activeLinks.hasOwnProperty(key)) {
+        optionalLinks += linkMap[key];
+      }
     });
-    
+
     return optionalLinks;
   }
-  
+
   // ----------------------------------------------
   // --- Insertion Logic ---
   // ----------------------------------------------
 
   const bkmrk09HTML = `<p class="bookmarklink"><a href="#" onclick="scrollToBkmrk09(); return false;">Trisagion - Apolytikia</a></p>`;
-  
+
   // Base links (Bkmrk 01 through 05)
   const baseLinksHTML = `
     <p class="lobTitle">Quick Links</p>
@@ -1213,7 +1213,7 @@ function insertVespersTOB() {
     newDiv.id = NEW_DIV_ID;
 
     const optionalLinks = getOptionalLinksHTML();
-    
+
     // Construct the final HTML: Bkmrk01-05 + Conditional Links (6, 7, 8 in order) + Bkmrk09
     newDiv.innerHTML = baseLinksHTML + optionalLinks + bkmrk09HTML;
 
@@ -2850,7 +2850,7 @@ function hideClassesForParish() {
 
 function hideParishSpaceAsteriskAndBrackets() {
   const body = document.body;
-  const regex = new RegExp('\\ \\*|[\\[\\]]|\u2044\u2044\ |\u2044\ ', 'g');
+  const regex = new RegExp('\\ \\*|[\\[\\]]', 'g');
   body.innerHTML = body.innerHTML.replace(regex, '');
 }
 
@@ -3254,25 +3254,131 @@ $(document).ready(function () {
 });
 
 
-//************************** */
-//AUDIO PLAYER
-//********************** */
-// ALWB.JS - Unified Audio Player Logic (DIV-based)
-"use strict"; 
 
-console.log("ALWB.JS: Script loaded.");
+// AUDIO PLAYER - Unified Player Logic (DIV-based)
+"use strict";
 
-// --- Global State Variables (Updated for DIV player) ---
-let playerDiv = null; 
+console.log("AUDIO PLAYER: Script loaded.");
+
+// --- Global State Variables ---
+let playerDiv = null;
 let audioElement = null;
 let isDragging = false;
 let dragOffsetX = 0;
 let dragOffsetY = 0;
-let pendingUpdate = false; 
+let pendingUpdate = false;
 let latestClientX = 0;
 let latestClientY = 0;
+let initialSearchLogged = false;
 
-let initialSearchLogged = false; 
+// --- 0. Embedded Styles ---
+const PLAYER_CSS = `
+/* Styles for the Floating Audio Player */
+
+/* 1. Main Container (Wrapper) */
+.audio-player-container {
+    background-color: white;
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
+    transition: opacity 300ms ease-in-out;
+}
+
+/* 2. Header (Drag Handle) */
+.audio-player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2563eb; /* blue-600 */
+    padding: 0.5rem; /* p-2 */
+    border-top-left-radius: 0.5rem; /* rounded-t-lg */
+    border-top-right-radius: 0.5rem;
+    border-bottom: 1px solid #3b82f6; /* border-b border-blue-500 */
+    cursor: move;
+}
+
+.header-controls-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* space-x-2 */
+}
+
+/* 3. Header Text */
+.header-drag-text {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600; /* font-semibold */
+    color: white; /* text-white */
+    padding-left: 0.25rem; /* pl-1 */
+}
+
+/* 4. Download Button */
+.header-download-btn {
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 500; /* font-medium */
+    transition: all 150ms ease-in-out;
+    border-radius: 0.25rem; /* rounded */
+    padding: 0.25rem 0.5rem; /* px-2 py-0.5 */
+    background-color: #facc15; /* yellow-400 */
+    color: #1f2937; /* gray-900 */
+    text-decoration: none; /* remove default underline */
+}
+
+.header-download-btn:hover {
+    background-color: #eab308; /* yellow-500 */
+}
+
+/* 5. Close Button */
+.header-close-btn {
+    color: white; /* text-white (or same as header text) */
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out;
+    padding: 0.125rem; /* p-0.5 */
+    border-radius: 9999px; /* rounded-full */
+}
+
+/* FIX: Ensure the SVG icon inside the button has a defined size */
+.header-close-btn svg {
+    width: 1rem; /* 16px */
+    height: 1rem; /* 16px */
+    display: block;
+}
+
+.header-close-btn:hover {
+    background-color: #1d4ed8; /* blue-700 */
+}
+
+.header-close-btn:focus {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 2px #f87171; /* ring-2 focus:ring-red-400 */
+}
+
+/* 6. Audio Player Body */
+.audio-player-body {
+    padding: 0.5rem; /* p-2 */
+    background-color: white;
+    border-bottom-left-radius: 0.5rem; /* rounded-b-lg */
+    border-bottom-right-radius: 0.5rem;
+}
+
+/* Ensure the audio element takes full width */
+#main-audio-player {
+    width: 100%;
+}
+`;
+
+/**
+ * Injects the required player styles into the document's head.
+ */
+function injectStyles() {
+  const style = document.createElement('style');
+  // Renamed ID for style element
+  style.id = 'ap-player-styles';
+  style.textContent = PLAYER_CSS;
+  document.head.appendChild(style);
+  console.log("AUDIO PLAYER: Styles injected into <head>.");
+}
+
 
 // --- 1. Player HTML Structure (Template for native DIV) ---
 const PLAYER_HTML_TEMPLATE = (audioUrl) => `
@@ -3306,494 +3412,706 @@ const PLAYER_HTML_TEMPLATE = (audioUrl) => `
 
 // --- 2. Player Creation and Initialization ---
 function createMiniPlayer(audioUrl) {
-    if (playerDiv) return;
+  if (playerDiv) return;
 
-    // Create the main container DIV
-    playerDiv = document.createElement('div');
-    playerDiv.id = 'floating-audio-player';
-    
-    // Apply REQUIRED fixed position styles
-    // NOTE: Player container needs a single class for overall styling, and position/z-index must be set inline.
-    playerDiv.className = 'audio-player-container';
-    playerDiv.style.width = '350px'; 
-    playerDiv.style.height = 'min-content';
-    
-    // FIX 1: Explicitly set position to fixed to ensure it floats and doesn't take up layout space.
-    playerDiv.style.position = 'fixed'; 
-    
-    // Initial State and Position (Bottom Left)
+  // Create the main container DIV
+  playerDiv = document.createElement('div');
+  playerDiv.id = 'floating-audio-player';
+
+  // Apply REQUIRED fixed position styles
+  playerDiv.className = 'audio-player-container';
+  playerDiv.style.width = '350px';
+  playerDiv.style.height = 'min-content';
+
+  playerDiv.style.position = 'fixed';
+
+  // Initial State and Position (Bottom Left)
+  playerDiv.style.opacity = '0';
+  playerDiv.style.visibility = 'hidden';
+  playerDiv.style.bottom = '20px';
+  playerDiv.style.left = '20px';
+  playerDiv.style.right = 'auto';
+  playerDiv.style.zIndex = '9998';
+
+  // Inject the inner HTML
+  playerDiv.innerHTML = PLAYER_HTML_TEMPLATE(audioUrl);
+  document.body.appendChild(playerDiv);
+
+  // Get element references and attach listeners
+  audioElement = playerDiv.querySelector('#main-audio-player');
+  const closeButton = playerDiv.querySelector('#close-button');
+  const dragHandle = playerDiv.querySelector('#player-drag-handle');
+
+  // Attach click and drag listeners
+  if (closeButton) closeButton.addEventListener('click', window.hidePlayer);
+
+  if (dragHandle) {
+    // Attach pointer listeners
+    dragHandle.addEventListener('pointerdown', handleDragStart);
+  }
+
+  // Set download file name for the link
+  const downloadLink = playerDiv.querySelector('#download-link');
+  const filename = audioUrl.split('/').pop().split('?')[0];
+  if (downloadLink) downloadLink.download = filename || 'audio_file.mp3';
+}
+
+
+// --- 3. Public Show/Hide Functions ---
+window.showPlayer = function (audioUrl) {
+  console.log(`[SHOW PLAYER]: Called with URL: ${audioUrl}`);
+
+  if (!playerDiv) {
+    createMiniPlayer(audioUrl);
+  }
+
+  // **START OF FIX**
+  const downloadLink = playerDiv.querySelector('#download-link');
+  const filename = audioUrl.split('/').pop().split('?')[0];
+
+  if (downloadLink) {
+    // FIX 1: Update the download link's HREF to the current audio URL
+    downloadLink.href = audioUrl;
+
+    // FIX 2: Update the download link's suggested file name
+    downloadLink.download = filename || 'audio_file.mp3';
+  }
+  // **END OF FIX**
+
+  if (audioElement && audioElement.src !== audioUrl) {
+    audioElement.src = audioUrl;
+  }
+
+  if (playerDiv) {
+    playerDiv.style.opacity = '1';
+    playerDiv.style.visibility = 'visible';
+  }
+  if (audioElement) {
+    audioElement.play().catch(e => console.warn("Autoplay prevented:", e));
+  }
+}
+
+window.hidePlayer = function () {
+  console.log("[HIDE PLAYER]: Hiding audio player DIV.");
+  if (audioElement) {
+    audioElement.pause();
+    audioElement.currentTime = 0;
+  }
+  if (playerDiv) {
     playerDiv.style.opacity = '0';
     playerDiv.style.visibility = 'hidden';
-    playerDiv.style.bottom = '20px';
-    playerDiv.style.left = '20px';
-    playerDiv.style.zIndex = '9998'; 
-
-    // Inject the inner HTML
-    playerDiv.innerHTML = PLAYER_HTML_TEMPLATE(audioUrl);
-    document.body.appendChild(playerDiv);
-
-    // Get element references and attach listeners
-    audioElement = playerDiv.querySelector('#main-audio-player');
-    const closeButton = playerDiv.querySelector('#close-button');
-    const dragHandle = playerDiv.querySelector('#player-drag-handle');
-
-    // Attach click and drag listeners
-    if (closeButton) closeButton.addEventListener('click', window.hidePlayer);
-    if (dragHandle) dragHandle.addEventListener('pointerdown', handleDragStart);
-
-    // Set download file name for the link
-    const downloadLink = playerDiv.querySelector('#download-link');
-    const filename = audioUrl.split('/').pop().split('?')[0];
-    if (downloadLink) downloadLink.download = filename || 'audio_file.mp3';
+  }
 }
 
 
-// --- 3. Public Show/Hide Functions (Called by link conversion and close button) ---
-/**
- * REPLACEMENT for window.loadNewAudio. Shows/creates the DIV player and starts playback.
- * NOTE: Renamed to showPlayer for clarity.
- */
-window.showPlayer = function(audioUrl) {
-    console.log(`[SHOW PLAYER]: Called with URL: ${audioUrl}`);
-    
-    if (!playerDiv) {
-        // Create player the first time it is called
-        createMiniPlayer(audioUrl);
-    }
-    
-    // Update source only if needed
-    if (audioElement && audioElement.src !== audioUrl) {
-        audioElement.src = audioUrl;
-    }
-    
-    // Show the player and attempt autoplay
-    if (playerDiv) {
-        playerDiv.style.opacity = '1';
-        playerDiv.style.visibility = 'visible';
-    }
-    if (audioElement) {
-        audioElement.play().catch(e => console.warn("Autoplay prevented:", e));
-    }
-}
-
-/**
- * Global function to hide the floating audio player DIV. (Called by close button)
- */
-window.hidePlayer = function() {
-    console.log("[HIDE PLAYER]: Hiding audio player DIV.");
-    if (audioElement) {
-        audioElement.pause();
-        audioElement.currentTime = 0; 
-    }
-    if (playerDiv) { 
-        playerDiv.style.opacity = '0';
-        playerDiv.style.visibility = 'hidden';
-    }
-}
-
-
-// --- 4. DRAG LOGIC (Robust, Native, and Fast) ---
-
+// --- 4. DRAG LOGIC (Pointer Events Only) ---
 function handleDragStart(e) {
-    if (!playerDiv) return;
-    
-    e.preventDefault(); 
-    
-    // Crucial for reliable dragging: Release pointer capture
-    if (e.pointerId !== undefined) {
-        e.currentTarget.releasePointerCapture(e.pointerId);
-    }
+  if (!playerDiv) return;
 
-    const rect = playerDiv.getBoundingClientRect();
+  e.preventDefault();
 
-    dragOffsetX = e.clientX - rect.left;
-    dragOffsetY = e.clientY - rect.top;
-    
-    isDragging = true;
-    playerDiv.style.zIndex = '9999'; 
+  if (e.pointerId !== undefined) {
+    e.currentTarget.releasePointerCapture(e.pointerId);
+  }
 
-    // Attach listeners to the main document for movement and release
-    document.addEventListener('pointermove', dragMove);
-    document.addEventListener('pointerup', dragEnd);
+  const rect = playerDiv.getBoundingClientRect();
+
+  dragOffsetX = e.clientX - rect.left;
+  dragOffsetY = e.clientY - rect.top;
+
+  isDragging = true;
+  playerDiv.style.zIndex = '9999';
+
+  document.addEventListener('pointermove', dragMove);
+  document.addEventListener('pointerup', dragEnd);
 }
 
 function updatePlayerPosition() {
-    if (!playerDiv || !isDragging) {
-        pendingUpdate = false;
-        return;
-    }
-
-    let newLeft = latestClientX - dragOffsetX;
-    let newTop = latestClientY - dragOffsetY;
-
-    // Boundary check (5px margin from the edge)
-    const maxWidth = window.innerWidth - playerDiv.offsetWidth;
-    const maxHeight = window.innerHeight - playerDiv.offsetHeight;
-
-    newLeft = Math.max(5, Math.min(newLeft, maxWidth - 5)); 
-    newTop = Math.max(5, Math.min(newTop, maxHeight - 5)); 
-    
-    // Apply new position
-    playerDiv.style.left = `${newLeft}px`;
-    playerDiv.style.top = `${newTop}px`;
-    
-    // Clear initial positioning properties (in case it started bottom/right)
-    playerDiv.style.bottom = 'auto';
-    playerDiv.style.right = 'auto';
-
+  if (!playerDiv || !isDragging) {
     pendingUpdate = false;
+    return;
+  }
+
+  let newLeft = latestClientX - dragOffsetX;
+  let newTop = latestClientY - dragOffsetY;
+
+  // Boundary check (5px margin from the edge)
+  const maxWidth = window.innerWidth - playerDiv.offsetWidth;
+  const maxHeight = window.innerHeight - playerDiv.offsetHeight;
+
+  newLeft = Math.max(5, Math.min(newLeft, maxWidth - 5));
+  newTop = Math.max(5, Math.min(newTop, maxHeight - 5));
+
+  // Apply new position
+  playerDiv.style.left = `${newLeft}px`;
+  playerDiv.style.top = `${newTop}px`;
+
+  // Clear initial positioning properties (in case it started bottom/right)
+  playerDiv.style.bottom = 'auto';
+  playerDiv.style.right = 'auto';
+
+  pendingUpdate = false;
 }
 
 function dragMove(e) {
-    if (!isDragging || !playerDiv) return;
-    e.preventDefault(); 
+  if (!isDragging || !playerDiv) return;
+  e.preventDefault();
 
-    latestClientX = e.clientX;
-    latestClientY = e.clientY;
+  latestClientX = e.clientX;
+  latestClientY = e.clientY;
 
-    if (!pendingUpdate) {
-        requestAnimationFrame(updatePlayerPosition);
-        pendingUpdate = true;
-    }
+  if (!pendingUpdate) {
+    requestAnimationFrame(updatePlayerPosition);
+    pendingUpdate = true;
+  }
 }
 
 function dragEnd() {
-    if (isDragging) {
-        isDragging = false;
-        playerDiv.style.zIndex = '9998'; 
+  if (isDragging) {
+    isDragging = false;
+    playerDiv.style.zIndex = '9998';
 
-        // CRITICAL: Clean up global listeners
-        document.removeEventListener('pointermove', dragMove);
-        document.removeEventListener('pointerup', dragEnd);
-        
-        // Ensure the last move is processed
-        if (pendingUpdate) {
-            requestAnimationFrame(updatePlayerPosition);
-        }
+    document.removeEventListener('pointermove', dragMove);
+    document.removeEventListener('pointerup', dragEnd);
+
+    if (pendingUpdate) {
+      requestAnimationFrame(updatePlayerPosition);
     }
+  }
 }
 
 
 // ----------------------------------------------------------------------------------
-// --- 5. The Link Conversion Function (KEPT from original logic) -------------------
+// --- 5. The Link Conversion Function ----------------------------------------------
 // ----------------------------------------------------------------------------------
 /**
  * Finds all MP3 links in the given document and converts them to call the parent's function.
  * @param {Document} doc - The iframe's content document.
  */
 function convertLinksToOnclick(doc) {
-    // Find all anchor tags whose href ends with .mp3 or .MP3
-    const mp3Links = doc.querySelectorAll('a[href$=".mp3"], a[href$=".MP3"]');
-    
-    if (mp3Links.length === 0) {
-        console.log("  [CONVERSION]: No MP3 links found for conversion.");
-        return;
+  const mp3Links = doc.querySelectorAll('a[href$=".mp3"], a[href$=".MP3"]');
+
+  if (mp3Links.length === 0) {
+    console.log("  [CONVERSION]: No MP3 links found for conversion.");
+    return;
+  }
+
+  console.log(`  [CONVERSION]: Found ${mp3Links.length} MP3 links. Converting...`);
+
+  mp3Links.forEach(link => {
+    let audioUrl;
+
+    try {
+      const urlObject = new URL(link.href);
+      audioUrl = urlObject.pathname + urlObject.search + urlObject.hash;
+
+    } catch (e) {
+      console.warn("  [CONVERSION]: URL API failed. Falling back to link.pathname.", e);
+      audioUrl = link.pathname;
     }
-    
-    console.log(`  [CONVERSION]: Found ${mp3Links.length} MP3 links. Converting...`);
 
-    mp3Links.forEach(link => {
-        
-        // --- Extract the clean root-relative path ---
-        let audioUrl; 
-        
-        try {
-            // Use the native URL API to parse the full absolute URL.
-            const urlObject = new URL(link.href);
-            // Extract only the path, search, and hash (gives /media/a/dedes/...)
-            audioUrl = urlObject.pathname + urlObject.search + urlObject.hash;
+    if (audioUrl && audioUrl.charAt(0) !== '/') {
+      audioUrl = '/' + audioUrl;
+    }
 
-        } catch (e) {
-            // Fallback
-            console.warn("  [CONVERSION]: URL API failed. Falling back to link.pathname.", e);
-            audioUrl = link.pathname;
-        }
-        
-        // Post-Extraction Safety Checks (Ensure it's root relative)
-        if (audioUrl && audioUrl.charAt(0) !== '/') {
-             audioUrl = '/' + audioUrl;
-        }
-        // ----------------------------------------------------------
-        
-        // Check if the link has already been converted to avoid redundant processing
-        if (link.dataset.alwbConverted === 'true') {
-            return;
-        }
+    if (link.dataset.alwbConverted === 'true') {
+      return;
+    }
 
-        // 1. Overwrite the click handler directly for reliable interception
-        link.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            // FIX 2: Call window.showPlayer directly since this script runs in the main window.
-            window.showPlayer(audioUrl); 
-            console.log(`  [CONVERSION]: Playing URL: ${audioUrl}`); // Log the exact URL being sent
-            return false;
-        };
-        
-        // 2. Clear the href to prevent default navigation (optional, but safe)
-        link.href = 'javascript:void(0)';
-        
-        // 3. Mark the link as converted
-        link.dataset.alwbConverted = 'true';
-    });
+    link.onclick = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.showPlayer(audioUrl);
+      console.log(`  [CONVERSION]: Playing URL: ${audioUrl}`);
+      return false;
+    };
 
-    console.log("  [CONVERSION]: All MP3 links successfully converted to custom player calls.");
+    link.href = 'javascript:void(0)';
+    // Kept for backward compatibility if other scripts check this data attribute
+    link.dataset.alwbConverted = 'true';
+  });
+
+  console.log("  [CONVERSION]: All MP3 links successfully converted to custom player calls.");
 }
 
 // ----------------------------------------------------------------------------------
-// --- 6. The Robust Initialization Function (KEPT from original logic) -------------
+// --- 6. The Robust Initialization Function ----------------------------------------
 // ----------------------------------------------------------------------------------
 /**
  * Initiates the search for the FrameText element and, once found, sets up the load handler.
  */
 function initializeAudioInterception() {
-    
-    // Only log the initial search message once to reduce console spam
-    if (!initialSearchLogged) {
-        console.log("ALWB.JS: Starting element search. Polling every 50ms until found...");
-        initialSearchLogged = true;
-    }
-    
-    // Attempt to find the iframe element
-    const frameText = document.getElementById('FrameText'); 
 
-    if (!frameText) {
-        // If the element is not yet in the DOM (timing issue), retry shortly.
-        setTimeout(initializeAudioInterception, 50);
+  if (!initialSearchLogged) {
+    // Updated console message
+    console.log("AUDIO PLAYER: Starting element search. Polling every 50ms until found...");
+    initialSearchLogged = true;
+  }
+
+  const frameText = document.getElementById('FrameText');
+
+  if (!frameText) {
+    setTimeout(initializeAudioInterception, 50);
+    return;
+  }
+
+  // Updated console message
+  console.log("AUDIO PLAYER: Element 'FrameText' found. Attaching handler.");
+
+  const handleFrameLoad = function () {
+    try {
+      if (!frameText.contentWindow || !frameText.contentWindow.document) {
         return;
+      }
+
+      const iframeDocument = frameText.contentWindow.document;
+
+      if (iframeDocument.readyState === 'complete') {
+        console.log(" [HANDLER]: Frame content is complete. Starting link conversion.");
+
+        convertLinksToOnclick(iframeDocument);
+
+        frameText.onload = handleFrameLoad;
+
+      } else {
+        setTimeout(handleFrameLoad, 100);
+      }
+
+    } catch (e) {
+      console.error(" [ERROR]: Frame access failure or handler error.", e);
     }
-    
-    // --- ELEMENT FOUND! PROCEED WITH SETUP ---
-    console.log("ALWB.JS: Element 'FrameText' found. Attaching handler.");
+  };
 
-    /**
-     * Executes when the iframe content loads. It checks readiness and performs conversion.
-     */
-    const handleFrameLoad = function() {
-        try {
-            // Ensure the iframe and its document are accessible
-            if (!frameText.contentWindow || !frameText.contentWindow.document) {
-                return;
-            }
+  // 1. Attach to the native onload event
+  frameText.onload = handleFrameLoad;
 
-            const iframeDocument = frameText.contentWindow.document;
-
-            // Check if the document is fully loaded before manipulating the DOM
-            if (iframeDocument.readyState === 'complete') {
-                console.log("  [HANDLER]: Frame content is complete. Starting link conversion.");
-                
-                // CRITICAL STEP: Convert the links in the newly loaded document
-                convertLinksToOnclick(iframeDocument);
-                
-                // Re-attach the function to the native onload event for future navigations
-                frameText.onload = handleFrameLoad;
-                
-            } else {
-                // Poll manually until the inner frame's document is ready
-                setTimeout(handleFrameLoad, 100); 
-            }
-
-        } catch (e) {
-            // This usually catches cross-origin security errors or transient failures
-            console.error("  [ERROR]: Frame access failure or handler error.", e);
-        }
-    };
-    
-    // 1. Attach to the native onload event (as a safety net for future navigations)
-    frameText.onload = handleFrameLoad;
-    
-    // 2. Execute immediately to catch the initial load of servicesindex.html
-    handleFrameLoad();
+  // 2. Execute immediately to catch the initial load
+  handleFrameLoad();
 }
 
 
-// --- 7. Start the entire process immediately (The final line of execution) ---
+// --- 7. Start the entire process immediately ---
+injectStyles();
 initializeAudioInterception();
 
+// ------------------------------------------------------------------
+// --- 8. Android Detection Logic  ---
+// ------------------------------------------------------------------
 /**
- * Searches for elements with a 'data-key' attribute that are descendants of 
- * a 'span.melody'. It generates a dropdown containing Staff and Byzantine scores 
- * (target="FrameScore") and an Audio link that targets "FrameAudio".
+ * Generates the correct URL for a score document based on the ONLY condition that requires the viewer: Android.
+ * Rules:
+ * - IF Android: Use the custom viewer URL (requires full path: /media/scores/...).
+ * - ELSE: Use the direct PDF link (scoreMediaRoot).
+ */
+// --- CORE URL CONSTANTS ---
+const rootPrefix = 'https://dcs.goarch.org/';
+const scoreViewerBase = rootPrefix + 'goa/dcs/js/viewer/web/viewer.html?file=/';
+const scoreMediaRoot = rootPrefix + 'media/scores/';
+const audioMediaRoot = rootPrefix + 'media/recordings/';
+
+function getScoreUrlFinalAndSimplest(fullScorePath) {
+  const userAgent = navigator.userAgent;
+
+  // Check if the device is Android (the ONLY condition that requires the viewer)
+  const isAndroid = /Android/i.test(userAgent);
+
+  if (isAndroid) {
+    // Log when Android IS detected
+    console.log("[PDF Logic] DETECTED: Android (Viewer ENABLED).");
+
+    // 🚨 ADJUSTMENT: We must manually prepend 'media/scores/' to the file path 
+    // because the new scoreViewerBase only ends with '?file=/'
+    const fullViewerPath = scoreMediaRoot.replace(rootPrefix, '') + fullScorePath;
+
+    // Optionally, log the final URL being used
+    // console.log(`[PDF Logic] Viewer URL: ${scoreViewerBase + fullViewerPath}`);
+
+    return scoreViewerBase + fullViewerPath;
+  }
+
+  // All other platforms (iOS/iPadOS, Mac, Windows, etc.) bypass the viewer
+
+  // Log when Android IS NOT detected (covering all other platforms)
+  console.log("[PDF Logic] DETECTED: Non-Android (Viewer DISABLED).");
+
+  // Optionally, log the final URL being used
+  // console.log(`[PDF Logic] Direct URL: ${scoreMediaRoot + fullScorePath}`);
+
+  return scoreMediaRoot + fullScorePath;
+}
+
+/**
+ * Function to dynamically find elements, parse their data-keys, and replace 
+ * them with a dropdown menu containing links for Scores (PDFs) and Audio (MP3s).
  */
 function generateDynamicLinks() {
-    console.log('✅ Function generateDynamicLinks() started.');
+  console.log('✅ Function generateDynamicLinks() started.');
 
-    // Configuration constants
-    const scoreBasePrefix = 'https://dcs.goarch.org/goa/dcs/'; 
-    const scoreUrlStructure = 'js/viewer/web/viewer.html?file=/media/m/dedes/'; 
-    const audioRootPrefix = 'https://dcs.goarch.org/media/a/'; 
-    
-    const dataKeyAttribute = 'data-key';
-    let dropdownCounter = 1;
+  // --- CRITICAL CONFIGURATION: DEFINE ALL PERSON CODES HERE ---
+  const PERSON_MAP = {
+    en: { audio: { default: 'dedes' }, score: { w: 'dedes', b: 'dedes' } },
+    gr: { audio: { default: 'dedes' }, score: { w: 'dedes', b: 'dedes' } }
+  };
+  // -------------------------------------------------------------
 
-    // 1. Selector: Target elements must be descendants of 'span.melody' and have 'data-key'.
-    const targetElements = document.querySelectorAll(`span.melody [${dataKeyAttribute}]`);
-    console.log(`🔎 Found ${targetElements.length} element(s) to process.`);
 
-    targetElements.forEach((span, index) => {
-        
-        // --- 1. Exclusion Check ---
-        if (span.classList.contains('dummy')) {
-             console.log(`--- Processing Element ${index + 1} ---`);
-             console.log('   ⚠️ SKIPPING: Element has class "dummy".');
-             return; 
-        }
-        
-        const fullKeyValue = span.getAttribute(dataKeyAttribute);
-        
-        console.log(`--- Processing Element ${index + 1} ---`);
+  const dataKeyAttribute = 'data-key';
+  let dropdownCounter = 1;
 
-        if (!fullKeyValue) {
-             console.log('   ⚠️ SKIPPING: Data Key was empty.');
-             return; 
-        }
+  // NOTE: initializeExistingAudio is no longer needed/used, but we keep the variable for reference
+  const initializeExistingAudio = typeof initializeAudioInterception === 'function'
+    ? initializeAudioInterception
+    : null;
 
-        // --- EXTRACT ORIGINAL TEXT BEFORE MODIFICATION ---
-        const originalMelodyName = span.textContent.trim();
-        if (originalMelodyName.length === 0) {
-            console.log('   ⚠️ SKIPPING: Original text content is empty.');
-            return;
-        }
+  const targetElements = document.querySelectorAll(`span.melody [${dataKeyAttribute}]`);
+  console.log(`🔎 Found ${targetElements.length} element(s) to process.`);
 
-        // --- 2. Language/Context Check ---
-        const parentTD = $(span).closest('td');
-        let scoreLangCode = 'en'; 
-        let audioContextCode = 'tbd'; 
+  targetElements.forEach((span, index) => {
 
-        if (parentTD.hasClass('leftCell')) {
-            scoreLangCode = 'gr';
-            audioContextCode = 'gr'; 
-        } else if (parentTD.hasClass('rightCell')) {
-            scoreLangCode = 'en';
-            audioContextCode = 'tbd'; 
-        } 
-        
-        const scoreUrlPrefix = scoreBasePrefix + scoreUrlStructure + scoreLangCode + '/'; 
-        const audioUrlPrefix = audioRootPrefix + audioContextCode + '/';
-        
-        const dropdownID = `jqm-dropdown-${Date.now()}-${dropdownCounter++}`; 
+    // --- 1. Exclusion Check & Parsing ---
+    if (span.classList.contains('dummy')) { console.log(`--- Processing Element ${index + 1} ---`); console.log('   ⚠️ SKIPPING: Element has class "dummy".'); return; }
+    const fullKeyValue = span.getAttribute(dataKeyAttribute);
+    if (!fullKeyValue) { console.log('   ⚠️ SKIPPING: Data Key was empty.'); return; }
+    const originalMelodyName = span.textContent.trim();
+    if (originalMelodyName.length === 0) { console.log('   ⚠️ SKIPPING: Original text content is empty.'); return; }
 
-        // --- 3. Data Key Parsing ---
-        const initialParts = fullKeyValue.split('|');
-        const prefixPart = initialParts[0]; 
-        let suffixPart = initialParts.pop(); 
-        
-        const prefixSegments = prefixPart.split('.'); 
-        let bookSegment = 'book_missing';
-        let segmentA = 'seg_missing';
-        let modeSegment = 'm0'; 
+    // --- 2. Language/Context Check ---
+    const parentTD = $(span).closest('td');
+    let langCode = 'en';
+    if (parentTD.hasClass('leftCell')) { langCode = 'gr'; }
+    else if (parentTD.hasClass('rightCell')) { langCode = 'en'; }
 
-        if (prefixSegments[0]) {
-            bookSegment = prefixSegments[0]; 
-        }
-        if (prefixSegments[1]) {
-            segmentA = prefixSegments[1]; 
-        }
-        
-        if (prefixSegments.length >= 3 && prefixSegments[2]) {
-            modeSegment = prefixSegments[2].split('_')[0]; 
-        }
-        
-        // --- B. Extract File Name ('OteEkTouXylou') from Suffix ---
-        const lastDotIndex = suffixPart.lastIndexOf('.');
-        let fileNameSegment = suffixPart;
+    const dropdownID = `jqm-dropdown-${Date.now()}-${dropdownCounter++}`;
 
-        if (lastDotIndex !== -1) {
-            fileNameSegment = fileNameSegment.substring(0, lastDotIndex); 
-        }
-        
-        const prefixToRemove = 'heAU.';
-        
-        if (fileNameSegment.startsWith(prefixToRemove)) {
-            fileNameSegment = fileNameSegment.slice(prefixToRemove.length);
-        }
-        
-        // --- 4. Construct Path Segments ---
-        const scorePathBase = 
-            `${bookSegment}/` + 
-            `${segmentA}/` + 
-            `${modeSegment}/`; 
-            
-        const audioPathBase = 
-            `${bookSegment}/` + 
-            `${segmentA}/` +
-            `${modeSegment}/`; 
+    // --- 3. Data Key Parsing (omitted for brevity) ---
+    const initialParts = fullKeyValue.split('|');
+    const prefixPart = initialParts[0];
+    let suffixPart = initialParts.pop();
 
-        // ------------------------------------------------------------------
-        // --- 5. CREATE DROPDOWN TRIGGER LINK (MELODY NAME) ---
-        // ------------------------------------------------------------------
-        
-        const melodyLink = document.createElement('a');
-        melodyLink.href = '#'; 
-        melodyLink.textContent = originalMelodyName; 
-        melodyLink.setAttribute('data-jqm-dropdown', `#${dropdownID}`); 
-        melodyLink.title = 'Select notation score or audio.'; 
+    const prefixSegments = prefixPart.split('.');
+    let bookSegment = prefixSegments[0] || 'book_missing';
+    let segmentA = prefixSegments[1] || 'seg_missing';
+    let modeSegment = (prefixSegments.length >= 3 && prefixSegments[2]) ? prefixSegments[2].split('_')[0] : 'm0';
 
-        // ------------------------------------------------------------------
-        // --- 6. CREATE DROPDOWN CONTENT (Staff, Byzantine, Audio) ---
-        // ------------------------------------------------------------------
-        
-        const dropdownDiv = document.createElement('div');
-        dropdownDiv.id = dropdownID;
-        dropdownDiv.className = 'jqm-dropdown jqm-dropdown-tip alwb-media-dropdown-div';
+    const lastDotIndex = suffixPart.lastIndexOf('.');
+    let fileNameSegment = suffixPart;
+    if (lastDotIndex !== -1) { fileNameSegment = suffixPart.substring(0, lastDotIndex); }
+    const prefixToRemove = 'heAU.';
+    if (fileNameSegment.startsWith(prefixToRemove)) { fileNameSegment = fileNameSegment.slice(prefixToRemove.length); }
 
-        const dropdownList = document.createElement('ul');
-        dropdownList.className = 'jqm-dropdown-menu jqm-dropdown-relative alwb-media-dropdown-menu';
+    // --- 4. Construct Path Base Segments (book/section/mode) ---
+    const pathSegments = `${bookSegment}/${segmentA}/${modeSegment}/`;
 
-        const linkOptions = [
-            { type: 'score', notation: 'w', label: 'Staff' },
-            { type: 'score', notation: 'b', label: 'Byzantine' },
-            { type: 'audio', notation: null, label: 'Audio' } 
-        ];
+    // ------------------------------------------------------------------
+    // --- 5. CREATE DROPDOWN TRIGGER LINK (omitted for brevity) ---
+    // ------------------------------------------------------------------
+    const melodyLink = document.createElement('a');
+    melodyLink.href = '#';
+    melodyLink.textContent = originalMelodyName;
+    melodyLink.setAttribute('data-jqm-dropdown', `#${dropdownID}`);
+    melodyLink.title = 'Select notation score or audio.';
 
-        linkOptions.forEach(option => {
-            let finalUrl = '';
-            let targetAttr = '';
-            
-            if (option.type === 'score') {
-                finalUrl = scoreUrlPrefix + scorePathBase + option.notation + '/' + fileNameSegment + '.pdf';
-                targetAttr = 'FrameScore'; // Set target for PDF files
-            } else { // Audio
-                finalUrl = audioUrlPrefix + audioPathBase + fileNameSegment + '.mp3';
-                targetAttr = 'FrameAudio'; // Set specific target for audio files
-            }
-            
-            const listItem = document.createElement('li');
-            const linkElement = document.createElement('a');
-            
-            linkElement.href = finalUrl;
-            linkElement.textContent = option.label;
-            
-            if (targetAttr) {
-                linkElement.target = targetAttr;
-                console.log(`   🔗 Generated ${option.label} Link (Target: ${targetAttr}): ${finalUrl}`);
-            } else {
-                 console.log(`   🔗 Generated ${option.label} Link (No Target): ${finalUrl}`);
-            }
+    // ------------------------------------------------------------------
+    // --- 6. CREATE DROPDOWN CONTENT (Staff, Byzantine, Audio) ---
+    // ------------------------------------------------------------------
 
-            listItem.appendChild(linkElement);
-            dropdownList.appendChild(listItem);
-        });
+    const dropdownDiv = document.createElement('div');
+    dropdownDiv.id = dropdownID;
+    dropdownDiv.className = 'jqm-dropdown jqm-dropdown-tip alwb-media-dropdown-div';
 
-        // Assemble the dropdown structure
-        dropdownDiv.appendChild(dropdownList);
+    const dropdownList = document.createElement('ul');
+    dropdownList.className = 'jqm-dropdown-menu jqm-dropdown-relative alwb-media-dropdown-menu';
 
-        // ------------------------------------------------------------------
-        // --- 7. FINAL REPLACEMENT: Assemble link and dropdown container ---
-        // ------------------------------------------------------------------
-        
-        span.innerHTML = '';
-        span.appendChild(melodyLink);
-        span.appendChild(dropdownDiv);
-        
-        console.log('   ✔️ Element updated successfully. PDF links target "FrameScore".');
+    const linkOptions = [
+      { type: 'score', notation: 'w', label: 'Staff' },
+      { type: 'score', notation: 'b', label: 'Byzantine' },
+      { type: 'audio', notation: null, label: 'Audio' }
+    ];
+
+    linkOptions.forEach(option => {
+      let finalUrl = '';
+      let targetAttr = '';
+      let personCode = '';
+      let linkClasses = '';
+
+      if (option.type === 'score') {
+        personCode = PERSON_MAP[langCode].score[option.notation];
+
+        // 1. Construct the file path *relative to the /media/scores/ directory*
+        const scoreFilePath =
+          `${personCode}/` +
+          `${langCode}/` +
+          pathSegments +
+          `${option.notation}/`;
+
+        const fullScorePath = scoreFilePath + fileNameSegment + '.pdf';
+
+        // 2. APPLY THE FIX
+        finalUrl = getScoreUrlFinalAndSimplest(fullScorePath);
+
+        targetAttr = 'FrameScore';
+
+      } else { // Audio
+        personCode = PERSON_MAP[langCode].audio.default;
+
+        const audioFilePath =
+          `${personCode}/` +
+          `${langCode}/` +
+          pathSegments;
+
+        finalUrl = audioMediaRoot + audioFilePath + fileNameSegment + '.mp3';
+        linkClasses = 'audio-link-trigger'; // Class for player interception
+      }
+
+      const listItem = document.createElement('li');
+      const linkElement = document.createElement('a');
+
+      linkElement.href = finalUrl;
+      linkElement.textContent = option.label;
+
+      if (targetAttr) {
+        linkElement.target = targetAttr;
+      }
+      if (linkClasses) {
+        linkElement.className = linkClasses;
+      }
+
+      listItem.appendChild(linkElement);
+      dropdownList.appendChild(listItem);
     });
-    console.log('✅ Function generateDynamicLinks() finished.');
+
+    // Assemble the dropdown structure
+    dropdownDiv.appendChild(dropdownList);
+
+    // --- 7. FINAL REPLACEMENT (omitted for brevity) ---
+    span.innerHTML = '';
+    span.appendChild(melodyLink);
+    span.appendChild(dropdownDiv);
+  });
+
+  // -----------------------------------------------------------------------
+  // --- POST-PROCESSING: MANUAL CLICK BINDING FOR AUDIO (CORRECTED) ---
+  // The core player logic is in window.showPlayer(audioUrl). Call it directly.
+  $('body').on('click', '.audio-link-trigger', function (e) {
+    e.preventDefault(); // Stop the browser from navigating
+
+    const audioUrl = $(this).attr('href');
+    const $link = $(this);
+
+    console.log(`🎤 Click intercepted. DIRECTLY calling window.showPlayer with URL: ${audioUrl}`);
+
+    // **FIX**: Call window.showPlayer, the public function that handles creation/update/playback.
+    if (typeof window.showPlayer === 'function') {
+      window.showPlayer(audioUrl);
+    } else {
+      console.warn('⚠️ window.showPlayer() function not found. Audio link may not play.');
+    }
+
+    // Hide the dropdown menu (good UX practice)
+    $link.closest('.jqm-dropdown').removeClass('jqm-dropdown-open');
+  });
+  console.log('⚙️ Applied jQuery click handler, calling window.showPlayer for playback.');
+  // -----------------------------------------------------------------------
+
+  // -----------------------------------------------------------------------
+  // --- INITIAL ATTACHMENT ---
+  // ALWB.JS already calls initializeAudioInterception() globally, so we skip this here.
+  // If you run this code after the ALWB.JS code, the function will already be called.
+  // We only need to ensure the dynamic links call the right playback function (showPlayer).
+  // -----------------------------------------------------------------------
+
+  console.log('✅ Function generateDynamicLinks() finished.');
 }
 
 // ------------------------------------------------------------------
 // --- jQuery Execution Wrapper ---
-//$(function() {
-//    generateDynamicLinks();
+// NOTE: Make sure the ALWB.JS code runs BEFORE this wrapper.
+//$(function () {
+//  generateDynamicLinks();
 //});
 // ------------------------------------------------------------------
+
+/* --- DCS Automated Word Export Section --- */
+(function () {
+  if (!self.location.pathname.includes('/indexes/')) {
+    return;
+  }
+
+  const cssPath = "https://dcs.goarch.org/goa/dcs/css/dcs_word_styles.css";
+
+  async function performWordExport(url, serviceName, lang) {
+    try {
+      const resp = await fetch(url);
+      const html = await resp.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      const target = doc.getElementById('biTable') || doc.querySelector('table');
+      if (!target) return;
+
+      // STEP 1: HARD REMOVALS (The Chainsaw)
+      target.querySelectorAll(`
+    [class^="source"], [class*=" source"], 
+    .key, [hidden], .media-group, .media-links, 
+    .jqm-dropdown, .noprint, i, script, style,
+    [class^="bmc"], [class*=" bmc"], 
+    [class^="emc"], [class*=" emc"]
+`).forEach(el => el.remove());
+
+      // 2. THE CLASS SCRUBBER (The Eraser)
+      // Removes these class names but KEEPS the text inside the spans.
+      const classesToScrub = [
+        'kvp', 'achoir', 'aclergy', 'adeacon', 'ahierarch', 'apeople',
+        'apriest', 'areader', 'dchoir', 'dclergy', 'ddeacon',
+        'dhierarch', 'dpeople', 'dpriest', 'dreader', 'dwachoir',
+        'dwaclergy', 'dwadeacon', 'dwahierarch', 'dwapeople',
+        'dwapriest', 'dwareader'
+      ];
+
+      classesToScrub.forEach(className => {
+        target.querySelectorAll('.' + className).forEach(el => {
+          el.classList.remove(className);
+          // Remove data-key if it exists (common in kvp spans)
+          if (el.hasAttribute('data-key')) el.removeAttribute('data-key');
+          // If no classes are left, remove the class attribute entirely
+          if (el.classList.length === 0) el.removeAttribute('class');
+        });
+      });
+
+      // 3. BOOKMARK SCRUBBER (The Sniper)
+      // Deletes the entire table row if it is just a bookmark title.
+      target.querySelectorAll('p[class^="bkmrk"]').forEach(p => {
+        if (p.textContent.toLowerCase().includes('bookmark')) {
+          const row = p.closest('tr');
+          if (row) row.remove();
+        }
+      });
+
+      // 4. DROP-CAP RESET
+      // Prevents "float" styles from breaking the Word layout.
+      target.querySelectorAll('[class*="dropcap"], [class*="first-letter"]').forEach(el => {
+        el.style.float = "none";
+        el.style.display = "inline";
+      });
+
+      // 5. THE VACUUM (The Deep Clean)
+      // Removes any rows that are now empty after the previous steps.
+      target.querySelectorAll('tr').forEach(row => {
+        const hasText = row.textContent.replace(/\u00a0/g, ' ').trim().length > 0;
+        const hasImg = row.querySelector('img') !== null;
+        if (!hasText && !hasImg) {
+          row.remove();
+        }
+      });
+
+      // 6. FINAL TABLE ATTRIBUTES
+      target.removeAttribute('width');
+      target.removeAttribute('cellspacing');
+      target.removeAttribute('cellpadding');
+      target.style.width = "100%";
+      target.style.tableLayout = "auto";
+
+      // 1. THE CHECK: Does any row have more than one cell?
+      // We look at the first few rows to see if any are side-by-side
+      const rows = target.querySelectorAll('tr');
+      let isBilingual = false;
+
+      // Check the first 5 rows (to skip potential single-cell title rows)
+      for (let i = 0; i < Math.min(rows.length, 5); i++) {
+        if (rows[i].querySelectorAll('td').length > 1) {
+          isBilingual = true;
+          break;
+        }
+      }
+
+      // 2. THE LOGIC:
+      // Bilingual = 1 Column Page (Full width table)
+      // English-Only = 2 Column Page (Newsletter flow)
+      const wordColumnCount = isBilingual ? 1 : 2;
+
+      // 3. DEBUG: Open your browser console (F12) to see this result
+      console.log("Bilingual Detected: " + isBilingual + " | Setting Word Columns to: " + wordColumnCount);
+
+      // --- THE FETCH ---
+      let cssText = "";
+      try {
+        // Force fresh CSS download every time
+        const cssResp = await fetch(cssPath + "?v=" + new Date().getTime());
+        cssText = await cssResp.text();
+      } catch (e) {
+        console.error("CSS Fetch failed, using fallback empty styles", e);
+      }
+
+      // --- THE EXPORT ---
+      const fileContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head>
+            <meta charset='utf-8'>
+            <style>
+                /* Bulletproof Page Setup: Hardcoded for Word's Parser */
+                @page Section1 {
+                    size: 8.5in 11.0in;
+                    margin: .75in;
+                    mso-columns: ${wordColumnCount};
+                    mso-column-sep: .25in;
+                }
+                div.Section1 { 
+                    page: Section1; 
+                }
+                
+                /* Injected styles from your CSS file */
+                ${cssText}
+            </style>
+        </head>
+        <body>
+            <div class="Section1">
+                ${target.outerHTML}
+            </div>
+        </body>
+        </html>`;
+
+      const blob = new Blob(['\ufeff' + fileContent], { type: 'application/msword' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = serviceName.replace(/[\/\\?%*:|"<>]/g, '-') + '.doc';
+      downloadLink.click();
+    } catch (e) {
+      console.error("DCS Export Error:", e);
+    }
+  }
+
+  function addWordButtons() {
+    const fullDateHeader = document.querySelector('.index-title-date')?.innerText || "";
+    const dateMatch = fullDateHeader.match(/Services for\s+(.*)/i);
+    const dateStr = dateMatch ? dateMatch[1].trim() : "";
+
+    document.querySelectorAll('a.index-file-link').forEach(link => {
+      if (link.textContent.trim() === "View" && !link.parentNode.querySelector('.btn-word-export')) {
+        const btn = document.createElement('button');
+        btn.innerHTML = 'Word';
+        btn.className = 'btn-word-export';
+        btn.style.cssText = 'margin-left:8px; padding:2px 8px; cursor:pointer; background:#800000; color:#fff; border:1px solid #500000; border-radius:3px; font-size:11px; font-weight:bold; vertical-align:middle;';
+
+        btn.onclick = (e) => {
+          e.preventDefault();
+          const currentRow = link.closest('tr');
+          const langText = currentRow.querySelector('.index-language')?.innerText.trim() || "";
+          let serviceHeader = "";
+          let prevRow = currentRow.previousElementSibling;
+          while (prevRow) {
+            if (prevRow.classList.contains('index-service-day-tr')) {
+              serviceHeader = prevRow.querySelector('.index-service-day')?.innerText.trim() || "";
+              break;
+            }
+            prevRow = prevRow.previousElementSibling;
+          }
+          performWordExport(link.href, `${dateStr} ${serviceHeader} ${langText}`.trim(), langText);
+        };
+        link.parentNode.appendChild(btn);
+      }
+    });
+  }
+
+  addWordButtons();
+  setInterval(addWordButtons, 3000);
+})();
